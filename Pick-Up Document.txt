@@ -1,0 +1,3 @@
+Pick-Up Document
+1.Put the scripts in /Script/Po_Script
+
