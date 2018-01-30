@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 114677044218124032}
   - component: {fileID: 54194240125690484}
   - component: {fileID: 82558190660115216}
+  - component: {fileID: 114070549433458346}
   m_Layer: 0
   m_Name: FPSControllerWithCap
   m_TagString: Player
@@ -104,7 +105,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1775074670382932}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.3, z: -1}
+  m_LocalPosition: {x: 1, y: 0.3, z: 0.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4246070010577710}
@@ -313,6 +314,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &114070549433458346
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1022487543641966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3456fc1a7f775c44842b20975c5f47b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114677044218124032
 MonoBehaviour:
   m_ObjectHideFlags: 1
