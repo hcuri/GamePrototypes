@@ -42,6 +42,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private bool m_Jumping;
         private AudioSource m_AudioSource;
 
+        private float JumpCooldown = 10.0f;
+        private float JumpPermitTime;
+
         // Use this for initialization
         private void Start()
         {
@@ -65,7 +68,14 @@ namespace UnityStandardAssets.Characters.FirstPerson
             // the jump state needs to read here to make sure it is not missed
             if (!m_Jump)
             {
-                m_Jump = CrossPlatformInputManager.GetButtonDown("Jump");
+                //1/26/2018 Special jump
+                if(CrossPlatformInputManager.GetButtonDown("Jump")&&Time.time > JumpPermitTime)
+                {
+                    m_Jump =true;
+                    JumpPermitTime = Time.time + JumpCooldown;
+                }
+                //
+                //m_Jump = CrossPlatformInputManager.GetButtonDown("Jump");
             }
 
             if (!m_PreviouslyGrounded && m_CharacterController.isGrounded)
