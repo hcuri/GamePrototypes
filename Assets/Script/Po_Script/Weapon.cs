@@ -44,6 +44,8 @@ public class Weapon : PickUp
             //it can only be interact with player
             if (other.CompareTag("Player"))
             {
+                Debug.Log("Player has touched");
+                other.GetComponent<Equip>().EquipWeapon(this.gameObject);
                 BeTaken();
                 //other.GetComponent<PlayerSatus>().updatePlayer()
             }

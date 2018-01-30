@@ -24,7 +24,7 @@ public class Equip : MonoBehaviour {
 		
 	}
 
-    void EquipWeapon(GameObject tarWeapon)
+    public void EquipWeapon(GameObject tarWeapon)
     {
         Debug.Log("Equipping");
         int weaponTypeNum = tarWeapon.GetComponent<Weapon>().weaponTypeNum;
@@ -33,7 +33,7 @@ public class Equip : MonoBehaviour {
         weaponBuy.transform.SetParent(transform);
     }
 
-    private void OnTriggerEnter(Collider other)
+    /*private void OnTriggerEnter(Collider other)
     {
         Debug.Log("I touch something");
         if (!other.GetComponent<PickUp>().isCooldown)
@@ -49,7 +49,7 @@ public class Equip : MonoBehaviour {
                 EatPowerUp("Store", 10);
             }
         }
-    }
+    }*/
 
     void EatPowerUp(string PUType, int amoutOfPU)
     {
