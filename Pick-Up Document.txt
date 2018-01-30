@@ -1,3 +1,3 @@
 Pick-Up Document
 1.Put the scripts in /Script/Po_Script
-
+2.Put the material in /Material/Po_Mat
