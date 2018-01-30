@@ -1,0 +1,7 @@
+Pick-Up Document
+1.Put the scripts in /Script/Po_Script
+2.Put the material in /Material/Po_Mat
+3.Testing in fine
+4.Remember the tag
+5.Remember to set the weapontypeNum
+
