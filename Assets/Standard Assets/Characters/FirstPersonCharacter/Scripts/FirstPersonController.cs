@@ -42,7 +42,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private bool m_Jumping;
         private AudioSource m_AudioSource;
 
-        private float JumpRate = 30.0f;
+        private float JumpCooldown = 10.0f;
         private float JumpPermitTime;
 
         // Use this for initialization
@@ -72,7 +72,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 if(CrossPlatformInputManager.GetButtonDown("Jump")&&Time.time > JumpPermitTime)
                 {
                     m_Jump =true;
-                    JumpPermitTime = Time.time + JumpRate;
+                    JumpPermitTime = Time.time + JumpCooldown;
                 }
                 //
                 //m_Jump = CrossPlatformInputManager.GetButtonDown("Jump");
