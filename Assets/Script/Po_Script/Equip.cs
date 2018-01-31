@@ -6,6 +6,7 @@ public class Equip : MonoBehaviour {
 
     GameObject m_Hand;
     WeaponKeeper weaponSeller;
+    PlayerStatusAndAction m_Status;
     //suppose there should be
     //PlayerStatus = 
     //
@@ -16,6 +17,11 @@ public class Equip : MonoBehaviour {
         if(weaponSeller == null)
         {
             Debug.Log("There supposed to be a weapon keeper");
+        }
+        m_Status = GetComponent<PlayerStatusAndAction>();
+        if(m_Status == null)
+        {
+            Debug.Log("Where is player's status");
         }
 	}
 	
@@ -31,6 +37,7 @@ public class Equip : MonoBehaviour {
         GameObject weaponBuy = weaponSeller.SellWeapon(weaponTypeNum);
         weaponBuy.transform.position = m_Hand.transform.position;
         weaponBuy.transform.SetParent(transform);
+        m_Status.SetWeapon(weaponBuy);
     }
 
     /*private void OnTriggerEnter(Collider other)
