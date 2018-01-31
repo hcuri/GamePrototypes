@@ -60,6 +60,7 @@ GameObject:
   - component: {fileID: 114410149209087938}
   - component: {fileID: 114754604884665168}
   - component: {fileID: 114647095220754822}
+  - component: {fileID: 114594274958087108}
   m_Layer: 0
   m_Name: FPSControllerWithHand
   m_TagString: Player
@@ -510,6 +511,23 @@ MonoBehaviour:
     InterpolateOption: 0
     InterpolateMoveTowardsSpeed: 1
     InterpolateLerpSpeed: 0
+--- !u!114 &114594274958087108
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1515468495388656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02bbbb436a0c1464b8d8cf681badc09c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isEquipped: 0
+  m_Health: 0
+  m_Power: 0
+  m_Speed: 0
+  m_Weapon: {fileID: 0}
+  m_Camera: {fileID: 0}
 --- !u!114 &114647095220754822
 MonoBehaviour:
   m_ObjectHideFlags: 1
