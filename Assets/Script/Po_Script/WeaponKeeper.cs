@@ -24,8 +24,9 @@ public class WeaponKeeper : MonoBehaviour {
     public GameObject SellWeapon(int weaponNum)
     {
         Debug.Log("Selling weapon" + weaponNum);
-        GameObject weaponToCreate;
-        weaponToCreate = Instantiate(keepWeapons[weaponNum]);
+        GameObject weaponToCreate = PhotonNetwork.Instantiate("Weapon_Throwable", new Vector3(0, 0, 0), Quaternion.identity, 0);
+        //weaponToCreate = Instantiate(keepWeapons[weaponNum]);
+        //GameObject weaponBuy = PhotonNetwork.Instantiate("Weapon_Throwable", new Vector3(0, 0, 0), Quaternion.identity, 0);
         return weaponToCreate;
     }
 }

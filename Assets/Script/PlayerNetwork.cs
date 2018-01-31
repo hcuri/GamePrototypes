@@ -46,11 +46,17 @@ public class PlayerNetwork : MonoBehaviour {
     {
         if(pv.isMine)
         {
+            /*if (Input.GetMouseButtonDown(0))
+            {
+                Debug.Log("I press left Mouse");
+                this.GetComponent<PlayerStatusAndAction>().ThrowObject(); ;
+            }*/
             return;
         }
 
         if(Input.GetKeyDown(KeyCode.E))
         {
+            
             playerHealth -= 5;
         }
     }
