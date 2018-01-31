@@ -56,11 +56,11 @@ GameObject:
   - component: {fileID: 114328004234749268}
   - component: {fileID: 54689533519537242}
   - component: {fileID: 82115777277777030}
+  - component: {fileID: 114594274958087108}
   - component: {fileID: 114381946255655028}
   - component: {fileID: 114410149209087938}
   - component: {fileID: 114754604884665168}
   - component: {fileID: 114647095220754822}
-  - component: {fileID: 114594274958087108}
   m_Layer: 0
   m_Name: FPSControllerWithHand
   m_TagString: Player
@@ -171,11 +171,11 @@ Camera:
   m_TargetEye: 3
   m_HDR: 0
   m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
-  m_StereoMirrorMode: 0
 --- !u!23 &23531812904407500
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -185,6 +185,7 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -200,6 +201,7 @@ MeshRenderer:
   m_PreserveUVs: 1
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -528,6 +530,7 @@ MonoBehaviour:
   m_Speed: 0
   m_Weapon: {fileID: 0}
   m_Camera: {fileID: 0}
+  m_pv: {fileID: 0}
 --- !u!114 &114647095220754822
 MonoBehaviour:
   m_ObjectHideFlags: 1

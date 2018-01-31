@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerStatusAndAction : MonoBehaviour {
+public class PlayerStatusAndAction : MonoBehaviour, IPunObservable {
 
     [SerializeField]private bool isEquipped;
     public float m_Health;
@@ -86,4 +86,20 @@ public class PlayerStatusAndAction : MonoBehaviour {
             }
         }
     }
+
+   /* void IPunObservable.OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.isWriting)
+        {
+            // We own this player: send the others our data
+            stream.SendNext(IsFiring);
+            stream.SendNext(Health);
+        }
+        else
+        {
+            // Network player, receive data
+            this.IsFiring = (bool)stream.ReceiveNext();
+            this.Health = (float)stream.ReceiveNext();
+        }
+    }*/
 }
