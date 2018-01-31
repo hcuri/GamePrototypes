@@ -32,8 +32,16 @@ public class PlayerStatusAndAction : MonoBehaviour {
 
     public void SetWeapon(GameObject weapon)
     {
-        isEquipped = true;
-        m_Weapon = weapon;
+        if (isEquipped == false)
+        {
+            isEquipped = true;
+            m_Weapon = weapon;
+        }
+        else
+        {
+            Destroy(m_Weapon);
+            m_Weapon = weapon;
+        }
     }
 
     
@@ -44,25 +52,29 @@ public class PlayerStatusAndAction : MonoBehaviour {
 
     public void ThrowObject()
     {
-        Debug.Log("I throw my weapon");
-        isEquipped = false;
-        m_Weapon.transform.parent = null;
-        Vector3 ThrowVector = m_Camera.transform.forward;
-        Rigidbody WeaponRigid = m_Weapon.GetComponent<Rigidbody>();
-        WeaponRigid.isKinematic = false;
-        Debug.Log("Power I use to thorw" + ThrowVector);
-        WeaponRigid.AddForce(ThrowVector*m_Power);
+        if (isEquipped)
+        {
+            Debug.Log("I throw my weapon");
+            isEquipped = false;
+            m_Weapon.transform.parent = null;
+            Vector3 ThrowVector = m_Camera.transform.forward;
+            Rigidbody WeaponRigid = m_Weapon.GetComponent<Rigidbody>();
+            WeaponRigid.isKinematic = false;
+            Debug.Log("Power I use to thorw" + ThrowVector);
+            WeaponRigid.AddForce(ThrowVector * m_Power);
+        }
     }
 
     private void MouseHandle()
     {
-        if (Input.GetMouseButtonDown(0))
+        /*if (Input.GetMouseButtonDown(0))
         {
             if (isEquipped)
             {
+                
                 //Debug.Log("Hey I press left mouse");
                 ThrowObject();
             }
-        }
+        }*/
     }
 }
