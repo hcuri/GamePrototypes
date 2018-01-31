@@ -10,6 +10,7 @@ public class PlayerStatusAndAction : MonoBehaviour {
     public float m_Speed;
     public GameObject m_Weapon;
     public Camera m_Camera;
+    public PhotonView m_pv;
 	// Use this for initialization
 	void Start () {
         isEquipped = false;
@@ -22,6 +23,11 @@ public class PlayerStatusAndAction : MonoBehaviour {
         if (m_Camera == null)
         {
             Debug.Log("Where is the player camera?");
+        }
+        m_pv = GetComponent<PhotonView>();
+        if(m_pv == null)
+        {
+            Debug.Log("The photon view is missing");
         }
 	}
 	
@@ -67,14 +73,17 @@ public class PlayerStatusAndAction : MonoBehaviour {
 
     private void MouseHandle()
     {
-        /*if (Input.GetMouseButtonDown(0))
+        if (m_pv.isMine)
         {
-            if (isEquipped)
+            if (Input.GetMouseButtonDown(0))
             {
-                
-                //Debug.Log("Hey I press left mouse");
-                ThrowObject();
+                if (isEquipped)
+                {
+
+                    //Debug.Log("Hey I press left mouse");
+                    ThrowObject();
+                }
             }
-        }*/
+        }
     }
 }
