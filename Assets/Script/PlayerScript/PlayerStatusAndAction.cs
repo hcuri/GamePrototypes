@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerStatusAndAction : MonoBehaviour, IPunObservable {
+public class PlayerStatusAndAction : MonoBehaviour{
 
     [SerializeField]private bool isEquipped;
     public float m_Health;
