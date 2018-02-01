@@ -526,7 +526,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isEquipped: 0
   m_Health: 0
-  m_Power: 0
+  m_Power: 2000
   m_Speed: 0
   m_Weapon: {fileID: 0}
   m_Camera: {fileID: 0}

@@ -13,6 +13,7 @@ public class ThrowableBehave : MonoBehaviour {
     public float m_Damage;
     public string m_Type;
     Rigidbody m_Rigidbody;
+    //public bool isThorwn;
 	// Use this for initialization
 	void Start () {
         tag = "Weapon";
@@ -32,4 +33,15 @@ public class ThrowableBehave : MonoBehaviour {
 	void Update () {
 		
 	}
+
+    public void throwIt()
+    {
+        StartCoroutine(waitDestroy(2.0f));
+    }
+
+    private IEnumerator waitDestroy(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        Destroy(this.gameObject);
+    }
 }

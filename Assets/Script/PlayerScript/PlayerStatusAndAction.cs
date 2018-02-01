@@ -15,7 +15,7 @@ public class PlayerStatusAndAction : MonoBehaviour{
 	void Start () {
         isEquipped = false;
         m_Health = 100;
-        m_Power = 1000;
+        //m_Power = 2000;
         m_Speed = 1;
         //setting up the player tag
         tag = "Player";
@@ -67,7 +67,9 @@ public class PlayerStatusAndAction : MonoBehaviour{
             Rigidbody WeaponRigid = m_Weapon.GetComponent<Rigidbody>();
             WeaponRigid.isKinematic = false;
             Debug.Log("Power I use to thorw" + ThrowVector);
+            m_Weapon.GetComponent<ThrowableBehave>().throwIt();
             WeaponRigid.AddForce(ThrowVector * m_Power);
+            
         }
     }
 
