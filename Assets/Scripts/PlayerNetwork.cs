@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerNetwork : MonoBehaviour {
@@ -91,8 +93,13 @@ public class PlayerNetwork : MonoBehaviour {
         if(m_health <= 0)
         {
             //Die
-            m_myPlayerControlScript.enabled = false;
+            //m_myPlayerControlScript.enabled = false;
             Debug.Log("You are died");
+			PhotonNetwork.Disconnect();
+			Cursor.lockState = CursorLockMode.None;
+			Cursor.lockState = CursorLockMode.Confined;
+			Cursor.visible = true;
+			SceneManager.LoadScene("EndScene");
         }
     }
 
