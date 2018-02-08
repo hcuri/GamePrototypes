@@ -65,7 +65,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         public float m_RegularJumpSpeed = 10.0f;
         public float m_SuperJumpSpeed = 20.0f;
-
+        public float m_SuperJumpGravity = 1.0f;
+        public float m_RegularJumpGravity = 2.0f;
         // Use this for initialization
         private void Start()
         {
@@ -93,6 +94,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 if (Input.GetMouseButtonDown(1) && Time.time > JumpPermitTime)
                 {
                     m_JumpSpeed = m_SuperJumpSpeed;
+                    m_GravityMultiplier = m_SuperJumpGravity;
                     m_Jump = true;
                     JumpPermitTime = Time.time + JumpCooldown;
                     
@@ -103,6 +105,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 if (CrossPlatformInputManager.GetButtonDown("Jump"))
                 {
                     m_JumpSpeed = m_RegularJumpSpeed;
+                    m_GravityMultiplier = m_RegularJumpGravity;
                     m_Jump = true;
                 }
 
