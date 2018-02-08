@@ -4,11 +4,8 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - Beam
   - Weapon
-  - WeaponPick
-  - WeaponKeeper
-  - PickUp
-  - Power-Up
   layers:
   - Default
   - TransparentFX
