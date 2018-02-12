@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
 using UnityStandardAssets.Utility;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 namespace UnityStandardAssets.Characters.FirstPerson
@@ -67,6 +68,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
         public float m_SuperJumpSpeed = 20.0f;
         public float m_SuperJumpGravity = 1.0f;
         public float m_RegularJumpGravity = 2.0f;
+
+		private Text m_jumpCooldownText;
+
         // Use this for initialization
         private void Start()
         {
@@ -80,6 +84,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_Jumping = false;
             m_AudioSource = GetComponent<AudioSource>();
             m_MouseLook.Init(transform, m_Camera.transform);
+
+			m_jumpCooldownText = GameObject.Find ("JumpCD").GetComponent<Text> ();
         }
 
 
@@ -97,7 +103,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
                     m_GravityMultiplier = m_SuperJumpGravity;
                     m_Jump = true;
                     JumpPermitTime = Time.time + JumpCooldown;
-                    
                 }
                 //
                 //m_Jump = CrossPlatformInputManager.GetButtonDown("Jump");
@@ -125,7 +130,13 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 m_MoveDir.y = 0f;
             }
 
-            m_PreviouslyGrounded = m_CharacterController.isGrounded;
+			m_PreviouslyGrounded = m_CharacterController.isGrounded;
+			if (JumpPermitTime - Time.time > 0) {
+				m_jumpCooldownText.text = "Jump Cooldown: " + (int)(JumpPermitTime - Time.time + 1);
+			} else {
+				m_jumpCooldownText.text = "Super Jump Ready!";
+			}
+				
         }
 
 
