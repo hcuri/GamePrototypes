@@ -19,7 +19,8 @@ public class Weapon : MonoBehaviour {
     [PunRPC]
     public void SetParentRPC(int parent)
     {
-        transform.SetParent(PhotonView.Find(parent).transform);
+        transform.SetParent(PhotonView.Find(parent).transform.Find("FirstPersonCharacter").transform.Find("PlayerArm").transform.Find("PlayerHand").transform);
+        //transform.position = new Vector3(0.0f, 0.0f, 0.0f);
     }
 
     [PunRPC]
