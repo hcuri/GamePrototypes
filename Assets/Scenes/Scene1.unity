@@ -330,7 +330,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   netInfo: {fileID: 753257345}
   spawnPoint: {fileID: 102197897}
-  player: {fileID: 100000, guid: ef940b6001d754e4383bc33bd7ad3069, type: 2}
+  player: {fileID: 1072422485308838, guid: cb38fcc1b4e997e4db9b9890d123f338, type: 2}
   lobbyCamera: {fileID: 2001878483}
 --- !u!4 &715131531
 Transform:

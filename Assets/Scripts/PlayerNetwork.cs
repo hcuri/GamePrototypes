@@ -67,7 +67,7 @@ public class PlayerNetwork : MonoBehaviour {
             }*/
             //Because now I put player weapon under player hand so we should first get the player hand and find weapon;
             GameObject playerHand = transform.Find("FirstPersonCharacter").transform.Find("PlayerArm").transform.Find("PlayerHand").gameObject;
-            foreach(Transform wea in playerHand.transform)
+            foreach(Transform wea in transform)
             {
                 if (wea.gameObject.CompareTag("Weapon"))
                     weapon = wea.gameObject;

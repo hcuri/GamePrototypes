@@ -188,7 +188,7 @@ MonoBehaviour:
   ownershipTransfer: 0
   ObservedComponents:
   - {fileID: 114231913507915928}
-  - {fileID: 0}
+  - {fileID: 4683390011900714}
   ObservedComponentsFoldoutOpen: 1
   viewIdField: 0
   instantiationId: -1
@@ -205,6 +205,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40730760e0913774eb6aedbe35ccb21a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_damage: 10
 --- !u!135 &135242753173483274
 SphereCollider:
   m_ObjectHideFlags: 1
