@@ -9,7 +9,7 @@ public class PlayerNetwork : MonoBehaviour {
 
     [SerializeField] private GameObject playerCamera;
     [SerializeField] private MonoBehaviour[] playerControlScripts;   
-    [SerializeField] private int m_health = 100;
+    [SerializeField] private float m_health = 100;
     [SerializeField] private float m_throwforce = 1500.0f;
     [SerializeField] private float m_jumpforce = 1500.0f;
 
@@ -17,6 +17,8 @@ public class PlayerNetwork : MonoBehaviour {
     private PhotonView m_pv;
     private MonoBehaviour m_myPlayerControlScript;
     private GameObject weapon;
+    private bool insideZone = true;
+    private float m_HPReducedPerSecond = 15.0f;
 
     private void Start ()
     {
@@ -31,6 +33,12 @@ public class PlayerNetwork : MonoBehaviour {
         {
             Movement();
             m_healthText.text = "HP:" + m_health.ToString();
+
+            if (!insideZone)
+            {
+                TakeDamage(Time.deltaTime * m_HPReducedPerSecond);
+            }
+
             return;
         }
     }
@@ -86,7 +94,7 @@ public class PlayerNetwork : MonoBehaviour {
     }
 
     [PunRPC]
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         m_health -= damage;
 
@@ -101,6 +109,11 @@ public class PlayerNetwork : MonoBehaviour {
 			Cursor.visible = true;
 			SceneManager.LoadScene("EndScene");
         }
+    }
+
+    public void setInsideZone(bool inside)
+    {
+        insideZone = inside;
     }
 
     private void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)

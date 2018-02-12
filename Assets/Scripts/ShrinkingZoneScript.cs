@@ -7,6 +7,7 @@ public class ShrinkingZoneScript : MonoBehaviour
 {
     public float timeToShrink = 20;
     public float initialRadius = 25;
+    public float height = 50;
     float currentTime;
     MeshFilter reverse;
 
@@ -16,7 +17,7 @@ public class ShrinkingZoneScript : MonoBehaviour
         transform.position = new Vector3(0, 0, 0); // TODO: should be random
 
         Debug.Log(initialRadius);
-        transform.localScale = new Vector3(initialRadius, 10, initialRadius);
+        transform.localScale = new Vector3(initialRadius, height, initialRadius);
 
         currentTime = 0;
 
@@ -39,7 +40,7 @@ public class ShrinkingZoneScript : MonoBehaviour
         float currsize = initialRadius * (1.0f - currentTime / timeToShrink);
         if (currsize > 0)
         {
-            transform.localScale = new Vector3(currsize, 10, currsize);
+            transform.localScale = new Vector3(currsize, height, currsize);
         }
     }
 
@@ -50,6 +51,7 @@ public class ShrinkingZoneScript : MonoBehaviour
         if (col.gameObject.tag == "Player")
         {
             Debug.Log("NAAAAYSSSS");
+            col.gameObject.GetComponent<PlayerNetwork>().setInsideZone(true);
         }
     }
 
@@ -61,6 +63,7 @@ public class ShrinkingZoneScript : MonoBehaviour
         if (col.gameObject.tag == "Player")
         {
             Debug.Log("YOU'RE GONNA HAVE A BAD TIME");
+            col.gameObject.GetComponent<PlayerNetwork>().setInsideZone(false);
         }
     }
 

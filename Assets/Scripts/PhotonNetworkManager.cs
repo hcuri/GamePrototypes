@@ -8,6 +8,7 @@ public class PhotonNetworkManager : Photon.PunBehaviour {
     [SerializeField] private Text netInfo;
     [SerializeField] private Transform spawnPoint;
     [SerializeField] private GameObject player;
+    [SerializeField] private GameObject shrinkingZone;
     [SerializeField] private GameObject lobbyCamera;
 
 	// Use this for initialization
@@ -27,6 +28,13 @@ public class PhotonNetworkManager : Photon.PunBehaviour {
         Debug.Log("We are now joined room");
         PhotonNetwork.Instantiate(player.name, spawnPoint.position, spawnPoint.rotation, 0);
         lobbyCamera.SetActive(false);
+
+        if (PhotonNetwork.isMasterClient)
+        {
+            Debug.Log("OnPhotonPlayerConnected isMasterClient " + PhotonNetwork.isMasterClient);
+
+            PhotonNetwork.Instantiate(shrinkingZone.name, new Vector3(0f, shrinkingZone.GetComponent<CapsuleCollider>().height/2.0f, 0f), Quaternion.identity, 0);
+        }
     }
 	
 	private void Update () {
