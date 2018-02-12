@@ -42,7 +42,8 @@ public class WeaponContainer : MonoBehaviour
         {
             if (pv.isMine)
             {
-                GameObject playerWeapon = PhotonNetwork.Instantiate(weapon.name.ToString(), other.transform.Find("PlayerHand").transform.position, Quaternion.identity, 0); 
+                //GameObject playerWeapon = PhotonNetwork.Instantiate(weapon.name.ToString(), other.transform.Find("PlayerHand").transform.position, Quaternion.identity, 0); 
+                GameObject playerWeapon = PhotonNetwork.Instantiate(weapon.name.ToString(), other.transform.Find("FirstPersonCharacter").transform.Find("PlayerArm").transform.Find("PlayerHand").transform.position, Quaternion.identity, 0);
                 playerWeapon.GetComponent<PhotonView>().RPC("SetParentRPC", PhotonTargets.AllBuffered, other.gameObject.GetComponent<PhotonView>().viewID);
             }
 
