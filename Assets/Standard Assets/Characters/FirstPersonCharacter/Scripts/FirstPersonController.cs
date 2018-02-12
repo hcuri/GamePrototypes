@@ -70,6 +70,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
         public float m_RegularJumpGravity = 2.0f;
 
 		private Text m_jumpCooldownText;
+		private Slider m_jumpCooldownSlider;
+		private Color m_jumpCooldownFill;
 
         // Use this for initialization
         private void Start()
@@ -86,6 +88,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_MouseLook.Init(transform, m_Camera.transform);
 
 			m_jumpCooldownText = GameObject.Find ("JumpCD").GetComponent<Text> ();
+			m_jumpCooldownSlider = GameObject.Find ("CDSlider").GetComponent<Slider> ();
+			//m_jumpCooldownFill = GameObject.Find ("CDFill").GetComponent<Color> ();
         }
 
 
@@ -131,10 +135,13 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }
 
 			m_PreviouslyGrounded = m_CharacterController.isGrounded;
+			m_jumpCooldownSlider.value = 10 - (JumpPermitTime - Time.time);
 			if (JumpPermitTime - Time.time > 0) {
-				m_jumpCooldownText.text = "Jump Cooldown: " + (int)(JumpPermitTime - Time.time + 1);
+				m_jumpCooldownText.text = "Jump Cooldown: " + (int)(JumpPermitTime - Time.time);
+				//m_jumpCooldownFill.color = new Color32 (0, 123, 0, 255);
 			} else {
 				m_jumpCooldownText.text = "Super Jump Ready!";
+				//m_jumpCooldownFill.color = new Color32 (0, 255, 0, 255);
 			}
 				
         }
