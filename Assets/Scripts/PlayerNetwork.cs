@@ -111,6 +111,12 @@ public class PlayerNetwork : MonoBehaviour {
         }
     }
 
+    [PunRPC]
+    public void TakeDamage(int damage)
+    {
+        TakeDamage((float)damage);
+    }
+
     public void setInsideZone(bool inside)
     {
         insideZone = inside;

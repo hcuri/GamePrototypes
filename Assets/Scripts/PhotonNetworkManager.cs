@@ -14,7 +14,8 @@ public class PhotonNetworkManager : Photon.PunBehaviour {
 	// Use this for initialization
 	private void Start () {
         PhotonNetwork.ConnectUsingSettings("ver 0.1");
-	}
+        PhotonNetwork.automaticallySyncScene = true;
+    }
 
     public override void OnJoinedLobby()
     {
@@ -33,7 +34,9 @@ public class PhotonNetworkManager : Photon.PunBehaviour {
         {
             Debug.Log("OnPhotonPlayerConnected isMasterClient " + PhotonNetwork.isMasterClient);
 
-            PhotonNetwork.Instantiate(shrinkingZone.name, new Vector3(0f, shrinkingZone.GetComponent<CapsuleCollider>().height/2.0f, 0f), Quaternion.identity, 0);
+            GameObject sZone = PhotonNetwork.InstantiateSceneObject(shrinkingZone.name, new Vector3(0f, shrinkingZone.GetComponent<CapsuleCollider>().height / 2.0f, 0f), Quaternion.identity, 0, null);
+            DontDestroyOnLoad(sZone);
+            sZone.GetPhotonView().viewID = 0;
         }
     }
 	

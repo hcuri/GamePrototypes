@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class ShrinkingZoneScript : MonoBehaviour
+public class ShrinkingZoneScript : Photon.MonoBehaviour
 {
     public float timeToShrink = 20;
     public float initialRadius = 25;
@@ -36,7 +36,7 @@ public class ShrinkingZoneScript : MonoBehaviour
     void Update()
     {
         currentTime += Time.deltaTime;
-
+        
         float currsize = initialRadius * (1.0f - currentTime / timeToShrink);
         if (currsize > 0)
         {
