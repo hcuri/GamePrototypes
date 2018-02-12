@@ -30,14 +30,10 @@ public class PhotonNetworkManager : Photon.PunBehaviour {
         PhotonNetwork.Instantiate(player.name, spawnPoint.position, spawnPoint.rotation, 0);
         lobbyCamera.SetActive(false);
 
-        if (PhotonNetwork.isMasterClient)
-        {
-            Debug.Log("OnPhotonPlayerConnected isMasterClient " + PhotonNetwork.isMasterClient);
-
-            GameObject sZone = PhotonNetwork.InstantiateSceneObject(shrinkingZone.name, new Vector3(0f, shrinkingZone.GetComponent<CapsuleCollider>().height / 2.0f, 0f), Quaternion.identity, 0, null);
-            DontDestroyOnLoad(sZone);
-            sZone.GetPhotonView().viewID = 0;
-        }
+        //if (PhotonNetwork.isMasterClient)
+        //{
+            GameObject.Find("ShrinkingZone").GetComponent<ShrinkingZoneScript>().startShrinking();
+        //}
     }
 	
 	private void Update () {

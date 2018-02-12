@@ -11,13 +11,16 @@ public class ShrinkingZoneScript : Photon.MonoBehaviour
     float currentTime;
     MeshFilter reverse;
 
+    private bool shouldShrink = false;
+
     // Use this for initialization; randomize the translation with respect to the level
     void Start()
     {
         transform.position = new Vector3(0, 0, 0); // TODO: should be random
 
         Debug.Log(initialRadius);
-        transform.localScale = new Vector3(initialRadius, height, initialRadius);
+        if(PhotonNetwork.isMasterClient)
+            transform.localScale = new Vector3(initialRadius, height, initialRadius);
 
         currentTime = 0;
 
@@ -35,12 +38,15 @@ public class ShrinkingZoneScript : Photon.MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        currentTime += Time.deltaTime;
-        
-        float currsize = initialRadius * (1.0f - currentTime / timeToShrink);
-        if (currsize > 0)
+        if (shouldShrink)
         {
-            transform.localScale = new Vector3(currsize, height, currsize);
+            currentTime += Time.deltaTime;
+
+            float currsize = initialRadius * (1.0f - currentTime / timeToShrink);
+            if (currsize > 0)
+            {
+                transform.localScale = new Vector3(currsize, height, currsize);
+            }
         }
     }
 
@@ -67,4 +73,8 @@ public class ShrinkingZoneScript : Photon.MonoBehaviour
         }
     }
 
+    public void startShrinking()
+    {
+        shouldShrink = true;
+    }
 }
