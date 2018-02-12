@@ -13,7 +13,7 @@ public class Weapon : MonoBehaviour {
         m_pv = GetComponent<PhotonView>();
 	}
 	
-	void Update () {
+	void FixedUpdate () {
 		if(playerHand != null)
         {
             transform.position = playerHand.transform.position;
