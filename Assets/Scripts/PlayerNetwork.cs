@@ -79,7 +79,20 @@ public class PlayerNetwork : MonoBehaviour {
             }
 
             weapon.GetComponent<PhotonView>().RPC("UnsetParentRPC", PhotonTargets.AllBuffered);
-            weapon.GetComponent<Rigidbody>().AddForce(playerCamera.transform.forward * m_throwforce);
+            //use raycast from camera position with camera front to get
+            Vector3 throwDirection;
+            RaycastHit hit;
+            if(Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit))
+            {
+                Debug.Log(hit.collider.gameObject.name + " the position is " + hit.point);
+                throwDirection = hit.point - weapon.transform.position;
+            }
+            else
+            {
+                throwDirection = playerCamera.transform.forward;
+            }
+            throwDirection.Normalize();
+            weapon.GetComponent<Rigidbody>().AddForce(throwDirection * m_throwforce);
             weapon = null;
         }
 
