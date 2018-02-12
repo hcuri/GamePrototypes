@@ -60,13 +60,19 @@ public class PlayerNetwork : MonoBehaviour {
         if (Input.GetMouseButtonDown(0))
         {
             //Searching the child weapons
-            for (int i = 0; i < transform.childCount; ++i)
+            /*for (int i = 0; i < transform.childCount; ++i)
             {
                 if (transform.GetChild(i).CompareTag("Weapon"))
                     weapon = transform.GetChild(i).gameObject;
+            }*/
+            //Because now I put player weapon under player hand so we should first get the player hand and find weapon;
+            GameObject playerHand = transform.Find("FirstPersonCharacter").transform.Find("PlayerArm").transform.Find("PlayerHand").gameObject;
+            foreach(Transform wea in playerHand.transform)
+            {
+                if (wea.gameObject.CompareTag("Weapon"))
+                    weapon = wea.gameObject;
             }
-
-            if(weapon == null)
+            if (weapon == null)
             {
                 Debug.Log("You have no weapon");
                 return;
