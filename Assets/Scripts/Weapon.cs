@@ -29,6 +29,12 @@ public class Weapon : MonoBehaviour {
         GetComponent<Rigidbody>().isKinematic = false;
     }
 
+    [PunRPC]
+    public void AutoDestroy()
+    {
+        Destroy(gameObject, 2.0f);
+    }
+
     private void OnCollisionEnter(Collision other)
     {
         if(other.gameObject.tag == "Player" && m_pv.isMine)

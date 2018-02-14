@@ -79,7 +79,8 @@ public class PlayerNetwork : MonoBehaviour {
 
             weapon.GetComponent<PhotonView>().RPC("UnsetParentRPC", PhotonTargets.AllBuffered);
             weapon.GetComponent<Rigidbody>().AddForce(playerCamera.transform.forward * m_throwforce);
-            weapon = null;
+            weapon.GetComponent<PhotonView>().RPC("AutoDestroy", PhotonTargets.AllBuffered);
+            weapon = null;          
         }
 
         if(Input.GetMouseButtonDown(1))
