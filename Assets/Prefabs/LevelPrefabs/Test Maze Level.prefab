@@ -2297,7 +2297,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4779936341015698}
   m_Layer: 0
-  m_Name: New Level 1
+  m_Name: Test Maze Level
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
