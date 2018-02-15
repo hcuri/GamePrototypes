@@ -14,6 +14,7 @@ public class PlayerNetwork : MonoBehaviour {
     [SerializeField] private float m_jumpforce = 1500.0f;
 
     private Text m_healthText;
+	private Slider m_healthSlider;
     private PhotonView m_pv;
     private MonoBehaviour m_myPlayerControlScript;
     private GameObject weapon;
@@ -24,6 +25,7 @@ public class PlayerNetwork : MonoBehaviour {
     {
         m_pv = GetComponent<PhotonView>();
         m_healthText = GameObject.Find("HP").GetComponent<Text>();
+		m_healthSlider = GameObject.Find ("HPSlider").GetComponent<Slider> ();
         Initialize();
 	}
 
@@ -33,12 +35,11 @@ public class PlayerNetwork : MonoBehaviour {
         {
             Movement();
             m_healthText.text = "HP:" + m_health.ToString();
-
+            m_healthSlider.value = m_health;
             if (!insideZone)
             {
                 TakeDamage(Time.deltaTime * m_HPReducedPerSecond);
             }
-
             return;
         }
     }
@@ -84,7 +85,8 @@ public class PlayerNetwork : MonoBehaviour {
 
             weapon.GetComponent<PhotonView>().RPC("UnsetParentRPC", PhotonTargets.AllBuffered);
             weapon.GetComponent<Rigidbody>().AddForce(playerCamera.transform.forward * m_throwforce);
-            weapon = null;
+            weapon.GetComponent<PhotonView>().RPC("AutoDestroy", PhotonTargets.AllBuffered);
+            weapon = null;          
         }
 
         if(Input.GetMouseButtonDown(1))
@@ -96,7 +98,7 @@ public class PlayerNetwork : MonoBehaviour {
     [PunRPC]
     public void TakeDamage(float damage)
     {
-        m_health -= damage;
+		m_health -= damage;
 
         if(m_health <= 0)
         {
