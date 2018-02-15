@@ -95,8 +95,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfaa046ff2d00c545a431fd9d81e7057, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToShrink: 20
-  initialRadius: 25
+  timeToShrink: 120
+  initialRadius: 500
 --- !u!136 &136527464858016734
 CapsuleCollider:
   m_ObjectHideFlags: 1

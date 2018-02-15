@@ -16,7 +16,7 @@ public class ShrinkingZoneScript : MonoBehaviour
         transform.position = new Vector3(0, 0, 0); // TODO: should be random
 
         Debug.Log(initialRadius);
-        transform.localScale = new Vector3(initialRadius, 10, initialRadius);
+        transform.localScale = new Vector3(initialRadius, 600, initialRadius);
 
         currentTime = 0;
 
@@ -39,7 +39,7 @@ public class ShrinkingZoneScript : MonoBehaviour
         float currsize = initialRadius * (1.0f - currentTime / timeToShrink);
         if (currsize > 0)
         {
-            transform.localScale = new Vector3(currsize, 10, currsize);
+            transform.localScale = new Vector3(currsize, 600, currsize);
         }
     }
 
