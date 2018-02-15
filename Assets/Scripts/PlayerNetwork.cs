@@ -76,11 +76,21 @@ public class PlayerNetwork : MonoBehaviour {
                 Debug.Log("You have no weapon");
                 return;
             }
-
-            weapon.GetComponent<PhotonView>().RPC("UnsetParentRPC", PhotonTargets.AllBuffered);
-            weapon.GetComponent<Rigidbody>().AddForce(playerCamera.transform.forward * m_throwforce);
-            weapon.GetComponent<PhotonView>().RPC("AutoDestroy", PhotonTargets.AllBuffered);
-            weapon = null;          
+            if (weapon.GetComponent<Weapon>().m_id == 1)
+            {
+                GameObject infiniteWeapon = PhotonNetwork.Instantiate("Weapon1", weapon.transform.position, Quaternion.identity, 0);
+                infiniteWeapon.GetComponent<Rigidbody>().isKinematic = false;
+                infiniteWeapon.GetComponent<Rigidbody>().AddForce(playerCamera.transform.forward * m_throwforce);
+                infiniteWeapon.GetComponent<PhotonView>().RPC("AutoDestroy", PhotonTargets.AllBuffered);
+            }
+            else
+            {
+                weapon.GetComponent<PhotonView>().RPC("UnsetParentRPC", PhotonTargets.AllBuffered);
+                weapon.GetComponent<Rigidbody>().AddForce(playerCamera.transform.forward * m_throwforce);
+                weapon.GetComponent<PhotonView>().RPC("AutoDestroy", PhotonTargets.AllBuffered);
+                weapon = null;
+            }
+                      
         }
 
         if(Input.GetMouseButtonDown(1))

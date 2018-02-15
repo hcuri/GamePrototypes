@@ -5,6 +5,7 @@ using UnityEngine;
 public class Weapon : MonoBehaviour {
 
     [SerializeField] private int m_damage = 10;
+    public int m_id = 1;
 
     private PhotonView m_pv;
 
