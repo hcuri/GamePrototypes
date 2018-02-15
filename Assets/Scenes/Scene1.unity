@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -390,6 +390,8 @@ MonoBehaviour:
   netInfo: {fileID: 753257345}
   spawnPoint: {fileID: 102197897}
   player: {fileID: 100000, guid: ef940b6001d754e4383bc33bd7ad3069, type: 2}
+  shrinkingZone: {fileID: 1718153061817834, guid: 13369119b8aa1a24a8e9146cb83403ac,
+    type: 2}
   lobbyCamera: {fileID: 2001878483}
 --- !u!4 &715131531
 Transform:

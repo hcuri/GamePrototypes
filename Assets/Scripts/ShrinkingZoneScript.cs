@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class ShrinkingZoneScript : MonoBehaviour
+public class ShrinkingZoneScript : Photon.MonoBehaviour
 {
     public float timeToShrink = 20;
     public float initialRadius = 25;
+    public float height = 50;
     float currentTime;
     MeshFilter reverse;
+
+    private bool shouldShrink = false;
 
     // Use this for initialization; randomize the translation with respect to the level
     void Start()
@@ -16,7 +19,8 @@ public class ShrinkingZoneScript : MonoBehaviour
         transform.position = new Vector3(0, 0, 0); // TODO: should be random
 
         Debug.Log(initialRadius);
-        transform.localScale = new Vector3(initialRadius, 600, initialRadius);
+        if(PhotonNetwork.isMasterClient)
+            transform.localScale = new Vector3(initialRadius, height, initialRadius);
 
         currentTime = 0;
 
@@ -34,12 +38,15 @@ public class ShrinkingZoneScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        currentTime += Time.deltaTime;
-
-        float currsize = initialRadius * (1.0f - currentTime / timeToShrink);
-        if (currsize > 0)
+        if (shouldShrink)
         {
-            transform.localScale = new Vector3(currsize, 600, currsize);
+            currentTime += Time.deltaTime;
+
+            float currsize = initialRadius * (1.0f - currentTime / timeToShrink);
+            if (currsize > 0)
+            {
+                transform.localScale = new Vector3(currsize, height, currsize);
+            }
         }
     }
 
@@ -50,6 +57,7 @@ public class ShrinkingZoneScript : MonoBehaviour
         if (col.gameObject.tag == "Player")
         {
             Debug.Log("NAAAAYSSSS");
+            col.gameObject.GetComponent<PlayerNetwork>().setInsideZone(true);
         }
     }
 
@@ -61,7 +69,12 @@ public class ShrinkingZoneScript : MonoBehaviour
         if (col.gameObject.tag == "Player")
         {
             Debug.Log("YOU'RE GONNA HAVE A BAD TIME");
+            col.gameObject.GetComponent<PlayerNetwork>().setInsideZone(false);
         }
     }
 
+    public void startShrinking()
+    {
+        shouldShrink = true;
+    }
 }
