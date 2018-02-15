@@ -113,7 +113,7 @@ public class PlayerNetwork : MonoBehaviour {
     {
 		m_health -= damage;
 
-        if(m_health <= 0)
+        if(m_health <= 0 && m_pv.isMine)
         {
             //Die
             //m_myPlayerControlScript.enabled = false;
