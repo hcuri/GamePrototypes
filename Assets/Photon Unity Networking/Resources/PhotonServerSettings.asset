@@ -47,4 +47,5 @@ MonoBehaviour:
   - UnsetParentRPC
   - TakeDamage
   - WaitForRespawn
+  - AutoDestroy
   DisableAutoOpenWizard: 1
