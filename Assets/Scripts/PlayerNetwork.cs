@@ -190,14 +190,12 @@ public class PlayerNetwork : MonoBehaviour {
     [PunRPC]
     public void GrabWeapon(int weaponType)
     {
-        Debug.Log("WeaponGet! " + weaponType);
-        if (weaponPointer != -1)
+        if (weaponPointer >=0 && weaponPointer <= 4)
         {
             m_weapons[weaponPointer].SetActive(false);
             weaponOn[weaponPointer] = false;
         }
         weaponPointer = weaponType;
-        Debug.Log(weaponPointer);
         m_weapons[weaponPointer].SetActive(true);
         weaponOn[weaponPointer] = true;
     }

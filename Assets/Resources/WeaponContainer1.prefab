@@ -38,7 +38,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1433968647374242}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.0191193, y: 0.5, z: 1.7476163}
+  m_LocalPosition: {x: -2.1125474, y: 0.5, z: 11.740948}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -110,6 +110,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeToRespawn: 2
   weapon: {fileID: 1326063945759016, guid: ba8e66df39fd0ac4094115200a540014, type: 2}
+  m_type: 0
 --- !u!114 &114503408476119110
 MonoBehaviour:
   m_ObjectHideFlags: 1

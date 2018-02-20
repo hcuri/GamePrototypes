@@ -50,4 +50,5 @@ MonoBehaviour:
   - AutoDestroy
   - setScale
   - SetScale
+  - GrabWeapon
   DisableAutoOpenWizard: 1
