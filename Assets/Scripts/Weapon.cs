@@ -5,6 +5,10 @@ using UnityEngine;
 public class Weapon : MonoBehaviour {
 
     [SerializeField] private int m_damage = 10;
+    [SerializeField] private float m_Size = 1.0f;
+    [SerializeField] private float m_Speed = 1.0f;
+    [SerializeField] private int m_type = -1;
+
 
     public int m_id = 1;
 
@@ -12,7 +16,9 @@ public class Weapon : MonoBehaviour {
 
 	void Start () {
         m_pv = GetComponent<PhotonView>();
-	}
+        /*if (m_type == -1)
+            Debug.Log(this.name + " was set to the wrong weapon type");*/
+    }
 	
 	void Update () {
 		
@@ -32,6 +38,12 @@ public class Weapon : MonoBehaviour {
     }
 
     [PunRPC]
+    public void SetScale()
+    {
+        this.gameObject.transform.localScale = this.gameObject.transform.localScale * m_Size;
+    }
+
+    [PunRPC]
     public void AutoDestroy()
     {
         Destroy(gameObject, 2.0f);
@@ -44,5 +56,15 @@ public class Weapon : MonoBehaviour {
             other.gameObject.GetComponent<PhotonView>().RPC("TakeDamage", PhotonTargets.AllBuffered, m_damage);
             m_damage = 0;
         }
+    }
+
+    public float ReturnSpeed()
+    {
+        return m_Speed;
+    }
+
+    public float ReturnScale()
+    {
+        return m_Size;
     }
 }

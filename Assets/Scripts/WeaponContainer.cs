@@ -10,10 +10,31 @@ public class WeaponContainer : MonoBehaviour
     private bool isAvailable = true;
     private float timer;
     private PhotonView pv;
+    [SerializeField] int m_type;
 
     void Start()
     {
         timer = timeToRespawn;
+        this.tag = "WeaponContainer";
+        if (weapon == null)
+        {
+            Debug.Log("You haven't attached weapon!!!");
+        }
+        else
+        {
+            string m_num = name.Substring(name.Length - 1);
+            string w_num = weapon.name.Substring(weapon.name.Length - 1);
+            //Debug.Log(m_num + " " + w_num);
+            if (m_num.CompareTo(w_num) != 0)
+            {
+                Debug.Log("You attached " + weapon.name + " to " + name);
+            }
+            m_type = System.Convert.ToInt32(m_num) - 1;
+            if(m_type == -1)
+            {
+                Debug.Log(name + " haven't set the correct type number");
+            }
+        }
     }
 
     void Update()
@@ -42,8 +63,10 @@ public class WeaponContainer : MonoBehaviour
         {
             if (pv.isMine)
             {
-                GameObject playerWeapon = PhotonNetwork.Instantiate(weapon.name.ToString(), other.transform.Find("PlayerHand").transform.position, Quaternion.identity, 0); 
+                /*GameObject playerWeapon = PhotonNetwork.Instantiate(weapon.name.ToString(), other.transform.Find("PlayerHand").transform.position, Quaternion.identity, 0); 
                 playerWeapon.GetComponent<PhotonView>().RPC("SetParentRPC", PhotonTargets.AllBuffered, other.gameObject.GetComponent<PhotonView>().viewID);
+                playerWeapon.GetComponent<PhotonView>().RPC("SetScale", PhotonTargets.AllBuffered);*/
+                other.GetComponent<PhotonView>().RPC("GrabWeapon", PhotonTargets.AllBuffered, m_type);
             }
 
             GetComponent<PhotonView>().RPC("WaitForRespawn", PhotonTargets.AllBuffered);
