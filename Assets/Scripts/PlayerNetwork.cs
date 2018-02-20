@@ -12,6 +12,7 @@ public class PlayerNetwork : MonoBehaviour {
     [SerializeField] private float m_health = 100;
     [SerializeField] private float m_throwforce = 1500.0f;
     [SerializeField] private float m_jumpforce = 1500.0f;
+	[SerializeField] private Color m_color;
 
     private Text m_healthText;
 	private Slider m_healthSlider;
@@ -60,6 +61,7 @@ public class PlayerNetwork : MonoBehaviour {
             Movement();
             m_healthText.text = "HP:" + m_health.ToString();
             m_healthSlider.value = m_health;
+			m_color = new Color (((m_health)/100)*255, 255, 0, 1.0f);
             if (!insideZone)
             {
                 TakeDamage(Time.deltaTime * m_HPReducedPerSecond);
