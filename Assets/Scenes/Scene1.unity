@@ -248,7 +248,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1277214114392166, guid: 6ebe3ba4e6a095d469d51bbcf51c9e96, type: 2}
       propertyPath: m_Name
-      value: WeaponContainer2 (1)
+      value: WeaponContainer2
       objectReference: {fileID: 0}
     - target: {fileID: 114118947496887798, guid: 6ebe3ba4e6a095d469d51bbcf51c9e96,
         type: 2}
@@ -476,7 +476,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1577480866948180, guid: 74f1f31c98de3c1489216ad780487624, type: 2}
       propertyPath: m_Name
-      value: WeaponContainer3 (1)
+      value: WeaponContainer3
       objectReference: {fileID: 0}
     - target: {fileID: 114112548575890094, guid: 74f1f31c98de3c1489216ad780487624,
         type: 2}
@@ -646,7 +646,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1322903279517678, guid: 7e1fc5e7f93069443b0209d59cd53e8a, type: 2}
       propertyPath: m_Name
-      value: WeaponContainer4 (1)
+      value: WeaponContainer4
       objectReference: {fileID: 0}
     - target: {fileID: 114537008079486518, guid: 7e1fc5e7f93069443b0209d59cd53e8a,
         type: 2}
@@ -762,7 +762,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1433968647374242, guid: 048568f426d7d054ab567d531a18835b, type: 2}
       propertyPath: m_Name
-      value: WeaponContainer1 (5)
+      value: WeaponContainer1
       objectReference: {fileID: 0}
     - target: {fileID: 114503408476119110, guid: 048568f426d7d054ab567d531a18835b,
         type: 2}
@@ -818,7 +818,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1235228135216736, guid: ddd5d96265d8054428b2fc217ab62799, type: 2}
       propertyPath: m_Name
-      value: WeaponContainer5 (1)
+      value: WeaponContainer5
       objectReference: {fileID: 0}
     - target: {fileID: 114286402810564436, guid: ddd5d96265d8054428b2fc217ab62799,
         type: 2}
