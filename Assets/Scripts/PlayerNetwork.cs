@@ -184,7 +184,19 @@ public class PlayerNetwork : MonoBehaviour {
     {
         m_weapons[weaponPointer].transform.position = m_Hand.transform.position;
     }
-    
-	
+
+    [PunRPC]
+    public void GrabWeapon(int weaponType)
+    {
+        Debug.Log("WeaponGet! " + weaponType);
+        if (weaponPointer != -1)
+        {
+            m_weapons[weaponPointer].SetActive(false);
+            weaponOn[weaponPointer] = false;
+        }
+        weaponPointer = weaponType;
+        m_weapons[weaponPointer].SetActive(true);
+        weaponOn[weaponPointer] = true;
+    }
 
 }

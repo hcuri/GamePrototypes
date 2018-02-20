@@ -16,8 +16,8 @@ public class Weapon : MonoBehaviour {
 
 	void Start () {
         m_pv = GetComponent<PhotonView>();
-        if (m_type == -1)
-            Debug.Log(this.name + " was set to the wrong weapon type");
+        /*if (m_type == -1)
+            Debug.Log(this.name + " was set to the wrong weapon type");*/
     }
 	
 	void Update () {
