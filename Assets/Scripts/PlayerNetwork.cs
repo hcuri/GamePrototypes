@@ -67,7 +67,7 @@ public class PlayerNetwork : MonoBehaviour {
             {
                 TakeDamage(Time.deltaTime * m_HPReducedPerSecond);
             }
-			      damageImage.color = Color.Lerp (damageImage.color, Color.clear, 0.5f*Time.deltaTime);
+			damageImage.color = Color.Lerp (damageImage.color, Color.clear, 0.5f*Time.deltaTime);
             if(weaponPointer != -1)
                 weaponUpdatePosition();
             return;
@@ -146,7 +146,8 @@ public class PlayerNetwork : MonoBehaviour {
     public void TakeDamage(float damage)
     {
 		m_health -= damage;
-		damageImage.color = damageColor;
+		if(m_pv.isMine)
+			damageImage.color = damageColor;
         if(m_health <= 0 && m_pv.isMine)
         {
             //Die
