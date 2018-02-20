@@ -45,7 +45,7 @@ public class PlayerNetwork : MonoBehaviour {
         {
             Debug.Log("You forgot to attach hand");
         }
-        weaponPointer = 1;
+        weaponPointer = 0;
 	}
 
     private void Update()
@@ -59,11 +59,10 @@ public class PlayerNetwork : MonoBehaviour {
             {
                 TakeDamage(Time.deltaTime * m_HPReducedPerSecond);
             }
+            if(weaponPointer != -1)
+                weaponUpdatePosition();
             return;
         }
-
-        if(weaponPointer!=0)
-            weaponUpdatePosition();
     }
 
     private void Initialize()
@@ -178,6 +177,8 @@ public class PlayerNetwork : MonoBehaviour {
 
     private void weaponUpdatePosition()
     {
+        Debug.Log("is Working");
+
         foreach(GameObject mw in m_weapons)
         mw.transform.position = m_Hand.transform.position;
     }
