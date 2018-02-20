@@ -21,7 +21,7 @@ public class ShrinkingZoneScript : Photon.MonoBehaviour
         float initialY = initialPosRandomMax.y;
         initialX = Random.Range(-initialX, initialX);
         initialY = Random.Range(-initialY, initialY);
-        transform.position = new Vector3(initialX, initialY);
+        transform.position = new Vector3(initialX, 0, initialY);
 
         Debug.Log(transform.position);
 
