@@ -10,6 +10,7 @@ public class WeaponContainer : MonoBehaviour
     private bool isAvailable = true;
     private float timer;
     private PhotonView pv;
+    [SerializeField] int m_type;
 
     void Start()
     {
@@ -27,6 +28,11 @@ public class WeaponContainer : MonoBehaviour
             if (m_num.CompareTo(w_num) != 0)
             {
                 Debug.Log("You attached " + weapon.name + " to " + name);
+            }
+            m_type = System.Convert.ToInt32(m_num) - 1;
+            if(m_type == -1)
+            {
+                Debug.Log(name + " haven't set the correct type number");
             }
         }
     }
