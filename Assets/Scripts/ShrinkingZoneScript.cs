@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class ShrinkingZoneScript : Photon.MonoBehaviour
 {
+    public Vector2 initialPosRandomMax;
     public float timeToShrink = 20;
     public float initialRadius = 25;
     public float height = 50;
@@ -16,11 +17,22 @@ public class ShrinkingZoneScript : Photon.MonoBehaviour
     // Use this for initialization; randomize the translation with respect to the level
     void Start()
     {
-        transform.position = new Vector3(0, 0, 0); // TODO: should be random
+        float initialX = initialPosRandomMax.x;
+        float initialY = initialPosRandomMax.y;
+        initialX = Random.Range(-initialX, initialX);
+        initialY = Random.Range(-initialY, initialY);
+        transform.position = new Vector3(initialX, initialY);
 
-        Debug.Log(initialRadius);
-        if(PhotonNetwork.isMasterClient)
-            transform.localScale = new Vector3(initialRadius, height, initialRadius);
+        Debug.Log(transform.position);
+
+        //if (PhotonNetwork.isMasterClient)
+        //{
+        //    transform.localScale = new Vector3(initialRadius, height, initialRadius);
+
+        //    Vector2 initialPos = Random.insideUnitCircle * GetComponent<Renderer>().bounds.extents.magnitude;
+        //    Debug.Log(initialPos);
+        //    transform.position = new Vector3(initialPos.x, initialPos.y);
+        //}
 
         currentTime = 0;
 
