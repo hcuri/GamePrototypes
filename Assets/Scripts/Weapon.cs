@@ -62,4 +62,9 @@ public class Weapon : MonoBehaviour {
     {
         return m_Speed;
     }
+
+    public float ReturnScale()
+    {
+        return m_Size;
+    }
 }
