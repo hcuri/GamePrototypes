@@ -86,11 +86,12 @@ public class PlayerNetwork : MonoBehaviour {
             if (weapon.GetComponent<Weapon>().m_id == 1)
             {
                 string weapName = weapon.name.Substring(0, 7);
+                float weaponWeight = weapon.GetComponent<Weapon>().ReturnSpeed();
                 GameObject infiniteWeapon = PhotonNetwork.Instantiate(weapName, weapon.transform.position + playerCamera.transform.forward, Quaternion.identity, 0);
                 infiniteWeapon.GetComponent<Rigidbody>().isKinematic = false;
                 //infiniteWeapon.GetComponent<PhotonView>().RPC("SetParentRPC", PhotonTargets.AllBuffered, GetComponent<PhotonView>().viewID);
                 //infiniteWeapon.GetComponent<PhotonView>().RPC("UnsetParentRPC", PhotonTargets.AllBuffered);
-                infiniteWeapon.GetComponent<Rigidbody>().AddForce(playerCamera.transform.forward * m_throwforce);           
+                infiniteWeapon.GetComponent<Rigidbody>().AddForce(playerCamera.transform.forward * m_throwforce * weaponWeight);           
                 infiniteWeapon.GetComponent<PhotonView>().RPC("AutoDestroy", PhotonTargets.AllBuffered);
             }
 

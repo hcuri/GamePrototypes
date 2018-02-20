@@ -54,4 +54,9 @@ public class Weapon : MonoBehaviour {
             m_damage = 0;
         }
     }
+
+    public float ReturnSpeed()
+    {
+        return m_Speed;
+    }
 }
