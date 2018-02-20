@@ -15,10 +15,9 @@ public class WeaponContainer : MonoBehaviour
     {
         timer = timeToRespawn;
         this.tag = "WeaponContainer";
-        if(weapon = null)
-        {
-            Debug.Log("You Forget To Attach Weapon");
-        }
+        string m_num = name.Substring(name.Length - 1);
+        string w_num = weapon.name.Substring(weapon.name.Length - 1);
+        Debug.Log(m_num + " " + w_num);
     }
 
     void Update()
