@@ -5,6 +5,9 @@ using UnityEngine;
 public class Weapon : MonoBehaviour {
 
     [SerializeField] private int m_damage = 10;
+    [SerializeField] private float m_Size = 1.0f;
+    [SerializeField] private float m_Speed = 1.0f;
+
 
     public int m_id = 1;
 
@@ -12,7 +15,7 @@ public class Weapon : MonoBehaviour {
 
 	void Start () {
         m_pv = GetComponent<PhotonView>();
-	}
+    }
 	
 	void Update () {
 		
@@ -29,6 +32,12 @@ public class Weapon : MonoBehaviour {
     {
         transform.parent = null;
         GetComponent<Rigidbody>().isKinematic = false;
+    }
+
+    [PunRPC]
+    public void SetScale()
+    {
+        this.gameObject.transform.localScale = this.gameObject.transform.localScale * m_Size;
     }
 
     [PunRPC]

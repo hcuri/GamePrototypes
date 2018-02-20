@@ -206,6 +206,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_damage: 10
+  m_Size: 0.75
+  m_Speed: 1.25
   m_id: 1
 --- !u!135 &135849572754002800
 SphereCollider:

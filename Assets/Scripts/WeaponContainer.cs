@@ -18,6 +18,7 @@ public class WeaponContainer : MonoBehaviour
         string m_num = name.Substring(name.Length - 1);
         string w_num = weapon.name.Substring(weapon.name.Length - 1);
         Debug.Log(m_num + " " + w_num);
+        Debug.Log(weapon.name);
     }
 
     void Update()
@@ -48,6 +49,7 @@ public class WeaponContainer : MonoBehaviour
             {
                 GameObject playerWeapon = PhotonNetwork.Instantiate(weapon.name.ToString(), other.transform.Find("PlayerHand").transform.position, Quaternion.identity, 0); 
                 playerWeapon.GetComponent<PhotonView>().RPC("SetParentRPC", PhotonTargets.AllBuffered, other.gameObject.GetComponent<PhotonView>().viewID);
+                playerWeapon.GetComponent<PhotonView>().RPC("SetScale", PhotonTargets.AllBuffered);
             }
 
             GetComponent<PhotonView>().RPC("WaitForRespawn", PhotonTargets.AllBuffered);
