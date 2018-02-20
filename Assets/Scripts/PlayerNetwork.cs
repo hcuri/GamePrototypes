@@ -15,6 +15,8 @@ public class PlayerNetwork : MonoBehaviour {
 
     private Text m_healthText;
 	private Slider m_healthSlider;
+	private Image damageImage;
+	private Color damageColor = new Color(1f, 0f, 0f, 0.5f);
     private PhotonView m_pv;
     private MonoBehaviour m_myPlayerControlScript;
     private GameObject weapon;
@@ -32,6 +34,7 @@ public class PlayerNetwork : MonoBehaviour {
         m_pv = GetComponent<PhotonView>();
         m_healthText = GameObject.Find("HP").GetComponent<Text>();
 		m_healthSlider = GameObject.Find ("HPSlider").GetComponent<Slider> ();
+		damageImage = GameObject.Find ("DamageImage").GetComponent<Image> ();
         Initialize();
 
         //added by Po
@@ -64,6 +67,7 @@ public class PlayerNetwork : MonoBehaviour {
             {
                 TakeDamage(Time.deltaTime * m_HPReducedPerSecond);
             }
+			      damageImage.color = Color.Lerp (damageImage.color, Color.clear, 0.5f*Time.deltaTime);
             if(weaponPointer != -1)
                 weaponUpdatePosition();
             return;
@@ -142,7 +146,7 @@ public class PlayerNetwork : MonoBehaviour {
     public void TakeDamage(float damage)
     {
 		m_health -= damage;
-
+		damageImage.color = damageColor;
         if(m_health <= 0 && m_pv.isMine)
         {
             //Die
