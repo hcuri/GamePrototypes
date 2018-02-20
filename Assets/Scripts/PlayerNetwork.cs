@@ -21,12 +21,36 @@ public class PlayerNetwork : MonoBehaviour {
     private bool insideZone = true;
     private float m_HPReducedPerSecond = 15.0f;
 
+    //added by Po
+    [SerializeField] GameObject[] m_weapons;
+    [SerializeField] bool[] weaponOn;
+    [SerializeField] private GameObject m_Hand;
+    [SerializeField] int weaponPointer;
+
     private void Start ()
     {
         m_pv = GetComponent<PhotonView>();
         m_healthText = GameObject.Find("HP").GetComponent<Text>();
 		m_healthSlider = GameObject.Find ("HPSlider").GetComponent<Slider> ();
         Initialize();
+
+        //added by Po
+        weaponOn = new bool[] { false, false, false, false, false };
+        if(m_weapons.Length < 5)
+        {
+            Debug.Log("You only attached " + m_weapons.Length + " weapons to player");
+        }
+
+        if(m_Hand == null)
+        {
+            Debug.Log("You forgot to attach hand");
+        }
+
+        foreach(GameObject mw in m_weapons)
+        {
+            mw.SetActive(false);
+        }
+        weaponPointer = -1;
 	}
 
     private void Update()
@@ -40,6 +64,8 @@ public class PlayerNetwork : MonoBehaviour {
             {
                 TakeDamage(Time.deltaTime * m_HPReducedPerSecond);
             }
+            if(weaponPointer != -1)
+                weaponUpdatePosition();
             return;
         }
     }
@@ -85,11 +111,15 @@ public class PlayerNetwork : MonoBehaviour {
 
             if (weapon.GetComponent<Weapon>().m_id == 1)
             {
-                GameObject infiniteWeapon = PhotonNetwork.Instantiate("Weapon1", weapon.transform.position + playerCamera.transform.forward, Quaternion.identity, 0);
+                int newW = weaponPointer + 1;
+                string weapName = "Weapon" + newW;
+                float weaponWeight = weapon.GetComponent<Weapon>().ReturnSpeed();
+                GameObject infiniteWeapon = PhotonNetwork.Instantiate(weapName, m_Hand.transform.position + playerCamera.transform.forward, Quaternion.identity, 0);
                 infiniteWeapon.GetComponent<Rigidbody>().isKinematic = false;
                 //infiniteWeapon.GetComponent<PhotonView>().RPC("SetParentRPC", PhotonTargets.AllBuffered, GetComponent<PhotonView>().viewID);
                 //infiniteWeapon.GetComponent<PhotonView>().RPC("UnsetParentRPC", PhotonTargets.AllBuffered);
-                infiniteWeapon.GetComponent<Rigidbody>().AddForce(playerCamera.transform.forward * m_throwforce);           
+                infiniteWeapon.GetComponent<Rigidbody>().AddForce(playerCamera.transform.forward * m_throwforce * weaponWeight);
+                infiniteWeapon.GetComponent<Transform>().localScale *= infiniteWeapon.GetComponent<Weapon>().ReturnScale();
                 infiniteWeapon.GetComponent<PhotonView>().RPC("AutoDestroy", PhotonTargets.AllBuffered);
             }
 
@@ -151,7 +181,23 @@ public class PlayerNetwork : MonoBehaviour {
         }
         */
     }
-    
-	
+
+    private void weaponUpdatePosition()
+    {
+        m_weapons[weaponPointer].transform.position = m_Hand.transform.position;
+    }
+
+    [PunRPC]
+    public void GrabWeapon(int weaponType)
+    {
+        if (weaponPointer >=0 && weaponPointer <= 4)
+        {
+            m_weapons[weaponPointer].SetActive(false);
+            weaponOn[weaponPointer] = false;
+        }
+        weaponPointer = weaponType;
+        m_weapons[weaponPointer].SetActive(true);
+        weaponOn[weaponPointer] = true;
+    }
 
 }
