@@ -849,6 +849,7 @@ MonoBehaviour:
   m_damage: 20
   m_Size: 1.25
   m_Speed: 0.75
+  m_type: -1
   m_id: 1
 --- !u!114 &114080044435467524
 MonoBehaviour:
@@ -1349,6 +1350,7 @@ MonoBehaviour:
   m_damage: 30
   m_Size: 1.5
   m_Speed: 0.5
+  m_type: -1
   m_id: 1
 --- !u!114 &114611539892078850
 MonoBehaviour:
@@ -1510,6 +1512,7 @@ MonoBehaviour:
   m_damage: 15
   m_Size: 1
   m_Speed: 1
+  m_type: -1
   m_id: 1
 --- !u!114 &114771317588380732
 MonoBehaviour:
@@ -1525,6 +1528,7 @@ MonoBehaviour:
   m_damage: 5
   m_Size: 0.5
   m_Speed: 1.5
+  m_type: -1
   m_id: 1
 --- !u!114 &114787905135586376
 MonoBehaviour:
@@ -1566,6 +1570,7 @@ MonoBehaviour:
   m_damage: 10
   m_Size: 0.75
   m_Speed: 1.25
+  m_type: -1
   m_id: 1
 --- !u!114 &114843303034495584
 MonoBehaviour:
