@@ -48,4 +48,6 @@ MonoBehaviour:
   - TakeDamage
   - WaitForRespawn
   - AutoDestroy
+  - setScale
+  - SetScale
   DisableAutoOpenWizard: 1

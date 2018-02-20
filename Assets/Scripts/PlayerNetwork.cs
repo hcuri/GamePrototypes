@@ -21,12 +21,31 @@ public class PlayerNetwork : MonoBehaviour {
     private bool insideZone = true;
     private float m_HPReducedPerSecond = 15.0f;
 
+    //added by Po
+    [SerializeField] GameObject[] m_weapons;
+    [SerializeField] bool[] weaponOn;
+    [SerializeField] private GameObject m_Hand;
+    [SerializeField] int weaponPointer;
+
     private void Start ()
     {
         m_pv = GetComponent<PhotonView>();
         m_healthText = GameObject.Find("HP").GetComponent<Text>();
 		m_healthSlider = GameObject.Find ("HPSlider").GetComponent<Slider> ();
         Initialize();
+
+        //added by Po
+        weaponOn = new bool[] { false, false, false, false, false };
+        if(m_weapons.Length < 5)
+        {
+            Debug.Log("You only attached " + m_weapons.Length + " weapons to player");
+        }
+
+        if(m_Hand == null)
+        {
+            Debug.Log("You forgot to attach hand");
+        }
+        weaponPointer = 1;
 	}
 
     private void Update()
@@ -42,6 +61,9 @@ public class PlayerNetwork : MonoBehaviour {
             }
             return;
         }
+
+        if(weaponPointer!=0)
+            weaponUpdatePosition();
     }
 
     private void Initialize()
@@ -152,6 +174,12 @@ public class PlayerNetwork : MonoBehaviour {
             m_health = (int)stream.ReceiveNext();
         }
         */
+    }
+
+    private void weaponUpdatePosition()
+    {
+        foreach(GameObject mw in m_weapons)
+        mw.transform.position = m_Hand.transform.position;
     }
     
 	
