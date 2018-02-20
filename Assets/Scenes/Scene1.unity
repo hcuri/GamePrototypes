@@ -377,6 +377,16 @@ Prefab:
       propertyPath: instantiationId
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 114109005206887768, guid: 13369119b8aa1a24a8e9146cb83403ac,
+        type: 2}
+      propertyPath: initialPosRandomMax.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 114109005206887768, guid: 13369119b8aa1a24a8e9146cb83403ac,
+        type: 2}
+      propertyPath: initialPosRandomMax.y
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 13369119b8aa1a24a8e9146cb83403ac, type: 2}
   m_IsPrefabParent: 0
@@ -523,6 +533,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3787383bebdca1740ac5005b39f93e50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  numPeopleToStart: 3
   netInfo: {fileID: 753257345}
   spawnPoint: {fileID: 102197897}
   player: {fileID: 1328007234698746, guid: 6df8654cd5db45540b7f6421439a0c52, type: 2}
