@@ -15,10 +15,20 @@ public class WeaponContainer : MonoBehaviour
     {
         timer = timeToRespawn;
         this.tag = "WeaponContainer";
-        string m_num = name.Substring(name.Length - 1);
-        string w_num = weapon.name.Substring(weapon.name.Length - 1);
-        Debug.Log(m_num + " " + w_num);
-        Debug.Log(weapon.name);
+        if (weapon == null)
+        {
+            Debug.Log("You haven't attached weapon!!!");
+        }
+        else
+        {
+            string m_num = name.Substring(name.Length - 1);
+            string w_num = weapon.name.Substring(weapon.name.Length - 1);
+            //Debug.Log(m_num + " " + w_num);
+            if (m_num.CompareTo(w_num) != 0)
+            {
+                Debug.Log("You attached " + weapon.name + " to " + name);
+            }
+        }
     }
 
     void Update()
