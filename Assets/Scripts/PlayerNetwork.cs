@@ -15,6 +15,7 @@ public class PlayerNetwork : MonoBehaviour {
 
     private Text m_healthText;
 	private Slider m_healthSlider;
+	private Color m_color = new Color (0f, 1f, 0f, 1.0f);
 	private Image damageImage;
 	private Color damageColor = new Color(1f, 0f, 0f, 0.5f);
     private PhotonView m_pv;
@@ -63,6 +64,7 @@ public class PlayerNetwork : MonoBehaviour {
             Movement();
             m_healthText.text = "HP:" + m_health.ToString();
             m_healthSlider.value = m_health;
+			GameObject.Find("Body").GetComponent<Renderer>().material.color = m_color;
             if (!insideZone)
             {
                 TakeDamage(Time.deltaTime * m_HPReducedPerSecond);
@@ -146,8 +148,11 @@ public class PlayerNetwork : MonoBehaviour {
     public void TakeDamage(float damage)
     {
 		m_health -= damage;
-		if(m_pv.isMine)
+		if (m_pv.isMine) {
 			damageImage.color = damageColor;
+			m_color.r = (100f - m_health) / 50f;
+			m_color.g = m_health / 50f;
+		}
         if(m_health <= 0 && m_pv.isMine)
         {
             //Die
