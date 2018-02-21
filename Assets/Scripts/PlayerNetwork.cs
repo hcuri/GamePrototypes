@@ -12,10 +12,10 @@ public class PlayerNetwork : MonoBehaviour {
     [SerializeField] private float m_health = 100;
     [SerializeField] private float m_throwforce = 1500.0f;
     [SerializeField] private float m_jumpforce = 1500.0f;
-	[SerializeField] private Color m_color;
 
     private Text m_healthText;
 	private Slider m_healthSlider;
+	[SerializeField] private Color m_color = new Color (255f, 255f, 0, 1.0f);
     private PhotonView m_pv;
     private MonoBehaviour m_myPlayerControlScript;
     private GameObject weapon;
@@ -61,7 +61,7 @@ public class PlayerNetwork : MonoBehaviour {
             Movement();
             m_healthText.text = "HP:" + m_health.ToString();
             m_healthSlider.value = m_health;
-			m_color = new Color (((m_health)/100)*255, 255, 0, 1.0f);
+			GameObject.Find("Body").GetComponent<Renderer>().material.color = m_color;
             if (!insideZone)
             {
                 TakeDamage(Time.deltaTime * m_HPReducedPerSecond);
@@ -144,7 +144,9 @@ public class PlayerNetwork : MonoBehaviour {
     public void TakeDamage(float damage)
     {
 		m_health -= damage;
-
+		if (m_pv.isMine) {
+			m_color.g = m_health / 100f * 255f;
+		}
         if(m_health <= 0 && m_pv.isMine)
         {
             //Die
