@@ -15,11 +15,9 @@ public class PlayerNetwork : MonoBehaviour {
 
     private Text m_healthText;
 	private Slider m_healthSlider;
-	[SerializeField] private Color m_color = new Color (255f, 255f, 0, 1.0f);
-=======
+	private Color m_color = new Color (0f, 1f, 0f, 1.0f);
 	private Image damageImage;
 	private Color damageColor = new Color(1f, 0f, 0f, 0.5f);
->>>>>>> master
     private PhotonView m_pv;
     private MonoBehaviour m_myPlayerControlScript;
     private GameObject weapon;
@@ -150,14 +148,11 @@ public class PlayerNetwork : MonoBehaviour {
     public void TakeDamage(float damage)
     {
 		m_health -= damage;
-<<<<<<< HEAD
 		if (m_pv.isMine) {
-			m_color.g = m_health / 100f * 255f;
-		}
-=======
-		if(m_pv.isMine)
 			damageImage.color = damageColor;
->>>>>>> master
+			m_color.r = (100f - m_health) / 50f;
+			m_color.g = m_health / 50f;
+		}
         if(m_health <= 0 && m_pv.isMine)
         {
             //Die
