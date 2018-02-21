@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class PhotonNetworkManager : Photon.PunBehaviour {
 
+    public int numPeopleToStart;
     [SerializeField] private Text netInfo;
     [SerializeField] private Transform spawnPoint;
     [SerializeField] private GameObject player;
@@ -26,17 +27,39 @@ public class PhotonNetworkManager : Photon.PunBehaviour {
 
     public override void OnJoinedRoom()
     {
-        Debug.Log("We are now joined room");
-        PhotonNetwork.Instantiate(player.name, spawnPoint.position, spawnPoint.rotation, 0);
-        lobbyCamera.SetActive(false);
+        if (PhotonNetwork.room.PlayerCount == numPeopleToStart)
+        {
+            Debug.Log("We are now joined room");
+            PhotonNetwork.Instantiate(player.name, spawnPoint.position, spawnPoint.rotation, 0);
+            lobbyCamera.SetActive(false);
 
-        //if (PhotonNetwork.isMasterClient)
-        //{
+            //if (PhotonNetwork.isMasterClient)
+            //{
             GameObject.Find("ShrinkingZone").GetComponent<ShrinkingZoneScript>().startShrinking();
-        //}
+            //}
+        }
+        else
+        {
+            Debug.Log("Waiting for more players");
+        }
     }
-	
-	private void Update () {
+
+    public override void OnPhotonPlayerConnected(PhotonPlayer newPlayer)
+    {
+        Debug.Log(PhotonNetwork.room.PlayerCount);
+        if (PhotonNetwork.room.PlayerCount == numPeopleToStart)
+        {
+            Debug.Log("We are now joined room");
+            PhotonNetwork.Instantiate(player.name, spawnPoint.position, spawnPoint.rotation, 0);
+            lobbyCamera.SetActive(false);
+
+            //if (PhotonNetwork.isMasterClient)
+            //{
+            GameObject.Find("ShrinkingZone").GetComponent<ShrinkingZoneScript>().startShrinking();
+        }
+    }
+
+    private void Update () {
         netInfo.text = PhotonNetwork.connectionStateDetailed.ToString();
 	}
 }
