@@ -113,16 +113,24 @@ public class PlayerNetwork : MonoBehaviour {
                 return;
             }
 
+            RaycastHit hit;
+            Vector3 shootDirection = playerCamera.transform.forward;
+            if(Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit))
+            {
+                shootDirection = hit.point - playerCamera.transform.position;
+            }
+            shootDirection.Normalize();
             if (weapon.GetComponent<Weapon>().m_id == 1)
             {
                 int newW = weaponPointer + 1;
                 string weapName = "Weapon" + newW;
                 float weaponWeight = weapon.GetComponent<Weapon>().ReturnSpeed();
-                GameObject infiniteWeapon = PhotonNetwork.Instantiate(weapName, m_Hand.transform.position + playerCamera.transform.forward, Quaternion.identity, 0);
+                GameObject infiniteWeapon = PhotonNetwork.Instantiate(weapName, m_Hand.transform.position + playerCamera.transform.forward*1.5f, Quaternion.identity, 0);
                 infiniteWeapon.GetComponent<Rigidbody>().isKinematic = false;
                 //infiniteWeapon.GetComponent<PhotonView>().RPC("SetParentRPC", PhotonTargets.AllBuffered, GetComponent<PhotonView>().viewID);
                 //infiniteWeapon.GetComponent<PhotonView>().RPC("UnsetParentRPC", PhotonTargets.AllBuffered);
-                infiniteWeapon.GetComponent<Rigidbody>().AddForce(playerCamera.transform.forward * m_throwforce * weaponWeight);
+                //infiniteWeapon.GetComponent<Rigidbody>().AddForce(playerCamera.transform.forward * m_throwforce * weaponWeight);
+                infiniteWeapon.GetComponent<Rigidbody>().AddForce(shootDirection * m_throwforce * weaponWeight);
                 infiniteWeapon.GetComponent<Transform>().localScale *= infiniteWeapon.GetComponent<Weapon>().ReturnScale();
                 infiniteWeapon.GetComponent<PhotonView>().RPC("AutoDestroy", PhotonTargets.AllBuffered);
             }
@@ -130,7 +138,8 @@ public class PlayerNetwork : MonoBehaviour {
             else
             {
                 weapon.GetComponent<PhotonView>().RPC("UnsetParentRPC", PhotonTargets.AllBuffered);
-                weapon.GetComponent<Rigidbody>().AddForce(playerCamera.transform.forward * m_throwforce);
+                //weapon.GetComponent<Rigidbody>().AddForce(playerCamera.transform.forward * m_throwforce);
+                weapon.GetComponent<Rigidbody>().AddForce(shootDirection * m_throwforce);
                 weapon.GetComponent<PhotonView>().RPC("AutoDestroy", PhotonTargets.AllBuffered);
                 weapon = null;
             }
