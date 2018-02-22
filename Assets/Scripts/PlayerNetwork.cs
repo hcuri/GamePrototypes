@@ -13,6 +13,20 @@ public class PlayerNetwork : MonoBehaviour {
     [SerializeField] private float m_throwforce = 1500.0f;
     [SerializeField] private float m_jumpforce = 1500.0f;
 
+    //2/21/2018 ME Cool
+    [SerializeField] private float m_thermalClipCapacity = 100f;
+    [SerializeField] private float m_thermalClip = 0f;
+    [SerializeField] private float m_heat = 100f;
+    [SerializeField] private float m_heatCooldownRate = 50f;
+    [SerializeField] private float m_overheatPenaltyTime = 5f;
+
+    //2/21/2018 ME Cool
+
+    private bool overHeated;
+    private bool penaltycasted;
+    private float m_postOverheatShootingPermit;
+    
+
     private Text m_healthText;
 	private Slider m_healthSlider;
 	private Image damageImage;
@@ -28,6 +42,7 @@ public class PlayerNetwork : MonoBehaviour {
     [SerializeField] bool[] weaponOn;
     [SerializeField] private GameObject m_Hand;
     [SerializeField] int weaponPointer;
+
 
     private void Start ()
     {
@@ -60,6 +75,22 @@ public class PlayerNetwork : MonoBehaviour {
     {
         if(m_pv.isMine)
         {
+
+            Weapon_Cool_Heat();
+            if(overHeated)
+            {
+                if (!penaltycasted)
+                {
+                    PenaltyHeatingWeapon();
+                }
+
+            }
+
+            if (Time.deltaTime > m_overheatPenaltyTime)
+            {
+                overHeated = false;
+            }
+
             Movement();
             m_healthText.text = "HP:" + m_health.ToString();
             m_healthSlider.value = m_health;
@@ -118,13 +149,21 @@ public class PlayerNetwork : MonoBehaviour {
                 int newW = weaponPointer + 1;
                 string weapName = "Weapon" + newW;
                 float weaponWeight = weapon.GetComponent<Weapon>().ReturnSpeed();
+
+                if (!overHeated)
+                {
                 GameObject infiniteWeapon = PhotonNetwork.Instantiate(weapName, m_Hand.transform.position + playerCamera.transform.forward, Quaternion.identity, 0);
                 infiniteWeapon.GetComponent<Rigidbody>().isKinematic = false;
                 //infiniteWeapon.GetComponent<PhotonView>().RPC("SetParentRPC", PhotonTargets.AllBuffered, GetComponent<PhotonView>().viewID);
                 //infiniteWeapon.GetComponent<PhotonView>().RPC("UnsetParentRPC", PhotonTargets.AllBuffered);
-                infiniteWeapon.GetComponent<Rigidbody>().AddForce(playerCamera.transform.forward * m_throwforce * weaponWeight);
-                infiniteWeapon.GetComponent<Transform>().localScale *= infiniteWeapon.GetComponent<Weapon>().ReturnScale();
-                infiniteWeapon.GetComponent<PhotonView>().RPC("AutoDestroy", PhotonTargets.AllBuffered);
+
+               
+                    infiniteWeapon.GetComponent<Rigidbody>().AddForce(playerCamera.transform.forward * m_throwforce * weaponWeight);
+                    infiniteWeapon.GetComponent<Transform>().localScale *= infiniteWeapon.GetComponent<Weapon>().ReturnScale();
+                    infiniteWeapon.GetComponent<PhotonView>().RPC("AutoDestroy", PhotonTargets.AllBuffered);
+
+                    HeatingWeapon();
+                }
             }
 
             else
@@ -205,4 +244,42 @@ public class PlayerNetwork : MonoBehaviour {
         weaponOn[weaponPointer] = true;
     }
 
+    private void Weapon_Cool_Heat()
+    {
+        if(overHeated == false&&m_thermalClip >= 0f && m_thermalClip<= m_thermalClipCapacity)
+        {
+            m_thermalClip -= m_heatCooldownRate * Time.deltaTime;
+        }
+
+        if(m_thermalClip <= 0)
+        {
+            m_thermalClip = 0;
+        }
+
+        if(m_thermalClip >= m_thermalClipCapacity)
+        {
+            overHeated = true;
+            penaltycasted = false;
+        }
+
+        if(overHeated == true && m_thermalClip >= m_thermalClipCapacity)
+        {
+            m_thermalClip = m_thermalClipCapacity;
+        }
+
+    }
+
+    private void HeatingWeapon()
+    {
+        if(overHeated == false && m_thermalClip <= m_thermalClipCapacity)
+        {
+            m_thermalClip += m_heat;
+        }
+    }
+
+    private void PenaltyHeatingWeapon()
+    {
+        m_postOverheatShootingPermit = Time.deltaTime + m_overheatPenaltyTime;
+        penaltycasted = true;
+    }
 }
