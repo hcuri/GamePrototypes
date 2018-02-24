@@ -464,6 +464,15 @@ MonoBehaviour:
   m_health: 100
   m_throwforce: 1500
   m_jumpforce: 1500
+  m_thermalClipCapacity: 200
+  m_thermalClip: 0
+  m_heat: 20
+  m_heatCooldownRate: 20
+  m_overheatPenaltyTime: 5
+  m_weapons: []
+  weaponOn: 
+  m_Hand: {fileID: 0}
+  weaponPointer: 0
 --- !u!114 &114882119320612914
 MonoBehaviour:
   m_ObjectHideFlags: 1

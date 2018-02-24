@@ -14,18 +14,19 @@ public class PlayerNetwork : MonoBehaviour {
     [SerializeField] private float m_jumpforce = 1500.0f;
 
     //2/21/2018 ME Cool
-    [SerializeField] private float m_thermalClipCapacity = 100f;
-    [SerializeField] private float m_thermalClip = 0f;
-    [SerializeField] private float m_heat = 100f;
-    [SerializeField] private float m_heatCooldownRate = 50f;
-    [SerializeField] private float m_overheatPenaltyTime = 5f;
-
+    [SerializeField] private float m_thermalClipCapacity = 200.0f;
+    [SerializeField] private float m_thermalClip = 0.0f;
+    [SerializeField] private float m_heat = 20.0f;
+    [SerializeField] private float m_heatCooldownRate = 20.0f;
+    [SerializeField] private float m_overheatPenaltyTime = 5.0f;
     //2/21/2018 ME Cool
 
+    //2/21/2018 ME COOL
+    //private float m_heat = 50.0f;
     private bool overHeated;
-    private bool penaltycasted;
+    private bool requirePenalty;
     private float m_postOverheatShootingPermit;
-    
+    //2/21/2018 ME COOL
 
     private Text m_healthText;
 	private Slider m_healthSlider;
@@ -77,16 +78,22 @@ public class PlayerNetwork : MonoBehaviour {
         {
 
             Weapon_Cool_Heat();
+
             if(overHeated)
             {
-                if (!penaltycasted)
+                if (requirePenalty)
                 {
                     PenaltyHeatingWeapon();
                 }
 
             }
-
-            if (Time.deltaTime > m_overheatPenaltyTime)
+            Debug.Log("Overheated:"+ overHeated);
+            Debug.Log("Panalty: " + requirePenalty);
+            Debug.Log(Time.time);
+            Debug.Log(m_postOverheatShootingPermit);
+            Debug.Log(m_thermalClip);
+            
+            if (Time.time > m_postOverheatShootingPermit)
             {
                 overHeated = false;
             }
@@ -246,40 +253,42 @@ public class PlayerNetwork : MonoBehaviour {
 
     private void Weapon_Cool_Heat()
     {
-        if(overHeated == false&&m_thermalClip >= 0f && m_thermalClip<= m_thermalClipCapacity)
+        if(overHeated == false && m_thermalClip >= 0f)
         {
             m_thermalClip -= m_heatCooldownRate * Time.deltaTime;
         }
+
+        //if(overHeated == true)
+        //{
+        //    m_thermalClip = m_thermalClipCapacity;
+        //}
 
         if(m_thermalClip <= 0)
         {
             m_thermalClip = 0;
         }
 
-        if(m_thermalClip >= m_thermalClipCapacity)
-        {
-            overHeated = true;
-            penaltycasted = false;
-        }
-
-        if(overHeated == true && m_thermalClip >= m_thermalClipCapacity)
-        {
-            m_thermalClip = m_thermalClipCapacity;
-        }
-
     }
 
     private void HeatingWeapon()
     {
-        if(overHeated == false && m_thermalClip <= m_thermalClipCapacity)
+        if(m_thermalClip < m_thermalClipCapacity)
         {
-            m_thermalClip += m_heat;
+            m_thermalClip = m_thermalClip + m_heat;
         }
+
+        if(m_thermalClip > m_thermalClipCapacity)
+        {
+            overHeated = true;
+            requirePenalty = true;
+        }
+
     }
 
     private void PenaltyHeatingWeapon()
     {
-        m_postOverheatShootingPermit = Time.deltaTime + m_overheatPenaltyTime;
-        penaltycasted = true;
+        Debug.Log("WTF?");
+        m_postOverheatShootingPermit = Time.time + m_overheatPenaltyTime;
+        requirePenalty = false;
     }
 }
