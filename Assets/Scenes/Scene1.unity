@@ -557,13 +557,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3787383bebdca1740ac5005b39f93e50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numPeopleToStart: 4
+  numPeopleToStart: 3
   netInfo: {fileID: 753257345}
   spawnPoint: {fileID: 102197897}
   player: {fileID: 1328007234698746, guid: 6df8654cd5db45540b7f6421439a0c52, type: 2}
   shrinkingZone: {fileID: 1718153061817834, guid: 13369119b8aa1a24a8e9146cb83403ac,
     type: 2}
   lobbyCamera: {fileID: 2001878483}
+  countDownToStart: 5
+  debugMode: 0
 --- !u!4 &715131531
 Transform:
   m_ObjectHideFlags: 0
