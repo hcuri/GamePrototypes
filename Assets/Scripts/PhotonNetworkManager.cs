@@ -12,10 +12,15 @@ public class PhotonNetworkManager : Photon.PunBehaviour {
     [SerializeField] private GameObject shrinkingZone;
     [SerializeField] private GameObject lobbyCamera;
 
+	private Text waitingText;
+	private bool joinedRoom;
+
 	// Use this for initialization
 	private void Start () {
         PhotonNetwork.ConnectUsingSettings("ver 0.1");
         PhotonNetwork.automaticallySyncScene = true;
+		waitingText = GameObject.Find("WaitingText").GetComponent<Text>();
+		waitingText.text = "";
     }
 
     public override void OnJoinedLobby()
@@ -29,6 +34,8 @@ public class PhotonNetworkManager : Photon.PunBehaviour {
     {
         if (PhotonNetwork.room.PlayerCount == numPeopleToStart)
         {
+			joinedRoom = true;
+			waitingText.text = "";
             Debug.Log("We are now joined room");
             PhotonNetwork.Instantiate(player.name, spawnPoint.position, spawnPoint.rotation, 0);
             lobbyCamera.SetActive(false);
@@ -40,7 +47,9 @@ public class PhotonNetworkManager : Photon.PunBehaviour {
         }
         else
         {
-            Debug.Log("Waiting for more players");
+			joinedRoom = false;
+			waitingText.text = "Waiting for more players..." + PhotonNetwork.room.PlayerCount + "/" + numPeopleToStart;
+			Debug.Log("Waiting for more players");
         }
     }
 
@@ -48,7 +57,9 @@ public class PhotonNetworkManager : Photon.PunBehaviour {
     {
         Debug.Log(PhotonNetwork.room.PlayerCount);
         if (PhotonNetwork.room.PlayerCount == numPeopleToStart)
-        {
+		{
+			joinedRoom = true;
+			waitingText.text = "";
             Debug.Log("We are now joined room");
             PhotonNetwork.Instantiate(player.name, spawnPoint.position, spawnPoint.rotation, 0);
             lobbyCamera.SetActive(false);
@@ -60,6 +71,9 @@ public class PhotonNetworkManager : Photon.PunBehaviour {
     }
 
     private void Update () {
-        netInfo.text = PhotonNetwork.connectionStateDetailed.ToString();
+		netInfo.text = PhotonNetwork.connectionStateDetailed.ToString();
+		if (!joinedRoom) {
+			waitingText.text = "Waiting for more players..." + PhotonNetwork.room.PlayerCount + "/" + numPeopleToStart;
+		}
 	}
 }
