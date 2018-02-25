@@ -13,6 +13,25 @@ public class PlayerNetwork : MonoBehaviour {
     [SerializeField] private float m_throwforce = 1500.0f;
     [SerializeField] private float m_jumpforce = 1500.0f;
 
+    //2/21/2018 ME Cool
+    [SerializeField] private float m_thermalClipCapacity = 200.0f;
+    [SerializeField] private float m_thermalClip = 0.0f;
+     
+    [SerializeField] private float m_overheatPenaltyTime = 5.0f;
+    //2/21/2018 ME Cool
+
+    //2/21/2018 ME COOL
+    private bool overHeated;
+    private bool requirePenalty;
+    private float m_postOverheatShootingPermit;
+    //2/21/2018 ME COOL
+
+    //2/25/2018 Switch heat setting to weapon
+    private float m_heat;
+    private float m_heatCooldownRate;
+    //2/25/2018 Switch heat setting to weapon
+
+
     private Text m_healthText;
 	private Slider m_healthSlider;
 	private Image damageImage;
@@ -28,6 +47,7 @@ public class PlayerNetwork : MonoBehaviour {
     [SerializeField] bool[] weaponOn;
     [SerializeField] private GameObject m_Hand;
     [SerializeField] int weaponPointer;
+
 
     private void Start ()
     {
@@ -60,6 +80,28 @@ public class PlayerNetwork : MonoBehaviour {
     {
         if(m_pv.isMine)
         {
+
+            Weapon_Cool_Heat();
+
+            if(overHeated)
+            {
+                if (requirePenalty)
+                {
+                    PenaltyHeatingWeapon();
+                }
+
+            }
+            Debug.Log("Overheated:"+ overHeated);
+            Debug.Log("Panalty: " + requirePenalty);
+            Debug.Log(Time.time);
+            Debug.Log(m_postOverheatShootingPermit);
+            Debug.Log(m_thermalClip);
+            
+            if (Time.time > m_postOverheatShootingPermit)
+            {
+                overHeated = false;
+            }
+
             Movement();
             m_healthText.text = "HP:" + m_health.ToString();
             m_healthSlider.value = m_health;
@@ -115,16 +157,29 @@ public class PlayerNetwork : MonoBehaviour {
 
             if (weapon.GetComponent<Weapon>().m_id == 1)
             {
+                //2/25/2018 Switch heat setting to weapon
+                m_heat = weapon.GetComponent<Weapon>().ReturnHeat();
+                m_heatCooldownRate = weapon.GetComponent<Weapon>().ReturnHeatCoolDownRate();
+                //2/25/2018 Switch heat setting to weapon
+
                 int newW = weaponPointer + 1;
                 string weapName = "Weapon" + newW;
                 float weaponWeight = weapon.GetComponent<Weapon>().ReturnSpeed();
+
+                if (!overHeated)
+                {
                 GameObject infiniteWeapon = PhotonNetwork.Instantiate(weapName, m_Hand.transform.position + playerCamera.transform.forward, Quaternion.identity, 0);
                 infiniteWeapon.GetComponent<Rigidbody>().isKinematic = false;
                 //infiniteWeapon.GetComponent<PhotonView>().RPC("SetParentRPC", PhotonTargets.AllBuffered, GetComponent<PhotonView>().viewID);
                 //infiniteWeapon.GetComponent<PhotonView>().RPC("UnsetParentRPC", PhotonTargets.AllBuffered);
-                infiniteWeapon.GetComponent<Rigidbody>().AddForce(playerCamera.transform.forward * m_throwforce * weaponWeight);
-                infiniteWeapon.GetComponent<Transform>().localScale *= infiniteWeapon.GetComponent<Weapon>().ReturnScale();
-                infiniteWeapon.GetComponent<PhotonView>().RPC("AutoDestroy", PhotonTargets.AllBuffered);
+
+               
+                    infiniteWeapon.GetComponent<Rigidbody>().AddForce(playerCamera.transform.forward * m_throwforce * weaponWeight);
+                    infiniteWeapon.GetComponent<Transform>().localScale *= infiniteWeapon.GetComponent<Weapon>().ReturnScale();
+                    infiniteWeapon.GetComponent<PhotonView>().RPC("AutoDestroy", PhotonTargets.AllBuffered);
+
+                    HeatingWeapon();
+                }
             }
 
             else
@@ -210,4 +265,44 @@ public class PlayerNetwork : MonoBehaviour {
         weaponOn[weaponPointer] = true;
     }
 
+    private void Weapon_Cool_Heat()
+    {
+        if(overHeated == false && m_thermalClip >= 0f)
+        {
+            m_thermalClip -= m_heatCooldownRate * Time.deltaTime;
+        }
+
+        //if(overHeated == true)
+        //{
+        //    m_thermalClip = m_thermalClipCapacity;
+        //}
+
+        if(m_thermalClip <= 0)
+        {
+            m_thermalClip = 0;
+        }
+
+    }
+
+    private void HeatingWeapon()
+    {
+        if(m_thermalClip < m_thermalClipCapacity)
+        {
+            m_thermalClip = m_thermalClip + m_heat;
+        }
+
+        if(m_thermalClip > m_thermalClipCapacity)
+        {
+            overHeated = true;
+            requirePenalty = true;
+        }
+
+    }
+
+    private void PenaltyHeatingWeapon()
+    {
+        Debug.Log("WTF?");
+        m_postOverheatShootingPermit = Time.time + m_overheatPenaltyTime;
+        requirePenalty = false;
+    }
 }

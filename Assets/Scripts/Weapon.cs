@@ -9,6 +9,10 @@ public class Weapon : MonoBehaviour {
     [SerializeField] private float m_Speed = 1.0f;
     [SerializeField] private int m_type = -1;
 
+    //2/25/2018 Switch heat setting to weapon
+    [SerializeField] private float m_heat = 30.0f;
+    [SerializeField] private float m_heatCooldownRate = 20.0f;
+    //2/25/2018 Switch heat setting to weapon
 
     public int m_id = 1;
 
@@ -67,4 +71,19 @@ public class Weapon : MonoBehaviour {
     {
         return m_Size;
     }
+
+    //2/25/2018 Switch heat setting to weapon
+    public float ReturnHeat()
+    {
+        return m_heat;
+    }
+
+    public float ReturnHeatCoolDownRate()
+    {
+        return m_heatCooldownRate;
+    }
+    //2/25/2018 Switch heat setting to weapon
+
+
+
 }
