@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PhotonNetworkManager : Photon.PunBehaviour {
+public class PhotonNetworkManager : Photon.PunBehaviour
+{
 
     public int numPeopleToStart;
     [SerializeField] private Text netInfo;
@@ -15,72 +16,134 @@ public class PhotonNetworkManager : Photon.PunBehaviour {
 	private Text waitingText;
 	private Text playersRemain;
 	private bool joinedRoom;
+    public float countDownToStart = 5.0f;
+    private bool countingDown = false;
 
-	// Use this for initialization
-	private void Start () {
+    // todo: remove
+    public bool debugMode = false;
+
+    // Use this for initialization
+    private void Start()
+    {
         PhotonNetwork.ConnectUsingSettings("ver 0.1");
         PhotonNetwork.automaticallySyncScene = true;
 		waitingText = GameObject.Find("WaitingText").GetComponent<Text>();
 		waitingText.text = "";
 		playersRemain = GameObject.Find ("PlayersRemain").GetComponent<Text> ();
 		playersRemain.text = "";
+		joinedRoom = false;
     }
 
     public override void OnJoinedLobby()
     {
         Debug.Log("We are now joined lobby");
 
-        PhotonNetwork.JoinOrCreateRoom("New", null, null);
+        // todo: fix sometimes clients both try connecting at the same time, then fail and make their own rooms
+        PhotonNetwork.JoinRandomRoom();
+    }
+
+    public override void OnPhotonRandomJoinFailed(object[] codeAndMsg)
+    {
+        Debug.Log("Imma make my own room, with blackjack and hookahz!");
+
+        PhotonNetwork.CreateRoom(null);
+    }
+
+    public override void OnCreatedRoom()
+    {
+        Debug.Log("Creating Room for peoplez");
+        PhotonNetwork.room.MaxPlayers = (debugMode ? 1 : numPeopleToStart);
     }
 
     public override void OnJoinedRoom()
     {
-        if (PhotonNetwork.room.PlayerCount == numPeopleToStart)
-        {
-			joinedRoom = true;
-			waitingText.text = "";
-			playersRemain.text = "Players remaining: " + PhotonNetwork.room.PlayerCount + "/" + numPeopleToStart;
-            Debug.Log("We are now joined room");
-            PhotonNetwork.Instantiate(player.name, spawnPoint.position, spawnPoint.rotation, 0);
-            lobbyCamera.SetActive(false);
+        Debug.Log("We are nao joishishi");
 
-            //if (PhotonNetwork.isMasterClient)
-            //{
-            GameObject.Find("ShrinkingZone").GetComponent<ShrinkingZoneScript>().startShrinking();
-            //}
-        }
-        else
-        {
-			joinedRoom = false;
-			waitingText.text = "Waiting for more players..." + PhotonNetwork.room.PlayerCount + "/" + numPeopleToStart;
-			Debug.Log("Waiting for more players");
-        }
+        doMatchMakingUpdateForPlayers();
+        doMatchMaking();
     }
 
     public override void OnPhotonPlayerConnected(PhotonPlayer newPlayer)
     {
-        Debug.Log(PhotonNetwork.room.PlayerCount);
-        if (PhotonNetwork.room.PlayerCount == numPeopleToStart)
-		{
-			joinedRoom = true;
-			waitingText.text = "";
-			playersRemain.text = "Players remaining: " + PhotonNetwork.room.PlayerCount + "/" + numPeopleToStart;
-            Debug.Log("We are now joined room");
-            PhotonNetwork.Instantiate(player.name, spawnPoint.position, spawnPoint.rotation, 0);
-            lobbyCamera.SetActive(false);
+        Debug.Log("Sum1 Elsa connected");
 
-            //if (PhotonNetwork.isMasterClient)
-            //{
-            GameObject.Find("ShrinkingZone").GetComponent<ShrinkingZoneScript>().startShrinking();
+        doMatchMakingUpdateForPlayers();
+        doMatchMaking();
+    }
+
+    public override void OnPhotonPlayerDisconnected(PhotonPlayer otherPlayer)
+    {
+        // if game has started in this room
+        if (countDownToStart < 0 || countingDown)
+        {
+            int currentNumPlayers = PhotonNetwork.room.PlayerCount;
+            Debug.Log("remaining players: " + currentNumPlayers);
+
+            // probably means that you have won
+            if(currentNumPlayers == 1)
+            {
+                Debug.Log("You iZ Winna!");
+            }
+        }
+        else
+        {
+            // todo: it's weird how sometimes disconnecting takes a while
+            doMatchMakingUpdateForPlayers();
+            // we are sure that we won't start the game when we have less than what we want
+
         }
     }
 
-    private void Update () {
-		netInfo.text = PhotonNetwork.connectionStateDetailed.ToString();
-		if (!joinedRoom) {
+    private void Update()
+    {
+        netInfo.text = PhotonNetwork.connectionStateDetailed.ToString();
+
+        if (countingDown)
+		{
+            countDownToStart -= Time.deltaTime;
+            if (countDownToStart < 0)
+            {
+				joinedRoom = true;
+                countingDown = false;
+
+                PhotonNetwork.Instantiate(player.name, spawnPoint.position, spawnPoint.rotation, 0);
+                lobbyCamera.SetActive(false);
+
+
+                GameObject.Find("ShrinkingZone").GetComponent<ShrinkingZoneScript>().startShrinking();
+            }
+        }
+		if (!joinedRoom && !countingDown) {
 			waitingText.text = "Waiting for more players..." + PhotonNetwork.room.PlayerCount + "/" + numPeopleToStart;
+			playersRemain.text = "";
+		} else if (!joinedRoom && countingDown) {
+			waitingText.text = "Game is starting in... " + (int)(countDownToStart + 1);
+			playersRemain.text = "Players remaining: " + PhotonNetwork.room.PlayerCount + "/" + numPeopleToStart;
 		} else {
+			waitingText.text = "";
 			playersRemain.text = "Players remaining: " + PhotonNetwork.room.PlayerCount + "/" + numPeopleToStart;
 		}
-	}
+    }
+
+
+    private void doMatchMakingUpdateForPlayers()
+    {
+        int currentNumPlayers = PhotonNetwork.room.PlayerCount;
+
+        Debug.Log("number of players connected: " + currentNumPlayers);
+        Debug.Log("Waiting for " + (numPeopleToStart - currentNumPlayers) + " more players");
+    }
+
+    private void doMatchMaking()
+    {
+        int currentNumPlayers = PhotonNetwork.room.PlayerCount;
+
+        // todo: remove debugmode
+        if (currentNumPlayers == numPeopleToStart || debugMode)
+        {
+            PhotonNetwork.room.IsOpen = debugMode;//false;
+            Debug.Log("We are going to start the game");
+            countingDown = true;
+        }
+    }
 }
