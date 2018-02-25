@@ -13,6 +13,7 @@ public class PhotonNetworkManager : Photon.PunBehaviour {
     [SerializeField] private GameObject lobbyCamera;
 
 	private Text waitingText;
+	private Text playersRemain;
 	private bool joinedRoom;
 
 	// Use this for initialization
@@ -21,6 +22,8 @@ public class PhotonNetworkManager : Photon.PunBehaviour {
         PhotonNetwork.automaticallySyncScene = true;
 		waitingText = GameObject.Find("WaitingText").GetComponent<Text>();
 		waitingText.text = "";
+		playersRemain = GameObject.Find ("PlayersRemain").GetComponent<Text> ();
+		playersRemain.text = "";
     }
 
     public override void OnJoinedLobby()
@@ -36,6 +39,7 @@ public class PhotonNetworkManager : Photon.PunBehaviour {
         {
 			joinedRoom = true;
 			waitingText.text = "";
+			playersRemain.text = "Players remaining: " + PhotonNetwork.room.PlayerCount + "/" + numPeopleToStart;
             Debug.Log("We are now joined room");
             PhotonNetwork.Instantiate(player.name, spawnPoint.position, spawnPoint.rotation, 0);
             lobbyCamera.SetActive(false);
@@ -60,6 +64,7 @@ public class PhotonNetworkManager : Photon.PunBehaviour {
 		{
 			joinedRoom = true;
 			waitingText.text = "";
+			playersRemain.text = "Players remaining: " + PhotonNetwork.room.PlayerCount + "/" + numPeopleToStart;
             Debug.Log("We are now joined room");
             PhotonNetwork.Instantiate(player.name, spawnPoint.position, spawnPoint.rotation, 0);
             lobbyCamera.SetActive(false);
@@ -74,6 +79,8 @@ public class PhotonNetworkManager : Photon.PunBehaviour {
 		netInfo.text = PhotonNetwork.connectionStateDetailed.ToString();
 		if (!joinedRoom) {
 			waitingText.text = "Waiting for more players..." + PhotonNetwork.room.PlayerCount + "/" + numPeopleToStart;
+		} else {
+			playersRemain.text = "Players remaining: " + PhotonNetwork.room.PlayerCount + "/" + numPeopleToStart;
 		}
 	}
 }
