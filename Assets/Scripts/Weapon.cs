@@ -10,7 +10,7 @@ public class Weapon : MonoBehaviour {
     [SerializeField] private int m_type = -1;
 
     //2/25/2018 Switch heat setting to weapon
-    [SerializeField] private float m_heat = 20.0f;
+    [SerializeField] private float m_heat = 30.0f;
     [SerializeField] private float m_heatCooldownRate = 20.0f;
     //2/25/2018 Switch heat setting to weapon
 
