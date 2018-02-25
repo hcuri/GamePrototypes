@@ -14,6 +14,7 @@ public class PlayerNetwork : MonoBehaviour {
     [SerializeField] private float m_jumpforce = 1500.0f;
 
     private Text m_healthText;
+	private Text zoneText;
 	private Slider m_healthSlider;
 	private Image damageImage;
 	private Color damageColor = new Color(1f, 0f, 0f, 0.5f);
@@ -33,6 +34,7 @@ public class PlayerNetwork : MonoBehaviour {
     {
         m_pv = GetComponent<PhotonView>();
         m_healthText = GameObject.Find("HP").GetComponent<Text>();
+		zoneText = GameObject.Find ("ZoneText").GetComponent<Text> ();
 		m_healthSlider = GameObject.Find ("HPSlider").GetComponent<Slider> ();
 		damageImage = GameObject.Find ("DamageImage").GetComponent<Image> ();
         Initialize();
@@ -63,10 +65,12 @@ public class PlayerNetwork : MonoBehaviour {
             Movement();
             m_healthText.text = "HP:" + m_health.ToString();
             m_healthSlider.value = m_health;
-            if (!insideZone)
-            {
-                TakeDamage(Time.deltaTime * m_HPReducedPerSecond);
-            }
+			if (!insideZone) {
+				TakeDamage (Time.deltaTime * m_HPReducedPerSecond);
+				zoneText.text = "You're taking damage inside the zone!";
+			} else {
+				zoneText.text = "";
+			}
 			damageImage.color = Color.Lerp (damageImage.color, Color.clear, 0.5f*Time.deltaTime);
             if(weaponPointer != -1)
                 weaponUpdatePosition();
