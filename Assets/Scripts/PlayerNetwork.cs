@@ -16,17 +16,21 @@ public class PlayerNetwork : MonoBehaviour {
     //2/21/2018 ME Cool
     [SerializeField] private float m_thermalClipCapacity = 200.0f;
     [SerializeField] private float m_thermalClip = 0.0f;
-    [SerializeField] private float m_heat = 20.0f;
-    [SerializeField] private float m_heatCooldownRate = 20.0f;
+     
     [SerializeField] private float m_overheatPenaltyTime = 5.0f;
     //2/21/2018 ME Cool
 
     //2/21/2018 ME COOL
-    //private float m_heat = 50.0f;
     private bool overHeated;
     private bool requirePenalty;
     private float m_postOverheatShootingPermit;
     //2/21/2018 ME COOL
+
+    //2/25/2018 Switch heat setting to weapon
+    private float m_heat;
+    private float m_heatCooldownRate;
+    //2/25/2018 Switch heat setting to weapon
+
 
     private Text m_healthText;
 	private Slider m_healthSlider;
@@ -153,6 +157,11 @@ public class PlayerNetwork : MonoBehaviour {
 
             if (weapon.GetComponent<Weapon>().m_id == 1)
             {
+                //2/25/2018 Switch heat setting to weapon
+                m_heat = weapon.GetComponent<Weapon>().ReturnHeat();
+                m_heatCooldownRate = weapon.GetComponent<Weapon>().ReturnHeatCoolDownRate();
+                //2/25/2018 Switch heat setting to weapon
+
                 int newW = weaponPointer + 1;
                 string weapName = "Weapon" + newW;
                 float weaponWeight = weapon.GetComponent<Weapon>().ReturnSpeed();
