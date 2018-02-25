@@ -148,7 +148,12 @@ public class PlayerNetwork : MonoBehaviour {
 		m_health -= damage;
 		if(m_pv.isMine)
 			damageImage.color = damageColor;
-        if(m_health <= 0 && m_pv.isMine)
+
+        // hides the dead body *cue murder sound effects
+        if (m_health <= 0 && !m_pv.isMine)
+            transform.GetChild(1).GetComponent<Renderer>().enabled = false;
+
+        if (m_health <= 0 && m_pv.isMine)
         {
             //Die
             //m_myPlayerControlScript.enabled = false;
