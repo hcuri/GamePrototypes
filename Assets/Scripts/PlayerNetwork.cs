@@ -113,26 +113,40 @@ public class PlayerNetwork : MonoBehaviour {
                 return;
             }
 
-            if (weapon.GetComponent<Weapon>().m_id == 1)
+            RaycastHit hit;
+            Vector3 shootDirection = playerCamera.transform.forward;
+            if(Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit))
             {
-                int newW = weaponPointer + 1;
-                string weapName = "Weapon" + newW;
-                float weaponWeight = weapon.GetComponent<Weapon>().ReturnSpeed();
-                GameObject infiniteWeapon = PhotonNetwork.Instantiate(weapName, m_Hand.transform.position + playerCamera.transform.forward, Quaternion.identity, 0);
-                infiniteWeapon.GetComponent<Rigidbody>().isKinematic = false;
-                //infiniteWeapon.GetComponent<PhotonView>().RPC("SetParentRPC", PhotonTargets.AllBuffered, GetComponent<PhotonView>().viewID);
-                //infiniteWeapon.GetComponent<PhotonView>().RPC("UnsetParentRPC", PhotonTargets.AllBuffered);
-                infiniteWeapon.GetComponent<Rigidbody>().AddForce(playerCamera.transform.forward * m_throwforce * weaponWeight);
-                infiniteWeapon.GetComponent<Transform>().localScale *= infiniteWeapon.GetComponent<Weapon>().ReturnScale();
-                infiniteWeapon.GetComponent<PhotonView>().RPC("AutoDestroy", PhotonTargets.AllBuffered);
+                shootDirection = hit.point - m_Hand.transform.position;
+                //Debug.Log(hit.collider.gameObject.name);
             }
+            shootDirection.Normalize();
 
-            else
+            if (weaponPointer != -1)
             {
-                weapon.GetComponent<PhotonView>().RPC("UnsetParentRPC", PhotonTargets.AllBuffered);
-                weapon.GetComponent<Rigidbody>().AddForce(playerCamera.transform.forward * m_throwforce);
-                weapon.GetComponent<PhotonView>().RPC("AutoDestroy", PhotonTargets.AllBuffered);
-                weapon = null;
+                if (weapon.GetComponent<Weapon>().m_id == 1)
+                {
+                    int newW = weaponPointer + 1;
+                    string weapName = "Weapon" + newW;
+                    float weaponWeight = weapon.GetComponent<Weapon>().ReturnSpeed();
+                    GameObject infiniteWeapon = PhotonNetwork.Instantiate(weapName, m_Hand.transform.position + playerCamera.transform.forward, Quaternion.identity, 0);
+                    infiniteWeapon.GetComponent<Rigidbody>().isKinematic = false;
+                    //infiniteWeapon.GetComponent<PhotonView>().RPC("SetParentRPC", PhotonTargets.AllBuffered, GetComponent<PhotonView>().viewID);
+                    //infiniteWeapon.GetComponent<PhotonView>().RPC("UnsetParentRPC", PhotonTargets.AllBuffered);
+                    infiniteWeapon.GetComponent<Rigidbody>().AddForce(playerCamera.transform.forward * m_throwforce * weaponWeight);
+                    //infiniteWeapon.GetComponent<Rigidbody>().AddForce(shootDirection * m_throwforce * weaponWeight);
+                    infiniteWeapon.GetComponent<Transform>().localScale *= infiniteWeapon.GetComponent<Weapon>().ReturnScale();
+                    infiniteWeapon.GetComponent<PhotonView>().RPC("AutoDestroy", PhotonTargets.AllBuffered);
+                }
+
+                else
+                {
+                    weapon.GetComponent<PhotonView>().RPC("UnsetParentRPC", PhotonTargets.AllBuffered);
+                    weapon.GetComponent<Rigidbody>().AddForce(playerCamera.transform.forward * m_throwforce);
+                    //weapon.GetComponent<Rigidbody>().AddForce(shootDirection * m_throwforce);
+                    weapon.GetComponent<PhotonView>().RPC("AutoDestroy", PhotonTargets.AllBuffered);
+                    weapon = null;
+                }
             }
         }
 
