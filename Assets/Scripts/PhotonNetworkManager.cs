@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PhotonNetworkManager : Photon.PunBehaviour
@@ -83,6 +84,11 @@ public class PhotonNetworkManager : Photon.PunBehaviour
             if(currentNumPlayers == 1)
             {
                 Debug.Log("You iZ Winna!");
+				PhotonNetwork.Disconnect();
+				Cursor.lockState = CursorLockMode.None;
+				Cursor.lockState = CursorLockMode.Confined;
+				Cursor.visible = true;
+				SceneManager.LoadScene("WinScene");
             }
         }
         else

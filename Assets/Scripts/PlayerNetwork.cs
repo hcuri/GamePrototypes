@@ -146,8 +146,9 @@ public class PlayerNetwork : MonoBehaviour {
     public void TakeDamage(float damage)
     {
 		m_health -= damage;
-		if(m_pv.isMine)
+		if (m_pv.isMine && damage > 0f) {
 			damageImage.color = damageColor;
+		}
 
         // hides the dead body *cue murder sound effects
         if (m_health <= 0 && !m_pv.isMine)
