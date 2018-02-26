@@ -833,16 +833,6 @@ Prefab:
       propertyPath: instantiationId
       value: 76
       objectReference: {fileID: 0}
-    - target: {fileID: 114109005206887768, guid: 13369119b8aa1a24a8e9146cb83403ac,
-        type: 2}
-      propertyPath: initialPosRandomMax.x
-      value: 200
-      objectReference: {fileID: 0}
-    - target: {fileID: 114109005206887768, guid: 13369119b8aa1a24a8e9146cb83403ac,
-        type: 2}
-      propertyPath: initialPosRandomMax.y
-      value: 200
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 13369119b8aa1a24a8e9146cb83403ac, type: 2}
   m_IsPrefabParent: 0

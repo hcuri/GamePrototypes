@@ -97,6 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfaa046ff2d00c545a431fd9d81e7057, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  initialPosRandomMax: {x: 200, y: 200}
   timeToShrink: 120
   initialRadius: 500
   height: 600
@@ -112,7 +113,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_PositionModel:
-    SynchronizeEnabled: 0
+    SynchronizeEnabled: 1
     TeleportEnabled: 1
     TeleportIfDistanceGreaterThan: 3
     InterpolateOption: 2
