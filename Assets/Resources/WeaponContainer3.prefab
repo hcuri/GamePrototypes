@@ -20,10 +20,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4390612859448432}
   - component: {fileID: 33819552389898430}
-  - component: {fileID: 65488571345347264}
   - component: {fileID: 23449504952701682}
   - component: {fileID: 114112548575890094}
   - component: {fileID: 114194891762970318}
+  - component: {fileID: 135158315849080914}
   m_Layer: 0
   m_Name: WeaponContainer3
   m_TagString: WeaponContainer
@@ -38,8 +38,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1577480866948180}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.5861242, y: 0.5, z: 17.151184}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 4.3, y: 0.5, z: -11.4}
+  m_LocalScale: {x: 500, y: 500, z: 500}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -58,7 +58,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: aef74bc0b49565d45a35a4c0decdbacf, type: 2}
+  - {fileID: 2100000, guid: e8fabadb5c73f5e478bff786c7fb1398, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -66,7 +66,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_PreserveUVs: 1
+  m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 0
@@ -84,19 +84,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1577480866948180}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!65 &65488571345347264
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1577480866948180}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Mesh: {fileID: 4300000, guid: a465364e5423f2248b571d2643a5c1d1, type: 3}
 --- !u!114 &114112548575890094
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -137,3 +125,15 @@ MonoBehaviour:
   timeToRespawn: 2
   weapon: {fileID: 1136481300133536, guid: f65dff21e5b8c8f468d91ec4087024d8, type: 2}
   m_type: 2
+--- !u!135 &135158315849080914
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1577480866948180}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.00095437764
+  m_Center: {x: 0.000000010069925, y: 2.3283064e-10, z: 0}

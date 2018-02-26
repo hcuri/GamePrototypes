@@ -86,7 +86,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1326063945759016}
-  m_Mesh: {fileID: 4300000, guid: 9035705c11ed9d9438dd54d3fb81c7a3, type: 3}
+  m_Mesh: {fileID: 4300000, guid: f636b5276af76f048921d9e25883ea03, type: 3}
 --- !u!54 &54165529781264574
 Rigidbody:
   m_ObjectHideFlags: 1
@@ -209,6 +209,8 @@ MonoBehaviour:
   m_Size: 1
   m_Speed: 1
   m_type: -1
+  m_heat: 30
+  m_heatCooldownRate: 20
   m_id: 1
 --- !u!135 &135242753173483274
 SphereCollider:
