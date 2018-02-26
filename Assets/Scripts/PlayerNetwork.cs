@@ -36,6 +36,7 @@ public class PlayerNetwork : MonoBehaviour {
 	private Slider m_healthSlider;
 	private Image damageImage;
 	private Color damageColor = new Color(1f, 0f, 0f, 0.5f);
+	private Slider m_heatSlider;
     private PhotonView m_pv;
     private MonoBehaviour m_myPlayerControlScript;
     private GameObject weapon;
