@@ -37,6 +37,7 @@ public class PlayerNetwork : MonoBehaviour {
 	private Image damageImage;
 	private Color damageColor = new Color(1f, 0f, 0f, 0.5f);
 	private Slider m_heatSlider;
+	private Text m_heatText;
     private PhotonView m_pv;
     private MonoBehaviour m_myPlayerControlScript;
     private GameObject weapon;
@@ -56,6 +57,8 @@ public class PlayerNetwork : MonoBehaviour {
         m_healthText = GameObject.Find("HP").GetComponent<Text>();
 		m_healthSlider = GameObject.Find ("HPSlider").GetComponent<Slider> ();
 		damageImage = GameObject.Find ("DamageImage").GetComponent<Image> ();
+		m_heatSlider = GameObject.Find ("HeatSlider").GetComponent<Slider> ();
+		m_heatText = GameObject.Find ("Heat").GetComponent<Text> ();
         Initialize();
 
         //added by Po
@@ -106,6 +109,12 @@ public class PlayerNetwork : MonoBehaviour {
             Movement();
             m_healthText.text = "HP:" + m_health.ToString();
             m_healthSlider.value = m_health;
+			m_heatSlider.value = m_thermalClip;
+			if (overHeated) {
+				m_heatText.text = "OVERHEATED!";
+			} else {
+				m_heatText.text = "Heat: " + (int)m_thermalClip + "/" + (int)m_thermalClipCapacity;
+			}
             if (!insideZone)
             {
                 TakeDamage(Time.deltaTime * m_HPReducedPerSecond);
