@@ -172,10 +172,23 @@ public class PlayerNetwork : MonoBehaviour {
 
                 if (!overHeated)
                 {
-                GameObject infiniteWeapon = PhotonNetwork.Instantiate(weapName, m_Hand.transform.position + playerCamera.transform.forward, Quaternion.identity, 0);
-                infiniteWeapon.GetComponent<Rigidbody>().isKinematic = false;
-                //infiniteWeapon.GetComponent<PhotonView>().RPC("SetParentRPC", PhotonTargets.AllBuffered, GetComponent<PhotonView>().viewID);
-                //infiniteWeapon.GetComponent<PhotonView>().RPC("UnsetParentRPC", PhotonTargets.AllBuffered);
+                    // camera forward
+                    Vector3 camfor = playerCamera.transform.forward;
+                    Vector3 pos = camfor * 2;
+
+                    RaycastHit hit;
+                    Physics.Raycast(playerCamera.transform.position, camfor, out hit);
+
+                    if (hit.distance < 2)
+                    {
+                        Debug.Log("You're too close to something to be able to throw");
+                        return;
+                    }
+
+                    GameObject infiniteWeapon = PhotonNetwork.Instantiate(weapName, playerCamera.transform.position + pos, Quaternion.identity, 0);
+                    infiniteWeapon.GetComponent<Rigidbody>().isKinematic = false;
+                    //infiniteWeapon.GetComponent<PhotonView>().RPC("SetParentRPC", PhotonTargets.AllBuffered, GetComponent<PhotonView>().viewID);
+                    //infiniteWeapon.GetComponent<PhotonView>().RPC("UnsetParentRPC", PhotonTargets.AllBuffered);
 
                
                     infiniteWeapon.GetComponent<Rigidbody>().AddForce(playerCamera.transform.forward * m_throwforce * weaponWeight);
