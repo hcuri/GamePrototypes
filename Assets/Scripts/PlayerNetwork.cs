@@ -98,7 +98,7 @@ public class PlayerNetwork : MonoBehaviour {
             Debug.Log(Time.time);
             Debug.Log(m_postOverheatShootingPermit);
             Debug.Log(m_thermalClip);
-            
+
             if (Time.time > m_postOverheatShootingPermit)
             {
                 overHeated = false;
@@ -174,15 +174,19 @@ public class PlayerNetwork : MonoBehaviour {
                 {
                     // camera forward
                     Vector3 camfor = playerCamera.transform.forward;
-                    Vector3 pos = camfor * 2;
+                    Vector3 pos = camfor * 2.1f;
 
                     RaycastHit hit;
                     Physics.Raycast(playerCamera.transform.position, camfor, out hit);
 
-                    if (hit.distance < 2)
+                    if(hit.collider != null)
                     {
-                        Debug.Log("You're too close to something to be able to throw");
-                        return;
+                        // list of stuff that we can hit
+                        if(hit.distance < 2.1f && hit.collider.tag == "Untagged")
+                        {
+                            Debug.Log("You're too close to something to be able to throw");
+                            return;
+                        }
                     }
 
                     GameObject infiniteWeapon = PhotonNetwork.Instantiate(weapName, playerCamera.transform.position + pos, Quaternion.identity, 0);
