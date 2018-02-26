@@ -152,4 +152,9 @@ public class PhotonNetworkManager : Photon.PunBehaviour
             countingDown = true;
         }
     }
+
+    public bool returnDebugMode()
+    {
+        return (debugMode);
+    }
 }

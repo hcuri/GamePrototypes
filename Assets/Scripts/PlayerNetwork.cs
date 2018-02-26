@@ -29,6 +29,7 @@ public class PlayerNetwork : MonoBehaviour {
     //2/25/2018 Switch heat setting to weapon
     private float m_heat;
     private float m_heatCooldownRate;
+    private bool m_debugMode;
     //2/25/2018 Switch heat setting to weapon
 
 
@@ -57,6 +58,7 @@ public class PlayerNetwork : MonoBehaviour {
 		zoneText = GameObject.Find ("ZoneText").GetComponent<Text> ();
 		m_healthSlider = GameObject.Find ("HPSlider").GetComponent<Slider> ();
 		damageImage = GameObject.Find ("DamageImage").GetComponent<Image> ();
+        m_debugMode = GameObject.Find("NetworkManager").GetComponent<PhotonNetworkManager>().returnDebugMode();
         Initialize();
 
         //added by Po
@@ -163,7 +165,15 @@ public class PlayerNetwork : MonoBehaviour {
             {
                 //2/25/2018 Switch heat setting to weapon
                 m_heat = weapon.GetComponent<Weapon>().ReturnHeat();
+
+                if (!m_debugMode)
+                { 
                 m_heatCooldownRate = weapon.GetComponent<Weapon>().ReturnHeatCoolDownRate();
+                }
+                else
+                {
+                    m_heatCooldownRate = 1000.0f;
+                }
                 //2/25/2018 Switch heat setting to weapon
 
                 int newW = weaponPointer + 1;
