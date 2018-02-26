@@ -622,7 +622,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1666312991378964}
-  m_Mesh: {fileID: 4300000, guid: 9035705c11ed9d9438dd54d3fb81c7a3, type: 3}
+  m_Mesh: {fileID: 4300000, guid: f636b5276af76f048921d9e25883ea03, type: 3}
 --- !u!33 &33019229357449284
 MeshFilter:
   m_ObjectHideFlags: 1
@@ -636,21 +636,21 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1276210251206162}
-  m_Mesh: {fileID: 4300000, guid: 6d65ff3600680834e86eab4da30fad51, type: 3}
+  m_Mesh: {fileID: 4300000, guid: ba6fe526282e45f47898a5ee480921a3, type: 3}
 --- !u!33 &33501438599240440
 MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1420219670274442}
-  m_Mesh: {fileID: 4300000, guid: ba6fe526282e45f47898a5ee480921a3, type: 3}
+  m_Mesh: {fileID: 4300000, guid: 6d65ff3600680834e86eab4da30fad51, type: 3}
 --- !u!33 &33523724825373932
 MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1885439921069074}
-  m_Mesh: {fileID: 4300000, guid: f636b5276af76f048921d9e25883ea03, type: 3}
+  m_Mesh: {fileID: 4300000, guid: 9035705c11ed9d9438dd54d3fb81c7a3, type: 3}
 --- !u!33 &33849574911669352
 MeshFilter:
   m_ObjectHideFlags: 1
@@ -1021,8 +1021,6 @@ MonoBehaviour:
   m_Size: 0.5
   m_Speed: 1.5
   m_type: -1
-  m_heat: 30
-  m_heatCooldownRate: 20
   m_id: 1
 --- !u!114 &114270728769611410
 MonoBehaviour:
@@ -1066,8 +1064,6 @@ MonoBehaviour:
   m_Size: 1.5
   m_Speed: 0.5
   m_type: -1
-  m_heat: 30
-  m_heatCooldownRate: 20
   m_id: 1
 --- !u!114 &114368352697097116
 MonoBehaviour:
@@ -1111,8 +1107,6 @@ MonoBehaviour:
   m_Size: 1
   m_Speed: 1
   m_type: -1
-  m_heat: 30
-  m_heatCooldownRate: 20
   m_id: 1
 --- !u!114 &114403469247809198
 MonoBehaviour:
@@ -1129,8 +1123,6 @@ MonoBehaviour:
   m_Size: 1.25
   m_Speed: 0.75
   m_type: -1
-  m_heat: 30
-  m_heatCooldownRate: 20
   m_id: 1
 --- !u!114 &114509542099040562
 MonoBehaviour:
@@ -1268,9 +1260,6 @@ MonoBehaviour:
   m_health: 100
   m_throwforce: 1500
   m_jumpforce: 1500
-  m_thermalClipCapacity: 200
-  m_thermalClip: 0
-  m_overheatPenaltyTime: 5
   m_weapons:
   - {fileID: 1885439921069074}
   - {fileID: 1666312991378964}
@@ -1295,8 +1284,6 @@ MonoBehaviour:
   m_Size: 0.75
   m_Speed: 1.25
   m_type: -1
-  m_heat: 30
-  m_heatCooldownRate: 20
   m_id: 1
 --- !u!114 &114688671276939810
 MonoBehaviour:
