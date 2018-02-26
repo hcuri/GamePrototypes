@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PhotonNetworkManager : Photon.PunBehaviour
@@ -13,6 +14,9 @@ public class PhotonNetworkManager : Photon.PunBehaviour
     [SerializeField] private GameObject shrinkingZone;
     [SerializeField] private GameObject lobbyCamera;
 
+	private Text waitingText;
+	private Text playersRemain;
+	private bool joinedRoom;
     public float countDownToStart = 5.0f;
     private bool countingDown = false;
 
@@ -24,6 +28,11 @@ public class PhotonNetworkManager : Photon.PunBehaviour
     {
         PhotonNetwork.ConnectUsingSettings("ver 0.1");
         PhotonNetwork.automaticallySyncScene = true;
+		waitingText = GameObject.Find("WaitingText").GetComponent<Text>();
+		waitingText.text = "";
+		playersRemain = GameObject.Find ("PlayersRemain").GetComponent<Text> ();
+		playersRemain.text = "";
+		joinedRoom = false;
     }
 
     public override void OnJoinedLobby()
@@ -75,6 +84,11 @@ public class PhotonNetworkManager : Photon.PunBehaviour
             if(currentNumPlayers == 1)
             {
                 Debug.Log("You iZ Winna!");
+				PhotonNetwork.Disconnect();
+				Cursor.lockState = CursorLockMode.None;
+				Cursor.lockState = CursorLockMode.Confined;
+				Cursor.visible = true;
+				SceneManager.LoadScene("WinScene");
             }
         }
         else
@@ -82,6 +96,7 @@ public class PhotonNetworkManager : Photon.PunBehaviour
             // todo: it's weird how sometimes disconnecting takes a while
             doMatchMakingUpdateForPlayers();
             // we are sure that we won't start the game when we have less than what we want
+
         }
     }
 
@@ -90,19 +105,32 @@ public class PhotonNetworkManager : Photon.PunBehaviour
         netInfo.text = PhotonNetwork.connectionStateDetailed.ToString();
 
         if (countingDown)
-        {
+		{
             countDownToStart -= Time.deltaTime;
             if (countDownToStart < 0)
             {
+				joinedRoom = true;
                 countingDown = false;
 
                 PhotonNetwork.Instantiate(player.name, spawnPoint.position, spawnPoint.rotation, 0);
                 lobbyCamera.SetActive(false);
 
+
                 GameObject.Find("ShrinkingZone").GetComponent<ShrinkingZoneScript>().startShrinking();
             }
         }
+		if (!joinedRoom && !countingDown) {
+			waitingText.text = "Waiting for more players..." + PhotonNetwork.room.PlayerCount + "/" + numPeopleToStart;
+			playersRemain.text = "";
+		} else if (!joinedRoom && countingDown) {
+			waitingText.text = "Game is starting in... " + (int)(countDownToStart + 1);
+			playersRemain.text = "Players remaining: " + PhotonNetwork.room.PlayerCount + "/" + numPeopleToStart;
+		} else {
+			waitingText.text = "";
+			playersRemain.text = "Players remaining: " + PhotonNetwork.room.PlayerCount + "/" + numPeopleToStart;
+		}
     }
+
 
     private void doMatchMakingUpdateForPlayers()
     {
