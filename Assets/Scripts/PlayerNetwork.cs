@@ -210,6 +210,8 @@ public class PlayerNetwork : MonoBehaviour {
                     }
 
                     GameObject infiniteWeapon = PhotonNetwork.Instantiate(weapName, playerCamera.transform.position + pos, Quaternion.identity, 0);
+                    //infiniteWeapon.transform.RotateAround(playerCamera.transform.right,) ;
+                    infiniteWeapon.transform.Rotate(playerCamera.transform.right*90);
                     infiniteWeapon.GetComponent<Rigidbody>().isKinematic = false;
                     //infiniteWeapon.GetComponent<PhotonView>().RPC("SetParentRPC", PhotonTargets.AllBuffered, GetComponent<PhotonView>().viewID);
                     //infiniteWeapon.GetComponent<PhotonView>().RPC("UnsetParentRPC", PhotonTargets.AllBuffered);
