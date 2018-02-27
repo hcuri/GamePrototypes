@@ -529,7 +529,7 @@ MonoBehaviour:
     type: 2}
   lobbyCamera: {fileID: 2001878483}
   countDownToStart: 5
-  debugMode: 0
+  debugMode: 1
 --- !u!4 &715131531
 Transform:
   m_ObjectHideFlags: 0
@@ -1039,6 +1039,26 @@ Prefab:
         type: 2}
       propertyPath: instantiationId
       value: 76
+      objectReference: {fileID: 0}
+    - target: {fileID: 114109005206887768, guid: 13369119b8aa1a24a8e9146cb83403ac,
+        type: 2}
+      propertyPath: initialPosRandomMax.x
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 114109005206887768, guid: 13369119b8aa1a24a8e9146cb83403ac,
+        type: 2}
+      propertyPath: initialPosRandomMax.y
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 114109005206887768, guid: 13369119b8aa1a24a8e9146cb83403ac,
+        type: 2}
+      propertyPath: timeToShrink
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 114109005206887768, guid: 13369119b8aa1a24a8e9146cb83403ac,
+        type: 2}
+      propertyPath: initialRadius
+      value: 1000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 13369119b8aa1a24a8e9146cb83403ac, type: 2}

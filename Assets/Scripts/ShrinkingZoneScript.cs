@@ -55,7 +55,7 @@ public class ShrinkingZoneScript : Photon.MonoBehaviour
             currentTime += Time.deltaTime;
 
             float currsize = initialRadius * (1.0f - currentTime / timeToShrink);
-            if (currsize > 0)
+            if (currsize > 10)
             {
                 transform.localScale = new Vector3(currsize, height, currsize);
             }
