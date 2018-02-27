@@ -107,6 +107,10 @@ public class PlayerNetwork : MonoBehaviour {
 
             if (Time.time > m_postOverheatShootingPermit)
             {
+                if(overHeated == true)
+                {
+                    m_thermalClip = 0.0f;
+                }
                 overHeated = false;
             }
 
