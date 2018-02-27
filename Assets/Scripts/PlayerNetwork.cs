@@ -44,7 +44,7 @@ public class PlayerNetwork : MonoBehaviour {
     private MonoBehaviour m_myPlayerControlScript;
     private GameObject weapon;
     private bool insideZone = true;
-    private float m_HPReducedPerSecond = 15.0f;
+    public float m_HPReducedPerSecond = 15.0f;
 
     //added by Po
     [SerializeField] GameObject[] m_weapons;

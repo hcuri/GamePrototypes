@@ -1058,7 +1058,7 @@ Prefab:
     - target: {fileID: 114109005206887768, guid: 13369119b8aa1a24a8e9146cb83403ac,
         type: 2}
       propertyPath: initialRadius
-      value: 1000
+      value: 1500
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 13369119b8aa1a24a8e9146cb83403ac, type: 2}
@@ -1209,6 +1209,16 @@ Prefab:
         type: 2}
       propertyPath: m_RootOrder
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 224265597574495838, guid: 2279d6ec3d5d1b94b997594aa8879599,
+        type: 2}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224265597574495838, guid: 2279d6ec3d5d1b94b997594aa8879599,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2279d6ec3d5d1b94b997594aa8879599, type: 2}
