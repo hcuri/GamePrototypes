@@ -529,7 +529,7 @@ MonoBehaviour:
     type: 2}
   lobbyCamera: {fileID: 2001878483}
   countDownToStart: 5
-  debugMode: 1
+  debugMode: 0
 --- !u!4 &715131531
 Transform:
   m_ObjectHideFlags: 0
