@@ -209,7 +209,7 @@ MonoBehaviour:
   m_Size: 1
   m_Speed: 0.2
   m_type: -1
-  m_heat: 30
+  m_heat: 50
   m_heatCooldownRate: 20
   m_id: 1
 --- !u!135 &135242753173483274
