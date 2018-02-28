@@ -804,17 +804,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49ab900e80016b143b04c4ef7b69756c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-<<<<<<< HEAD
-  numPeopleToStart: 1
-  netInfo: {fileID: 753257345}
-  spawnPoint:
-  - {fileID: 438285192}
-  - {fileID: 728294761}
-  - {fileID: 1807625348}
-  - {fileID: 874664104}
-  player: {fileID: 1856486162337142, guid: 7a4dd6f6393727b40b9cdac7ad707bb2, type: 2}
-  shrinkingZone: {fileID: 1718153061817834, guid: 13369119b8aa1a24a8e9146cb83403ac,
-=======
   timeToRespawn: 2
   weapon: {fileID: 1467907783246858, guid: 77920e5ec4969e0458d5bdc0b4cf29de, type: 2}
   m_type: 1
@@ -822,7 +811,6 @@ MonoBehaviour:
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 114093528319870422, guid: 6d6417270dd09dc45a0098fa57d6d47e,
->>>>>>> master
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 122764065}
