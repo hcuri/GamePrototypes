@@ -471,11 +471,13 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: '1. Find a weapon
+  m_Text: '1. Find a weapon and click to shoot
 
     2. Right click for special jump
 
-    3. Be the last man alive!'
+    3. Stay inside the shrinking zone
+
+    4. Be the last man alive!'
 --- !u!114 &114904196252660596
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -508,11 +510,13 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: '1. Find a weapon
+  m_Text: '1. Find a weapon and click to shoot
 
     2. Right click for special jump
 
-    3. Be the last man alive!'
+    3. Stay inside the shrinking zone
+
+    4. Be the last man alive!'
 --- !u!114 &114952726263334518
 MonoBehaviour:
   m_ObjectHideFlags: 1
