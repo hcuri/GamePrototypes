@@ -9,8 +9,9 @@ public class PowerUpScript : Photon.MonoBehaviour {
     private bool isAvailable = true;
     private float timer;
     private PhotonView pv;
-    [SerializeField] int m_type;
+    [SerializeField] int m_type; //0 is health up, 1 is player speed up, 2 is weapon power up, 3 is weapon speed up
     public Mesh[] meshField;
+    public Material[] materialField;
     bool isSet = false;
     int randNum;
 
@@ -21,7 +22,7 @@ public class PowerUpScript : Photon.MonoBehaviour {
         timer = timeToRespawn;
         this.tag = "WeaponContainer";
         //Debug.Log("Hi I am Master");
-        randNum = (int)Random.Range(0, 5);
+        randNum = (int)Random.Range(0, 4);
         Debug.Log("random is :" + randNum);
         //this.gameObject.GetComponent<PhotonView>().RPC("SetType", PhotonTargets.AllBuffered, randNum);
         //Debug.Log("Am I master?");
@@ -40,6 +41,8 @@ public class PowerUpScript : Photon.MonoBehaviour {
     {
         Debug.Log("t_type: " +  t_type);
         m_type = t_type;
+        GetComponent<MeshFilter>().sharedMesh = meshField[m_type];
+        GetComponent<MeshRenderer>().material = materialField[m_type];
         isSet = true;
     }
 
