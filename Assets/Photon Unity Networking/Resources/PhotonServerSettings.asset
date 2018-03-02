@@ -51,4 +51,7 @@ MonoBehaviour:
   - setScale
   - SetScale
   - GrabWeapon
+  - setType
+  - SetType
+  - GetPowerUp
   DisableAutoOpenWizard: 1
