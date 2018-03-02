@@ -5,13 +5,13 @@ using UnityEngine;
 public class PowerUpScript : Photon.MonoBehaviour {
 
     public float timeToRespawn = 2.0f;
-    public GameObject weapon;
+    public bool isRespawnable = true;
     private bool isAvailable = true;
     private float timer;
     private PhotonView pv;
     [SerializeField] int m_type; //0 is health up, 1 is player speed up, 2 is weapon power up, 3 is weapon speed up
+    //These Three are the table for Meshes, Material for
     public Mesh[] meshField;
-    public Material[] materialField;
     public Color[] colorField;
     bool isSet = false;
     int randNum;
@@ -28,45 +28,57 @@ public class PowerUpScript : Photon.MonoBehaviour {
         childObject = transform.GetChild(0).gameObject;
 
     }
-    /*public override void OnCreatedRoom()
-    {
-        m_type = (int)Random.Range(0, 5);
-        Debug.Log("the type of power up is " + m_type);
-    }*/
+
     [PunRPC]
     public void SetType(int t_type)
     {
         Debug.Log("t_type: " +  t_type);
         m_type = t_type;
         childObject.GetComponent<MeshFilter>().sharedMesh = meshField[m_type];
-        childObject.GetComponent<MeshRenderer>().material = materialField[m_type];
+        //childObject.GetComponent<MeshRenderer>().material = materialField[m_type];
+        childObject.GetComponent<MeshRenderer>().material.color = colorField[m_type];
         GetComponent<MeshRenderer>().material.color = colorField[m_type];
         isSet = true;
     }
 
     void Update()
     {
+        //Notice that, somehow when I tried to called RPC in start it doesn't work, so I called this at the first loop of update
         if (!isSet)
         {
             this.gameObject.GetComponent<PhotonView>().RPC("SetType", PhotonTargets.AllBuffered, randNum);
         }
-        timer -= Time.deltaTime;
-        if (!isAvailable && timer < 0)
+        if (isRespawnable)
         {
-            isAvailable = true;
-            GetComponent<MeshRenderer>().enabled = true;
-            childObject.GetComponent<MeshRenderer>().enabled = true;
+            timer -= Time.deltaTime;
+            if (!isAvailable && timer < 0)
+            {
+                isAvailable = true;
+                GetComponent<MeshRenderer>().enabled = true;
+                childObject.GetComponent<MeshRenderer>().enabled = true;
+                GetComponent<Collider>().enabled = true;
+            }
         }
     }
+
+    
+     /* 
+     * This function will disable the appearance of power up,
+     * you can set isRespawnable to control whether it will respawn
+     */
 
     [PunRPC]
     public void WaitForRespawn()
     {
         //Reset the weapon keeper 
-        timer = timeToRespawn;
+        if (isRespawnable)
+        {
+            timer = timeToRespawn;
+        }
         isAvailable = false;
         GetComponent<MeshRenderer>().enabled = false;
         childObject.GetComponent<MeshRenderer>().enabled = false;
+        GetComponent<Collider>().enabled = false;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -76,10 +88,8 @@ public class PowerUpScript : Photon.MonoBehaviour {
         {
             if (pv.isMine)
             {
-                /*GameObject playerWeapon = PhotonNetwork.Instantiate(weapon.name.ToString(), other.transform.Find("PlayerHand").transform.position, Quaternion.identity, 0); 
-                playerWeapon.GetComponent<PhotonView>().RPC("SetParentRPC", PhotonTargets.AllBuffered, other.gameObject.GetComponent<PhotonView>().viewID);
-                playerWeapon.GetComponent<PhotonView>().RPC("SetScale", PhotonTargets.AllBuffered);*/
-                other.GetComponent<PhotonView>().RPC("GrabWeapon", PhotonTargets.AllBuffered, m_type);
+                //it will send the type number to player, and player should handle it.
+                other.GetComponent<PhotonView>().RPC("GetPowerUp", PhotonTargets.AllBuffered, m_type);
             }
 
             GetComponent<PhotonView>().RPC("WaitForRespawn", PhotonTargets.AllBuffered);

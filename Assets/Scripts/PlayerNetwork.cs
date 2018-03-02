@@ -312,10 +312,17 @@ public class PlayerNetwork : MonoBehaviour {
             m_weapons[weaponPointer].SetActive(false);
             weaponOn[weaponPointer] = false;
         }
-        Debug.Log("weaponType:" + weaponType);
+        //Debug.Log("weaponType:" + weaponType);
         weaponPointer = weaponType;
         m_weapons[weaponPointer].SetActive(true);
         weaponOn[weaponPointer] = true;
+    }
+
+    [PunRPC]
+    public void GetPowerUp(int powerType)
+    {
+        Debug.Log("I get Power: " + powerType);
+        //Some one need to handle the number of the power type to add attribue accordingly
     }
 
     private void Weapon_Cool_Heat()

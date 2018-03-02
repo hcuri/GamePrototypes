@@ -123,7 +123,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 6a6944f4904547e4fb039789da5fcd85, type: 2}
+  - {fileID: 2100000, guid: 5748831ace281bb4f93dc99345e25177, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -179,8 +179,8 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 114312663609206940}
   ObservedComponentsFoldoutOpen: 1
-  viewIdField: 2
-  instantiationId: 2
+  viewIdField: 0
+  instantiationId: -1
   currentMasterID: -1
   isRuntimeInstantiated: 0
 --- !u!114 &114312663609206940
@@ -195,18 +195,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeToRespawn: 2
-  weapon: {fileID: 1326063945759016, guid: ba8e66df39fd0ac4094115200a540014, type: 2}
+  isRespawnable: 1
   m_type: 0
   meshField:
   - {fileID: 4300000, guid: f5e70b692f804d346a44df961b6ad5a8, type: 3}
   - {fileID: 4300000, guid: bc0cdff0b0fdafc46bbdbda4b3717d71, type: 3}
   - {fileID: 4300000, guid: 486351f15650ce5408452352641fc317, type: 3}
   - {fileID: 4300000, guid: 911b2aca4190de843ba6fc029bf3734d, type: 3}
-  materialField:
-  - {fileID: 2100000, guid: 6a6944f4904547e4fb039789da5fcd85, type: 2}
-  - {fileID: 2100000, guid: 640dc2f025ee433489ca50d9f685de47, type: 2}
-  - {fileID: 2100000, guid: 152a75409221b6244be7b0063172b666, type: 2}
-  - {fileID: 2100000, guid: efe6fc25350958c479cd9fcde7e565f9, type: 2}
   colorField:
   - {r: 1, g: 0, b: 0.64137936, a: 0.39215687}
   - {r: 1, g: 0.88965523, b: 0, a: 0.39215687}

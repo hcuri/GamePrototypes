@@ -53,4 +53,5 @@ MonoBehaviour:
   - GrabWeapon
   - setType
   - SetType
+  - GetPowerUp
   DisableAutoOpenWizard: 1
