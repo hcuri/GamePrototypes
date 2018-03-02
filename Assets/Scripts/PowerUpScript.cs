@@ -12,23 +12,20 @@ public class PowerUpScript : Photon.MonoBehaviour {
     [SerializeField] int m_type; //0 is health up, 1 is player speed up, 2 is weapon power up, 3 is weapon speed up
     public Mesh[] meshField;
     public Material[] materialField;
+    public Color[] colorField;
     bool isSet = false;
     int randNum;
+    private GameObject childObject;
 
     void Start()
     {
         if (meshField == null)
             Debug.Log("You need to assign differet meshes to the power up so that it can change");
         timer = timeToRespawn;
-        this.tag = "WeaponContainer";
-        //Debug.Log("Hi I am Master");
+        this.tag = "PowerUp";
         randNum = (int)Random.Range(0, 4);
         Debug.Log("random is :" + randNum);
-        //this.gameObject.GetComponent<PhotonView>().RPC("SetType", PhotonTargets.AllBuffered, randNum);
-        //Debug.Log("Am I master?");
-        //Debug.Log("the type of power up is " + m_type);
-        //Mesh m_mesh = GetComponent<MeshFilter>().sharedMesh;
-        // GetComponent<MeshFilter>().sharedMesh = meshField[m_type];
+        childObject = transform.GetChild(0).gameObject;
 
     }
     /*public override void OnCreatedRoom()
@@ -41,8 +38,9 @@ public class PowerUpScript : Photon.MonoBehaviour {
     {
         Debug.Log("t_type: " +  t_type);
         m_type = t_type;
-        GetComponent<MeshFilter>().sharedMesh = meshField[m_type];
-        GetComponent<MeshRenderer>().material = materialField[m_type];
+        childObject.GetComponent<MeshFilter>().sharedMesh = meshField[m_type];
+        childObject.GetComponent<MeshRenderer>().material = materialField[m_type];
+        GetComponent<MeshRenderer>().material.color = colorField[m_type];
         isSet = true;
     }
 
@@ -57,6 +55,7 @@ public class PowerUpScript : Photon.MonoBehaviour {
         {
             isAvailable = true;
             GetComponent<MeshRenderer>().enabled = true;
+            childObject.GetComponent<MeshRenderer>().enabled = true;
         }
     }
 
@@ -67,6 +66,7 @@ public class PowerUpScript : Photon.MonoBehaviour {
         timer = timeToRespawn;
         isAvailable = false;
         GetComponent<MeshRenderer>().enabled = false;
+        childObject.GetComponent<MeshRenderer>().enabled = false;
     }
 
     private void OnTriggerEnter(Collider other)
