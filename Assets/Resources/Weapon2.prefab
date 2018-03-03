@@ -207,9 +207,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_damage: 20
   m_Size: 1
-  m_Speed: 1
+  m_Speed: 0.4
   m_type: -1
-  m_heat: 30
+  m_heat: 40
   m_heatCooldownRate: 20
   m_id: 1
 --- !u!135 &135251960011638994

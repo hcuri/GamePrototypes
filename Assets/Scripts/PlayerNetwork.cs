@@ -105,6 +105,10 @@ public class PlayerNetwork : Photon.MonoBehaviour {
 
             if (Time.time > m_postOverheatShootingPermit)
             {
+                if(overHeated == true)
+                {
+                    m_thermalClip = 0.0f;
+                }
                 overHeated = false;
             }
 
@@ -173,7 +177,7 @@ public class PlayerNetwork : Photon.MonoBehaviour {
             if (weapon.GetComponent<Weapon>().m_id == 1)
             {
                 //2/25/2018 Switch heat setting to weapon
-                m_heat = weapon.GetComponent<Weapon>().ReturnHeat();
+                /*m_heat = weapon.GetComponent<Weapon>().ReturnHeat();*/
 
                 if (!m_debugMode)
                 { 
@@ -184,10 +188,10 @@ public class PlayerNetwork : Photon.MonoBehaviour {
                     m_heatCooldownRate = 1000.0f;
                 }
                 //2/25/2018 Switch heat setting to weapon
-
                 int newW = weaponPointer + 1;
                 string weapName = "Weapon" + newW;
-                float weaponWeight = weapon.GetComponent<Weapon>().ReturnSpeed();
+                //float weaponWeight = weapon.GetComponent<Weapon>().ReturnSpeed();
+                //Debug.Log("weaponWeight " +weaponWeight);
 
                 if (!overHeated)
                 {
@@ -209,15 +213,21 @@ public class PlayerNetwork : Photon.MonoBehaviour {
                     }
 
                     GameObject infiniteWeapon = PhotonNetwork.Instantiate(weapName, playerCamera.transform.position + pos, Quaternion.identity, 0);
+                    //infiniteWeapon.transform.RotateAround(playerCamera.transform.right,) ;
+                    infiniteWeapon.transform.Rotate(playerCamera.transform.right*90);
                     infiniteWeapon.GetComponent<Rigidbody>().isKinematic = false;
                     //infiniteWeapon.GetComponent<PhotonView>().RPC("SetParentRPC", PhotonTargets.AllBuffered, GetComponent<PhotonView>().viewID);
                     //infiniteWeapon.GetComponent<PhotonView>().RPC("UnsetParentRPC", PhotonTargets.AllBuffered);
 
-               
-                    infiniteWeapon.GetComponent<Rigidbody>().AddForce(playerCamera.transform.forward * m_throwforce * weaponWeight);
+                    float weSpeed = infiniteWeapon.GetComponent<Weapon>().ReturnSpeed();
+                    //Debug.Log("WeaponSpeed: " + weSpeed);
+
+
+                    infiniteWeapon.GetComponent<Rigidbody>().AddForce(playerCamera.transform.forward * m_throwforce * weSpeed);
                     infiniteWeapon.GetComponent<Transform>().localScale *= infiniteWeapon.GetComponent<Weapon>().ReturnScale();
                     infiniteWeapon.GetComponent<PhotonView>().RPC("AutoDestroy", PhotonTargets.AllBuffered);
-
+                    m_heat = infiniteWeapon.GetComponent<Weapon>().ReturnHeat();
+                    Debug.Log(infiniteWeapon.name + " is heat: " + m_heat);
                     HeatingWeapon();
                 }
             }
@@ -314,9 +324,17 @@ public class PlayerNetwork : Photon.MonoBehaviour {
             m_weapons[weaponPointer].SetActive(false);
             weaponOn[weaponPointer] = false;
         }
+        //Debug.Log("weaponType:" + weaponType);
         weaponPointer = weaponType;
         m_weapons[weaponPointer].SetActive(true);
         weaponOn[weaponPointer] = true;
+    }
+
+    [PunRPC]
+    public void GetPowerUp(int powerType)
+    {
+        Debug.Log("I get Power: " + powerType);
+        //Some one need to handle the number of the power type to add attribue accordingly
     }
 
     private void Weapon_Cool_Heat()
