@@ -6,10 +6,11 @@ public class PowerUpScript : Photon.MonoBehaviour {
 
     public float timeToRespawn = 2.0f;
     public bool isRespawnable = true;
+    public bool isRandomizable = true;
     private bool isAvailable = true;
     private float timer;
     private PhotonView pv;
-    [SerializeField] int m_type; //0 is health up, 1 is player speed up, 2 is weapon power up, 3 is weapon speed up
+    [SerializeField] int m_type = 0; //0 is health up, 1 is player speed up, 2 is weapon power up, 3 is weapon speed up
     //These Three are the table for Meshes, Material for
     public Mesh[] meshField;
     public Color[] colorField;
@@ -46,7 +47,7 @@ public class PowerUpScript : Photon.MonoBehaviour {
         //Notice that, somehow when I tried to called RPC in start it doesn't work, so I called this at the first loop of update
         if (!isSet)
         {
-            this.gameObject.GetComponent<PhotonView>().RPC("SetType", PhotonTargets.AllBuffered, randNum);
+            this.gameObject.GetComponent<PhotonView>().RPC("SetType", PhotonTargets.AllBuffered, isRandomizable ? randNum : m_type);
         }
         if (isRespawnable)
         {
