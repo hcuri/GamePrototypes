@@ -83,13 +83,15 @@ public class PlayerNetwork : Photon.MonoBehaviour {
             mw.SetActive(false);
         }
         weaponPointer = -1;
+
+        //start looking green
+        SetColor();
 	}
 
     private void Update()
 	{
         if(m_pv.isMine)
         {
-			GetComponent<PhotonView>().RPC("SetColor", PhotonTargets.AllBuffered, null);
             Weapon_Cool_Heat();
 
             if(overHeated)
@@ -100,11 +102,6 @@ public class PlayerNetwork : Photon.MonoBehaviour {
                 }
 
             }
-            Debug.Log("Overheated:"+ overHeated);
-            Debug.Log("Panalty: " + requirePenalty);
-            Debug.Log(Time.time);
-            Debug.Log(m_postOverheatShootingPermit);
-            Debug.Log(m_thermalClip);
 
             if (Time.time > m_postOverheatShootingPermit)
             {
@@ -114,8 +111,6 @@ public class PlayerNetwork : Photon.MonoBehaviour {
             Movement();
             m_healthText.text = "HP:" + m_health.ToString();
 			m_healthSlider.value = m_health;
-
-			SetColor ();
 
 			m_heatSlider.value = m_thermalClip;
 			if (overHeated) {
@@ -246,7 +241,9 @@ public class PlayerNetwork : Photon.MonoBehaviour {
     public void TakeDamage(float damage)
     {
 		m_health -= damage;
-		if (m_pv.isMine && damage > 0f) {
+        SetColor();
+
+        if (m_pv.isMine && damage > 0f) {
 			damageImage.color = damageColor;
 		}
 
@@ -273,18 +270,15 @@ public class PlayerNetwork : Photon.MonoBehaviour {
         TakeDamage((float)damage);
     }
 
-	[PunRPC]
 	public void SetColor(){
-		if (m_pv.isMine) {
-			if (m_health > 50) {
-				m_color.r = ((100 - m_health) / 50f);
-				m_color.g = 1f;
-			} else {
-				m_color.r = 1f;
-				m_color.g = (m_health/50f) ;
-			}
-			GetComponentInChildren<Renderer>().material.color = m_color;
+		if (m_health > 50) {
+			m_color.r = ((100 - m_health) / 50f);
+			m_color.g = 1f;
+		} else {
+			m_color.r = 1f;
+			m_color.g = (m_health/50f) ;
 		}
+		GetComponentInChildren<Renderer>().material.color = m_color;
 	}
 
     public void setInsideZone(bool inside)
