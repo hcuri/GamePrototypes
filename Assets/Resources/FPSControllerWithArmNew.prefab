@@ -1271,6 +1271,7 @@ MonoBehaviour:
   m_thermalClipCapacity: 200
   m_thermalClip: 0
   m_overheatPenaltyTime: 5
+  m_color: {r: 0, g: 255, b: 0, a: 1}
   m_HPReducedPerSecond: 15
   m_weapons:
   - {fileID: 1885439921069074}

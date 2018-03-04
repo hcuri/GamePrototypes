@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class PlayerNetwork : MonoBehaviour {
+public class PlayerNetwork : Photon.MonoBehaviour {
 
     [SerializeField] private GameObject playerCamera;
     [SerializeField] private MonoBehaviour[] playerControlScripts;   
@@ -38,6 +38,7 @@ public class PlayerNetwork : MonoBehaviour {
 	private Slider m_healthSlider;
 	private Image damageImage;
 	private Color damageColor = new Color(1f, 0f, 0f, 0.5f);
+	private Color m_color = new Color(0f, 1f, 0f);
 	private Slider m_heatSlider;
 	private Text m_heatText;
     private PhotonView m_pv;
@@ -82,13 +83,15 @@ public class PlayerNetwork : MonoBehaviour {
             mw.SetActive(false);
         }
         weaponPointer = -1;
+
+        //start looking green
+        SetColor();
 	}
 
     private void Update()
-    {
+	{
         if(m_pv.isMine)
         {
-
             Weapon_Cool_Heat();
 
             if(overHeated)
@@ -99,11 +102,6 @@ public class PlayerNetwork : MonoBehaviour {
                 }
 
             }
-            /*Debug.Log("Overheated:"+ overHeated);
-            Debug.Log("Panalty: " + requirePenalty);
-            Debug.Log(Time.time);
-            Debug.Log(m_postOverheatShootingPermit);
-            Debug.Log(m_thermalClip);*/
 
             if (Time.time > m_postOverheatShootingPermit)
             {
@@ -117,6 +115,7 @@ public class PlayerNetwork : MonoBehaviour {
             Movement();
             m_healthText.text = "HP:" + m_health.ToString();
 			m_healthSlider.value = m_health;
+
 			m_heatSlider.value = m_thermalClip;
 			if (overHeated) {
 				m_heatText.text = "OVERHEATED!";
@@ -252,7 +251,9 @@ public class PlayerNetwork : MonoBehaviour {
     public void TakeDamage(float damage)
     {
 		m_health -= damage;
-		if (m_pv.isMine && damage > 0f) {
+        SetColor();
+
+        if (m_pv.isMine && damage > 0f) {
 			damageImage.color = damageColor;
 		}
 
@@ -278,6 +279,17 @@ public class PlayerNetwork : MonoBehaviour {
     {
         TakeDamage((float)damage);
     }
+
+	public void SetColor(){
+		if (m_health > 50) {
+			m_color.r = ((100 - m_health) / 50f);
+			m_color.g = 1f;
+		} else {
+			m_color.r = 1f;
+			m_color.g = (m_health/50f) ;
+		}
+		GetComponentInChildren<Renderer>().material.color = m_color;
+	}
 
     public void setInsideZone(bool inside)
     {
