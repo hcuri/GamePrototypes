@@ -212,23 +212,9 @@ public class PlayerNetwork : Photon.MonoBehaviour {
                         }
                     }
 
-                    GameObject infiniteWeapon = PhotonNetwork.Instantiate(weapName, playerCamera.transform.position + pos, Quaternion.identity, 0);
-                    //infiniteWeapon.transform.RotateAround(playerCamera.transform.right,) ;
-                    infiniteWeapon.transform.Rotate(playerCamera.transform.right*90);
-                    infiniteWeapon.GetComponent<Rigidbody>().isKinematic = false;
-                    //infiniteWeapon.GetComponent<PhotonView>().RPC("SetParentRPC", PhotonTargets.AllBuffered, GetComponent<PhotonView>().viewID);
-                    //infiniteWeapon.GetComponent<PhotonView>().RPC("UnsetParentRPC", PhotonTargets.AllBuffered);
-
-                    float weSpeed = infiniteWeapon.GetComponent<Weapon>().ReturnSpeed();
-                    //Debug.Log("WeaponSpeed: " + weSpeed);
-
-
-                    infiniteWeapon.GetComponent<Rigidbody>().AddForce(playerCamera.transform.forward * m_throwforce * weSpeed);
-                    infiniteWeapon.GetComponent<Transform>().localScale *= infiniteWeapon.GetComponent<Weapon>().ReturnScale();
-                    infiniteWeapon.GetComponent<PhotonView>().RPC("AutoDestroy", PhotonTargets.AllBuffered);
-                    m_heat = infiniteWeapon.GetComponent<Weapon>().ReturnHeat();
-                    Debug.Log(infiniteWeapon.name + " is heat: " + m_heat);
-                    HeatingWeapon();
+                    Vector3 position = playerCamera.transform.position + pos;
+                    Vector3 velocity = playerCamera.transform.forward * m_throwforce;
+                    m_pv.RPC("InstantiateWeapon", PhotonTargets.AllBuffered, weapName, position, velocity);
                 }
             }
 
@@ -245,6 +231,27 @@ public class PlayerNetwork : Photon.MonoBehaviour {
         {
             
         }
+    }
+
+    [PunRPC]
+    public void InstantiateWeapon(String weaponName, Vector3 position, Vector3 velocity)
+    {
+        //GameObject infiniteWeapon = PhotonNetwork.Instantiate(weaponName, position, Quaternion.identity, 0);
+        GameObject infiniteWeapon = GameObject.Instantiate((GameObject)Resources.Load(weaponName), position, Quaternion.identity);
+
+        infiniteWeapon.transform.Rotate(playerCamera.transform.right * 90);
+        infiniteWeapon.GetComponent<Rigidbody>().isKinematic = false;
+
+        float weSpeed = infiniteWeapon.GetComponent<Weapon>().ReturnSpeed();
+
+        infiniteWeapon.GetComponent<Rigidbody>().AddForce(velocity * weSpeed);
+        infiniteWeapon.GetComponent<Transform>().localScale *= infiniteWeapon.GetComponent<Weapon>().ReturnScale();
+        infiniteWeapon.GetComponent<PhotonView>().RPC("AutoDestroy", PhotonTargets.AllBuffered);
+        m_heat = infiniteWeapon.GetComponent<Weapon>().ReturnHeat();
+        Debug.Log(infiniteWeapon.name + " is heat: " + m_heat);
+
+        if(m_pv.isMine)
+            HeatingWeapon();
     }
 
     [PunRPC]

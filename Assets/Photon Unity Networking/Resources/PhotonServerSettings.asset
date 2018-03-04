@@ -54,4 +54,5 @@ MonoBehaviour:
   - setType
   - SetType
   - GetPowerUp
+  - InstantiateWeapon
   DisableAutoOpenWizard: 1
