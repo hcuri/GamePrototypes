@@ -243,6 +243,27 @@ public class PlayerNetwork : Photon.MonoBehaviour {
     }
 
     [PunRPC]
+    public void InstantiateWeapon(String weaponName, Vector3 position, Vector3 velocity)
+    {
+        //GameObject infiniteWeapon = PhotonNetwork.Instantiate(weaponName, position, Quaternion.identity, 0);
+        GameObject infiniteWeapon = GameObject.Instantiate((GameObject)Resources.Load(weaponName), position, Quaternion.identity);
+
+        infiniteWeapon.transform.Rotate(playerCamera.transform.right * 90);
+        infiniteWeapon.GetComponent<Rigidbody>().isKinematic = false;
+
+        float weSpeed = infiniteWeapon.GetComponent<Weapon>().ReturnSpeed();
+
+        infiniteWeapon.GetComponent<Rigidbody>().AddForce(velocity * weSpeed);
+        infiniteWeapon.GetComponent<Transform>().localScale *= infiniteWeapon.GetComponent<Weapon>().ReturnScale();
+        infiniteWeapon.GetComponent<PhotonView>().RPC("AutoDestroy", PhotonTargets.AllBuffered);
+        m_heat = infiniteWeapon.GetComponent<Weapon>().ReturnHeat();
+        Debug.Log(infiniteWeapon.name + " is heat: " + m_heat);
+
+        if(m_pv.isMine)
+            HeatingWeapon();
+    }
+
+    [PunRPC]
     public void TakeDamage(float damage)
     {
 		m_health -= damage;
