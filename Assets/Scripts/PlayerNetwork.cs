@@ -33,8 +33,8 @@ public class PlayerNetwork : Photon.MonoBehaviour {
     //2/25/2018 Switch heat setting to weapon
 
     //3/5/2018 Receive the powerup
-    private int WeaponDamageEmpoweredCounter;
-    private int WeaponSpeedEmpoweredCounter;
+    public int WeaponDamageEmpoweredCounter;
+    public int WeaponSpeedEmpoweredCounter;
     private int PlayerSpeedEmpoweredCounter;
     private int PlayerHealthEmpoweredCounter;
 
@@ -449,6 +449,7 @@ public class PlayerNetwork : Photon.MonoBehaviour {
             for (int i = 0; i < WeaponDamageEmpoweredCounter; i++)
             {
                 weapon.GetComponent<Weapon>().SetDamage();
+                weapon.GetComponent<Weapon>().SetSize();
             }
         //}
     }
