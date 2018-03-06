@@ -58,6 +58,7 @@ public class PlayerNetwork : Photon.MonoBehaviour {
     private GameObject weapon;
     private bool insideZone = true;
     public float m_HPReducedPerSecond = 15.0f;
+    private float m_maxHP = 100f;
 
     //added by Po
     [SerializeField] GameObject[] m_weapons;
@@ -272,6 +273,7 @@ public class PlayerNetwork : Photon.MonoBehaviour {
     public void TakeDamage(float damage)
     {
 		m_health -= damage;
+        if (m_health > m_maxHP) m_health = m_maxHP;
         SetColor();
 
         if (m_pv.isMine && damage > 0f) {
@@ -461,15 +463,7 @@ public class PlayerNetwork : Photon.MonoBehaviour {
         //if (m_power == 0)//health
         //{
         if (HPPickedUp == true) { 
-            float local_health = m_health;
-            if (local_health + 10 >= 100)
-            {
-                m_health = 100f;
-            }
-            else
-            {
-                m_health = m_health + 10f;
-            }
+            m_pv.RPC("TakeDamage", PhotonTargets.AllBuffered, -10);
             HPPickedUp = false;
             //m_power = 4;
         }
