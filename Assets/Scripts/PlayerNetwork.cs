@@ -219,6 +219,7 @@ public class PlayerNetwork : Photon.MonoBehaviour {
                             Debug.Log("You're too close to something to be able to throw");
                             return;
                         }
+
                     }
                 }
             }
