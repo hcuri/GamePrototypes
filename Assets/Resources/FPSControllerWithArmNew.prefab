@@ -277,7 +277,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4836334117781178}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4406969121590894
 Transform:
@@ -329,7 +329,7 @@ Transform:
   m_LocalScale: {x: 0.2, y: 0.50000024, z: 0.20000012}
   m_Children: []
   m_Father: {fileID: 4836334117781178}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!4 &4620308904124554
 Transform:
@@ -369,7 +369,7 @@ Transform:
   m_Children:
   - {fileID: 4984621430924786}
   m_Father: {fileID: 4836334117781178}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4836334117781178
 Transform:
@@ -381,9 +381,9 @@ Transform:
   m_LocalPosition: {x: -1.9779105, y: 1, z: -4.356959}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 4263043535360554}
   - {fileID: 4522330710177568}
   - {fileID: 4741025534073100}
-  - {fileID: 4263043535360554}
   - {fileID: 4679456702526080}
   - {fileID: 4406969121590894}
   - {fileID: 4171390030634506}
@@ -1343,7 +1343,6 @@ MonoBehaviour:
   m_thermalClipCapacity: 200
   m_thermalClip: 0
   m_overheatPenaltyTime: 5
-  m_color: {r: 0, g: 255, b: 0, a: 1}
   m_HPReducedPerSecond: 15
   m_weapons:
   - {fileID: 1885439921069074}
