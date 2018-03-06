@@ -24,7 +24,7 @@ public class PowerUpScript : Photon.MonoBehaviour {
             Debug.Log("You need to assign differet meshes to the power up so that it can change");
         timer = timeToRespawn;
         this.tag = "PowerUp";
-        randNum = (int)Random.Range(0, 3);
+        randNum = (int)Random.Range(0, 4);
         Debug.Log("random is :" + randNum);
         childObject = transform.GetChild(0).gameObject;
 
