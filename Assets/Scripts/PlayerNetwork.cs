@@ -351,6 +351,12 @@ public class PlayerNetwork : Photon.MonoBehaviour {
         weaponPointer = weaponType;
         m_weapons[weaponPointer].SetActive(true);
         weaponOn[weaponPointer] = true;
+        GetComponent<PhotonView>().RPC("SetHandSize", PhotonTargets.AllBuffered);
+    }
+    [PunRPC] void SetHandSize()
+    {
+        float sizeCh = 1 * (float)Math.Pow(1.1, (double)WeaponDamageEmpoweredCounter);
+        m_weapons[weaponPointer].transform.localScale = new Vector3(sizeCh, sizeCh, sizeCh);
     }
 
     [PunRPC]
@@ -379,6 +385,7 @@ public class PlayerNetwork : Photon.MonoBehaviour {
             {
                 WeaponDamageEmpoweredCounter = 5;
             }
+            GetComponent<PhotonView>().RPC("SetHandSize", PhotonTargets.AllBuffered);
         }
         else if (powerType ==2)
         {if (WeaponSpeedEmpoweredCounter < 5)
