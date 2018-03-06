@@ -361,12 +361,12 @@ public class PlayerNetwork : Photon.MonoBehaviour {
             //m_power = 0;
             PlayerHealthEmpoweredCounter = PlayerHealthEmpoweredCounter + 1;
         }
-        else if (powerType == 1)
+        else if (powerType == 3)
         {
             //m_power = 1;
-            PlayerSpeedEmpoweredCounter = PlayerSpeedEmpoweredCounter + 1;
+            //PlayerSpeedEmpoweredCounter = PlayerSpeedEmpoweredCounter + 1;
         }
-        else if (powerType == 2)
+        else if (powerType == 1)
         {
             if (WeaponDamageEmpoweredCounter < 5)
             {
@@ -378,7 +378,7 @@ public class PlayerNetwork : Photon.MonoBehaviour {
                 WeaponDamageEmpoweredCounter = 5;
             }
         }
-        else if (powerType ==3)
+        else if (powerType ==2)
         {if (WeaponSpeedEmpoweredCounter < 5)
             {
                 //m_power = 3;
