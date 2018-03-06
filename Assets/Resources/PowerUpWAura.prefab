@@ -197,6 +197,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeToRespawn: 2
   isRespawnable: 1
+  isRandomizable: 1
   m_type: 0
   meshField:
   - {fileID: 4300000, guid: f5e70b692f804d346a44df961b6ad5a8, type: 3}
@@ -206,8 +207,8 @@ MonoBehaviour:
   colorField:
   - {r: 1, g: 0, b: 0.64137936, a: 0.39215687}
   - {r: 1, g: 0.88965523, b: 0, a: 0.39215687}
-  - {r: 0.9034481, g: 0, b: 1, a: 0.39215687}
   - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
+  - {r: 0.9034481, g: 0, b: 1, a: 0.39215687}
 --- !u!114 &114572603424031570
 MonoBehaviour:
   m_ObjectHideFlags: 1
