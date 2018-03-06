@@ -220,6 +220,7 @@ public class PlayerNetwork : Photon.MonoBehaviour {
                             return;
                         }
                     }
+
                     Vector3 position = playerCamera.transform.position + pos;
                     Vector3 velocity = playerCamera.transform.forward * m_throwforce;
                     m_pv.RPC("InstantiateWeapon", PhotonTargets.AllBuffered, weapName, position, velocity);
