@@ -251,6 +251,7 @@ public class PlayerNetwork : Photon.MonoBehaviour {
         infiniteWeapon.transform.Rotate(playerCamera.transform.right * 90);
         infiniteWeapon.GetComponent<Rigidbody>().isKinematic = false;
 
+        WeaponPowerSort(infiniteWeapon);
         float weSpeed = infiniteWeapon.GetComponent<Weapon>().ReturnSpeed();
 
         infiniteWeapon.GetComponent<Rigidbody>().AddForce(velocity * weSpeed);
