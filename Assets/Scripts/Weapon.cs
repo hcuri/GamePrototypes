@@ -84,6 +84,24 @@ public class Weapon : MonoBehaviour {
     }
     //2/25/2018 Switch heat setting to weapon
 
+    public void SetSpeed()
+    {
+        m_Speed = m_Speed * (1.2f);
+    }
 
+    public void SetHeat()
+    {
+        m_heat = m_heat * (0.8f);
+    }
+
+    public void SetSize()
+    {
+        m_Size = m_Size * (1.1f);
+    }
+
+    public void SetDamage()
+    {
+        m_damage = m_damage + 5;
+    }
 
 }
