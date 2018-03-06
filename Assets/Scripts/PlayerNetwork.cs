@@ -259,6 +259,7 @@ public class PlayerNetwork : Photon.MonoBehaviour {
         Debug.Log(weSpeed);
         infiniteWeapon.GetComponent<Rigidbody>().AddForce(velocity * weSpeed);
         infiniteWeapon.GetComponent<Transform>().localScale *= infiniteWeapon.GetComponent<Weapon>().ReturnScale();
+        infiniteWeapon.GetComponent<PhotonView>().RPC("SetScale", PhotonTargets.AllBuffered);
         infiniteWeapon.GetComponent<PhotonView>().RPC("AutoDestroy", PhotonTargets.AllBuffered);
         m_heat = infiniteWeapon.GetComponent<Weapon>().ReturnHeat();
         Debug.Log(infiniteWeapon.name + " is heat: " + m_heat);
@@ -450,6 +451,7 @@ public class PlayerNetwork : Photon.MonoBehaviour {
             {
                 weapon.GetComponent<Weapon>().SetDamage();
                 weapon.GetComponent<Weapon>().SetSize();
+            
             }
         //}
     }
