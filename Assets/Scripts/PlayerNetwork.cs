@@ -37,7 +37,10 @@ public class PlayerNetwork : Photon.MonoBehaviour {
     private int WeaponSpeedEmpoweredCounter;
     private int PlayerSpeedEmpoweredCounter;
     private int PlayerHealthEmpoweredCounter;
-    private int m_power = 4; //4 means no powerup received.
+
+    private bool HPPickedUp;
+
+    //private int m_power = 4; //4 means no powerup received.
     //private bool SizeEmpowered;
     //private bool HeatEmpowered;
     //3/5/2018 Receive the powerup
@@ -253,7 +256,7 @@ public class PlayerNetwork : Photon.MonoBehaviour {
 
         WeaponPowerSort(infiniteWeapon);
         float weSpeed = infiniteWeapon.GetComponent<Weapon>().ReturnSpeed();
-
+        Debug.Log(weSpeed);
         infiniteWeapon.GetComponent<Rigidbody>().AddForce(velocity * weSpeed);
         infiniteWeapon.GetComponent<Transform>().localScale *= infiniteWeapon.GetComponent<Weapon>().ReturnScale();
         infiniteWeapon.GetComponent<PhotonView>().RPC("AutoDestroy", PhotonTargets.AllBuffered);
@@ -353,23 +356,37 @@ public class PlayerNetwork : Photon.MonoBehaviour {
         Debug.Log("I get Power: " + powerType);
         if(powerType == 0)
         {
-            m_power = 0;
+            HPPickedUp = true;
+            //m_power = 0;
             PlayerHealthEmpoweredCounter = PlayerHealthEmpoweredCounter + 1;
         }
         else if (powerType == 1)
         {
-            m_power = 1;
+            //m_power = 1;
             PlayerSpeedEmpoweredCounter = PlayerSpeedEmpoweredCounter + 1;
         }
         else if (powerType == 2)
         {
-            m_power = 2;
-            WeaponDamageEmpoweredCounter = WeaponDamageEmpoweredCounter + 1;
+            if (WeaponDamageEmpoweredCounter < 5)
+            {
+                //m_power = 2;
+                WeaponDamageEmpoweredCounter = WeaponDamageEmpoweredCounter + 1;
+            }
+            else
+            {
+                WeaponDamageEmpoweredCounter = 5;
+            }
         }
         else if (powerType ==3)
-        {
-            m_power = 3;
-            WeaponSpeedEmpoweredCounter = WeaponSpeedEmpoweredCounter + 1;
+        {if (WeaponSpeedEmpoweredCounter < 5)
+            {
+                //m_power = 3;
+                WeaponSpeedEmpoweredCounter = WeaponSpeedEmpoweredCounter + 1;
+            }
+            else
+            {
+                WeaponSpeedEmpoweredCounter = 5;
+            }
         }
         //Some one need to handle the number of the power type to add attribue accordingly
     }
@@ -418,28 +435,29 @@ public class PlayerNetwork : Photon.MonoBehaviour {
     private void WeaponPowerSort(GameObject weapon)
     {
        
-        if (m_power == 1)//weapon speed
-        {
+        //if (m_power == 1)//weapon speed
+        //{
             for (int i = 0; i < WeaponSpeedEmpoweredCounter; i++)
             {
                 weapon.GetComponent<Weapon>().SetSpeed();
             }
         
-        }
+        //}
 
-        if (m_power == 2)//weapon damage
-        {
+        //if (m_power == 2)//weapon damage
+        //{
             for (int i = 0; i < WeaponDamageEmpoweredCounter; i++)
             {
                 weapon.GetComponent<Weapon>().SetDamage();
             }
-        }
+        //}
     }
 
     private void PlayerPowerSort()
     {
-        if (m_power == 0)//health
-        {
+        //if (m_power == 0)//health
+        //{
+        if (HPPickedUp == true) { 
             float local_health = m_health;
             if (local_health + 10 >= 100)
             {
@@ -449,12 +467,13 @@ public class PlayerNetwork : Photon.MonoBehaviour {
             {
                 m_health = m_health + 10f;
             }
-            m_power = 4;
+            HPPickedUp = false;
+            //m_power = 4;
         }
         
-        if(m_power == 3)
-        {
+        //if(m_power == 3)
+        //{
             //dont know how to access
-        }
+        //}
     }
 }
