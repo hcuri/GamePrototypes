@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class PlayerNetwork : MonoBehaviour {
+public class PlayerNetwork : Photon.MonoBehaviour {
 
     [SerializeField] private GameObject playerCamera;
     [SerializeField] private MonoBehaviour[] playerControlScripts;   
@@ -38,6 +38,7 @@ public class PlayerNetwork : MonoBehaviour {
 	private Slider m_healthSlider;
 	private Image damageImage;
 	private Color damageColor = new Color(1f, 0f, 0f, 0.5f);
+	private Color m_color = new Color(0f, 1f, 0f);
 	private Slider m_heatSlider;
 	private Text m_heatText;
     private PhotonView m_pv;
@@ -82,13 +83,15 @@ public class PlayerNetwork : MonoBehaviour {
             mw.SetActive(false);
         }
         weaponPointer = -1;
+
+        //start looking green
+        SetColor();
 	}
 
     private void Update()
-    {
+	{
         if(m_pv.isMine)
         {
-
             Weapon_Cool_Heat();
 
             if(overHeated)
@@ -99,11 +102,6 @@ public class PlayerNetwork : MonoBehaviour {
                 }
 
             }
-            /*Debug.Log("Overheated:"+ overHeated);
-            Debug.Log("Panalty: " + requirePenalty);
-            Debug.Log(Time.time);
-            Debug.Log(m_postOverheatShootingPermit);
-            Debug.Log(m_thermalClip);*/
 
             if (Time.time > m_postOverheatShootingPermit)
             {
@@ -117,6 +115,7 @@ public class PlayerNetwork : MonoBehaviour {
             Movement();
             m_healthText.text = "HP:" + m_health.ToString();
 			m_healthSlider.value = m_health;
+
 			m_heatSlider.value = m_thermalClip;
 			if (overHeated) {
 				m_heatText.text = "OVERHEATED!";
@@ -213,23 +212,9 @@ public class PlayerNetwork : MonoBehaviour {
                         }
                     }
 
-                    GameObject infiniteWeapon = PhotonNetwork.Instantiate(weapName, playerCamera.transform.position + pos, Quaternion.identity, 0);
-                    //infiniteWeapon.transform.RotateAround(playerCamera.transform.right,) ;
-                    infiniteWeapon.transform.Rotate(playerCamera.transform.right*90);
-                    infiniteWeapon.GetComponent<Rigidbody>().isKinematic = false;
-                    //infiniteWeapon.GetComponent<PhotonView>().RPC("SetParentRPC", PhotonTargets.AllBuffered, GetComponent<PhotonView>().viewID);
-                    //infiniteWeapon.GetComponent<PhotonView>().RPC("UnsetParentRPC", PhotonTargets.AllBuffered);
-
-                    float weSpeed = infiniteWeapon.GetComponent<Weapon>().ReturnSpeed();
-                    //Debug.Log("WeaponSpeed: " + weSpeed);
-
-
-                    infiniteWeapon.GetComponent<Rigidbody>().AddForce(playerCamera.transform.forward * m_throwforce * weSpeed);
-                    infiniteWeapon.GetComponent<Transform>().localScale *= infiniteWeapon.GetComponent<Weapon>().ReturnScale();
-                    infiniteWeapon.GetComponent<PhotonView>().RPC("AutoDestroy", PhotonTargets.AllBuffered);
-                    m_heat = infiniteWeapon.GetComponent<Weapon>().ReturnHeat();
-                    Debug.Log(infiniteWeapon.name + " is heat: " + m_heat);
-                    HeatingWeapon();
+                    Vector3 position = playerCamera.transform.position + pos;
+                    Vector3 velocity = playerCamera.transform.forward * m_throwforce;
+                    m_pv.RPC("InstantiateWeapon", PhotonTargets.AllBuffered, weapName, position, velocity);
                 }
             }
 
@@ -249,10 +234,33 @@ public class PlayerNetwork : MonoBehaviour {
     }
 
     [PunRPC]
+    public void InstantiateWeapon(String weaponName, Vector3 position, Vector3 velocity)
+    {
+        //GameObject infiniteWeapon = PhotonNetwork.Instantiate(weaponName, position, Quaternion.identity, 0);
+        GameObject infiniteWeapon = GameObject.Instantiate((GameObject)Resources.Load(weaponName), position, Quaternion.identity);
+
+        infiniteWeapon.transform.Rotate(playerCamera.transform.right * 90);
+        infiniteWeapon.GetComponent<Rigidbody>().isKinematic = false;
+
+        float weSpeed = infiniteWeapon.GetComponent<Weapon>().ReturnSpeed();
+
+        infiniteWeapon.GetComponent<Rigidbody>().AddForce(velocity * weSpeed);
+        infiniteWeapon.GetComponent<Transform>().localScale *= infiniteWeapon.GetComponent<Weapon>().ReturnScale();
+        infiniteWeapon.GetComponent<PhotonView>().RPC("AutoDestroy", PhotonTargets.AllBuffered);
+        m_heat = infiniteWeapon.GetComponent<Weapon>().ReturnHeat();
+        Debug.Log(infiniteWeapon.name + " is heat: " + m_heat);
+
+        if(m_pv.isMine)
+            HeatingWeapon();
+    }
+
+    [PunRPC]
     public void TakeDamage(float damage)
     {
 		m_health -= damage;
-		if (m_pv.isMine && damage > 0f) {
+        SetColor();
+
+        if (m_pv.isMine && damage > 0f) {
 			damageImage.color = damageColor;
 		}
 
@@ -278,6 +286,17 @@ public class PlayerNetwork : MonoBehaviour {
     {
         TakeDamage((float)damage);
     }
+
+	public void SetColor(){
+		if (m_health > 50) {
+			m_color.r = ((100 - m_health) / 50f);
+			m_color.g = 1f;
+		} else {
+			m_color.r = 1f;
+			m_color.g = (m_health/50f) ;
+		}
+		GetComponentInChildren<Renderer>().material.color = m_color;
+	}
 
     public void setInsideZone(bool inside)
     {

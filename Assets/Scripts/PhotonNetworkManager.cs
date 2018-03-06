@@ -112,10 +112,8 @@ public class PhotonNetworkManager : Photon.PunBehaviour
 				joinedRoom = true;
                 countingDown = false;
 
-                //PhotonNetwork.Instantiate(player.name, spawnPoint.position, spawnPoint.rotation, 0);
-
-
                 GameObject go = PhotonNetwork.Instantiate(player.name, new Vector3(0, 0, 0), Quaternion.identity, 0);
+                
                 int id = go.GetComponent<PhotonView>().ownerId;
 				go.transform.Translate(spawnPoint[id % spawnPoint.Length].position.x, spawnPoint[id % spawnPoint.Length].position.y, spawnPoint[id % spawnPoint.Length].position.z);
                 
@@ -126,7 +124,6 @@ public class PhotonNetworkManager : Photon.PunBehaviour
 
 
                 lobbyCamera.SetActive(false);
-
 
                 GameObject.Find("ShrinkingZone").GetComponent<ShrinkingZoneScript>().startShrinking();
             }
