@@ -32,6 +32,15 @@ public class PlayerNetwork : Photon.MonoBehaviour {
     private bool m_debugMode;
     //2/25/2018 Switch heat setting to weapon
 
+    //3/5/2018 Receive the powerup
+    private int WeaponDamageEmpoweredCounter;
+    private int WeaponSpeedEmpoweredCounter;
+    private int PlayerSpeedEmpoweredCounter;
+    private int PlayerHealthEmpoweredCounter;
+    private int m_power = 4; //4 means no powerup received.
+    //private bool SizeEmpowered;
+    //private bool HeatEmpowered;
+    //3/5/2018 Receive the powerup
 
     private Text m_healthText;
 	private Text zoneText;
@@ -113,9 +122,9 @@ public class PlayerNetwork : Photon.MonoBehaviour {
             }
 
             Movement();
+            PlayerPowerSort();
             m_healthText.text = "HP:" + m_health.ToString();
 			m_healthSlider.value = m_health;
-
 			m_heatSlider.value = m_thermalClip;
 			if (overHeated) {
 				m_heatText.text = "OVERHEATED!";
@@ -219,13 +228,14 @@ public class PlayerNetwork : Photon.MonoBehaviour {
                     //infiniteWeapon.GetComponent<PhotonView>().RPC("SetParentRPC", PhotonTargets.AllBuffered, GetComponent<PhotonView>().viewID);
                     //infiniteWeapon.GetComponent<PhotonView>().RPC("UnsetParentRPC", PhotonTargets.AllBuffered);
 
+
+                    WeaponPowerSort(infiniteWeapon);
                     float weSpeed = infiniteWeapon.GetComponent<Weapon>().ReturnSpeed();
                     //Debug.Log("WeaponSpeed: " + weSpeed);
-
-
                     infiniteWeapon.GetComponent<Rigidbody>().AddForce(playerCamera.transform.forward * m_throwforce * weSpeed);
                     infiniteWeapon.GetComponent<Transform>().localScale *= infiniteWeapon.GetComponent<Weapon>().ReturnScale();
                     infiniteWeapon.GetComponent<PhotonView>().RPC("AutoDestroy", PhotonTargets.AllBuffered);
+
                     m_heat = infiniteWeapon.GetComponent<Weapon>().ReturnHeat();
                     Debug.Log(infiniteWeapon.name + " is heat: " + m_heat);
                     HeatingWeapon();
@@ -334,6 +344,26 @@ public class PlayerNetwork : Photon.MonoBehaviour {
     public void GetPowerUp(int powerType)
     {
         Debug.Log("I get Power: " + powerType);
+        if(powerType == 0)
+        {
+            m_power = 0;
+            PlayerHealthEmpoweredCounter = PlayerHealthEmpoweredCounter + 1;
+        }
+        else if (powerType == 1)
+        {
+            m_power = 1;
+            PlayerSpeedEmpoweredCounter = PlayerSpeedEmpoweredCounter + 1;
+        }
+        else if (powerType == 2)
+        {
+            m_power = 2;
+            WeaponDamageEmpoweredCounter = WeaponDamageEmpoweredCounter + 1;
+        }
+        else if (powerType ==3)
+        {
+            m_power = 3;
+            WeaponSpeedEmpoweredCounter = WeaponSpeedEmpoweredCounter + 1;
+        }
         //Some one need to handle the number of the power type to add attribue accordingly
     }
 
@@ -376,5 +406,48 @@ public class PlayerNetwork : Photon.MonoBehaviour {
         Debug.Log("WTF?");
         m_postOverheatShootingPermit = Time.time + m_overheatPenaltyTime;
         requirePenalty = false;
+    }
+
+    private void WeaponPowerSort(GameObject weapon)
+    {
+       
+        if (m_power == 1)//weapon speed
+        {
+            for (int i = 0; i < WeaponSpeedEmpoweredCounter; i++)
+            {
+                weapon.GetComponent<Weapon>().SetSpeed();
+            }
+        
+        }
+
+        if (m_power == 2)//weapon damage
+        {
+            for (int i = 0; i < WeaponDamageEmpoweredCounter; i++)
+            {
+                weapon.GetComponent<Weapon>().SetDamage();
+            }
+        }
+    }
+
+    private void PlayerPowerSort()
+    {
+        if (m_power == 0)//health
+        {
+            float local_health = m_health;
+            if (local_health + 10 >= 100)
+            {
+                m_health = 100f;
+            }
+            else
+            {
+                m_health = m_health + 10f;
+            }
+            m_power = 4;
+        }
+        
+        if(m_power == 3)
+        {
+            //dont know how to access
+        }
     }
 }
