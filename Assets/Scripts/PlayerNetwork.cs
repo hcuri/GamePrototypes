@@ -270,8 +270,8 @@ public class PlayerNetwork : Photon.MonoBehaviour {
     public void InstantiateWeapon(String weaponName, Vector3 position, Vector3 velocity)
     {
         //GameObject infiniteWeapon = PhotonNetwork.Instantiate(weaponName, position, Quaternion.identity, 0);
-        GameObject infiniteWeapon = GameObject.Instantiate((GameObject)Resources.Load(weaponName), position, Quaternion.identity);
-
+        //GameObject infiniteWeapon = GameObject.Instantiate((GameObject)Resources.Load(weaponName), position, Quaternion.identity);
+        GameObject infiniteWeapon = GameObject.Instantiate((GameObject)Resources.Load("Weapon3_Spiky"), position, Quaternion.identity);
         infiniteWeapon.transform.Rotate(playerCamera.transform.right * 90);
         infiniteWeapon.GetComponent<Rigidbody>().isKinematic = false;
 
