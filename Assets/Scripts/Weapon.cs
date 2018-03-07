@@ -101,6 +101,7 @@ public class Weapon : MonoBehaviour {
 
     public void SetDamage()
     {
+        //Debug.Log("Power Up the Weapon now!!!");
         m_damage = m_damage + 5;
     }
 

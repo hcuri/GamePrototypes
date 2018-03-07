@@ -103,7 +103,9 @@ public class PlayerNetwork : Photon.MonoBehaviour {
         {
             mw.SetActive(false);
         }
-        weaponPointer = -1;
+        weaponPointer = 2;
+        m_weapons[weaponPointer].SetActive(true);
+        weaponOn[weaponPointer] = true;
 
         //start looking green
         SetColor();
