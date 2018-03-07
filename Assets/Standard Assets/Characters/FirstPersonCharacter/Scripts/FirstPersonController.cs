@@ -64,8 +64,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private float JumpCooldown = 10.0f;
         private float JumpPermitTime;
 
-        public float m_RegularJumpSpeed = 10.0f;
-        public float m_SuperJumpSpeed = 20.0f;
+        public float m_RegularJumpSpeed = 100.0f;
+        public float m_SuperJumpSpeed = 100.0f;
         public float m_SuperJumpGravity = 1.0f;
         public float m_RegularJumpGravity = 2.0f;
 
@@ -101,19 +101,19 @@ namespace UnityStandardAssets.Characters.FirstPerson
             if (!m_Jump)
             {
                 //1/26/2018 Special jump
-                if (Input.GetMouseButtonDown(1) && Time.time > JumpPermitTime)
-                {
-                    m_JumpSpeed = m_SuperJumpSpeed;
-                    m_GravityMultiplier = m_SuperJumpGravity;
-                    m_Jump = true;
-                    JumpPermitTime = Time.time + JumpCooldown;
-                }
+//                if (Input.GetMouseButtonDown(1) && Time.time > JumpPermitTime)
+//                {
+//                    m_JumpSpeed = m_SuperJumpSpeed;
+//                    m_GravityMultiplier = m_SuperJumpGravity;
+//                    m_Jump = true;
+//                    JumpPermitTime = Time.time + JumpCooldown;
+//                }
                 //
                 //m_Jump = CrossPlatformInputManager.GetButtonDown("Jump");
 
-                if (CrossPlatformInputManager.GetButtonDown("Jump"))
+				if (CrossPlatformInputManager.GetButtonDown("Jump")&&m_CharacterController.isGrounded)
                 {
-                    m_JumpSpeed = m_RegularJumpSpeed;
+                    
                     m_GravityMultiplier = m_RegularJumpGravity;
                     m_Jump = true;
                 }

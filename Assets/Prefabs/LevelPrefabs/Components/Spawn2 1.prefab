@@ -871,7 +871,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1836733141933248}
   m_LocalRotation: {x: 0, y: 0.2588191, z: 0, w: 0.9659258}
-  m_LocalPosition: {x: 0, y: -15, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_Children:
   - {fileID: 4085789186001734}
@@ -1581,13 +1581,17 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: '1. Find a weapon and click to shoot
+  m_Text: '1. Click to shoot weapon
 
-    2. Right click for special jump
+    2. Collect blue upgrades for weapon speed
 
-    3. Stay inside the shrinking zone
+    3. Collect yellow upgrades for weapon damage and size
 
-    4. Be the last man alive!'
+    4. Collect hearts to recover health
+
+    5. Stay inside the shrinking zone
+
+    6. Be the last man alive!'
 --- !u!114 &114126302027471752
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3564,7 +3568,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -0.28, y: 0}
+  m_AnchoredPosition: {x: -0.27999997, y: -2.1553612}
   m_SizeDelta: {x: 10, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224276868603566302
@@ -3770,7 +3774,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 2.37, y: 0}
+  m_AnchoredPosition: {x: 2.37, y: -2.1553612}
   m_SizeDelta: {x: 10, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224623099529034680

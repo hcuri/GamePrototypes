@@ -127,13 +127,13 @@ public class PlayerNetwork : Photon.MonoBehaviour {
 
             Movement();
             PlayerPowerSort();
-            m_healthText.text = "HP:" + m_health.ToString();
+            m_healthText.text = "HP:" + m_health.ToString("F0");
 			m_healthSlider.value = m_health;
 			m_heatSlider.value = m_thermalClip;
 			if (overHeated) {
 				m_heatText.text = "OVERHEATED!";
 			} else {
-				m_heatText.text = "Heat: " + (int)m_thermalClip + "/" + (int)m_thermalClipCapacity;
+				m_heatText.text = "Weapon Heat: " + (int)m_thermalClip + "/" + (int)m_thermalClipCapacity;
 			}
 			if (!insideZone) {
 				TakeDamage (Time.deltaTime * m_HPReducedPerSecond);
