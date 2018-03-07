@@ -53,6 +53,10 @@ public class PlayerNetwork : Photon.MonoBehaviour {
 	private Color m_color = new Color(0f, 1f, 0f);
 	private Slider m_heatSlider;
 	private Text m_heatText;
+	private Slider m_atkSlider;
+	private Text m_atkText;
+	private Slider m_spdSlider;
+	private Text m_spdText;
     private PhotonView m_pv;
     private MonoBehaviour m_myPlayerControlScript;
     private GameObject weapon;
@@ -76,6 +80,10 @@ public class PlayerNetwork : Photon.MonoBehaviour {
 		damageImage = GameObject.Find ("DamageImage").GetComponent<Image> ();
 		m_heatSlider = GameObject.Find ("HeatSlider").GetComponent<Slider> ();
 		m_heatText = GameObject.Find ("Heat").GetComponent<Text> ();
+		m_atkSlider = GameObject.Find ("ATKSlider").GetComponent<Slider> ();
+		m_spdSlider = GameObject.Find ("SPDSlider").GetComponent<Slider> ();
+		m_atkText = GameObject.Find ("ATK").GetComponent<Text> ();
+		m_spdText = GameObject.Find ("SPD").GetComponent<Text> ();
         m_debugMode = GameObject.Find("NetworkManager").GetComponent<PhotonNetworkManager>().returnDebugMode();
         Initialize();
 
@@ -134,6 +142,18 @@ public class PlayerNetwork : Photon.MonoBehaviour {
 				m_heatText.text = "OVERHEATED!";
 			} else {
 				m_heatText.text = "Weapon Heat: " + (int)m_thermalClip + "/" + (int)m_thermalClipCapacity;
+			}
+			m_atkSlider.value = WeaponDamageEmpoweredCounter;
+			m_spdSlider.value = WeaponSpeedEmpoweredCounter;
+			if (WeaponDamageEmpoweredCounter == 5) {
+				m_atkText.text = "MAXIMUM POWER!!!";
+			} else {
+				m_atkText.text = "Attack Damage: " + WeaponDamageEmpoweredCounter + "/5";
+			}
+			if (WeaponSpeedEmpoweredCounter == 5) {
+				m_spdText.text = "MAXIMUM SPEED!!!";
+			} else {
+				m_spdText.text = "Projectile Speed: " + WeaponSpeedEmpoweredCounter + "/5";
 			}
 			if (!insideZone) {
 				TakeDamage (Time.deltaTime * m_HPReducedPerSecond);
@@ -373,23 +393,23 @@ public class PlayerNetwork : Photon.MonoBehaviour {
             if (WeaponDamageEmpoweredCounter < 5)
             {
                 //m_power = 2;
-                WeaponDamageEmpoweredCounter = WeaponDamageEmpoweredCounter + 1;
+				WeaponDamageEmpoweredCounter = WeaponDamageEmpoweredCounter + 1;
             }
             else
             {
-                WeaponDamageEmpoweredCounter = 5;
-            }
+				WeaponDamageEmpoweredCounter = 5;
+			}
         }
         else if (powerType ==2)
         {if (WeaponSpeedEmpoweredCounter < 5)
             {
                 //m_power = 3;
-                WeaponSpeedEmpoweredCounter = WeaponSpeedEmpoweredCounter + 1;
+				WeaponSpeedEmpoweredCounter = WeaponSpeedEmpoweredCounter + 1;
             }
             else
             {
-                WeaponSpeedEmpoweredCounter = 5;
-            }
+				WeaponSpeedEmpoweredCounter = 5;
+			}
         }
         //Some one need to handle the number of the power type to add attribue accordingly
     }
