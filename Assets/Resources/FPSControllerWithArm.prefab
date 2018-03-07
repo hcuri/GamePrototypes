@@ -822,7 +822,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -850,6 +850,8 @@ MonoBehaviour:
   m_Size: 1.25
   m_Speed: 0.75
   m_type: -1
+  m_heat: 30
+  m_heatCooldownRate: 20
   m_id: 1
 --- !u!114 &114080044435467524
 MonoBehaviour:
@@ -1351,6 +1353,8 @@ MonoBehaviour:
   m_Size: 1.5
   m_Speed: 0.5
   m_type: -1
+  m_heat: 30
+  m_heatCooldownRate: 20
   m_id: 1
 --- !u!114 &114611539892078850
 MonoBehaviour:
@@ -1513,6 +1517,8 @@ MonoBehaviour:
   m_Size: 1
   m_Speed: 1
   m_type: -1
+  m_heat: 30
+  m_heatCooldownRate: 20
   m_id: 1
 --- !u!114 &114771317588380732
 MonoBehaviour:
@@ -1529,6 +1535,8 @@ MonoBehaviour:
   m_Size: 0.5
   m_Speed: 1.5
   m_type: -1
+  m_heat: 30
+  m_heatCooldownRate: 20
   m_id: 1
 --- !u!114 &114787905135586376
 MonoBehaviour:
@@ -1547,6 +1555,12 @@ MonoBehaviour:
   m_health: 100
   m_throwforce: 1500
   m_jumpforce: 1500
+  m_thermalClipCapacity: 200
+  m_thermalClip: 0
+  m_overheatPenaltyTime: 5
+  WeaponDamageEmpoweredCounter: 0
+  WeaponSpeedEmpoweredCounter: 0
+  m_HPReducedPerSecond: 15
   m_weapons:
   - {fileID: 1569636729539568}
   - {fileID: 1764019683947332}
@@ -1571,6 +1585,8 @@ MonoBehaviour:
   m_Size: 0.75
   m_Speed: 1.25
   m_type: -1
+  m_heat: 30
+  m_heatCooldownRate: 20
   m_id: 1
 --- !u!114 &114843303034495584
 MonoBehaviour:
