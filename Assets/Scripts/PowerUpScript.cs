@@ -27,7 +27,11 @@ public class PowerUpScript : Photon.MonoBehaviour {
         randNum = (int)Random.Range(0, 3);
         Debug.Log("random is :" + randNum);
         childObject = transform.GetChild(0).gameObject;
-
+		colorField = new Color[4];
+		colorField [0] = new Color (255/255f,0/255f,164/255f,100/255f);
+		colorField [1] = new Color (255/255f, 227/255f, 0/255f, 100/255f);
+		colorField [2] = new Color (0/255f, 123/255f, 255/255f, 100/255f);
+		colorField [3] = new Color (230/255f, 0/255f, 255/255f, 100/255f);
     }
 
     [PunRPC]

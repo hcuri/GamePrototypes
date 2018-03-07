@@ -894,7 +894,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -1343,6 +1343,8 @@ MonoBehaviour:
   m_thermalClipCapacity: 200
   m_thermalClip: 0
   m_overheatPenaltyTime: 5
+  WeaponDamageEmpoweredCounter: 0
+  WeaponSpeedEmpoweredCounter: 0
   m_HPReducedPerSecond: 15
   m_weapons:
   - {fileID: 1885439921069074}
