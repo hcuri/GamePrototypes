@@ -44858,7 +44858,7 @@ MonoBehaviour:
   shrinkingZone: {fileID: 1718153061817834, guid: 13369119b8aa1a24a8e9146cb83403ac,
     type: 2}
   lobbyCamera: {fileID: 2001878483}
-  countDownToStart: 0
+  countDownToStart: 3
   debugMode: 0
 --- !u!4 &715131531
 Transform:
@@ -121998,6 +121998,30 @@ Prefab:
         type: 2}
       propertyPath: instantiationId
       value: 94
+      objectReference: {fileID: 0}
+    - target: {fileID: 1308215364270066, guid: c91da7fef8dca554384fe2177a9c50d1, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1091682679616800, guid: c91da7fef8dca554384fe2177a9c50d1, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1384293167868244, guid: c91da7fef8dca554384fe2177a9c50d1, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1993933841184542, guid: c91da7fef8dca554384fe2177a9c50d1, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1344215298916868, guid: c91da7fef8dca554384fe2177a9c50d1, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1399041319282564, guid: c91da7fef8dca554384fe2177a9c50d1, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c91da7fef8dca554384fe2177a9c50d1, type: 2}

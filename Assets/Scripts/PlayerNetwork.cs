@@ -328,7 +328,11 @@ public class PlayerNetwork : Photon.MonoBehaviour {
     }
 
 	public void SetColor(){
-		if (m_health > 50) {
+		if (m_health <= 0) {
+			m_color.r = 0;
+			m_color.g = 0;
+		}
+		else if (m_health > 50) {
 			m_color.r = ((100 - m_health) / 50f);
 			m_color.g = 1f;
 		} else {
