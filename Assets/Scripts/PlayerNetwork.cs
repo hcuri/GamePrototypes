@@ -234,7 +234,11 @@ public class PlayerNetwork : Photon.MonoBehaviour {
                     Vector3 camfor = playerCamera.transform.forward;
                     //Vector3 pos = camfor * 2.1f;
                     //Modify By Po, 3/7
-                    Vector3 pos =camfor *  2.1f +  camfor * WeaponDamageEmpoweredCounter / 5.0f;
+
+                    float toScale = 1.0f;
+                    for (int i = 0; i < WeaponDamageEmpoweredCounter; i++) toScale *= 1.5f;
+
+                    Vector3 pos = camfor *  2.1f +  camfor * toScale;
 
                     RaycastHit hit;
                     Physics.Raycast(playerCamera.transform.position, camfor, out hit);
@@ -242,7 +246,7 @@ public class PlayerNetwork : Photon.MonoBehaviour {
                     if(hit.collider != null)
                     {
                         // list of stuff that we can hit
-                        if(hit.distance < 2.1f && hit.collider.tag == "Untagged")
+                        if(hit.distance < toScale * 2.1f && hit.collider.tag == "Untagged")
                         {
                             Debug.Log("You're too close to something to be able to throw");
                             return;
@@ -251,7 +255,7 @@ public class PlayerNetwork : Photon.MonoBehaviour {
 
                     Vector3 position = playerCamera.transform.position + pos;
                     Vector3 velocity = playerCamera.transform.forward * m_throwforce;
-                    m_pv.RPC("InstantiateWeapon", PhotonTargets.AllBuffered, weapName, position, velocity);
+                    m_pv.RPC("InstantiateWeapon", PhotonTargets.AllBuffered, weapName, position, velocity, toScale);
                 }
             }
 
@@ -271,7 +275,7 @@ public class PlayerNetwork : Photon.MonoBehaviour {
     }
 
     [PunRPC]
-    public void InstantiateWeapon(String weaponName, Vector3 position, Vector3 velocity)
+    public void InstantiateWeapon(String weaponName, Vector3 position, Vector3 velocity, float toScale)
     {
         //GameObject infiniteWeapon = PhotonNetwork.Instantiate(weaponName, position, Quaternion.identity, 0);
         //GameObject infiniteWeapon = GameObject.Instantiate((GameObject)Resources.Load(weaponName), position, Quaternion.identity);
@@ -283,8 +287,13 @@ public class PlayerNetwork : Photon.MonoBehaviour {
         float weSpeed = infiniteWeapon.GetComponent<Weapon>().ReturnSpeed();
         Debug.Log(weSpeed);
         infiniteWeapon.GetComponent<Rigidbody>().AddForce(velocity * weSpeed);
-        infiniteWeapon.GetComponent<Transform>().localScale *= infiniteWeapon.GetComponent<Weapon>().ReturnScale();
-        infiniteWeapon.GetComponent<PhotonView>().RPC("SetScale", PhotonTargets.AllBuffered);
+
+        Debug.Log("Toscale: " + toScale);
+        infiniteWeapon.GetComponent<Transform>().localScale *= toScale;
+
+        //infiniteWeapon.GetComponent<Transform>().localScale *= infiniteWeapon.GetComponent<Weapon>().ReturnScale();
+        //infiniteWeapon.GetComponent<PhotonView>().RPC("SetScale", PhotonTargets.AllBuffered);
+
         infiniteWeapon.GetComponent<PhotonView>().RPC("AutoDestroy", PhotonTargets.AllBuffered);
         m_heat = infiniteWeapon.GetComponent<Weapon>().ReturnHeat();
         Debug.Log(infiniteWeapon.name + " is heat: " + m_heat);
