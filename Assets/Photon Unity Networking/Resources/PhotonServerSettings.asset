@@ -56,4 +56,5 @@ MonoBehaviour:
   - GetPowerUp
   - InstantiateWeapon
   - SetHandSize
+  - setMyID
   DisableAutoOpenWizard: 1

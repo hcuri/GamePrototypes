@@ -19,6 +19,7 @@ public class PhotonNetworkManager : Photon.PunBehaviour
 	private bool joinedRoom;
     public float countDownToStart = 5.0f;
     private bool countingDown = false;
+    public int m_ID = -1;
 
     // todo: remove
     public bool debugMode = false;
@@ -117,6 +118,7 @@ public class PhotonNetworkManager : Photon.PunBehaviour
                 int id = go.GetComponent<PhotonView>().ownerId;
 				go.transform.Translate(spawnPoint[id % spawnPoint.Length].position.x, spawnPoint[id % spawnPoint.Length].position.y, spawnPoint[id % spawnPoint.Length].position.z);
 				go.transform.Rotate (new Vector3 (0, 1, 0), (id % spawnPoint.Length) * 60 - 30);
+                go.GetComponent<PhotonView>().RPC("setMyID", PhotonTargets.AllBuffered,id);
 
 
 

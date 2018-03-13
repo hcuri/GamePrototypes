@@ -69,6 +69,8 @@ public class PlayerNetwork : Photon.MonoBehaviour {
     [SerializeField] bool[] weaponOn;
     [SerializeField] private GameObject m_Hand;
     [SerializeField] int weaponPointer;
+    public int player_ID = -1;
+    public bool isSet = false;
 
 
     private void Start ()
@@ -113,6 +115,10 @@ public class PlayerNetwork : Photon.MonoBehaviour {
 
     private void Update()
 	{
+        /*if(!isSet && player_ID != -1)
+        {
+            //called a RPC to set my ID on every client
+        }*/
         if(m_pv.isMine)
         {
             Weapon_Cool_Heat();
@@ -300,6 +306,12 @@ public class PlayerNetwork : Photon.MonoBehaviour {
 
         if(m_pv.isMine)
             HeatingWeapon();
+    }
+    
+    [PunRPC]
+    public void setMyID(int m_ID)
+    {
+        player_ID = m_ID;
     }
 
     [PunRPC]
