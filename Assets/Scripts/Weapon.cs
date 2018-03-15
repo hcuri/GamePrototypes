@@ -67,7 +67,7 @@ public class Weapon : MonoBehaviour {
     {
         if(other.gameObject.tag == "Player" && m_pv.isMine)
         {
-            other.gameObject.GetComponent<PhotonView>().RPC("TakeDamage", PhotonTargets.AllBuffered, m_damage);
+            other.gameObject.GetComponent<PhotonView>().RPC("TakeDamage", PhotonTargets.AllBuffered, m_damage, m_id);
             m_damage = 0;
         }
     }

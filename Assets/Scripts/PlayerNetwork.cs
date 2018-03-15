@@ -164,7 +164,7 @@ public class PlayerNetwork : Photon.MonoBehaviour {
 				m_spdText.text = "Projectile Speed: " + WeaponSpeedEmpoweredCounter + "/5";
 			}
 			if (!insideZone) {
-				TakeDamage (Time.deltaTime * m_HPReducedPerSecond);
+				TakeDamage (Time.deltaTime * m_HPReducedPerSecond, -1);
 				zoneText.text = "You're taking damage inside the zone!";
 			} else {
 				zoneText.text = "";
@@ -291,10 +291,10 @@ public class PlayerNetwork : Photon.MonoBehaviour {
 
         WeaponPowerSort(infiniteWeapon);
         float weSpeed = infiniteWeapon.GetComponent<Weapon>().ReturnSpeed();
-        Debug.Log(weSpeed);
+        //Debug.Log(weSpeed);
         infiniteWeapon.GetComponent<Rigidbody>().AddForce(velocity * weSpeed);
 
-        Debug.Log("Toscale: " + toScale);
+        //Debug.Log("Toscale: " + toScale);
         infiniteWeapon.GetComponent<Transform>().localScale *= toScale;
         infiniteWeapon.GetComponent<Weapon>().SetID(player_ID);
 
@@ -303,7 +303,7 @@ public class PlayerNetwork : Photon.MonoBehaviour {
 
         infiniteWeapon.GetComponent<PhotonView>().RPC("AutoDestroy", PhotonTargets.AllBuffered);
         m_heat = infiniteWeapon.GetComponent<Weapon>().ReturnHeat();
-        Debug.Log(infiniteWeapon.name + " is heat: " + m_heat);
+        //Debug.Log(infiniteWeapon.name + " is heat: " + m_heat);
 
         if(m_pv.isMine)
             HeatingWeapon();
@@ -315,9 +315,19 @@ public class PlayerNetwork : Photon.MonoBehaviour {
         player_ID = m_ID;
     }
 
+    /*----------------------------------------------------
+    Notes for TakeDamage:
+    Notice that we input shooterID to TakeDamage, so that
+    we can realize the player was killed by whom.
+    The ID of Player should start from 0~numOfPlayer-1
+    And we set -1 as the ID of shrinking zone
+    ----------------------------------------------------*/
+
+
     [PunRPC]
-    public void TakeDamage(float damage)
+    public void TakeDamage(float damage, int shooterID)
     {
+        Debug.Log("I was shot by player" + shooterID);
 		m_health -= damage;
         if (m_health > m_maxHP) m_health = m_maxHP;
         SetColor();
@@ -344,9 +354,9 @@ public class PlayerNetwork : Photon.MonoBehaviour {
     }
 
     [PunRPC]
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage, int shooterID)
     {
-        TakeDamage((float)damage);
+        TakeDamage((float)damage, shooterID);
     }
 
 	public void SetColor(){
