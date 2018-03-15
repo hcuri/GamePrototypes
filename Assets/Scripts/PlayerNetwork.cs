@@ -296,6 +296,7 @@ public class PlayerNetwork : Photon.MonoBehaviour {
 
         Debug.Log("Toscale: " + toScale);
         infiniteWeapon.GetComponent<Transform>().localScale *= toScale;
+        infiniteWeapon.GetComponent<Weapon>().SetID(player_ID);
 
         //infiniteWeapon.GetComponent<Transform>().localScale *= infiniteWeapon.GetComponent<Weapon>().ReturnScale();
         //infiniteWeapon.GetComponent<PhotonView>().RPC("SetScale", PhotonTargets.AllBuffered);
