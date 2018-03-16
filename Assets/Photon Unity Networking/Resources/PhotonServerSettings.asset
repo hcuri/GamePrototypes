@@ -58,4 +58,6 @@ MonoBehaviour:
   - SetHandSize
   - setMyID
   - SetID
+  - KillerWarn
+  - KillWarn
   DisableAutoOpenWizard: 1

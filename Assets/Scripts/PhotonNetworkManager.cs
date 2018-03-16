@@ -21,6 +21,8 @@ public class PhotonNetworkManager : Photon.PunBehaviour
     private bool countingDown = false;
     public int m_ID = -1;
 
+    [SerializeField] private Text killText;
+
     // todo: remove
     public bool debugMode = false;
 
@@ -33,6 +35,8 @@ public class PhotonNetworkManager : Photon.PunBehaviour
 		waitingText.text = "";
 		playersRemain = GameObject.Find ("PlayersRemain").GetComponent<Text> ();
 		playersRemain.text = "";
+        killText = GameObject.Find("KillMessage").GetComponent<Text>();
+        killText.text = "";
 		joinedRoom = false;
     }
 
@@ -167,5 +171,11 @@ public class PhotonNetworkManager : Photon.PunBehaviour
     public bool returnDebugMode()
     {
         return (debugMode);
+    }
+
+    public void killWarn(int killer, int victim)
+    {
+        //Debug.Log("Killer is: " + killer + " Victim is: " + victim);
+        killText.text = "Player" + killer + " has killed Player" + victim + "\n";
     }
 }

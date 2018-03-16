@@ -71,6 +71,7 @@ public class PlayerNetwork : Photon.MonoBehaviour {
     [SerializeField] int weaponPointer;
     public int player_ID = -1;
     public bool isSet = false;
+    [SerializeField] GameObject NetworkManager;
 
 
     private void Start ()
@@ -87,6 +88,7 @@ public class PlayerNetwork : Photon.MonoBehaviour {
 		m_atkText = GameObject.Find ("ATK").GetComponent<Text> ();
 		m_spdText = GameObject.Find ("SPD").GetComponent<Text> ();
         m_debugMode = GameObject.Find("NetworkManager").GetComponent<PhotonNetworkManager>().returnDebugMode();
+        NetworkManager = GameObject.Find("NetworkManager");
         Initialize();
 
         //added by Po
@@ -337,20 +339,49 @@ public class PlayerNetwork : Photon.MonoBehaviour {
 		}
 
         // hides the dead body *cue murder sound effects
-        if (m_health <= 0 && !m_pv.isMine)
+        /*if (m_health <= 0 && !m_pv.isMine)
+        {
             transform.GetChild(1).GetComponent<Renderer>().enabled = false;
+            //KillWarn(shooterID, player_ID);
+            //m_pv.RPC("KillWarn", PhotonTargets.AllBuffered, shooterID, player_ID);
+        }
 
         if (m_health <= 0 && m_pv.isMine)
         {
             //Die
             //m_myPlayerControlScript.enabled = false;
             Debug.Log("You are died");
+
+            //KillWarn(shooterID, player_ID);
+
 			PhotonNetwork.Disconnect();
 			Cursor.lockState = CursorLockMode.None;
 			Cursor.lockState = CursorLockMode.Confined;
 			Cursor.visible = true;
 			SceneManager.LoadScene("EndScene");
+        }*/
+
+        if(m_health <= 0)
+        {
+            NetworkManager.GetComponent<PhotonNetworkManager>().killWarn(shooterID, player_ID);
+            if (m_pv.isMine)
+            {
+                //Die
+                //m_myPlayerControlScript.enabled = false;
+                //Debug.Log("You are died");
+                PhotonNetwork.Disconnect();
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.lockState = CursorLockMode.Confined;
+                Cursor.visible = true;
+                SceneManager.LoadScene("EndScene");
+            }
+            else
+            {
+                transform.GetChild(1).GetComponent<Renderer>().enabled = false;
+            }
         }
+
+
     }
 
     [PunRPC]
@@ -533,4 +564,11 @@ public class PlayerNetwork : Photon.MonoBehaviour {
             //dont know how to access
         //}
     }
+
+
+    /*[PunRPC]
+    public void KillWarn(int Killer, int Victim)
+    {
+        Debug.Log("Killer is: " + Killer + " Victim is: " + Victim);
+    }*/
 }
