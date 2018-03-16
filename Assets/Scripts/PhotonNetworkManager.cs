@@ -176,6 +176,9 @@ public class PhotonNetworkManager : Photon.PunBehaviour
     public void killWarn(int killer, int victim)
     {
         //Debug.Log("Killer is: " + killer + " Victim is: " + victim);
-        killText.text = "Player" + killer + " has killed Player" + victim + "\n";
+        if (killer != -1)
+            killText.text = "Player" + killer + " has killed Player" + victim + "\n";
+        else
+            killText.text = "Player" + victim + " has died in the shrinking zone\n";
     }
 }
