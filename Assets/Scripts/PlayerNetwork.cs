@@ -72,6 +72,7 @@ public class PlayerNetwork : Photon.MonoBehaviour {
     public int player_ID = -1;
     public bool isSet = false;
     [SerializeField] GameObject NetworkManager;
+    public int killCount;
 
 
     private void Start ()
@@ -110,6 +111,9 @@ public class PlayerNetwork : Photon.MonoBehaviour {
         weaponPointer = 2;
         m_weapons[weaponPointer].SetActive(true);
         weaponOn[weaponPointer] = true;
+
+        //Reset the kill count at the start
+        killCount = 0;
 
         //start looking green
         SetColor();
@@ -339,7 +343,7 @@ public class PlayerNetwork : Photon.MonoBehaviour {
 		}
 
         // hides the dead body *cue murder sound effects
-        /*if (m_health <= 0 && !m_pv.isMine)
+        if (m_health <= 0 && !m_pv.isMine)
         {
             transform.GetChild(1).GetComponent<Renderer>().enabled = false;
             //KillWarn(shooterID, player_ID);
@@ -359,9 +363,12 @@ public class PlayerNetwork : Photon.MonoBehaviour {
 			Cursor.lockState = CursorLockMode.Confined;
 			Cursor.visible = true;
 			SceneManager.LoadScene("EndScene");
-        }*/
+        }
 
         if(m_health <= 0)
+            NetworkManager.GetComponent<PhotonNetworkManager>().killWarn(shooterID, player_ID);
+
+        /*if(m_health <= 0)
         {
             NetworkManager.GetComponent<PhotonNetworkManager>().killWarn(shooterID, player_ID);
             if (m_pv.isMine)
@@ -379,7 +386,7 @@ public class PlayerNetwork : Photon.MonoBehaviour {
             {
                 transform.GetChild(1).GetComponent<Renderer>().enabled = false;
             }
-        }
+        }*/
 
 
     }
@@ -563,6 +570,12 @@ public class PlayerNetwork : Photon.MonoBehaviour {
         //{
             //dont know how to access
         //}
+    }
+
+    public int killIncrement()
+    {
+        return ++killCount;
+        
     }
 
 

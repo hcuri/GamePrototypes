@@ -22,6 +22,8 @@ public class PhotonNetworkManager : Photon.PunBehaviour
     public int m_ID = -1;
 
     [SerializeField] private Text killText;
+    [SerializeField] private Text killCountText;
+    [SerializeField] private GameObject[] PlayersInGame;
 
     // todo: remove
     public bool debugMode = false;
@@ -37,7 +39,11 @@ public class PhotonNetworkManager : Photon.PunBehaviour
 		playersRemain.text = "";
         killText = GameObject.Find("KillMessage").GetComponent<Text>();
         killText.text = "";
-		joinedRoom = false;
+        killCountText = GameObject.Find("KillCountMessage").GetComponent<Text>();
+        killCountText.text = "Killed 0 Capsules";
+        joinedRoom = false;
+        //Initial the array which to keep track of players
+        PlayersInGame = new GameObject[numPeopleToStart];
     }
 
     public override void OnJoinedLobby()
@@ -123,6 +129,9 @@ public class PhotonNetworkManager : Photon.PunBehaviour
 				go.transform.Translate(spawnPoint[id % spawnPoint.Length].position.x, spawnPoint[id % spawnPoint.Length].position.y, spawnPoint[id % spawnPoint.Length].position.z);
 				go.transform.Rotate (new Vector3 (0, 1, 0), (id % spawnPoint.Length) * 60 - 30);
                 go.GetComponent<PhotonView>().RPC("setMyID", PhotonTargets.AllBuffered,id);
+                if (go.GetComponent<PhotonView>().isMine)
+                    m_ID = id;
+                PlayersInGame[id-1] = go;
 
 
 
@@ -180,5 +189,18 @@ public class PhotonNetworkManager : Photon.PunBehaviour
             killText.text = "Player" + killer + " has killed Player" + victim + "\n";
         else
             killText.text = "Player" + victim + " has died in the shrinking zone\n";
+
+        GameObject myPlayer = PlayersInGame[killer - 1];
+
+        int killCount = myPlayer.GetComponent<PlayerNetwork>().killIncrement();
+
+        if (myPlayer.GetComponent<PhotonView>().isMine)
+        {
+            killCountText.text = "Killed " + killCount + " Capsules";
+        }
+
+
+
+        
     }
 }
