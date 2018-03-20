@@ -158,10 +158,10 @@ public class PlayerNetwork : Photon.MonoBehaviour {
 			m_heatIcon.fillAmount = m_thermalClip / m_thermalClipCapacity;
 			if (overHeated) {
 				m_heatText.text = "OVERHEATED!";
-				m_heatIcon.color = new Color (1, 0, 0, 1);
+				m_heatIcon.color = new Color (1, 0, 0, 0.5f);
 			} else {
 				m_heatText.text = "";
-				m_heatIcon.color = new Color (1, 0.5f, 0, 1);
+				m_heatIcon.color = new Color (1, 0.5f, 0, 0.5f);
 			}
 			m_atkSlider.value = WeaponDamageEmpoweredCounter;
 			m_spdSlider.value = WeaponSpeedEmpoweredCounter;
