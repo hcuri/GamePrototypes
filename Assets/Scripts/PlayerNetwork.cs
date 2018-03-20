@@ -581,7 +581,7 @@ public class PlayerNetwork : Photon.MonoBehaviour {
         //if (m_power == 0)//health
         //{
         if (HPPickedUp == true) { 
-            m_pv.RPC("TakeDamage", PhotonTargets.AllBuffered, -10);
+            m_pv.RPC("TakeDamage", PhotonTargets.AllBuffered, -10, 10);
             HPPickedUp = false;
             //m_power = 4;
         }
