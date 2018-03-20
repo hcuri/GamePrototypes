@@ -365,19 +365,15 @@ public class PlayerNetwork : Photon.MonoBehaviour {
 
         if (m_health <= 0)
         {
-            Debug.Log("Someone is dying");
-            NetworkManager.GetComponent<PhotonNetworkManager>().killWarn(shooterID, player_ID);
             if (!m_pv.isMine)
             {
-                Debug.Log("Someone is dying");
                 transform.GetChild(1).GetComponent<Renderer>().enabled = false;
                 transform.GetChild(0).GetComponent<Renderer>().enabled = false;
             }
-            else
+            else if(m_pv.isMine)
             {
                 //Die
                 //m_myPlayerControlScript.enabled = false;
-                Debug.Log("You are died");
 
                 //KillWarn(shooterID, player_ID);
 
@@ -387,6 +383,7 @@ public class PlayerNetwork : Photon.MonoBehaviour {
                 Cursor.visible = true;
                 SceneManager.LoadScene("EndScene");
             }
+            NetworkManager.GetComponent<PhotonNetworkManager>().killWarn(shooterID, player_ID);
         }
 
         // hides the dead body *cue murder sound effects
