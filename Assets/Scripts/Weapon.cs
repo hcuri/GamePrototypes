@@ -14,7 +14,8 @@ public class Weapon : MonoBehaviour {
     [SerializeField] private float m_heatCooldownRate = 20.0f;
     //2/25/2018 Switch heat setting to weapon
 
-    public int m_id = 1;
+    //Use this ID to see who shoot this weapon, -1 means unset
+    public int m_id = -1;
 
     private PhotonView m_pv;
 
@@ -47,17 +48,26 @@ public class Weapon : MonoBehaviour {
         this.gameObject.transform.localScale = this.gameObject.transform.localScale * m_Size;
     }
 
+    //[PunRPC]
+    public void SetID(int shooterID)
+    {
+        m_id = shooterID;
+    }
+
     [PunRPC]
     public void AutoDestroy()
     {
-        Destroy(gameObject, 2.0f);
+        //this setting set the life time of a weapon
+        //Destroy(gameObject, 2.0f);
+        //I set it to 10, just for testing
+        Destroy(gameObject, 10.0f);
     }
 
     private void OnCollisionEnter(Collision other)
     {
         if(other.gameObject.tag == "Player" && m_pv.isMine)
         {
-            other.gameObject.GetComponent<PhotonView>().RPC("TakeDamage", PhotonTargets.AllBuffered, m_damage);
+            other.gameObject.GetComponent<PhotonView>().RPC("TakeDamage", PhotonTargets.AllBuffered, m_damage, m_id);
             m_damage = 0;
         }
     }
