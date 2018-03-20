@@ -363,6 +363,9 @@ public class PlayerNetwork : Photon.MonoBehaviour {
 			damageImage.color = damageColor;
 		}
 
+        if (m_health <= 0)
+            NetworkManager.GetComponent<PhotonNetworkManager>().killWarn(shooterID, player_ID);
+
         // hides the dead body *cue murder sound effects
         if (m_health <= 0 && !m_pv.isMine)
         {
@@ -386,8 +389,7 @@ public class PlayerNetwork : Photon.MonoBehaviour {
 			SceneManager.LoadScene("EndScene");
         }
 
-        if(m_health <= 0)
-            NetworkManager.GetComponent<PhotonNetworkManager>().killWarn(shooterID, player_ID);
+        
 
         /*if(m_health <= 0)
         {
