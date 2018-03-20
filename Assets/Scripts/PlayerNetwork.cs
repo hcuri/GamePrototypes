@@ -367,9 +367,9 @@ public class PlayerNetwork : Photon.MonoBehaviour {
         {
             if (!m_pv.isMine)
             {
+                Debug.Log("In !isMine, my Id is: " + player_ID + "my photon id is: " + m_pv.ownerId);
                 transform.GetChild(1).GetComponent<Renderer>().enabled = false;
                 transform.GetChild(0).GetComponent<Renderer>().enabled = false;
-                Debug.Log("In !isMine, my Id is: " + player_ID + "my photon id is: " + m_pv.ownerId);
             }
             else if(m_pv.isMine)
             {
