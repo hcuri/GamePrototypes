@@ -365,6 +365,7 @@ public class PlayerNetwork : Photon.MonoBehaviour {
 
         if (m_health <= 0)
         {
+            //Debug.Log("my Id is: " + player_ID + "my photon id is: " + m_pv.ownerId);
             if (!m_pv.isMine)
             {
                 transform.GetChild(1).GetComponent<Renderer>().enabled = false;
@@ -374,9 +375,7 @@ public class PlayerNetwork : Photon.MonoBehaviour {
             {
                 //Die
                 //m_myPlayerControlScript.enabled = false;
-
                 //KillWarn(shooterID, player_ID);
-
                 PhotonNetwork.Disconnect();
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.lockState = CursorLockMode.Confined;
