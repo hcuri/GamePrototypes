@@ -364,13 +364,37 @@ public class PlayerNetwork : Photon.MonoBehaviour {
 		}
 
         if (m_health <= 0)
-            NetworkManager.GetComponent<PhotonNetworkManager>().killWarn(shooterID, player_ID);
-        Debug.Log("Someone is dying");
-        // hides the dead body *cue murder sound effects
-        if (m_health <= 0 && !m_pv.isMine)
         {
-            Debug.Log("I am dying");
+            Debug.Log("Someone is dying");
+            NetworkManager.GetComponent<PhotonNetworkManager>().killWarn(shooterID, player_ID);
+            if (!m_pv.isMine)
+            {
+                Debug.Log("Someone is dying");
+                transform.GetChild(1).GetComponent<Renderer>().enabled = false;
+                transform.GetChild(0).GetComponent<Renderer>().enabled = false;
+            }
+            else
+            {
+                //Die
+                //m_myPlayerControlScript.enabled = false;
+                Debug.Log("You are died");
+
+                //KillWarn(shooterID, player_ID);
+
+                PhotonNetwork.Disconnect();
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.lockState = CursorLockMode.Confined;
+                Cursor.visible = true;
+                SceneManager.LoadScene("EndScene");
+            }
+        }
+
+        // hides the dead body *cue murder sound effects
+       /* if (m_health <= 0 && !m_pv.isMine)
+        {
+            Debug.Log("Someone is dying");
             transform.GetChild(1).GetComponent<Renderer>().enabled = false;
+            transform.GetChild(0).GetComponent<Renderer>().enabled = false;
             //KillWarn(shooterID, player_ID);
             //m_pv.RPC("KillWarn", PhotonTargets.AllBuffered, shooterID, player_ID);
         }
@@ -388,31 +412,9 @@ public class PlayerNetwork : Photon.MonoBehaviour {
 			Cursor.lockState = CursorLockMode.Confined;
 			Cursor.visible = true;
 			SceneManager.LoadScene("EndScene");
-        }
-
-        
-
-        /*if(m_health <= 0)
-        {
-            NetworkManager.GetComponent<PhotonNetworkManager>().killWarn(shooterID, player_ID);
-            if (m_pv.isMine)
-            {
-                //Die
-                //m_myPlayerControlScript.enabled = false;
-                //Debug.Log("You are died");
-                PhotonNetwork.Disconnect();
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.lockState = CursorLockMode.Confined;
-                Cursor.visible = true;
-                SceneManager.LoadScene("EndScene");
-            }
-            else
-            {
-                transform.GetChild(1).GetComponent<Renderer>().enabled = false;
-            }
         }*/
 
-
+  
     }
 
     [PunRPC]
