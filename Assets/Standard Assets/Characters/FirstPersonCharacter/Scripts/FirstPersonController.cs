@@ -68,10 +68,11 @@ namespace UnityStandardAssets.Characters.FirstPerson
         public float m_SuperJumpSpeed = 100.0f;
         public float m_SuperJumpGravity = 1.0f;
         public float m_RegularJumpGravity = 2.0f;
+        public float m_jumpBuffer = 10f;
 
-		private Text m_jumpCooldownText;
-		private Slider m_jumpCooldownSlider;
-		private Color m_jumpCooldownFill;
+        private Text m_jumpCooldownText;
+        private Slider m_jumpCooldownSlider;
+        private Color m_jumpCooldownFill;
 
         // Use this for initialization
         private void Start()
@@ -122,6 +123,14 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
             }
 
+            if (CrossPlatformInputManager.GetButtonUp("Jump") && m_Jumping)
+            {
+                m_Jumping = false;
+                
+                if(m_MoveDir.y > m_jumpBuffer)
+                    m_MoveDir.y = m_jumpBuffer;
+            }
+
             if (!m_PreviouslyGrounded && m_CharacterController.isGrounded)
             {
                 StartCoroutine(m_JumpBob.DoBobCycle());
@@ -135,7 +144,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }
 
 			m_PreviouslyGrounded = m_CharacterController.isGrounded;
-			m_jumpCooldownSlider.value = 10 - (JumpPermitTime - Time.time);
+			//m_jumpCooldownSlider.value = 10 - (JumpPermitTime - Time.time);
 			if (JumpPermitTime - Time.time > 0) {
 				m_jumpCooldownText.text = "Jump Cooldown: " + (int)(JumpPermitTime - Time.time);
 				//m_jumpCooldownFill.color = new Color32 (0, 123, 0, 255);

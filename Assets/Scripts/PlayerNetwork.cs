@@ -69,6 +69,10 @@ public class PlayerNetwork : Photon.MonoBehaviour {
     [SerializeField] bool[] weaponOn;
     [SerializeField] private GameObject m_Hand;
     [SerializeField] int weaponPointer;
+    public int player_ID = -1;
+    public bool isSet = false;
+    [SerializeField] GameObject NetworkManager;
+    public int killCount;
 
     //Bloody effect
     [SerializeField] GameObject[] m_bloodCube;
@@ -87,6 +91,7 @@ public class PlayerNetwork : Photon.MonoBehaviour {
 		m_atkText = GameObject.Find ("ATK").GetComponent<Text> ();
 		m_spdText = GameObject.Find ("SPD").GetComponent<Text> ();
         m_debugMode = GameObject.Find("NetworkManager").GetComponent<PhotonNetworkManager>().returnDebugMode();
+        NetworkManager = GameObject.Find("NetworkManager");
         Initialize();
 
         //added by Po
@@ -109,12 +114,19 @@ public class PlayerNetwork : Photon.MonoBehaviour {
         m_weapons[weaponPointer].SetActive(true);
         weaponOn[weaponPointer] = true;
 
+        //Reset the kill count at the start
+        killCount = 0;
+
         //start looking green
         SetColor();
 	}
 
     private void Update()
 	{
+        /*if(!isSet && player_ID != -1)
+        {
+            //called a RPC to set my ID on every client
+        }*/
         if(m_pv.isMine)
         {
             Weapon_Cool_Heat();
@@ -160,7 +172,7 @@ public class PlayerNetwork : Photon.MonoBehaviour {
 				m_spdText.text = "Projectile Speed: " + WeaponSpeedEmpoweredCounter + "/5";
 			}
 			if (!insideZone) {
-				TakeDamage (Time.deltaTime * m_HPReducedPerSecond);
+				TakeDamage (Time.deltaTime * m_HPReducedPerSecond, -1);
 				zoneText.text = "You're taking damage inside the zone!";
 			} else {
 				zoneText.text = "";
@@ -287,26 +299,43 @@ public class PlayerNetwork : Photon.MonoBehaviour {
 
         WeaponPowerSort(infiniteWeapon);
         float weSpeed = infiniteWeapon.GetComponent<Weapon>().ReturnSpeed();
-        Debug.Log(weSpeed);
+        //Debug.Log(weSpeed);
         infiniteWeapon.GetComponent<Rigidbody>().AddForce(velocity * weSpeed);
 
-        Debug.Log("Toscale: " + toScale);
+        //Debug.Log("Toscale: " + toScale);
         infiniteWeapon.GetComponent<Transform>().localScale *= toScale;
+        infiniteWeapon.GetComponent<Weapon>().SetID(player_ID);
 
         //infiniteWeapon.GetComponent<Transform>().localScale *= infiniteWeapon.GetComponent<Weapon>().ReturnScale();
         //infiniteWeapon.GetComponent<PhotonView>().RPC("SetScale", PhotonTargets.AllBuffered);
 
         infiniteWeapon.GetComponent<PhotonView>().RPC("AutoDestroy", PhotonTargets.AllBuffered);
         m_heat = infiniteWeapon.GetComponent<Weapon>().ReturnHeat();
-        Debug.Log(infiniteWeapon.name + " is heat: " + m_heat);
+        //Debug.Log(infiniteWeapon.name + " is heat: " + m_heat);
 
         if(m_pv.isMine)
             HeatingWeapon();
     }
+    
+    [PunRPC]
+    public void setMyID(int m_ID)
+    {
+        player_ID = m_ID;
+    }
+
+    /*----------------------------------------------------
+    Notes for TakeDamage:
+    Notice that we input shooterID to TakeDamage, so that
+    we can realize the player was killed by whom.
+    The ID of Player should start from 0~numOfPlayer-1
+    And we set -1 as the ID of shrinking zone
+    ----------------------------------------------------*/
+
 
     [PunRPC]
-    public void TakeDamage(float damage)
+    public void TakeDamage(float damage, int shooterID)
     {
+
         foreach(GameObject go in m_bloodCube)
         {
             for (int i = 0; i < 10; i++)
@@ -315,6 +344,9 @@ public class PlayerNetwork : Photon.MonoBehaviour {
                 g.GetComponent<Rigidbody>().AddForce(new Vector3(UnityEngine.Random.Range(-5f, 5f), UnityEngine.Random.Range(0, 5f), UnityEngine.Random.Range(-5f, 5f)));
             }
         }
+
+
+        Debug.Log("I was shot by player" + shooterID);
 
 		m_health -= damage;
         if (m_health > m_maxHP) m_health = m_maxHP;
@@ -326,25 +358,57 @@ public class PlayerNetwork : Photon.MonoBehaviour {
 
         // hides the dead body *cue murder sound effects
         if (m_health <= 0 && !m_pv.isMine)
+        {
             transform.GetChild(1).GetComponent<Renderer>().enabled = false;
+            //KillWarn(shooterID, player_ID);
+            //m_pv.RPC("KillWarn", PhotonTargets.AllBuffered, shooterID, player_ID);
+        }
 
         if (m_health <= 0 && m_pv.isMine)
         {
             //Die
             //m_myPlayerControlScript.enabled = false;
             Debug.Log("You are died");
+
+            //KillWarn(shooterID, player_ID);
+
 			PhotonNetwork.Disconnect();
 			Cursor.lockState = CursorLockMode.None;
 			Cursor.lockState = CursorLockMode.Confined;
 			Cursor.visible = true;
 			SceneManager.LoadScene("EndScene");
         }
+
+        if(m_health <= 0)
+            NetworkManager.GetComponent<PhotonNetworkManager>().killWarn(shooterID, player_ID);
+
+        /*if(m_health <= 0)
+        {
+            NetworkManager.GetComponent<PhotonNetworkManager>().killWarn(shooterID, player_ID);
+            if (m_pv.isMine)
+            {
+                //Die
+                //m_myPlayerControlScript.enabled = false;
+                //Debug.Log("You are died");
+                PhotonNetwork.Disconnect();
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.lockState = CursorLockMode.Confined;
+                Cursor.visible = true;
+                SceneManager.LoadScene("EndScene");
+            }
+            else
+            {
+                transform.GetChild(1).GetComponent<Renderer>().enabled = false;
+            }
+        }*/
+
+
     }
 
     [PunRPC]
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage, int shooterID)
     {
-        TakeDamage((float)damage);
+        TakeDamage((float)damage, shooterID);
     }
 
 	public void SetColor(){
@@ -521,4 +585,17 @@ public class PlayerNetwork : Photon.MonoBehaviour {
             //dont know how to access
         //}
     }
+
+    public int killIncrement()
+    {
+        return ++killCount;
+        
+    }
+
+
+    /*[PunRPC]
+    public void KillWarn(int Killer, int Victim)
+    {
+        Debug.Log("Killer is: " + Killer + " Victim is: " + Victim);
+    }*/
 }
