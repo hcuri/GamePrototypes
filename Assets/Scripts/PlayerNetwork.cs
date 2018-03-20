@@ -51,12 +51,13 @@ public class PlayerNetwork : Photon.MonoBehaviour {
 	private Image damageImage;
 	private Color damageColor = new Color(1f, 0f, 0f, 0.5f);
 	private Color m_color = new Color(0f, 1f, 0f);
-	private Slider m_heatSlider;
+	//private Slider m_heatSlider;
 	private Text m_heatText;
+	private Image m_heatIcon;
 	private Slider m_atkSlider;
-	private Text m_atkText;
+	//private Text m_atkText;
 	private Slider m_spdSlider;
-	private Text m_spdText;
+	//private Text m_spdText;
     private PhotonView m_pv;
     private MonoBehaviour m_myPlayerControlScript;
     private GameObject weapon;
@@ -82,12 +83,14 @@ public class PlayerNetwork : Photon.MonoBehaviour {
 		zoneText = GameObject.Find ("ZoneText").GetComponent<Text> ();
 		m_healthSlider = GameObject.Find ("HPSlider").GetComponent<Slider> ();
 		damageImage = GameObject.Find ("DamageImage").GetComponent<Image> ();
-		m_heatSlider = GameObject.Find ("HeatSlider").GetComponent<Slider> ();
+		//m_heatSlider = GameObject.Find ("HeatSlider").GetComponent<Slider> ();
 		m_heatText = GameObject.Find ("Heat").GetComponent<Text> ();
+		m_heatIcon = GameObject.Find ("Heat Icon").GetComponent<Image> ();
+
 		m_atkSlider = GameObject.Find ("ATKSlider").GetComponent<Slider> ();
 		m_spdSlider = GameObject.Find ("SPDSlider").GetComponent<Slider> ();
-		m_atkText = GameObject.Find ("ATK").GetComponent<Text> ();
-		m_spdText = GameObject.Find ("SPD").GetComponent<Text> ();
+		//m_atkText = GameObject.Find ("ATK").GetComponent<Text> ();
+		//m_spdText = GameObject.Find ("SPD").GetComponent<Text> ();
         m_debugMode = GameObject.Find("NetworkManager").GetComponent<PhotonNetworkManager>().returnDebugMode();
         NetworkManager = GameObject.Find("NetworkManager");
         Initialize();
@@ -151,15 +154,18 @@ public class PlayerNetwork : Photon.MonoBehaviour {
             PlayerPowerSort();
             m_healthText.text = "HP:" + m_health.ToString("F0");
 			m_healthSlider.value = m_health;
-			m_heatSlider.value = m_thermalClip;
+			//m_heatSlider.value = m_thermalClip;
+			m_heatIcon.fillAmount = m_thermalClip / m_thermalClipCapacity;
 			if (overHeated) {
 				m_heatText.text = "OVERHEATED!";
+				m_heatIcon.color = new Color (1, 0, 0, 1);
 			} else {
-				m_heatText.text = "Weapon Heat: " + (int)m_thermalClip + "/" + (int)m_thermalClipCapacity;
+				m_heatText.text = "";
+				m_heatIcon.color = new Color (1, 0.5f, 0, 1);
 			}
 			m_atkSlider.value = WeaponDamageEmpoweredCounter;
 			m_spdSlider.value = WeaponSpeedEmpoweredCounter;
-			if (WeaponDamageEmpoweredCounter == 5) {
+			/*if (WeaponDamageEmpoweredCounter == 5) {
 				m_atkText.text = "MAXIMUM POWER!!!";
 			} else {
 				m_atkText.text = "Attack Damage: " + WeaponDamageEmpoweredCounter + "/5";
@@ -168,7 +174,7 @@ public class PlayerNetwork : Photon.MonoBehaviour {
 				m_spdText.text = "MAXIMUM SPEED!!!";
 			} else {
 				m_spdText.text = "Projectile Speed: " + WeaponSpeedEmpoweredCounter + "/5";
-			}
+			}*/
 			if (!insideZone) {
 				TakeDamage (Time.deltaTime * m_HPReducedPerSecond, -1);
 				zoneText.text = "You're taking damage inside the zone!";
@@ -499,10 +505,10 @@ public class PlayerNetwork : Photon.MonoBehaviour {
             m_thermalClip -= m_heatCooldownRate * Time.deltaTime;
         }
 
-        //if(overHeated == true)
-        //{
-        //    m_thermalClip = m_thermalClipCapacity;
-        //}
+        else if(overHeated == true)
+		{
+			m_thermalClip -= 2.075f*m_heatCooldownRate * Time.deltaTime;
+        }
 
         if(m_thermalClip <= 0)
         {
