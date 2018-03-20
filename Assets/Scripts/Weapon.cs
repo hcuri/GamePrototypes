@@ -12,6 +12,7 @@ public class Weapon : MonoBehaviour {
     //2/25/2018 Switch heat setting to weapon
     [SerializeField] private float m_heat = 30.0f;
     [SerializeField] private float m_heatCooldownRate = 20.0f;
+	[SerializeField] private float AutoDestroyTimer = 5.0f;
     //2/25/2018 Switch heat setting to weapon
 
     //Use this ID to see who shoot this weapon, -1 means unset
@@ -60,7 +61,7 @@ public class Weapon : MonoBehaviour {
         //this setting set the life time of a weapon
         //Destroy(gameObject, 2.0f);
         //I set it to 10, just for testing
-        Destroy(gameObject, 10.0f);
+		Destroy(gameObject, AutoDestroyTimer);
     }
 
     private void OnCollisionEnter(Collision other)
