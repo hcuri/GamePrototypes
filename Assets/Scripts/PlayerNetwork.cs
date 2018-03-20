@@ -369,7 +369,7 @@ public class PlayerNetwork : Photon.MonoBehaviour {
             {
                 transform.GetChild(1).GetComponent<Renderer>().enabled = false;
                 transform.GetChild(0).GetComponent<Renderer>().enabled = false;
-                Debug.Log("my Id is: " + player_ID + "my photon id is: " + m_pv.ownerId);
+                Debug.Log("In !isMine, my Id is: " + player_ID + "my photon id is: " + m_pv.ownerId);
             }
             else if(m_pv.isMine)
             {
@@ -377,7 +377,7 @@ public class PlayerNetwork : Photon.MonoBehaviour {
                 //m_myPlayerControlScript.enabled = false;
 
                 //KillWarn(shooterID, player_ID);
-                Debug.Log("my Id is: " + player_ID + "my photon id is: " + m_pv.ownerId);
+                Debug.Log("In isMine, my Id is: " + player_ID + "my photon id is: " + m_pv.ownerId);
                 PhotonNetwork.Disconnect();
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.lockState = CursorLockMode.Confined;
