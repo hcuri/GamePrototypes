@@ -129,7 +129,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 
                 if(m_MoveDir.y > m_jumpBuffer)
                     m_MoveDir.y = m_jumpBuffer;
-                Debug.Log("stopped jumping");
             }
 
             if (!m_PreviouslyGrounded && m_CharacterController.isGrounded)
