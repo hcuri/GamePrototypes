@@ -365,7 +365,7 @@ public class PlayerNetwork : Photon.MonoBehaviour {
 
         if (m_health <= 0)
             NetworkManager.GetComponent<PhotonNetworkManager>().killWarn(shooterID, player_ID);
-
+        Debug.Log("Someone is dying");
         // hides the dead body *cue murder sound effects
         if (m_health <= 0 && !m_pv.isMine)
         {
