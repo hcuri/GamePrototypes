@@ -184,11 +184,14 @@ public class PhotonNetworkManager : Photon.PunBehaviour
 
     public void killWarn(int killer, int victim)
     {
-        //Debug.Log("Killer is: " + killer + " Victim is: " + victim);
+        Debug.Log("Killer is: " + killer + " Victim is: " + victim);
         if (killer != -1)
             killText.text = "Player" + killer + " has killed Player" + victim + "\n";
         else
+        {
+            Debug.Log("Player " + victim + "has died in the shrinking zone");
             killText.text = "Player" + victim + " has died in the shrinking zone\n";
+        }
 
         GameObject myPlayer = PlayersInGame[killer - 1];
 
