@@ -341,7 +341,7 @@ public class PlayerNetwork : Photon.MonoBehaviour {
     [PunRPC]
     public void TakeDamage(float damage, int shooterID)
     {
-        if (insideZone) {
+        if (insideZone && damage < 0) {
             foreach (GameObject go in m_bloodCube)
             {
                 for (int i = 0; i < 10; i++)
