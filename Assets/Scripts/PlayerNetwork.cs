@@ -369,6 +369,7 @@ public class PlayerNetwork : Photon.MonoBehaviour {
         // hides the dead body *cue murder sound effects
         if (m_health <= 0 && !m_pv.isMine)
         {
+            Debug.Log("I am dying");
             transform.GetChild(1).GetComponent<Renderer>().enabled = false;
             //KillWarn(shooterID, player_ID);
             //m_pv.RPC("KillWarn", PhotonTargets.AllBuffered, shooterID, player_ID);
