@@ -70,6 +70,8 @@ public class PlayerNetwork : Photon.MonoBehaviour {
     [SerializeField] private GameObject m_Hand;
     [SerializeField] int weaponPointer;
 
+    //Bloody effect
+    [SerializeField] GameObject[] m_bloodCube;
 
     private void Start ()
     {
@@ -305,6 +307,15 @@ public class PlayerNetwork : Photon.MonoBehaviour {
     [PunRPC]
     public void TakeDamage(float damage)
     {
+        foreach(GameObject go in m_bloodCube)
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                GameObject g = Instantiate(go, gameObject.transform.position + new Vector3(UnityEngine.Random.Range(-0.5f, 0.5f), 2.2f, UnityEngine.Random.Range(-0.5f, 0.5f)), Quaternion.identity);
+                g.GetComponent<Rigidbody>().AddForce(new Vector3(UnityEngine.Random.Range(-5f, 5f), UnityEngine.Random.Range(0, 5f), UnityEngine.Random.Range(-5f, 5f)));
+            }
+        }
+
 		m_health -= damage;
         if (m_health > m_maxHP) m_health = m_maxHP;
         SetColor();
