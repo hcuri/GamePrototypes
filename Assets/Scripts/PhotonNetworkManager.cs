@@ -114,9 +114,8 @@ public class PhotonNetworkManager : Photon.PunBehaviour
     private void Update()
     {
         netInfo.text = PhotonNetwork.connectionStateDetailed.ToString();
-
         if (countingDown)
-		{
+		{            
             countDownToStart -= Time.deltaTime;
             if (countDownToStart < 0)
             {
@@ -133,16 +132,12 @@ public class PhotonNetworkManager : Photon.PunBehaviour
                     m_ID = id;
                 PlayersInGame[id-1] = go;
 
-
-
-
-
-
                 lobbyCamera.SetActive(false);
 
                 GameObject.Find("ShrinkingZone").GetComponent<ShrinkingZoneScript>().startShrinking();
             }
         }
+
 		if (!joinedRoom && !countingDown) {
 			waitingText.text = "Waiting for more players..." + PhotonNetwork.room.PlayerCount + "/" + numPeopleToStart;
 			playersRemain.text = "";
@@ -152,7 +147,8 @@ public class PhotonNetworkManager : Photon.PunBehaviour
 		} else {
 			waitingText.text = "";
 			playersRemain.text = "Players remaining: " + PhotonNetwork.room.PlayerCount + "/" + numPeopleToStart;
-		}
+            netInfo.text = "";
+        }
     }
 
 
