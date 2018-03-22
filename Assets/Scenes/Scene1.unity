@@ -65882,7 +65882,7 @@ Prefab:
     - target: {fileID: 114109005206887768, guid: 13369119b8aa1a24a8e9146cb83403ac,
         type: 2}
       propertyPath: timeToShrink
-      value: 240
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 114109005206887768, guid: 13369119b8aa1a24a8e9146cb83403ac,
         type: 2}
