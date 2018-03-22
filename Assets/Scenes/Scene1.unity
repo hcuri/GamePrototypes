@@ -44859,6 +44859,10 @@ MonoBehaviour:
     type: 2}
   lobbyCamera: {fileID: 2001878483}
   countDownToStart: 3
+  m_ID: -1
+  killText: {fileID: 0}
+  killCountText: {fileID: 0}
+  PlayersInGame: []
   debugMode: 0
 --- !u!4 &715131531
 Transform:
@@ -61023,45 +61027,25 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 224714696647943072, guid: 2279d6ec3d5d1b94b997594aa8879599,
-        type: 2}
-      propertyPath: m_AnchorMax.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 224714696647943072, guid: 2279d6ec3d5d1b94b997594aa8879599,
-        type: 2}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 224924770857163644, guid: 2279d6ec3d5d1b94b997594aa8879599,
-        type: 2}
-      propertyPath: m_AnchorMax.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 224924770857163644, guid: 2279d6ec3d5d1b94b997594aa8879599,
-        type: 2}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 224820261695180280, guid: 2279d6ec3d5d1b94b997594aa8879599,
         type: 2}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224820261695180280, guid: 2279d6ec3d5d1b94b997594aa8879599,
         type: 2}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 224687373078578232, guid: 2279d6ec3d5d1b94b997594aa8879599,
+    - target: {fileID: 224924770857163644, guid: 2279d6ec3d5d1b94b997594aa8879599,
         type: 2}
-      propertyPath: m_AnchorMax.x
-      value: 1
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224687373078578232, guid: 2279d6ec3d5d1b94b997594aa8879599,
         type: 2}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2279d6ec3d5d1b94b997594aa8879599, type: 2}
