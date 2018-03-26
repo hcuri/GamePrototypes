@@ -204,11 +204,13 @@ MonoBehaviour:
   - {fileID: 4300000, guid: bc0cdff0b0fdafc46bbdbda4b3717d71, type: 3}
   - {fileID: 4300000, guid: 486351f15650ce5408452352641fc317, type: 3}
   - {fileID: 4300000, guid: 911b2aca4190de843ba6fc029bf3734d, type: 3}
+  - {fileID: 4300000, guid: 88298ecb4d0fcff45879b1338c17fe54, type: 3}
   colorField:
   - {r: 1, g: 0, b: 0.64137936, a: 0.39215687}
   - {r: 1, g: 0.88965523, b: 0, a: 0.39215687}
   - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
   - {r: 0.9034481, g: 0, b: 1, a: 0.39215687}
+  - {r: 1, g: 1, b: 1, a: 0.39215687}
 --- !u!114 &114572603424031570
 MonoBehaviour:
   m_ObjectHideFlags: 1

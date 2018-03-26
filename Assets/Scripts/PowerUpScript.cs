@@ -24,14 +24,17 @@ public class PowerUpScript : Photon.MonoBehaviour {
             Debug.Log("You need to assign differet meshes to the power up so that it can change");
         timer = timeToRespawn;
         this.tag = "PowerUp";
-        randNum = (int)Random.Range(0, 3);
+        randNum = (int)Random.Range(0, 4);
+		if (randNum == 3)
+			randNum = 4;
         Debug.Log("random is :" + randNum);
         childObject = transform.GetChild(0).gameObject;
-		colorField = new Color[4];
+		colorField = new Color[5];
 		colorField [0] = new Color (255/255f,0/255f,164/255f,100/255f);
 		colorField [1] = new Color (255/255f, 227/255f, 0/255f, 100/255f);
 		colorField [2] = new Color (0/255f, 123/255f, 255/255f, 100/255f);
 		colorField [3] = new Color (230/255f, 0/255f, 255/255f, 100/255f);
+		colorField [4] = new Color (255/255f, 255/255f, 255/255f, 100/255f);
     }
 
     [PunRPC]

@@ -40,6 +40,9 @@ public class PlayerNetwork : Photon.MonoBehaviour {
 
     private bool HPPickedUp;
 
+	private bool isInvuln = false;
+	private float invulnTime = -10.0f;
+
     //private int m_power = 4; //4 means no powerup received.
     //private bool SizeEmpowered;
     //private bool HeatEmpowered;
@@ -177,6 +180,10 @@ public class PlayerNetwork : Photon.MonoBehaviour {
 			} else {
 				m_spdText.text = "Projectile Speed: " + WeaponSpeedEmpoweredCounter + "/5";
 			}*/
+			if (Time.time - invulnTime >= 10.0f) {
+				isInvuln = false;
+				SetColor ();
+			}
 			if (!insideZone) {
 				TakeDamage (Time.deltaTime * m_HPReducedPerSecond, -1);
 				zoneText.text = "You're taking damage inside the zone!";
@@ -341,76 +348,71 @@ public class PlayerNetwork : Photon.MonoBehaviour {
     [PunRPC]
     public void TakeDamage(float damage, int shooterID)
     {
-        if (insideZone && damage > 0) {
-            foreach (GameObject go in m_bloodCube)
-            {
-                for (int i = 0; i < 10; i++)
-                {
-                    GameObject g = Instantiate(go, gameObject.transform.position + new Vector3(UnityEngine.Random.Range(-0.5f, 0.5f), 2.2f, UnityEngine.Random.Range(-0.5f, 0.5f)), Quaternion.identity);
-                    g.GetComponent<Rigidbody>().AddForce(new Vector3(UnityEngine.Random.Range(-5f, 5f), UnityEngine.Random.Range(0, 5f), UnityEngine.Random.Range(-5f, 5f)));
-                }
-            }
-        }
+		if (!isInvuln) {
+			if (insideZone && damage > 0) {
+				foreach (GameObject go in m_bloodCube) {
+					for (int i = 0; i < 10; i++) {
+						GameObject g = Instantiate (go, gameObject.transform.position + new Vector3 (UnityEngine.Random.Range (-0.5f, 0.5f), 2.2f, UnityEngine.Random.Range (-0.5f, 0.5f)), Quaternion.identity);
+						g.GetComponent<Rigidbody> ().AddForce (new Vector3 (UnityEngine.Random.Range (-5f, 5f), UnityEngine.Random.Range (0, 5f), UnityEngine.Random.Range (-5f, 5f)));
+					}
+				}
+			}
 
 
-        Debug.Log("I was shot by player" + shooterID);
+			Debug.Log ("I was shot by player" + shooterID);
 
-		m_health -= damage;
-        if (m_health > m_maxHP) m_health = m_maxHP;
-        SetColor();
+			m_health -= damage;
+			if (m_health > m_maxHP)
+				m_health = m_maxHP;
+			SetColor ();
 
-        if (m_pv.isMine && damage > 0f) {
-			damageImage.color = damageColor;
+			if (m_pv.isMine && damage > 0f) {
+				damageImage.color = damageColor;
+			}
+
+			if (m_health <= 0) {
+				//Debug.Log("my Id is: " + player_ID + "my photon id is: " + m_pv.ownerId);
+				if (!m_pv.isMine) {
+					transform.GetChild (1).GetComponent<Renderer> ().enabled = false;
+					transform.GetChild (0).GetComponent<Renderer> ().enabled = false;
+				} else if (m_pv.isMine) {
+					//Die
+					//m_myPlayerControlScript.enabled = false;
+					//KillWarn(shooterID, player_ID);
+					PhotonNetwork.Disconnect ();
+					Cursor.lockState = CursorLockMode.None;
+					Cursor.lockState = CursorLockMode.Confined;
+					Cursor.visible = true;
+					SceneManager.LoadScene ("EndScene");
+				}
+				NetworkManager.GetComponent<PhotonNetworkManager> ().killWarn (shooterID, player_ID);
+			}
+
+			// hides the dead body *cue murder sound effects
+			/* if (m_health <= 0 && !m_pv.isMine)
+	        {
+	            Debug.Log("Someone is dying");
+	            transform.GetChild(1).GetComponent<Renderer>().enabled = false;
+	            transform.GetChild(0).GetComponent<Renderer>().enabled = false;
+	            //KillWarn(shooterID, player_ID);
+	            //m_pv.RPC("KillWarn", PhotonTargets.AllBuffered, shooterID, player_ID);
+	        }
+
+	        if (m_health <= 0 && m_pv.isMine)
+	        {
+	            //Die
+	            //m_myPlayerControlScript.enabled = false;
+	            Debug.Log("You are died");
+
+	            //KillWarn(shooterID, player_ID);
+
+				PhotonNetwork.Disconnect();
+				Cursor.lockState = CursorLockMode.None;
+				Cursor.lockState = CursorLockMode.Confined;
+				Cursor.visible = true;
+				SceneManager.LoadScene("EndScene");
+	        }*/
 		}
-
-        if (m_health <= 0)
-        {
-            //Debug.Log("my Id is: " + player_ID + "my photon id is: " + m_pv.ownerId);
-            if (!m_pv.isMine)
-            {
-                transform.GetChild(1).GetComponent<Renderer>().enabled = false;
-                transform.GetChild(0).GetComponent<Renderer>().enabled = false;
-            }
-            else if(m_pv.isMine)
-            {
-                //Die
-                //m_myPlayerControlScript.enabled = false;
-                //KillWarn(shooterID, player_ID);
-                PhotonNetwork.Disconnect();
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.lockState = CursorLockMode.Confined;
-                Cursor.visible = true;
-                SceneManager.LoadScene("EndScene");
-            }
-            NetworkManager.GetComponent<PhotonNetworkManager>().killWarn(shooterID, player_ID);
-        }
-
-        // hides the dead body *cue murder sound effects
-       /* if (m_health <= 0 && !m_pv.isMine)
-        {
-            Debug.Log("Someone is dying");
-            transform.GetChild(1).GetComponent<Renderer>().enabled = false;
-            transform.GetChild(0).GetComponent<Renderer>().enabled = false;
-            //KillWarn(shooterID, player_ID);
-            //m_pv.RPC("KillWarn", PhotonTargets.AllBuffered, shooterID, player_ID);
-        }
-
-        if (m_health <= 0 && m_pv.isMine)
-        {
-            //Die
-            //m_myPlayerControlScript.enabled = false;
-            Debug.Log("You are died");
-
-            //KillWarn(shooterID, player_ID);
-
-			PhotonNetwork.Disconnect();
-			Cursor.lockState = CursorLockMode.None;
-			Cursor.lockState = CursorLockMode.Confined;
-			Cursor.visible = true;
-			SceneManager.LoadScene("EndScene");
-        }*/
-
-  
     }
 
     [PunRPC]
@@ -420,18 +422,22 @@ public class PlayerNetwork : Photon.MonoBehaviour {
     }
 
 	public void SetColor(){
+		m_color.b = 0f;
 		if (m_health <= 0) {
-			m_color.r = 0;
-			m_color.g = 0;
-		}
-		else if (m_health > 50) {
+			m_color.r = 0f;
+			m_color.g = 0f;
+		} else if (m_health > 50) {
 			m_color.r = ((100 - m_health) / 50f);
 			m_color.g = 1f;
 		} else {
 			m_color.r = 1f;
-			m_color.g = (m_health/50f) ;
+			m_color.g = (m_health / 50f);
 		}
 		GetComponentInChildren<Renderer>().material.color = m_color;
+	}
+
+	public void SetInvulnColor(){
+		GetComponentInChildren<Renderer>().material.color = Color.white;
 	}
 
     public void setInsideZone(bool inside)
@@ -477,40 +483,32 @@ public class PlayerNetwork : Photon.MonoBehaviour {
     public void GetPowerUp(int powerType)
     {
         Debug.Log("I get Power: " + powerType);
-        if(powerType == 0)
-        {
-            HPPickedUp = true;
-            //m_power = 0;
-            PlayerHealthEmpoweredCounter = PlayerHealthEmpoweredCounter + 1;
-        }
-        else if (powerType == 3)
-        {
-            //m_power = 1;
-            //PlayerSpeedEmpoweredCounter = PlayerSpeedEmpoweredCounter + 1;
-        }
-        else if (powerType == 1)
-        {
-            if (WeaponDamageEmpoweredCounter < 5)
-            {
-                //m_power = 2;
+		if (powerType == 0) {
+			HPPickedUp = true;
+			//m_power = 0;
+			PlayerHealthEmpoweredCounter = PlayerHealthEmpoweredCounter + 1;
+		} else if (powerType == 3) {
+			//m_power = 1;
+			//PlayerSpeedEmpoweredCounter = PlayerSpeedEmpoweredCounter + 1;
+		} else if (powerType == 1) {
+			if (WeaponDamageEmpoweredCounter < 5) {
+				//m_power = 2;
 				WeaponDamageEmpoweredCounter = WeaponDamageEmpoweredCounter + 1;
-            }
-            else
-            {
+			} else {
 				WeaponDamageEmpoweredCounter = 5;
 			}
-        }
-        else if (powerType ==2)
-        {if (WeaponSpeedEmpoweredCounter < 5)
-            {
-                //m_power = 3;
+		} else if (powerType == 2) {
+			if (WeaponSpeedEmpoweredCounter < 5) {
+				//m_power = 3;
 				WeaponSpeedEmpoweredCounter = WeaponSpeedEmpoweredCounter + 1;
-            }
-            else
-            {
+			} else {
 				WeaponSpeedEmpoweredCounter = 5;
 			}
-        }
+		} else if (powerType == 4) {
+			isInvuln = true;
+			invulnTime = Time.time;
+			SetInvulnColor ();
+		}
         //Some one need to handle the number of the power type to add attribue accordingly
     }
 
