@@ -60,4 +60,5 @@ MonoBehaviour:
   - SetID
   - KillerWarn
   - KillWarn
+  - Uninvuln
   DisableAutoOpenWizard: 1

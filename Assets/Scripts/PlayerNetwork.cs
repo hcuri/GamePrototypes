@@ -42,6 +42,7 @@ public class PlayerNetwork : Photon.MonoBehaviour {
 
 	private bool isInvuln = false;
 	private float invulnTime = -10.0f;
+	private Text invulnText;
 
     //private int m_power = 4; //4 means no powerup received.
     //private bool SizeEmpowered;
@@ -91,6 +92,8 @@ public class PlayerNetwork : Photon.MonoBehaviour {
 		//m_heatSlider = GameObject.Find ("HeatSlider").GetComponent<Slider> ();
 		m_heatText = GameObject.Find ("Heat").GetComponent<Text> ();
 		m_heatIcon = GameObject.Find ("Heat Icon").GetComponent<Image> ();
+
+		invulnText = GameObject.Find ("Invuln Text").GetComponent<Text> ();
 
 		m_atkSlider = GameObject.Find ("ATKSlider").GetComponent<Slider> ();
 		m_spdSlider = GameObject.Find ("SPDSlider").GetComponent<Slider> ();
@@ -180,9 +183,12 @@ public class PlayerNetwork : Photon.MonoBehaviour {
 			} else {
 				m_spdText.text = "Projectile Speed: " + WeaponSpeedEmpoweredCounter + "/5";
 			}*/
-			if (Time.time - invulnTime >= 10.0f) {
-				isInvuln = false;
-				SetColor ();
+			if (isInvuln) {
+				int timeleft = 10 - (int)(Time.time - invulnTime);
+				invulnText.text = "Invulnerable: " + timeleft;
+			}
+			if (isInvuln && Time.time - invulnTime >= 10.0f) {
+				Uninvuln ();
 			}
 			if (!insideZone) {
 				TakeDamage (Time.deltaTime * m_HPReducedPerSecond, -1);
@@ -440,6 +446,15 @@ public class PlayerNetwork : Photon.MonoBehaviour {
 		GetComponentInChildren<Renderer>().material.color = Color.white;
 	}
 
+	[PunRPC]
+	public void Uninvuln(){
+		if (m_pv.isMine) {
+			invulnText.text = "";
+			isInvuln = false;
+			SetColor();
+		}
+	}
+
     public void setInsideZone(bool inside)
     {
         insideZone = inside;
@@ -507,7 +522,7 @@ public class PlayerNetwork : Photon.MonoBehaviour {
 		} else if (powerType == 4) {
 			isInvuln = true;
 			invulnTime = Time.time;
-			SetInvulnColor ();
+			SetInvulnColor();
 		}
         //Some one need to handle the number of the power type to add attribue accordingly
     }
