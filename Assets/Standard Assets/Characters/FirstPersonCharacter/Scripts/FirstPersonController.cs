@@ -149,7 +149,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 				m_jumpCooldownText.text = "Jump Cooldown: " + (int)(JumpPermitTime - Time.time);
 				//m_jumpCooldownFill.color = new Color32 (0, 123, 0, 255);
 			} else {
-				m_jumpCooldownText.text = "Super Jump Ready!";
+				//m_jumpCooldownText.text = "Super Jump Ready!";
 				//m_jumpCooldownFill.color = new Color32 (0, 255, 0, 255);
 			}
 				
