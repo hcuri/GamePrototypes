@@ -43,6 +43,7 @@ public class PlayerNetwork : Photon.MonoBehaviour {
 	private bool isInvuln = false;
 	private float invulnTime = -10.0f;
 	private Text invulnText;
+	private Transform halo;
 
     //private int m_power = 4; //4 means no powerup received.
     //private bool SizeEmpowered;
@@ -94,6 +95,7 @@ public class PlayerNetwork : Photon.MonoBehaviour {
 		m_heatIcon = GameObject.Find ("Heat Icon").GetComponent<Image> ();
 
 		invulnText = GameObject.Find ("Invuln Text").GetComponent<Text> ();
+		halo = transform.Find ("Halo");
 
 		m_atkSlider = GameObject.Find ("ATKSlider").GetComponent<Slider> ();
 		m_spdSlider = GameObject.Find ("SPDSlider").GetComponent<Slider> ();
@@ -136,6 +138,10 @@ public class PlayerNetwork : Photon.MonoBehaviour {
         {
             //called a RPC to set my ID on every client
         }*/
+		if (isInvuln && Time.time - invulnTime >= 10.0f) {
+			//Uninvuln ();
+			this.GetComponent<PhotonView>().RPC("Uninvuln", PhotonTargets.AllBuffered);
+		}
         if(m_pv.isMine)
         {
             Weapon_Cool_Heat();
@@ -187,9 +193,9 @@ public class PlayerNetwork : Photon.MonoBehaviour {
 				int timeleft = 10 - (int)(Time.time - invulnTime);
 				invulnText.text = "Invulnerable: " + timeleft;
 			}
-			if (isInvuln && Time.time - invulnTime >= 10.0f) {
+			/*if (isInvuln && Time.time - invulnTime >= 10.0f) {
 				Uninvuln ();
-			}
+			}*/
 			if (!insideZone) {
 				TakeDamage (Time.deltaTime * m_HPReducedPerSecond, -1);
 				zoneText.text = "You're taking damage inside the zone!";
@@ -419,6 +425,7 @@ public class PlayerNetwork : Photon.MonoBehaviour {
 				SceneManager.LoadScene("EndScene");
 	        }*/
 		}
+		SetColor ();
     }
 
     [PunRPC]
@@ -439,11 +446,15 @@ public class PlayerNetwork : Photon.MonoBehaviour {
 			m_color.r = 1f;
 			m_color.g = (m_health / 50f);
 		}
-		GetComponentInChildren<Renderer>().material.color = m_color;
+		//GetComponentInChildren<Renderer>().material.color = m_color;
+		transform.Find("Body").GetComponent<MeshRenderer>().material.color = m_color;
 	}
 
-	public void SetInvulnColor(){
-		GetComponentInChildren<Renderer>().material.color = Color.white;
+	[PunRPC]
+	public void Invuln(){
+		isInvuln = true;
+		invulnTime = Time.time;
+		transform.Find("Halo").GetComponent<MeshRenderer>().enabled = true;
 	}
 
 	[PunRPC]
@@ -451,8 +462,8 @@ public class PlayerNetwork : Photon.MonoBehaviour {
 		if (m_pv.isMine) {
 			invulnText.text = "";
 			isInvuln = false;
-			SetColor();
 		}
+		transform.Find("Halo").GetComponent<MeshRenderer>().enabled = false;
 	}
 
     public void setInsideZone(bool inside)
@@ -520,9 +531,7 @@ public class PlayerNetwork : Photon.MonoBehaviour {
 				WeaponSpeedEmpoweredCounter = 5;
 			}
 		} else if (powerType == 4) {
-			isInvuln = true;
-			invulnTime = Time.time;
-			SetInvulnColor();
+			this.GetComponent<PhotonView>().RPC("Invuln", PhotonTargets.AllBuffered);
 		}
         //Some one need to handle the number of the power type to add attribue accordingly
     }

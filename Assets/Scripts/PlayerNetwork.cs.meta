@@ -1,11 +1,15 @@
 fileFormatVersion: 2
 guid: dda89fcb577ea1e40a7764e006f5f428
-timeCreated: 1517696509
+timeCreated: 1522202935
 licenseType: Free
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - playerCamera: {instanceID: 0}
+  - halo: {fileID: 1504327932042926, guid: 61bb8c213dbfe174d95dfbc6188258c0, type: 2}
+  - m_Hand: {instanceID: 0}
+  - NetworkManager: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

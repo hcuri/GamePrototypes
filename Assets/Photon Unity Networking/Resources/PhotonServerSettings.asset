@@ -61,4 +61,5 @@ MonoBehaviour:
   - KillerWarn
   - KillWarn
   - Uninvuln
+  - Invuln
   DisableAutoOpenWizard: 1
