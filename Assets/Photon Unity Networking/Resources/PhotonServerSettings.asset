@@ -60,4 +60,5 @@ MonoBehaviour:
   - SetID
   - KillerWarn
   - KillWarn
+  - Binojyutsu
   DisableAutoOpenWizard: 1

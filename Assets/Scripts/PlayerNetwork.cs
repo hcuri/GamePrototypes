@@ -74,6 +74,9 @@ public class PlayerNetwork : Photon.MonoBehaviour {
     public bool isSet = false;
     [SerializeField] GameObject NetworkManager;
     public int killCount;
+    private MeshRenderer m_MR;
+    private MeshRenderer[] child_MR;
+    public float disappearTimer = 8.0f;
 
     //Bloody effect
     [SerializeField] GameObject[] m_bloodCube;
@@ -95,6 +98,8 @@ public class PlayerNetwork : Photon.MonoBehaviour {
 		//m_spdText = GameObject.Find ("SPD").GetComponent<Text> ();
         m_debugMode = GameObject.Find("NetworkManager").GetComponent<PhotonNetworkManager>().returnDebugMode();
         NetworkManager = GameObject.Find("NetworkManager");
+        m_MR = this.GetComponent<MeshRenderer>();
+        child_MR = transform.GetComponentsInChildren<MeshRenderer>();
         Initialize();
 
         //added by Po
@@ -511,7 +516,38 @@ public class PlayerNetwork : Photon.MonoBehaviour {
 				WeaponSpeedEmpoweredCounter = 5;
 			}
         }
+        else if(powerType == 4)
+        {
+            this.GetComponent<PhotonView>().RPC("Binojyutsu", PhotonTargets.AllBuffered);
+        }
         //Some one need to handle the number of the power type to add attribue accordingly
+    }
+
+    [PunRPC]
+    public void Binojyutsu()
+    {
+        Debug.Log("Nin nin");
+        foreach(MeshRenderer mr in child_MR)
+        {
+            mr.enabled = false;
+        }
+        StartCoroutine(ComeBack());
+
+    }
+
+    public void showBack()
+    {
+        Debug.Log("I'm back");
+        foreach(MeshRenderer mr in child_MR)
+        {
+            mr.enabled = true;
+        }
+    }
+
+    private IEnumerator ComeBack()
+    {
+        yield return new WaitForSeconds(disappearTimer);
+        showBack();
     }
 
     private void Weapon_Cool_Heat()
