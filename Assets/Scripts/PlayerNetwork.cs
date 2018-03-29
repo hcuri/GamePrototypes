@@ -275,7 +275,8 @@ public class PlayerNetwork : Photon.MonoBehaviour {
 
                     Vector3 position = playerCamera.transform.position + pos;
                     Vector3 velocity = playerCamera.transform.forward * m_throwforce;
-                    m_pv.RPC("InstantiateWeapon", PhotonTargets.AllBuffered, weapName, position, velocity, toScale);
+                    //m_pv.RPC("InstantiateWeapon", PhotonTargets.AllBuffered, weapName, position, velocity, toScale);
+                    InstantiateWeapon(weapName, position, velocity, toScale);
                 }
             }
 
@@ -294,12 +295,13 @@ public class PlayerNetwork : Photon.MonoBehaviour {
         }
     }
 
-    [PunRPC]
+    //[PunRPC]
     public void InstantiateWeapon(String weaponName, Vector3 position, Vector3 velocity, float toScale)
     {
         //GameObject infiniteWeapon = PhotonNetwork.Instantiate(weaponName, position, Quaternion.identity, 0);
         //GameObject infiniteWeapon = GameObject.Instantiate((GameObject)Resources.Load(weaponName), position, Quaternion.identity);
-        GameObject infiniteWeapon = GameObject.Instantiate((GameObject)Resources.Load("Weapon3_Spiky"), position, Quaternion.identity);
+        GameObject infiniteWeapon = PhotonNetwork.Instantiate("Weapon3_Spiky", position, Quaternion.identity, 0);
+        //GameObject infiniteWeapon = GameObject.Instantiate((GameObject)Resources.Load("Weapon3_Spiky"), position, Quaternion.identity);
         infiniteWeapon.transform.Rotate(playerCamera.transform.right * 90);
         infiniteWeapon.GetComponent<Rigidbody>().isKinematic = false;
 
