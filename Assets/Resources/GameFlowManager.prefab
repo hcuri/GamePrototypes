@@ -63,8 +63,8 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 114416954152256284}
   ObservedComponentsFoldoutOpen: 1
-  viewIdField: 95
-  instantiationId: 95
+  viewIdField: 0
+  instantiationId: -1
   currentMasterID: -1
   isRuntimeInstantiated: 0
 --- !u!114 &114416954152256284
@@ -81,5 +81,7 @@ MonoBehaviour:
   playerInGame: []
   playerCount: 0
   playerInGameIsFilled: 0
+  pNManager: {fileID: 0}
   endPanel: {fileID: 0}
   winPanel: {fileID: 0}
+  isDebugging: 0
