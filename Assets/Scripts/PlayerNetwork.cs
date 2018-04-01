@@ -372,17 +372,26 @@ public class PlayerNetwork : Photon.MonoBehaviour {
             {
                 transform.GetChild(1).GetComponent<Renderer>().enabled = false;
                 transform.GetChild(0).GetComponent<Renderer>().enabled = false;
+                transform.GetChild(6).GetComponent<Renderer>().enabled = false;
             }
             else if(m_pv.isMine)
             {
                 //Die
                 //m_myPlayerControlScript.enabled = false;
                 //KillWarn(shooterID, player_ID);
-                PhotonNetwork.Disconnect();
+                //PhotonNetwork.Disconnect();
+                /*Cursor.lockState = CursorLockMode.None;
+                Cursor.lockState = CursorLockMode.Confined;
+                Cursor.visible = true;*/
+                //SceneManager.LoadScene("EndScene");
+                Debug.Log("I'm Dying");
+                transform.GetChild(1).GetComponent<Renderer>().enabled = false;
+                transform.GetChild(0).GetComponent<Renderer>().enabled = false;
+                transform.GetChild(6).GetComponent<Renderer>().enabled = false;
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.lockState = CursorLockMode.Confined;
                 Cursor.visible = true;
-                SceneManager.LoadScene("EndScene");
+                NetworkManager.GetComponent<PhotonNetworkManager>().endPanel.SetActive(true);
             }
             NetworkManager.GetComponent<PhotonNetworkManager>().killWarn(shooterID, player_ID);
         }
