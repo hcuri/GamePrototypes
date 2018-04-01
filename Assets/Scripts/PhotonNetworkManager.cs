@@ -103,7 +103,7 @@ public class PhotonNetworkManager : Photon.PunBehaviour
                 Debug.Log("You iZ Winna!");
 				PhotonNetwork.Disconnect();
 				Cursor.lockState = CursorLockMode.None;
-				Cursor.lockState = CursorLockMode.Confined;
+				//Cursor.lockState = CursorLockMode.Confined;
 				Cursor.visible = true;
 				SceneManager.LoadScene("WinScene");
             }

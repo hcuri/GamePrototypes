@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityStandardAssets.Characters.FirstPerson;
 
 public class PlayerNetwork : Photon.MonoBehaviour {
 
@@ -75,6 +76,8 @@ public class PlayerNetwork : Photon.MonoBehaviour {
     [SerializeField] GameObject NetworkManager;
     public int killCount;
 
+    public bool showCursor;
+
     //Bloody effect
     [SerializeField] GameObject[] m_bloodCube;
 
@@ -122,6 +125,8 @@ public class PlayerNetwork : Photon.MonoBehaviour {
 
         //start looking green
         SetColor();
+
+        showCursor = false;
 	}
 
     private void Update()
@@ -130,7 +135,15 @@ public class PlayerNetwork : Photon.MonoBehaviour {
         {
             //called a RPC to set my ID on every client
         }*/
-        if(m_pv.isMine)
+        /*if (showCursor)
+        {
+            //Cursor.lockState = CursorLockMode.None;
+            //Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = true;
+            //showCursor = false;
+        }*/
+
+        if (m_pv.isMine)
         {
             Weapon_Cool_Heat();
 
@@ -388,9 +401,12 @@ public class PlayerNetwork : Photon.MonoBehaviour {
                 transform.GetChild(1).GetComponent<Renderer>().enabled = false;
                 transform.GetChild(0).GetComponent<Renderer>().enabled = false;
                 transform.GetChild(6).GetComponent<Renderer>().enabled = false;
+                /*Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;
-                Cursor.lockState = CursorLockMode.Confined;
-                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.Confined;*/
+                this.GetComponent<FirstPersonController>().showMouse();
+                showCursor = true;
+                
                 NetworkManager.GetComponent<PhotonNetworkManager>().endPanel.SetActive(true);
             }
             NetworkManager.GetComponent<PhotonNetworkManager>().killWarn(shooterID, player_ID);
@@ -423,6 +439,16 @@ public class PlayerNetwork : Photon.MonoBehaviour {
 
   
     }
+
+    /*private void OnGUI()
+    {
+        if (showCursor)
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.lockState = CursorLockMode.Confined;
+        }
+    }*/
 
     [PunRPC]
     public void TakeDamage(int damage, int shooterID)

@@ -1016,7 +1016,9 @@ MonoBehaviour:
   m_type: -1
   m_heat: 30
   m_heatCooldownRate: 20
+  AutoDestroyTimer: 5
   m_id: 1
+  isMine: 0
 --- !u!114 &114187428772597360
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1034,7 +1036,9 @@ MonoBehaviour:
   m_type: -1
   m_heat: 30
   m_heatCooldownRate: 20
+  AutoDestroyTimer: 5
   m_id: 1
+  isMine: 0
 --- !u!114 &114245019002106758
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1052,7 +1056,9 @@ MonoBehaviour:
   m_type: -1
   m_heat: 30
   m_heatCooldownRate: 20
+  AutoDestroyTimer: 5
   m_id: 1
+  isMine: 0
 --- !u!114 &114257731220080004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1254,7 +1260,9 @@ MonoBehaviour:
   m_type: -1
   m_heat: 30
   m_heatCooldownRate: 20
+  AutoDestroyTimer: 5
   m_id: 1
+  isMine: 0
 --- !u!114 &114566641177116842
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1337,7 +1345,9 @@ MonoBehaviour:
   m_type: -1
   m_heat: 30
   m_heatCooldownRate: 20
+  AutoDestroyTimer: 5
   m_id: 1
+  isMine: 0
 --- !u!114 &114640685182478924
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1489,6 +1499,11 @@ MonoBehaviour:
   weaponOn: 
   m_Hand: {fileID: 1057540994951822}
   weaponPointer: 0
+  player_ID: -1
+  isSet: 0
+  NetworkManager: {fileID: 0}
+  killCount: 0
+  showCursor: 0
   m_bloodCube:
   - {fileID: 1391852346370616, guid: 3cccedd4060fa704792d0986774e222a, type: 2}
   - {fileID: 1856350265260026, guid: 4080d1b2f48d76d41bf9602c055e873d, type: 2}
@@ -1626,6 +1641,7 @@ MonoBehaviour:
   m_SuperJumpSpeed: 20
   m_SuperJumpGravity: 1
   m_RegularJumpGravity: 2
+  m_jumpBuffer: 10
 --- !u!114 &114984504924142556
 MonoBehaviour:
   m_ObjectHideFlags: 1
