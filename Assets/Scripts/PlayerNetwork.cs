@@ -77,6 +77,7 @@ public class PlayerNetwork : Photon.MonoBehaviour {
     public int killCount;
 
     public bool showCursor;
+    public bool shootEnable;
 
     //Bloody effect
     [SerializeField] GameObject[] m_bloodCube;
@@ -127,6 +128,7 @@ public class PlayerNetwork : Photon.MonoBehaviour {
         SetColor();
 
         showCursor = false;
+        shootEnable = true;
 	}
 
     private void Update()
@@ -165,7 +167,11 @@ public class PlayerNetwork : Photon.MonoBehaviour {
                 overHeated = false;
             }
 
-            Movement();
+
+            if (shootEnable)
+            {
+                Movement();
+            }
             PlayerPowerSort();
             m_healthText.text = "HP:" + m_health.ToString("F0");
 			m_healthSlider.value = m_health;
@@ -401,11 +407,13 @@ public class PlayerNetwork : Photon.MonoBehaviour {
                 transform.GetChild(1).GetComponent<Renderer>().enabled = false;
                 transform.GetChild(0).GetComponent<Renderer>().enabled = false;
                 transform.GetChild(6).GetComponent<Renderer>().enabled = false;
-                /*Cursor.visible = true;
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.lockState = CursorLockMode.Confined;*/
+                
+                //we have to access mouse look so that we can change the state of the mouse
                 this.GetComponent<FirstPersonController>().showMouse();
-                showCursor = true;
+
+                //disable the chracter Controller so that it won't be able to move anymore, also it will disable the collider
+                this.GetComponent<CharacterController>().enabled = false;
+                shootEnable = false;
                 
                 NetworkManager.GetComponent<PhotonNetworkManager>().endPanel.SetActive(true);
             }

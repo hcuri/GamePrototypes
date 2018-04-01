@@ -1504,6 +1504,7 @@ MonoBehaviour:
   NetworkManager: {fileID: 0}
   killCount: 0
   showCursor: 0
+  shootEnable: 0
   m_bloodCube:
   - {fileID: 1391852346370616, guid: 3cccedd4060fa704792d0986774e222a, type: 2}
   - {fileID: 1856350265260026, guid: 4080d1b2f48d76d41bf9602c055e873d, type: 2}
