@@ -81,6 +81,7 @@ public class PlayerNetwork : Photon.MonoBehaviour {
 
     //Bloody effect
     [SerializeField] GameObject[] m_bloodCube;
+    [SerializeField] GameObject gameFlowManager;
 
     private void Start ()
     {
@@ -129,6 +130,8 @@ public class PlayerNetwork : Photon.MonoBehaviour {
 
         showCursor = false;
         shootEnable = true;
+
+        gameFlowManager = GameObject.Find("GameFlowManager");
 	}
 
     private void Update()
@@ -136,13 +139,6 @@ public class PlayerNetwork : Photon.MonoBehaviour {
         /*if(!isSet && player_ID != -1)
         {
             //called a RPC to set my ID on every client
-        }*/
-        /*if (showCursor)
-        {
-            //Cursor.lockState = CursorLockMode.None;
-            //Cursor.lockState = CursorLockMode.Confined;
-            Cursor.visible = true;
-            //showCursor = false;
         }*/
 
         if (m_pv.isMine)
@@ -205,6 +201,7 @@ public class PlayerNetwork : Photon.MonoBehaviour {
 			damageImage.color = Color.Lerp (damageImage.color, Color.clear, 0.5f*Time.deltaTime);
             if(weaponPointer != -1)
                 weaponUpdatePosition();
+
             return;
         }
     }
@@ -396,67 +393,19 @@ public class PlayerNetwork : Photon.MonoBehaviour {
             else if(m_pv.isMine)
             {
                 //Die
-                //m_myPlayerControlScript.enabled = false;
-                //KillWarn(shooterID, player_ID);
-                //PhotonNetwork.Disconnect();
-                /*Cursor.lockState = CursorLockMode.None;
-                Cursor.lockState = CursorLockMode.Confined;
-                Cursor.visible = true;*/
-                //SceneManager.LoadScene("EndScene");
                 Debug.Log("I'm Dying");
                 transform.GetChild(1).GetComponent<Renderer>().enabled = false;
                 transform.GetChild(0).GetComponent<Renderer>().enabled = false;
                 transform.GetChild(6).GetComponent<Renderer>().enabled = false;
-                
-                //we have to access mouse look so that we can change the state of the mouse
-                this.GetComponent<FirstPersonController>().showMouse();
 
-                //disable the chracter Controller so that it won't be able to move anymore, also it will disable the collider
-                this.GetComponent<CharacterController>().enabled = false;
-                shootEnable = false;
-                
-                NetworkManager.GetComponent<PhotonNetworkManager>().endPanel.SetActive(true);
+                disableMove();
             }
+            gameFlowManager.GetComponent<GameFlowManager>().playerDead(gameObject);
             NetworkManager.GetComponent<PhotonNetworkManager>().killWarn(shooterID, player_ID);
+
         }
-
-        // hides the dead body *cue murder sound effects
-       /* if (m_health <= 0 && !m_pv.isMine)
-        {
-            Debug.Log("Someone is dying");
-            transform.GetChild(1).GetComponent<Renderer>().enabled = false;
-            transform.GetChild(0).GetComponent<Renderer>().enabled = false;
-            //KillWarn(shooterID, player_ID);
-            //m_pv.RPC("KillWarn", PhotonTargets.AllBuffered, shooterID, player_ID);
-        }
-
-        if (m_health <= 0 && m_pv.isMine)
-        {
-            //Die
-            //m_myPlayerControlScript.enabled = false;
-            Debug.Log("You are died");
-
-            //KillWarn(shooterID, player_ID);
-
-			PhotonNetwork.Disconnect();
-			Cursor.lockState = CursorLockMode.None;
-			Cursor.lockState = CursorLockMode.Confined;
-			Cursor.visible = true;
-			SceneManager.LoadScene("EndScene");
-        }*/
-
-  
     }
 
-    /*private void OnGUI()
-    {
-        if (showCursor)
-        {
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.lockState = CursorLockMode.Confined;
-        }
-    }*/
 
     [PunRPC]
     public void TakeDamage(int damage, int shooterID)
@@ -643,6 +592,16 @@ public class PlayerNetwork : Photon.MonoBehaviour {
     {
         return ++killCount;
         
+    }
+
+    public void disableMove()
+    {
+        //we have to access mouse look so that we can change the state of the mouse
+        this.GetComponent<FirstPersonController>().showMouse();
+
+        //disable the chracter Controller so that it won't be able to move anymore, also it will disable the collider
+        this.GetComponent<CharacterController>().enabled = false;
+        shootEnable = false;
     }
 
 

@@ -7,10 +7,19 @@ public class GameFlowManager : MonoBehaviour {
     public GameObject[] playerInGame;
     public int playerCount;
     public bool playerInGameIsFilled;
-	// Use this for initialization
-	void Start () {
+
+    public GameObject endPanel;
+    public GameObject winPanel;
+    // Use this for initialization
+    void Start () {
         playerInGameIsFilled = false;
-	}
+
+        //add by Po,
+        endPanel = GameObject.Find("EndPanel");
+        winPanel = GameObject.Find("WinPanel");
+        endPanel.SetActive(false);
+        winPanel.SetActive(false);
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -18,7 +27,33 @@ public class GameFlowManager : MonoBehaviour {
         {
             playerInGame = GameObject.FindGameObjectsWithTag("Player");
             playerCount = playerInGame.Length;
-            playerInGameIsFilled = false;
+            playerInGameIsFilled = true;
         }
 	}
+
+    public void playerDead(GameObject deadPlayer)
+    {
+        if (deadPlayer.GetComponent<PhotonView>().isMine)
+        {
+            setLost();
+        }
+
+        playerCount--;
+        return;
+    }
+
+    public int requestPlayerNumber()
+    {
+        return playerCount;
+    }
+
+    public void setWin()
+    {
+        winPanel.SetActive(true);
+    }
+
+    public void setLost()
+    {
+        endPanel.SetActive(true);
+    }
 }

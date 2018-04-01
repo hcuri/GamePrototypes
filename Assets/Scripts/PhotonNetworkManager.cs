@@ -25,8 +25,6 @@ public class PhotonNetworkManager : Photon.PunBehaviour
     [SerializeField] private Text killCountText;
     [SerializeField] private GameObject[] PlayersInGame;
 
-    public GameObject endPanel;
-
     // todo: remove
     public bool debugMode = false;
 
@@ -46,10 +44,6 @@ public class PhotonNetworkManager : Photon.PunBehaviour
         joinedRoom = false;
         //Initial the array which to keep track of players
         PlayersInGame = new GameObject[numPeopleToStart];
-
-        //add by Po,
-        endPanel = GameObject.Find("EndPanel");
-        endPanel.SetActive(false);
     }
 
     public override void OnJoinedLobby()
