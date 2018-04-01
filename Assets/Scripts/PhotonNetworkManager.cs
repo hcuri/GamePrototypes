@@ -203,9 +203,11 @@ public class PhotonNetworkManager : Photon.PunBehaviour
         {
             killCountText.text = "Killed " + killCount + " Capsules";
         }
+    }
 
-
-
-        
+    public void ExitGame()
+    {
+        Debug.Log("Exit Game!!!");
+        Application.Quit();
     }
 }
