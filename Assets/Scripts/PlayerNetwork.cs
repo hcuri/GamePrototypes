@@ -604,10 +604,8 @@ public class PlayerNetwork : Photon.MonoBehaviour {
         shootEnable = false;
     }
 
-
-    /*[PunRPC]
-    public void KillWarn(int Killer, int Victim)
+    public float returnHealth()
     {
-        Debug.Log("Killer is: " + Killer + " Victim is: " + Victim);
-    }*/
+        return m_health;
+    }
 }

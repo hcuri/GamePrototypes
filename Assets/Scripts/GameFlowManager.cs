@@ -39,6 +39,10 @@ public class GameFlowManager : MonoBehaviour {
         }
 
         playerCount--;
+        if(playerCount == 1)
+        {
+            checkWin();
+        }
         return;
     }
 
@@ -56,4 +60,18 @@ public class GameFlowManager : MonoBehaviour {
     {
         endPanel.SetActive(true);
     }
+
+    public void checkWin()
+    {
+        foreach(GameObject livePlayer in playerInGame)
+        {
+            if(livePlayer.GetComponent<PlayerNetwork>().returnHealth() >= 0.0f)
+            {
+
+            }
+        }
+    }
+
+    [PunRPC]
+    public void
 }
