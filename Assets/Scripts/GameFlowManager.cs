@@ -85,6 +85,8 @@ public class GameFlowManager : MonoBehaviour {
                 int id = livePlayer.GetComponent<PhotonView>().ownerId;
 
                 this.GetComponent<PhotonView>().RPC("sendWin", PhotonPlayer.Find(id));
+
+                livePlayer.GetComponent<FirstPersonController>().showMouse();
             }
         }
     }
@@ -93,5 +95,6 @@ public class GameFlowManager : MonoBehaviour {
     public void sendWin()
     {
         winPanel.SetActive(true);
+        
     }
 }

@@ -92,7 +92,7 @@ public class PhotonNetworkManager : Photon.PunBehaviour
             Debug.Log("remaining players: " + currentNumPlayers);
 
             // probably means that you have won
-            if(currentNumPlayers == 1)
+            /*if(currentNumPlayers == 1)
             {
                 Debug.Log("You iZ Winna!");
 				PhotonNetwork.Disconnect();
@@ -100,7 +100,7 @@ public class PhotonNetworkManager : Photon.PunBehaviour
 				//Cursor.lockState = CursorLockMode.Confined;
 				Cursor.visible = true;
 				SceneManager.LoadScene("WinScene");
-            }
+            }*/
         }
         else
         {

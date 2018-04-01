@@ -393,7 +393,7 @@ public class PlayerNetwork : Photon.MonoBehaviour {
             else if(m_pv.isMine)
             {
                 //Die
-                Debug.Log("I'm Dying");
+                //Debug.Log("I'm Dying");
                 transform.GetChild(1).GetComponent<Renderer>().enabled = false;
                 transform.GetChild(0).GetComponent<Renderer>().enabled = false;
                 transform.GetChild(6).GetComponent<Renderer>().enabled = false;
