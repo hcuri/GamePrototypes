@@ -208,7 +208,7 @@ public class PhotonNetworkManager : Photon.PunBehaviour
     public void Reload()
     {
         PhotonNetwork.Disconnect();
-        Scene m_Scene = SceneManager.GetActiveScene();
-        SceneManager.LoadScene(m_Scene.name);
+        //Scene m_Scene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene("Scene0");
     }
 }
