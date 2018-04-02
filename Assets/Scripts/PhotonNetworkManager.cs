@@ -204,4 +204,11 @@ public class PhotonNetworkManager : Photon.PunBehaviour
         Debug.Log("Exit Game!!!");
         Application.Quit();
     }
+
+    public void Reload()
+    {
+        PhotonNetwork.Disconnect();
+        Scene m_Scene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(m_Scene.name);
+    }
 }
