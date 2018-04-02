@@ -80,8 +80,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerInGame: []
   playerCount: 0
+  total_Player: 0
   playerInGameIsFilled: 0
   pNManager: {fileID: 0}
   endPanel: {fileID: 0}
   winPanel: {fileID: 0}
   isDebugging: 0
+  playersRemain: {fileID: 0}

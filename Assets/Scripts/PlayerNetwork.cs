@@ -78,6 +78,7 @@ public class PlayerNetwork : Photon.MonoBehaviour {
 
     public bool showCursor;
     public bool shootEnable;
+    public bool isDead;
 
     //Bloody effect
     [SerializeField] GameObject[] m_bloodCube;
@@ -130,6 +131,7 @@ public class PlayerNetwork : Photon.MonoBehaviour {
 
         showCursor = false;
         shootEnable = true;
+        isDead = false;
 
         gameFlowManager = GameObject.Find("GameFlowManager");
 	}
@@ -193,7 +195,8 @@ public class PlayerNetwork : Photon.MonoBehaviour {
 				m_spdText.text = "Projectile Speed: " + WeaponSpeedEmpoweredCounter + "/5";
 			}*/
 			if (!insideZone) {
-				TakeDamage (Time.deltaTime * m_HPReducedPerSecond, -1);
+                //TakeDamage (Time.deltaTime * m_HPReducedPerSecond, -1);
+                this.GetComponent<PhotonView>().RPC("TakeDamage", PhotonTargets.AllBuffered, Time.deltaTime * m_HPReducedPerSecond, -1);
 				zoneText.text = "You're taking damage inside the zone!";
 			} else {
 				zoneText.text = "";
@@ -381,14 +384,17 @@ public class PlayerNetwork : Photon.MonoBehaviour {
 			damageImage.color = damageColor;
 		}
 
-        if (m_health <= 0)
+        if (m_health <= 0 && !isDead)
         {
+            isDead = true;
             //Debug.Log("my Id is: " + player_ID + "my photon id is: " + m_pv.ownerId);
             if (!m_pv.isMine)
             {
                 transform.GetChild(1).GetComponent<Renderer>().enabled = false;
                 transform.GetChild(0).GetComponent<Renderer>().enabled = false;
                 transform.GetChild(6).GetComponent<Renderer>().enabled = false;
+
+                this.GetComponent<CharacterController>().enabled = false;
             }
             else if(m_pv.isMine)
             {
@@ -402,7 +408,6 @@ public class PlayerNetwork : Photon.MonoBehaviour {
             }
             gameFlowManager.GetComponent<GameFlowManager>().playerDead(gameObject);
             NetworkManager.GetComponent<PhotonNetworkManager>().killWarn(shooterID, player_ID);
-
         }
     }
 

@@ -51,7 +51,6 @@ public class GameFlowManager : MonoBehaviour {
         }
 
         playerCount--;
-
         updatePlayerRemain();
         if (playerCount == 1 && !isDebugging)
         {
