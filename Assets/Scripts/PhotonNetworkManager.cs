@@ -15,7 +15,7 @@ public class PhotonNetworkManager : Photon.PunBehaviour
     [SerializeField] private GameObject lobbyCamera;
 
 	private Text waitingText;
-	private Text playersRemain;
+	//private Text playersRemain;
 	private bool joinedRoom;
     public float countDownToStart = 5.0f;
     private bool countingDown = false;
@@ -35,8 +35,8 @@ public class PhotonNetworkManager : Photon.PunBehaviour
         PhotonNetwork.automaticallySyncScene = true;
 		waitingText = GameObject.Find("WaitingText").GetComponent<Text>();
 		waitingText.text = "";
-		playersRemain = GameObject.Find ("PlayersRemain").GetComponent<Text> ();
-		playersRemain.text = "";
+		/*playersRemain = GameObject.Find ("PlayersRemain").GetComponent<Text> ();
+		playersRemain.text = "";*/
         killText = GameObject.Find("KillMessage").GetComponent<Text>();
         killText.text = "";
         killCountText = GameObject.Find("KillCountMessage").GetComponent<Text>();
@@ -92,15 +92,15 @@ public class PhotonNetworkManager : Photon.PunBehaviour
             Debug.Log("remaining players: " + currentNumPlayers);
 
             // probably means that you have won
-            if(currentNumPlayers == 1)
+            /*if(currentNumPlayers == 1)
             {
                 Debug.Log("You iZ Winna!");
 				PhotonNetwork.Disconnect();
 				Cursor.lockState = CursorLockMode.None;
-				Cursor.lockState = CursorLockMode.Confined;
+				//Cursor.lockState = CursorLockMode.Confined;
 				Cursor.visible = true;
 				SceneManager.LoadScene("WinScene");
-            }
+            }*/
         }
         else
         {
@@ -140,13 +140,13 @@ public class PhotonNetworkManager : Photon.PunBehaviour
 
 		if (!joinedRoom && !countingDown) {
 			waitingText.text = "Waiting for more players..." + PhotonNetwork.room.PlayerCount + "/" + numPeopleToStart;
-			playersRemain.text = "";
+			//playersRemain.text = "";
 		} else if (!joinedRoom && countingDown) {
 			waitingText.text = "Game is starting in... " + (int)(countDownToStart + 1);
-			playersRemain.text = "Players remaining: " + PhotonNetwork.room.PlayerCount + "/" + numPeopleToStart;
+			//playersRemain.text = "Players remaining: " + PhotonNetwork.room.PlayerCount + "/" + numPeopleToStart;
 		} else {
 			waitingText.text = "";
-			playersRemain.text = "Players remaining: " + PhotonNetwork.room.PlayerCount + "/" + numPeopleToStart;
+			//playersRemain.text = "Players remaining: " + PhotonNetwork.room.PlayerCount + "/" + numPeopleToStart;
             netInfo.text = "";
         }
     }
@@ -197,9 +197,18 @@ public class PhotonNetworkManager : Photon.PunBehaviour
         {
             killCountText.text = "Killed " + killCount + " Capsules";
         }
+    }
 
+    public void ExitGame()
+    {
+        Debug.Log("Exit Game!!!");
+        Application.Quit();
+    }
 
-
-        
+    public void Reload()
+    {
+        PhotonNetwork.Disconnect();
+        //Scene m_Scene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene("Scene0");
     }
 }
