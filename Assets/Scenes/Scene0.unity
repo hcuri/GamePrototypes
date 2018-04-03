@@ -214,11 +214,21 @@ Prefab:
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1830691466}
     - target: {fileID: 114863539826124174, guid: 80ecf24bfedc1be49b29428d3e60b151,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
+      objectReference: {fileID: 1830691466}
+    - target: {fileID: 114129609355926910, guid: 80ecf24bfedc1be49b29428d3e60b151,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: NextScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 114863539826124174, guid: 80ecf24bfedc1be49b29428d3e60b151,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ExitGame
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 80ecf24bfedc1be49b29428d3e60b151, type: 2}
@@ -492,6 +502,12 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a968a6112c32b8a4b91db83a8c047101, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &1830691466 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114957694770608878, guid: 14af63a2d4041024c874916a6d469474,
+    type: 2}
+  m_PrefabInternal: {fileID: 923882369}
+  m_Script: {fileID: 11500000, guid: d72f769628734df4a945cba9b62d7dd3, type: 3}
 --- !u!1 &1904384414
 GameObject:
   m_ObjectHideFlags: 0

@@ -46,7 +46,7 @@ public class PhotonNetworkManager : Photon.PunBehaviour
         joinedRoom = false;
         //Initial the array which to keep track of players
         PlayersInGame = new GameObject[numPeopleToStart];
-        nameCarrier = GameObject.Find("");
+        nameCarrier = GameObject.Find("NameCarrier");
     }
 
     public override void OnJoinedLobby()

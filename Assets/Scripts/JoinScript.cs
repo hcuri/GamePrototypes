@@ -18,6 +18,7 @@ public class JoinScript : MonoBehaviour {
 
     public void NextScene()
 	{
+        Debug.Log("Jump");
         nameCarrier.GetComponent<CarryName>().carryName(input_text.text);
 		SceneManager.LoadScene("Scene1");
 	}
