@@ -25,6 +25,8 @@ public class PhotonNetworkManager : Photon.PunBehaviour
     [SerializeField] private Text killCountText;
     [SerializeField] private GameObject[] PlayersInGame;
 
+    public GameObject nameCarrier;
+
     // todo: remove
     public bool debugMode = false;
 
@@ -33,9 +35,9 @@ public class PhotonNetworkManager : Photon.PunBehaviour
     {
         PhotonNetwork.ConnectUsingSettings("ver 0.1");
         PhotonNetwork.automaticallySyncScene = true;
-		waitingText = GameObject.Find("WaitingText").GetComponent<Text>();
-		waitingText.text = "";
-		/*playersRemain = GameObject.Find ("PlayersRemain").GetComponent<Text> ();
+        waitingText = GameObject.Find("WaitingText").GetComponent<Text>();
+        waitingText.text = "";
+        /*playersRemain = GameObject.Find ("PlayersRemain").GetComponent<Text> ();
 		playersRemain.text = "";*/
         killText = GameObject.Find("KillMessage").GetComponent<Text>();
         killText.text = "";
@@ -44,6 +46,7 @@ public class PhotonNetworkManager : Photon.PunBehaviour
         joinedRoom = false;
         //Initial the array which to keep track of players
         PlayersInGame = new GameObject[numPeopleToStart];
+        nameCarrier = GameObject.Find("");
     }
 
     public override void OnJoinedLobby()
