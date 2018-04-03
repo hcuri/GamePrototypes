@@ -137,6 +137,9 @@ public class PhotonNetworkManager : Photon.PunBehaviour
 
                 lobbyCamera.SetActive(false);
 
+                go.GetComponent<PhotonView>().RPC("setMyName", PhotonTargets.AllBuffered, nameCarrier.GetComponent<CarryName>().input_name);
+                //go.GetComponent<PlayerNetwork>().setMyName(nameCarrier.GetComponent<CarryName>().input_name);
+
                 GameObject.Find("ShrinkingZone").GetComponent<ShrinkingZoneScript>().startShrinking();
             }
         }
