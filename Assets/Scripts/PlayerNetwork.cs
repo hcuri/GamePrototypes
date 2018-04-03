@@ -631,6 +631,9 @@ public class PlayerNetwork : Photon.MonoBehaviour {
     [PunRPC]
     public void setMyTag()
     {
-        nameOnHead.text = playerName;
+        if (playerName == "")
+            nameOnHead.text = "empty";
+        else
+            nameOnHead.text = playerName;
     }
 }
