@@ -88,8 +88,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_AudioSource = GetComponent<AudioSource>();
             m_MouseLook.Init(transform, m_Camera.transform);
 
-			m_jumpCooldownText = GameObject.Find ("JumpCD").GetComponent<Text> ();
-			m_jumpCooldownSlider = GameObject.Find ("CDSlider").GetComponent<Slider> ();
+			//m_jumpCooldownText = GameObject.Find ("JumpCD").GetComponent<Text> ();
+			//m_jumpCooldownSlider = GameObject.Find ("CDSlider").GetComponent<Slider> ();
 			//m_jumpCooldownFill = GameObject.Find ("CDFill").GetComponent<Color> ();
         }
 
@@ -149,7 +149,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 				m_jumpCooldownText.text = "Jump Cooldown: " + (int)(JumpPermitTime - Time.time);
 				//m_jumpCooldownFill.color = new Color32 (0, 123, 0, 255);
 			} else {
-				m_jumpCooldownText.text = "Super Jump Ready!";
+				//m_jumpCooldownText.text = "Super Jump Ready!";
 				//m_jumpCooldownFill.color = new Color32 (0, 255, 0, 255);
 			}
 				
@@ -326,6 +326,11 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 return;
             }
             body.AddForceAtPosition(m_CharacterController.velocity * 0.1f, hit.point, ForceMode.Impulse);
+        }
+
+        public void showMouse()
+        {
+            m_MouseLook.SetCursorLock(false);
         }
     }
 }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityStandardAssets.Characters.FirstPerson;
 
 public class PlayerNetwork : Photon.MonoBehaviour {
 
@@ -76,8 +77,13 @@ public class PlayerNetwork : Photon.MonoBehaviour {
     [SerializeField] GameObject NetworkManager;
     public int killCount;
 
+    public bool showCursor;
+    public bool shootEnable;
+    public bool isDead;
+
     //Bloody effect
     [SerializeField] GameObject[] m_bloodCube;
+    [SerializeField] GameObject gameFlowManager;
 
     private void Start ()
     {
@@ -123,6 +129,12 @@ public class PlayerNetwork : Photon.MonoBehaviour {
 
         //start looking green
         SetColor();
+
+        showCursor = false;
+        shootEnable = true;
+        isDead = false;
+
+        gameFlowManager = GameObject.Find("GameFlowManager");
 	}
 
     private void Update()
@@ -131,7 +143,8 @@ public class PlayerNetwork : Photon.MonoBehaviour {
         {
             //called a RPC to set my ID on every client
         }*/
-        if(m_pv.isMine)
+
+        if (m_pv.isMine)
         {
             Weapon_Cool_Heat();
 
@@ -153,7 +166,11 @@ public class PlayerNetwork : Photon.MonoBehaviour {
                 overHeated = false;
             }
 
-            Movement();
+
+            if (shootEnable)
+            {
+                Movement();
+            }
             PlayerPowerSort();
             m_healthText.text = "HP:" + m_health.ToString("F0");
 			m_healthSlider.value = m_health;
@@ -179,7 +196,8 @@ public class PlayerNetwork : Photon.MonoBehaviour {
 				m_spdText.text = "Projectile Speed: " + WeaponSpeedEmpoweredCounter + "/5";
 			}*/
 			if (!insideZone) {
-				TakeDamage (Time.deltaTime * m_HPReducedPerSecond, -1);
+                //TakeDamage (Time.deltaTime * m_HPReducedPerSecond, -1);
+                this.GetComponent<PhotonView>().RPC("TakeDamage", PhotonTargets.AllBuffered, Time.deltaTime * m_HPReducedPerSecond, -1);
 				zoneText.text = "You're taking damage inside the zone!";
 			} else {
 				zoneText.text = "";
@@ -187,6 +205,7 @@ public class PlayerNetwork : Photon.MonoBehaviour {
 			damageImage.color = Color.Lerp (damageImage.color, Color.clear, 0.5f*Time.deltaTime);
             if(weaponPointer != -1)
                 weaponUpdatePosition();
+
             return;
         }
     }
@@ -281,7 +300,8 @@ public class PlayerNetwork : Photon.MonoBehaviour {
 
                     Vector3 position = playerCamera.transform.position + pos;
                     Vector3 velocity = playerCamera.transform.forward * m_throwforce;
-                    m_pv.RPC("InstantiateWeapon", PhotonTargets.AllBuffered, weapName, position, velocity, toScale);
+                    //m_pv.RPC("InstantiateWeapon", PhotonTargets.AllBuffered, weapName, position, velocity, toScale);
+                    InstantiateWeapon(weapName, position, velocity, toScale);
                 }
             }
 
@@ -300,12 +320,13 @@ public class PlayerNetwork : Photon.MonoBehaviour {
         }
     }
 
-    [PunRPC]
+    //[PunRPC]
     public void InstantiateWeapon(String weaponName, Vector3 position, Vector3 velocity, float toScale)
     {
         //GameObject infiniteWeapon = PhotonNetwork.Instantiate(weaponName, position, Quaternion.identity, 0);
         //GameObject infiniteWeapon = GameObject.Instantiate((GameObject)Resources.Load(weaponName), position, Quaternion.identity);
-        GameObject infiniteWeapon = GameObject.Instantiate((GameObject)Resources.Load("Weapon3_Spiky"), position, Quaternion.identity);
+        GameObject infiniteWeapon = PhotonNetwork.Instantiate("Weapon3_Spiky", position, Quaternion.identity, 0);
+        //GameObject infiniteWeapon = GameObject.Instantiate((GameObject)Resources.Load("Weapon3_Spiky"), position, Quaternion.identity);
         infiniteWeapon.transform.Rotate(playerCamera.transform.right * 90);
         infiniteWeapon.GetComponent<Rigidbody>().isKinematic = false;
 
@@ -369,55 +390,33 @@ public class PlayerNetwork : Photon.MonoBehaviour {
 			damageImage.color = damageColor;
 		}
 
-        if (m_health <= 0)
+        if (m_health <= 0 && !isDead)
         {
+            isDead = true;
             //Debug.Log("my Id is: " + player_ID + "my photon id is: " + m_pv.ownerId);
             if (!m_pv.isMine)
             {
                 transform.GetChild(1).GetComponent<Renderer>().enabled = false;
                 transform.GetChild(0).GetComponent<Renderer>().enabled = false;
+                transform.GetChild(6).GetComponent<Renderer>().enabled = false;
+
+                this.GetComponent<CharacterController>().enabled = false;
             }
             else if(m_pv.isMine)
             {
                 //Die
-                //m_myPlayerControlScript.enabled = false;
-                //KillWarn(shooterID, player_ID);
-                PhotonNetwork.Disconnect();
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.lockState = CursorLockMode.Confined;
-                Cursor.visible = true;
-                SceneManager.LoadScene("EndScene");
+                //Debug.Log("I'm Dying");
+                transform.GetChild(1).GetComponent<Renderer>().enabled = false;
+                transform.GetChild(0).GetComponent<Renderer>().enabled = false;
+                transform.GetChild(6).GetComponent<Renderer>().enabled = false;
+
+                disableMove();
             }
+            gameFlowManager.GetComponent<GameFlowManager>().playerDead(gameObject);
             NetworkManager.GetComponent<PhotonNetworkManager>().killWarn(shooterID, player_ID);
         }
-
-        // hides the dead body *cue murder sound effects
-       /* if (m_health <= 0 && !m_pv.isMine)
-        {
-            Debug.Log("Someone is dying");
-            transform.GetChild(1).GetComponent<Renderer>().enabled = false;
-            transform.GetChild(0).GetComponent<Renderer>().enabled = false;
-            //KillWarn(shooterID, player_ID);
-            //m_pv.RPC("KillWarn", PhotonTargets.AllBuffered, shooterID, player_ID);
-        }
-
-        if (m_health <= 0 && m_pv.isMine)
-        {
-            //Die
-            //m_myPlayerControlScript.enabled = false;
-            Debug.Log("You are died");
-
-            //KillWarn(shooterID, player_ID);
-
-			PhotonNetwork.Disconnect();
-			Cursor.lockState = CursorLockMode.None;
-			Cursor.lockState = CursorLockMode.Confined;
-			Cursor.visible = true;
-			SceneManager.LoadScene("EndScene");
-        }*/
-
-  
     }
+
 
     [PunRPC]
     public void TakeDamage(int damage, int shooterID)
@@ -605,22 +604,31 @@ public class PlayerNetwork : Photon.MonoBehaviour {
         
     }
 
+    public void disableMove()
+    {
+        //we have to access mouse look so that we can change the state of the mouse
+        this.GetComponent<FirstPersonController>().showMouse();
+
+        //disable the chracter Controller so that it won't be able to move anymore, also it will disable the collider
+        this.GetComponent<CharacterController>().enabled = false;
+        shootEnable = false;
+    }
+
+    public float returnHealth()
+    {
+        return m_health;
+    }
+
     IEnumerator bigBallsPowerup(float time)
     {
         Debug.Log("big ball powerup starting");
         largeBalls = true;
         int temp = WeaponDamageEmpoweredCounter;
         WeaponDamageEmpoweredCounter = 5;
-        
+
         yield return new WaitForSeconds(time);
         largeBalls = false;
         WeaponDamageEmpoweredCounter = temp;
         Debug.Log("Big ball powerup ending");
     }
-
-    /*[PunRPC]
-    public void KillWarn(int Killer, int Victim)
-    {
-        Debug.Log("Killer is: " + Killer + " Victim is: " + Victim);
-    }*/
 }
