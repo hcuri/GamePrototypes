@@ -97,6 +97,11 @@ public class PowerUpScript : Photon.MonoBehaviour {
                 other.GetComponent<PhotonView>().RPC("GetPowerUp", PhotonTargets.AllBuffered, m_type);
             }
 
+            if(!isRespawnable)
+            {
+                PhotonNetwork.Destroy(gameObject);
+            }
+
             GetComponent<PhotonView>().RPC("WaitForRespawn", PhotonTargets.AllBuffered);
         }
     }

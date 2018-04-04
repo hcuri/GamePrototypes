@@ -396,7 +396,7 @@ public class PlayerNetwork : Photon.MonoBehaviour {
 
                 this.GetComponent<CharacterController>().enabled = false;
             }
-            else if(m_pv.isMine)
+            else if (m_pv.isMine)
             {
                 //Die
                 //Debug.Log("I'm Dying");
@@ -408,6 +408,13 @@ public class PlayerNetwork : Photon.MonoBehaviour {
             }
             gameFlowManager.GetComponent<GameFlowManager>().playerDead(gameObject);
             NetworkManager.GetComponent<PhotonNetworkManager>().killWarn(shooterID, player_ID);
+
+            for (int i = 0; i < 5; i++)
+            {
+                PhotonNetwork.Instantiate("SpreePowerUp", transform.position + new Vector3(UnityEngine.Random.Range(-3f, 3f), 35, UnityEngine.Random.Range(-3f, 3f)), Quaternion.identity, 0);
+            }
+            GameObject g1 = PhotonNetwork.Instantiate("SpreePowerUp", transform.position + new Vector3(UnityEngine.Random.Range(-3f, 3f), 35, UnityEngine.Random.Range(-3f, 3f)), Quaternion.identity, 0);
+            g1.GetComponent<PhotonView>().RPC("SetType", PhotonTargets.AllBuffered, UnityEngine.Random.Range(1, 3));         
         }
     }
 
