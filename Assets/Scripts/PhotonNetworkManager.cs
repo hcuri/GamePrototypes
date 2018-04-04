@@ -91,6 +91,15 @@ public class PhotonNetworkManager : Photon.PunBehaviour
             int currentNumPlayers = PhotonNetwork.room.PlayerCount;
             Debug.Log("remaining players: " + currentNumPlayers);
 
+            foreach(PhotonView pv in FindObjectsOfType<PhotonView>())
+            {
+                if(pv.ownerId == otherPlayer.ID && pv.gameObject.CompareTag("Player"))
+                {
+                    FindObjectOfType<GameFlowManager>().playerDisconnected();
+                    killText.text = "Player" + pv.ownerId + " has disconnected";
+                }
+            }
+
             // probably means that you have won
             /*if(currentNumPlayers == 1)
             {

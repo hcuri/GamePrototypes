@@ -58,6 +58,17 @@ public class GameFlowManager : MonoBehaviour {
         }
         return;
     }
+    
+    public void playerDisconnected()
+    {
+        playerCount--;
+        updatePlayerRemain();
+        if (playerCount == 1 && !isDebugging)
+        {
+            checkWin();
+        }
+        return;
+    }
 
     public int requestPlayerNumber()
     {
