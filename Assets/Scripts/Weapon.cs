@@ -125,4 +125,11 @@ public class Weapon : MonoBehaviour {
         m_damage = m_damage + 5;
     }
 
+    [PunRPC]
+    public void setSize(float bSize)
+    {
+        transform.localScale *= bSize;
+    }
+
+
 }
