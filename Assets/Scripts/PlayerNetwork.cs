@@ -502,7 +502,7 @@ public class PlayerNetwork : Photon.MonoBehaviour {
     public void GetPowerUp(int powerType)
     {
         Debug.Log("I get Power: " + powerType);
-        if(powerType == 0)
+        if (powerType == 0)
         {
             HPPickedUp = true;
             //m_power = 0;
@@ -513,28 +513,29 @@ public class PlayerNetwork : Photon.MonoBehaviour {
             if (WeaponDamageEmpoweredCounter < 5)
             {
                 //m_power = 2;
-				WeaponDamageEmpoweredCounter = WeaponDamageEmpoweredCounter + 1;
+                WeaponDamageEmpoweredCounter = WeaponDamageEmpoweredCounter + 1;
             }
             else
             {
-				WeaponDamageEmpoweredCounter = 5;
-			}
+                WeaponDamageEmpoweredCounter = 5;
+            }
         }
         else if (powerType == 2)
         {
             if (WeaponSpeedEmpoweredCounter < 5)
             {
                 //m_power = 3;
-				WeaponSpeedEmpoweredCounter = WeaponSpeedEmpoweredCounter + 1;
+                WeaponSpeedEmpoweredCounter = WeaponSpeedEmpoweredCounter + 1;
             }
             else
             {
-				WeaponSpeedEmpoweredCounter = 5;
-			}
+                WeaponSpeedEmpoweredCounter = 5;
+            }
         }
-        else if(powerType == 4)
+        else if (powerType == 4)
         {
             this.GetComponent<PhotonView>().RPC("Binojyutsu", PhotonTargets.AllBuffered);
+        }
         else if (powerType == 3)
         {
             StartCoroutine(bigBallsPowerup(5.0f));
@@ -550,6 +551,7 @@ public class PlayerNetwork : Photon.MonoBehaviour {
         {
             mr.enabled = false;
         }
+        nameOnHead.enabled = false;
         StartCoroutine(ComeBack());
 
     }
@@ -561,8 +563,9 @@ public class PlayerNetwork : Photon.MonoBehaviour {
         {
             mr.enabled = true;
         }
+        nameOnHead.enabled = true;
     }
-
+    
     private IEnumerator ComeBack()
     {
         yield return new WaitForSeconds(disappearTimer);
