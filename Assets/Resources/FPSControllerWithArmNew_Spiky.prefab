@@ -1031,8 +1031,8 @@ MonoBehaviour:
   - {fileID: 114725137554802074}
   - {fileID: 0}
   ObservedComponentsFoldoutOpen: 1
-  viewIdField: 0
-  instantiationId: -1
+  viewIdField: 100
+  instantiationId: 100
   currentMasterID: -1
   isRuntimeInstantiated: 0
 --- !u!114 &114162063625139924
@@ -1134,8 +1134,8 @@ MonoBehaviour:
   - {fileID: 114067638880550254}
   - {fileID: 0}
   ObservedComponentsFoldoutOpen: 1
-  viewIdField: 0
-  instantiationId: -1
+  viewIdField: 97
+  instantiationId: 97
   currentMasterID: -1
   isRuntimeInstantiated: 0
 --- !u!114 &114378928363581240
@@ -1289,7 +1289,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: 46238fb1ad7a7a84ba8954c1c860994c, type: 3}
-    m_FontSize: 20
+    m_FontSize: 30
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
@@ -1324,8 +1324,8 @@ MonoBehaviour:
   - {fileID: 114566641177116842}
   - {fileID: 0}
   ObservedComponentsFoldoutOpen: 1
-  viewIdField: 0
-  instantiationId: -1
+  viewIdField: 98
+  instantiationId: 98
   currentMasterID: -1
   isRuntimeInstantiated: 0
 --- !u!114 &114519322677915810
@@ -1456,8 +1456,8 @@ MonoBehaviour:
   - {fileID: 114984504924142556}
   - {fileID: 0}
   ObservedComponentsFoldoutOpen: 1
-  viewIdField: 0
-  instantiationId: -1
+  viewIdField: 99
+  instantiationId: 99
   currentMasterID: -1
   isRuntimeInstantiated: 0
 --- !u!114 &114725137554802074
@@ -1569,8 +1569,8 @@ MonoBehaviour:
   - {fileID: 114378928363581240}
   - {fileID: 0}
   ObservedComponentsFoldoutOpen: 1
-  viewIdField: 0
-  instantiationId: -1
+  viewIdField: 96
+  instantiationId: 96
   currentMasterID: -1
   isRuntimeInstantiated: 0
 --- !u!114 &114758473113280418
@@ -1642,8 +1642,8 @@ MonoBehaviour:
   - {fileID: 114411077028869060}
   - {fileID: 114758473113280418}
   ObservedComponentsFoldoutOpen: 1
-  viewIdField: 0
-  instantiationId: -1
+  viewIdField: 101
+  instantiationId: 101
   currentMasterID: -1
   isRuntimeInstantiated: 0
 --- !u!114 &114979054943578610
@@ -1944,7 +1944,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 160, y: 30}
+  m_SizeDelta: {x: 300, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224472315900176460
 RectTransform:
