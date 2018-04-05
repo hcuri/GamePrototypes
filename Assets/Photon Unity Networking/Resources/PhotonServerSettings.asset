@@ -61,4 +61,6 @@ MonoBehaviour:
   - KillerWarn
   - KillWarn
   - sendWin
+  - setMyName
+  - setMyTag
   DisableAutoOpenWizard: 1
