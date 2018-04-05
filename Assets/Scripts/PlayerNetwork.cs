@@ -569,7 +569,9 @@ public class PlayerNetwork : Photon.MonoBehaviour {
             for (int i = 0; i < WeaponSpeedEmpoweredCounter; i++)
             {
                 weapon.GetComponent<Weapon>().SetSpeed();
-            }
+            //---
+                weapon.GetComponent<Weapon>().SetSize();
+        }
         
         //}
 
@@ -578,7 +580,7 @@ public class PlayerNetwork : Photon.MonoBehaviour {
             for (int i = 0; i < WeaponDamageEmpoweredCounter; i++)
             {
                 weapon.GetComponent<Weapon>().SetDamage();
-                weapon.GetComponent<Weapon>().SetSize();
+                //weapon.GetComponent<Weapon>().SetSize();
             
             }
         //}
