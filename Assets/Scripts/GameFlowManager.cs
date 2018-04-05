@@ -75,14 +75,12 @@ public class GameFlowManager : MonoBehaviour {
         return playerCount;
     }
 
-    public void setWin()
-    {
-        winPanel.SetActive(true);
-    }
-
     public void setLost()
     {
-        endPanel.SetActive(true);
+        Debug.Log(endPanel.activeSelf + " " + winPanel.activeSelf);
+        if (!endPanel.activeSelf && !winPanel.activeSelf)
+            endPanel.SetActive(true);
+        Debug.Log(endPanel.activeSelf + " " + winPanel.activeSelf);
     }
 
     public void checkWin()
@@ -104,7 +102,7 @@ public class GameFlowManager : MonoBehaviour {
     [PunRPC]
     public void sendWin()
     {
-        winPanel.SetActive(true);
-        
+        if (!endPanel.activeSelf && !winPanel.activeSelf)
+            winPanel.SetActive(true);
     }
 }
