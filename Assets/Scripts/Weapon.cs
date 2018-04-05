@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour {
 
-    [SerializeField] private int m_damage = 10;
+    [SerializeField] private int m_damage = 5;
     [SerializeField] private float m_Size = 1.0f;
     [SerializeField] private float m_Speed = 1.0f;
     [SerializeField] private int m_type = -1;
@@ -124,5 +124,12 @@ public class Weapon : MonoBehaviour {
         //Debug.Log("Power Up the Weapon now!!!");
         m_damage = m_damage + 5;
     }
+
+    [PunRPC]
+    public void setSize(float bSize)
+    {
+        transform.localScale *= bSize;
+    }
+
 
 }

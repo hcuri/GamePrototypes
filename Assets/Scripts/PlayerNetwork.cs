@@ -85,6 +85,9 @@ public class PlayerNetwork : Photon.MonoBehaviour {
     [SerializeField] GameObject[] m_bloodCube;
     [SerializeField] GameObject gameFlowManager;
 
+    public Text nameOnHead;
+    public string playerName;
+
     private void Start ()
     {
         m_pv = GetComponent<PhotonView>();
@@ -102,6 +105,7 @@ public class PlayerNetwork : Photon.MonoBehaviour {
 		//m_spdText = GameObject.Find ("SPD").GetComponent<Text> ();
         m_debugMode = GameObject.Find("NetworkManager").GetComponent<PhotonNetworkManager>().returnDebugMode();
         NetworkManager = GameObject.Find("NetworkManager");
+        nameOnHead = transform.Find("PlayerName").GetComponentInChildren<Text>();
         Initialize();
 
         //added by Po
@@ -135,6 +139,8 @@ public class PlayerNetwork : Photon.MonoBehaviour {
         isDead = false;
 
         gameFlowManager = GameObject.Find("GameFlowManager");
+
+        this.GetComponent<PhotonView>().RPC("setMyTag", PhotonTargets.AllBuffered);
 	}
 
     private void Update()
@@ -276,7 +282,7 @@ public class PlayerNetwork : Photon.MonoBehaviour {
                     //Modify By Po, 3/7
 
                     float toScale = 1.0f;
-                    for (int i = 0; i < WeaponDamageEmpoweredCounter; i++) toScale *= 1.5f;
+                    for (int i = 0; i < WeaponSpeedEmpoweredCounter; i++) toScale *= 1.5f;
 
                     if (largeBalls)
                     {
@@ -336,7 +342,9 @@ public class PlayerNetwork : Photon.MonoBehaviour {
         infiniteWeapon.GetComponent<Rigidbody>().AddForce(velocity * weSpeed);
 
         //Debug.Log("Toscale: " + toScale);
-        infiniteWeapon.GetComponent<Transform>().localScale *= toScale;
+        //infiniteWeapon.GetComponent<Transform>().localScale *= toScale;
+        //increseWeaponSize(infiniteWeapon, toScale);
+        infiniteWeapon.GetComponent<PhotonView>().RPC("setSize", PhotonTargets.AllBuffered, toScale);
         infiniteWeapon.GetComponent<Weapon>().SetID(player_ID);
 
         //infiniteWeapon.GetComponent<Transform>().localScale *= infiniteWeapon.GetComponent<Weapon>().ReturnScale();
@@ -402,7 +410,7 @@ public class PlayerNetwork : Photon.MonoBehaviour {
 
                 this.GetComponent<CharacterController>().enabled = false;
             }
-            else if(m_pv.isMine)
+            else if (m_pv.isMine)
             {
                 //Die
                 //Debug.Log("I'm Dying");
@@ -414,6 +422,13 @@ public class PlayerNetwork : Photon.MonoBehaviour {
             }
             gameFlowManager.GetComponent<GameFlowManager>().playerDead(gameObject);
             NetworkManager.GetComponent<PhotonNetworkManager>().killWarn(shooterID, player_ID);
+
+            for (int i = 0; i < 5; i++)
+            {
+                PhotonNetwork.Instantiate("SpreePowerUp", transform.position + new Vector3(UnityEngine.Random.Range(-3f, 3f), 35, UnityEngine.Random.Range(-3f, 3f)), Quaternion.identity, 0);
+            }
+            GameObject g1 = PhotonNetwork.Instantiate("SpreePowerUp", transform.position + new Vector3(UnityEngine.Random.Range(-3f, 3f), 35, UnityEngine.Random.Range(-3f, 3f)), Quaternion.identity, 0);
+            g1.GetComponent<PhotonView>().RPC("SetType", PhotonTargets.AllBuffered, UnityEngine.Random.Range(1, 3));         
         }
     }
 
@@ -565,10 +580,12 @@ public class PlayerNetwork : Photon.MonoBehaviour {
        
         //if (m_power == 1)//weapon speed
         //{
-            for (int i = 0; i < WeaponSpeedEmpoweredCounter; i++)
-            {
-                weapon.GetComponent<Weapon>().SetSpeed();
-            }
+        for (int i = 0; i < WeaponSpeedEmpoweredCounter; i++)
+        {
+            weapon.GetComponent<Weapon>().SetSpeed();
+        //---
+            weapon.GetComponent<Weapon>().SetSize();
+        }
         
         //}
 
@@ -577,7 +594,7 @@ public class PlayerNetwork : Photon.MonoBehaviour {
             for (int i = 0; i < WeaponDamageEmpoweredCounter; i++)
             {
                 weapon.GetComponent<Weapon>().SetDamage();
-                weapon.GetComponent<Weapon>().SetSize();
+                //weapon.GetComponent<Weapon>().SetSize();
             }
         //}
     }
@@ -618,7 +635,7 @@ public class PlayerNetwork : Photon.MonoBehaviour {
     {
         return m_health;
     }
-
+    
     IEnumerator bigBallsPowerup(float time)
     {
         Debug.Log("big ball powerup starting");
@@ -630,5 +647,22 @@ public class PlayerNetwork : Photon.MonoBehaviour {
         largeBalls = false;
         WeaponDamageEmpoweredCounter = temp;
         Debug.Log("Big ball powerup ending");
+    }
+
+    [PunRPC]
+    public void setMyName(string m_name)
+    {
+        //Debug.Log("Setting Name");
+        //Debug.Log(m_name);
+        playerName = m_name;
+    }
+
+    [PunRPC]
+    public void setMyTag()
+    {
+        if (playerName == "")
+            nameOnHead.text = "empty";
+        else
+            nameOnHead.text = playerName;
     }
 }
