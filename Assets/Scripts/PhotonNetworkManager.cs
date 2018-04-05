@@ -25,6 +25,8 @@ public class PhotonNetworkManager : Photon.PunBehaviour
     [SerializeField] private Text killCountText;
     [SerializeField] private GameObject[] PlayersInGame;
 
+    public GameObject nameCarrier;
+
     // todo: remove
     public bool debugMode = false;
 
@@ -33,9 +35,9 @@ public class PhotonNetworkManager : Photon.PunBehaviour
     {
         PhotonNetwork.ConnectUsingSettings("ver 0.1");
         PhotonNetwork.automaticallySyncScene = true;
-		waitingText = GameObject.Find("WaitingText").GetComponent<Text>();
-		waitingText.text = "";
-		/*playersRemain = GameObject.Find ("PlayersRemain").GetComponent<Text> ();
+        waitingText = GameObject.Find("WaitingText").GetComponent<Text>();
+        waitingText.text = "";
+        /*playersRemain = GameObject.Find ("PlayersRemain").GetComponent<Text> ();
 		playersRemain.text = "";*/
         killText = GameObject.Find("KillMessage").GetComponent<Text>();
         killText.text = "";
@@ -44,6 +46,7 @@ public class PhotonNetworkManager : Photon.PunBehaviour
         joinedRoom = false;
         //Initial the array which to keep track of players
         PlayersInGame = new GameObject[numPeopleToStart];
+        nameCarrier = GameObject.Find("NameCarrier");
     }
 
     public override void OnJoinedLobby()
@@ -91,6 +94,15 @@ public class PhotonNetworkManager : Photon.PunBehaviour
             int currentNumPlayers = PhotonNetwork.room.PlayerCount;
             Debug.Log("remaining players: " + currentNumPlayers);
 
+            foreach(PhotonView pv in FindObjectsOfType<PhotonView>())
+            {
+                if(pv.ownerId == otherPlayer.ID && pv.gameObject.CompareTag("Player"))
+                {
+                    FindObjectOfType<GameFlowManager>().playerDisconnected();
+                    killText.text = "Player" + pv.ownerId + " has disconnected";
+                }
+            }
+
             // probably means that you have won
             /*if(currentNumPlayers == 1)
             {
@@ -133,6 +145,9 @@ public class PhotonNetworkManager : Photon.PunBehaviour
                 PlayersInGame[id-1] = go;
 
                 lobbyCamera.SetActive(false);
+
+                go.GetComponent<PhotonView>().RPC("setMyName", PhotonTargets.AllBuffered, nameCarrier.GetComponent<CarryName>().input_name);
+                //go.GetComponent<PlayerNetwork>().setMyName(nameCarrier.GetComponent<CarryName>().input_name);
 
                 GameObject.Find("ShrinkingZone").GetComponent<ShrinkingZoneScript>().startShrinking();
             }

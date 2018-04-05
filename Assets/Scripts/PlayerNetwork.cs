@@ -65,6 +65,7 @@ public class PlayerNetwork : Photon.MonoBehaviour {
     private bool insideZone = true;
     public float m_HPReducedPerSecond = 15.0f;
     private float m_maxHP = 100f;
+    private bool largeBalls = false;
 
     //added by Po
     [SerializeField] GameObject[] m_weapons;
@@ -87,6 +88,9 @@ public class PlayerNetwork : Photon.MonoBehaviour {
     [SerializeField] GameObject[] m_bloodCube;
     [SerializeField] GameObject gameFlowManager;
 
+    public Text nameOnHead;
+    public string playerName;
+
     private void Start ()
     {
         m_pv = GetComponent<PhotonView>();
@@ -106,6 +110,7 @@ public class PlayerNetwork : Photon.MonoBehaviour {
         NetworkManager = GameObject.Find("NetworkManager");
         m_MR = this.GetComponent<MeshRenderer>();
         child_MR = transform.GetComponentsInChildren<MeshRenderer>();
+        nameOnHead = transform.Find("PlayerName").GetComponentInChildren<Text>();
         Initialize();
 
         //added by Po
@@ -139,6 +144,8 @@ public class PlayerNetwork : Photon.MonoBehaviour {
         isDead = false;
 
         gameFlowManager = GameObject.Find("GameFlowManager");
+
+        this.GetComponent<PhotonView>().RPC("setMyTag", PhotonTargets.AllBuffered);
 	}
 
     private void Update()
@@ -280,7 +287,12 @@ public class PlayerNetwork : Photon.MonoBehaviour {
                     //Modify By Po, 3/7
 
                     float toScale = 1.0f;
-                    for (int i = 0; i < WeaponDamageEmpoweredCounter; i++) toScale *= 1.5f;
+                    for (int i = 0; i < WeaponSpeedEmpoweredCounter; i++) toScale *= 1.5f;
+
+                    if (largeBalls)
+                    {
+                        toScale = 15.0f;
+                    }
 
                     Vector3 pos = camfor *  2.1f +  camfor * toScale;
 
@@ -335,7 +347,9 @@ public class PlayerNetwork : Photon.MonoBehaviour {
         infiniteWeapon.GetComponent<Rigidbody>().AddForce(velocity * weSpeed);
 
         //Debug.Log("Toscale: " + toScale);
-        infiniteWeapon.GetComponent<Transform>().localScale *= toScale;
+        //infiniteWeapon.GetComponent<Transform>().localScale *= toScale;
+        //increseWeaponSize(infiniteWeapon, toScale);
+        infiniteWeapon.GetComponent<PhotonView>().RPC("setSize", PhotonTargets.AllBuffered, toScale);
         infiniteWeapon.GetComponent<Weapon>().SetID(player_ID);
 
         //infiniteWeapon.GetComponent<Transform>().localScale *= infiniteWeapon.GetComponent<Weapon>().ReturnScale();
@@ -401,7 +415,7 @@ public class PlayerNetwork : Photon.MonoBehaviour {
 
                 this.GetComponent<CharacterController>().enabled = false;
             }
-            else if(m_pv.isMine)
+            else if (m_pv.isMine)
             {
                 //Die
                 //Debug.Log("I'm Dying");
@@ -413,6 +427,13 @@ public class PlayerNetwork : Photon.MonoBehaviour {
             }
             gameFlowManager.GetComponent<GameFlowManager>().playerDead(gameObject);
             NetworkManager.GetComponent<PhotonNetworkManager>().killWarn(shooterID, player_ID);
+
+            for (int i = 0; i < 5; i++)
+            {
+                PhotonNetwork.Instantiate("SpreePowerUp", transform.position + new Vector3(UnityEngine.Random.Range(-3f, 3f), 35, UnityEngine.Random.Range(-3f, 3f)), Quaternion.identity, 0);
+            }
+            GameObject g1 = PhotonNetwork.Instantiate("SpreePowerUp", transform.position + new Vector3(UnityEngine.Random.Range(-3f, 3f), 35, UnityEngine.Random.Range(-3f, 3f)), Quaternion.identity, 0);
+            g1.GetComponent<PhotonView>().RPC("SetType", PhotonTargets.AllBuffered, UnityEngine.Random.Range(1, 3));         
         }
     }
 
@@ -487,11 +508,6 @@ public class PlayerNetwork : Photon.MonoBehaviour {
             //m_power = 0;
             PlayerHealthEmpoweredCounter = PlayerHealthEmpoweredCounter + 1;
         }
-        else if (powerType == 3)
-        {
-            //m_power = 1;
-            //PlayerSpeedEmpoweredCounter = PlayerSpeedEmpoweredCounter + 1;
-        }
         else if (powerType == 1)
         {
             if (WeaponDamageEmpoweredCounter < 5)
@@ -504,8 +520,9 @@ public class PlayerNetwork : Photon.MonoBehaviour {
 				WeaponDamageEmpoweredCounter = 5;
 			}
         }
-        else if (powerType ==2)
-        {if (WeaponSpeedEmpoweredCounter < 5)
+        else if (powerType == 2)
+        {
+            if (WeaponSpeedEmpoweredCounter < 5)
             {
                 //m_power = 3;
 				WeaponSpeedEmpoweredCounter = WeaponSpeedEmpoweredCounter + 1;
@@ -518,6 +535,9 @@ public class PlayerNetwork : Photon.MonoBehaviour {
         else if(powerType == 4)
         {
             this.GetComponent<PhotonView>().RPC("Binojyutsu", PhotonTargets.AllBuffered);
+        else if (powerType == 3)
+        {
+            StartCoroutine(bigBallsPowerup(5.0f));
         }
         //Some one need to handle the number of the power type to add attribue accordingly
     }
@@ -595,10 +615,12 @@ public class PlayerNetwork : Photon.MonoBehaviour {
        
         //if (m_power == 1)//weapon speed
         //{
-            for (int i = 0; i < WeaponSpeedEmpoweredCounter; i++)
-            {
-                weapon.GetComponent<Weapon>().SetSpeed();
-            }
+        for (int i = 0; i < WeaponSpeedEmpoweredCounter; i++)
+        {
+            weapon.GetComponent<Weapon>().SetSpeed();
+        //---
+            weapon.GetComponent<Weapon>().SetSize();
+        }
         
         //}
 
@@ -607,8 +629,7 @@ public class PlayerNetwork : Photon.MonoBehaviour {
             for (int i = 0; i < WeaponDamageEmpoweredCounter; i++)
             {
                 weapon.GetComponent<Weapon>().SetDamage();
-                weapon.GetComponent<Weapon>().SetSize();
-            
+                //weapon.GetComponent<Weapon>().SetSize();
             }
         //}
     }
@@ -648,5 +669,35 @@ public class PlayerNetwork : Photon.MonoBehaviour {
     public float returnHealth()
     {
         return m_health;
+    }
+    
+    IEnumerator bigBallsPowerup(float time)
+    {
+        Debug.Log("big ball powerup starting");
+        largeBalls = true;
+        int temp = WeaponDamageEmpoweredCounter;
+        WeaponDamageEmpoweredCounter = 5;
+
+        yield return new WaitForSeconds(time);
+        largeBalls = false;
+        WeaponDamageEmpoweredCounter = temp;
+        Debug.Log("Big ball powerup ending");
+    }
+
+    [PunRPC]
+    public void setMyName(string m_name)
+    {
+        //Debug.Log("Setting Name");
+        //Debug.Log(m_name);
+        playerName = m_name;
+    }
+
+    [PunRPC]
+    public void setMyTag()
+    {
+        if (playerName == "")
+            nameOnHead.text = "empty";
+        else
+            nameOnHead.text = playerName;
     }
 }

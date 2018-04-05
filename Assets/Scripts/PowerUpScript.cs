@@ -24,15 +24,15 @@ public class PowerUpScript : Photon.MonoBehaviour {
             Debug.Log("You need to assign differet meshes to the power up so that it can change");
         timer = timeToRespawn;
         this.tag = "PowerUp";
-        randNum = (int)Random.Range(0, 3);
+        randNum = (int)Random.Range(0, 4);
         Debug.Log("random is :" + randNum);
         childObject = transform.GetChild(0).gameObject;
 		colorField = new Color[5];
 		colorField [0] = new Color (255/255f,0/255f,164/255f,100/255f);
 		colorField [1] = new Color (255/255f, 227/255f, 0/255f, 100/255f);
 		colorField [2] = new Color (0/255f, 123/255f, 255/255f, 100/255f);
-		colorField [3] = new Color (230/255f, 0/255f, 255/255f, 100/255f);
         colorField[4] = new Color(75 / 255f, 75 / 255f, 75 / 255f, 100 / 255f);
+		colorField [3] = new Color (100/255f, 1000/255f, 100/255f, 100/255f);
     }
 
     [PunRPC]
@@ -96,6 +96,11 @@ public class PowerUpScript : Photon.MonoBehaviour {
             {
                 //it will send the type number to player, and player should handle it.
                 other.GetComponent<PhotonView>().RPC("GetPowerUp", PhotonTargets.AllBuffered, m_type);
+            }
+
+            if(!isRespawnable)
+            {
+                PhotonNetwork.Destroy(gameObject);
             }
 
             GetComponent<PhotonView>().RPC("WaitForRespawn", PhotonTargets.AllBuffered);

@@ -6,8 +6,19 @@ using UnityEngine.UI;
 
 public class JoinScript : MonoBehaviour {
 
-	public void NextScene()
+    public InputField input_text;
+    public GameObject nameCarrier;
+
+    private void Start()
+    {
+        input_text = GameObject.Find("NameInput").GetComponent<InputField>();
+        nameCarrier = GameObject.Find("NameCarrier");
+
+    }
+
+    public void NextScene()
 	{
+        nameCarrier.GetComponent<CarryName>().carryName(input_text.text);
 		SceneManager.LoadScene("Scene1");
 	}
 	public void ExitGame()

@@ -62,4 +62,8 @@ MonoBehaviour:
   - KillWarn
   - sendWin
   - Binojyutsu
+  - setMyName
+  - setMyTag
+  - increseWeaponSize
+  - setSize
   DisableAutoOpenWizard: 1
