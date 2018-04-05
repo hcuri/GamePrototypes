@@ -61,6 +61,7 @@ MonoBehaviour:
   - KillerWarn
   - KillWarn
   - sendWin
+  - Binojyutsu
   - setMyName
   - setMyTag
   - increseWeaponSize
