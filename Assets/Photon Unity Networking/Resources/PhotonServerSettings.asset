@@ -61,4 +61,8 @@ MonoBehaviour:
   - KillerWarn
   - KillWarn
   - sendWin
+  - setMyName
+  - setMyTag
+  - increseWeaponSize
+  - setSize
   DisableAutoOpenWizard: 1

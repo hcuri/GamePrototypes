@@ -84,6 +84,9 @@ public class PlayerNetwork : Photon.MonoBehaviour {
     [SerializeField] GameObject[] m_bloodCube;
     [SerializeField] GameObject gameFlowManager;
 
+    public Text nameOnHead;
+    public string playerName;
+
     private void Start ()
     {
         m_pv = GetComponent<PhotonView>();
@@ -101,6 +104,7 @@ public class PlayerNetwork : Photon.MonoBehaviour {
 		//m_spdText = GameObject.Find ("SPD").GetComponent<Text> ();
         m_debugMode = GameObject.Find("NetworkManager").GetComponent<PhotonNetworkManager>().returnDebugMode();
         NetworkManager = GameObject.Find("NetworkManager");
+        nameOnHead = transform.Find("PlayerName").GetComponentInChildren<Text>();
         Initialize();
 
         //added by Po
@@ -134,6 +138,8 @@ public class PlayerNetwork : Photon.MonoBehaviour {
         isDead = false;
 
         gameFlowManager = GameObject.Find("GameFlowManager");
+
+        this.GetComponent<PhotonView>().RPC("setMyTag", PhotonTargets.AllBuffered);
 	}
 
     private void Update()
@@ -275,7 +281,7 @@ public class PlayerNetwork : Photon.MonoBehaviour {
                     //Modify By Po, 3/7
 
                     float toScale = 1.0f;
-                    for (int i = 0; i < WeaponDamageEmpoweredCounter; i++) toScale *= 1.5f;
+                    for (int i = 0; i < WeaponSpeedEmpoweredCounter; i++) toScale *= 1.5f;
 
                     Vector3 pos = camfor *  2.1f +  camfor * toScale;
 
@@ -330,7 +336,9 @@ public class PlayerNetwork : Photon.MonoBehaviour {
         infiniteWeapon.GetComponent<Rigidbody>().AddForce(velocity * weSpeed);
 
         //Debug.Log("Toscale: " + toScale);
-        infiniteWeapon.GetComponent<Transform>().localScale *= toScale;
+        //infiniteWeapon.GetComponent<Transform>().localScale *= toScale;
+        //increseWeaponSize(infiniteWeapon, toScale);
+        infiniteWeapon.GetComponent<PhotonView>().RPC("setSize", PhotonTargets.AllBuffered, toScale);
         infiniteWeapon.GetComponent<Weapon>().SetID(player_ID);
 
         //infiniteWeapon.GetComponent<Transform>().localScale *= infiniteWeapon.GetComponent<Weapon>().ReturnScale();
@@ -569,7 +577,9 @@ public class PlayerNetwork : Photon.MonoBehaviour {
             for (int i = 0; i < WeaponSpeedEmpoweredCounter; i++)
             {
                 weapon.GetComponent<Weapon>().SetSpeed();
-            }
+            //---
+                weapon.GetComponent<Weapon>().SetSize();
+        }
         
         //}
 
@@ -578,7 +588,7 @@ public class PlayerNetwork : Photon.MonoBehaviour {
             for (int i = 0; i < WeaponDamageEmpoweredCounter; i++)
             {
                 weapon.GetComponent<Weapon>().SetDamage();
-                weapon.GetComponent<Weapon>().SetSize();
+                //weapon.GetComponent<Weapon>().SetSize();
             
             }
         //}
@@ -620,4 +630,22 @@ public class PlayerNetwork : Photon.MonoBehaviour {
     {
         return m_health;
     }
+
+    [PunRPC]
+    public void setMyName(string m_name)
+    {
+        //Debug.Log("Setting Name");
+        //Debug.Log(m_name);
+        playerName = m_name;
+    }
+
+    [PunRPC]
+    public void setMyTag()
+    {
+        if (playerName == "")
+            nameOnHead.text = "empty";
+        else
+            nameOnHead.text = playerName;
+    }
+
 }
