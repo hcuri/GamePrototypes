@@ -84,6 +84,9 @@ public class PlayerNetwork : Photon.MonoBehaviour {
     [SerializeField] GameObject[] m_bloodCube;
     [SerializeField] GameObject gameFlowManager;
 
+    public Text nameOnHead;
+    public string playerName;
+
     private void Start ()
     {
         m_pv = GetComponent<PhotonView>();
@@ -101,6 +104,7 @@ public class PlayerNetwork : Photon.MonoBehaviour {
 		//m_spdText = GameObject.Find ("SPD").GetComponent<Text> ();
         m_debugMode = GameObject.Find("NetworkManager").GetComponent<PhotonNetworkManager>().returnDebugMode();
         NetworkManager = GameObject.Find("NetworkManager");
+        nameOnHead = transform.Find("PlayerName").GetComponentInChildren<Text>();
         Initialize();
 
         //added by Po
@@ -134,6 +138,8 @@ public class PlayerNetwork : Photon.MonoBehaviour {
         isDead = false;
 
         gameFlowManager = GameObject.Find("GameFlowManager");
+
+        this.GetComponent<PhotonView>().RPC("setMyTag", PhotonTargets.AllBuffered);
 	}
 
     private void Update()
@@ -619,5 +625,22 @@ public class PlayerNetwork : Photon.MonoBehaviour {
     public float returnHealth()
     {
         return m_health;
+    }
+
+    [PunRPC]
+    public void setMyName(string m_name)
+    {
+        //Debug.Log("Setting Name");
+        //Debug.Log(m_name);
+        playerName = m_name;
+    }
+
+    [PunRPC]
+    public void setMyTag()
+    {
+        if (playerName == "")
+            nameOnHead.text = "empty";
+        else
+            nameOnHead.text = playerName;
     }
 }
