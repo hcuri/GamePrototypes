@@ -63,4 +63,6 @@ MonoBehaviour:
   - sendWin
   - setMyName
   - setMyTag
+  - increseWeaponSize
+  - setSize
   DisableAutoOpenWizard: 1
