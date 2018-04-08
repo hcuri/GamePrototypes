@@ -90,6 +90,7 @@ public class PlayerNetwork : Photon.MonoBehaviour {
 
     public Text nameOnHead;
     public string playerName;
+    public Image arrowImage;
 
     private void Start ()
     {
@@ -111,6 +112,8 @@ public class PlayerNetwork : Photon.MonoBehaviour {
         m_MR = this.GetComponent<MeshRenderer>();
         child_MR = transform.GetComponentsInChildren<MeshRenderer>();
         nameOnHead = transform.Find("PlayerName").GetComponentInChildren<Text>();
+        arrowImage = transform.Find("Arrow").GetComponentInChildren<Image>();
+        arrowImage.enabled = false;
         Initialize();
 
         //added by Po
@@ -210,9 +213,19 @@ public class PlayerNetwork : Photon.MonoBehaviour {
                 //TakeDamage (Time.deltaTime * m_HPReducedPerSecond, -1);
                 this.GetComponent<PhotonView>().RPC("TakeDamage", PhotonTargets.AllBuffered, Time.deltaTime * m_HPReducedPerSecond, -1);
 				zoneText.text = "You're taking damage inside the zone!";
+
+                if(!arrowImage.enabled && !isDead)
+                    arrowImage.enabled = true;
+
+                if(isDead)
+                    arrowImage.enabled = false;
+                else
+                    arrowImage.transform.eulerAngles = new Vector3(0,0,AngleToShrinkingZone());
+
 			} else {
 				zoneText.text = "";
-			}
+                arrowImage.enabled = false;
+            }
 			damageImage.color = Color.Lerp (damageImage.color, Color.clear, 0.5f*Time.deltaTime);
             if(weaponPointer != -1)
                 weaponUpdatePosition();
@@ -702,5 +715,15 @@ public class PlayerNetwork : Photon.MonoBehaviour {
             nameOnHead.text = "empty";
         else
             nameOnHead.text = playerName;
+    }
+
+    private float AngleToShrinkingZone()
+    {
+        ShrinkingZoneScript sz = FindObjectOfType<ShrinkingZoneScript>();
+
+        Vector2 tosz = new Vector2(sz.transform.position.x - transform.position.x, sz.transform.position.z - transform.position.z);
+        Vector2 facing = new Vector2(playerCamera.transform.forward.x, playerCamera.transform.forward.z);
+        
+        return Vector2.SignedAngle(facing, tosz);
     }
 }
