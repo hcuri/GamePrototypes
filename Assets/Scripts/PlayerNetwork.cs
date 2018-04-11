@@ -300,7 +300,7 @@ public class PlayerNetwork : Photon.MonoBehaviour {
                     //Modify By Po, 3/7
 
                     float toScale = 1.0f;
-                    for (int i = 0; i < WeaponSpeedEmpoweredCounter; i++) toScale *= 1.5f;
+                    for (int i = 0; i < WeaponDamageEmpoweredCounter; i++) toScale *= 1.5f;
 
                     if (largeBalls)
                     {
