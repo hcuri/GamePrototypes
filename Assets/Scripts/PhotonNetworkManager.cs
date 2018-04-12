@@ -98,8 +98,11 @@ public class PhotonNetworkManager : Photon.PunBehaviour
             {
                 if(pv.ownerId == otherPlayer.ID && pv.gameObject.CompareTag("Player"))
                 {
-                    FindObjectOfType<GameFlowManager>().playerDisconnected();
-                    killText.text = "Player" + pv.ownerId + " has disconnected";
+                    if (pv.gameObject.GetComponent<PlayerNetwork>().returnHealth() > 0)
+                    {
+                        FindObjectOfType<GameFlowManager>().playerDisconnected();
+                        killText.text = "Player" + pv.ownerId + " has disconnected";
+                    }
                 }
             }
 
