@@ -11,6 +11,8 @@ public class ShrinkingZoneScript : Photon.MonoBehaviour
     public float height = 50;
     float currentTime;
     MeshFilter reverse;
+    public GameFlowManager m_GFM;
+    public float stageChangeTime;
 
     private bool shouldShrink = false;
 
@@ -45,6 +47,9 @@ public class ShrinkingZoneScript : Photon.MonoBehaviour
         outside.CopyTo(inout, inside.Length);
 
         mesh.triangles = inout;
+
+        m_GFM = GameObject.Find("GameFlowManager").GetComponent<GameFlowManager>();
+        stageChangeTime = timeToShrink / 2.0f;
     }
 
     // Update is called once per frame
@@ -58,6 +63,12 @@ public class ShrinkingZoneScript : Photon.MonoBehaviour
             if (currsize > 10)
             {
                 transform.localScale = new Vector3(currsize, height, currsize);
+            }
+
+            if(currentTime >= stageChangeTime)
+            {
+                m_GFM.processToNextStage();
+                stageChangeTime = int.MaxValue;
             }
         }
     }
