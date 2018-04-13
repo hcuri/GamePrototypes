@@ -20,6 +20,7 @@ public class PhotonNetworkManager : Photon.PunBehaviour
     public float countDownToStart = 5.0f;
     private bool countingDown = false;
     public int m_ID = -1;
+    public Hashtable nameTable;
 
     [SerializeField] private Text killText;
     [SerializeField] private Text killCountText;
@@ -47,6 +48,8 @@ public class PhotonNetworkManager : Photon.PunBehaviour
         //Initial the array which to keep track of players
         PlayersInGame = new GameObject[numPeopleToStart];
         nameCarrier = GameObject.Find("NameCarrier");
+        //nameTable = new Hashtable();
+        nameTable = null;
     }
 
     public override void OnJoinedLobby()
@@ -198,6 +201,10 @@ public class PhotonNetworkManager : Photon.PunBehaviour
 
     public void killWarn(int killer, int victim)
     {
+        if(nameTable == null)
+        {
+            FillNameTable();
+        }
         Debug.Log("Killer is: " + killer + " Victim is: " + victim);
         if (killer != -1)
             killText.text = "Player" + killer + " has killed Player" + victim + "\n";
@@ -228,5 +235,20 @@ public class PhotonNetworkManager : Photon.PunBehaviour
         PhotonNetwork.Disconnect();
         //Scene m_Scene = SceneManager.GetActiveScene();
         SceneManager.LoadScene("Scene0");
+    }
+
+    public void FillNameTable()
+    {
+        //Debug.Log("Finding Player");
+        nameTable = new Hashtable();
+        GameObject[] AllPlayers = GameObject.FindGameObjectsWithTag("Player");
+        //Debug.Log("Searching name in " + AllPlayers.Length);
+        foreach (GameObject tP in AllPlayers)
+        {
+            int tID = tP.GetComponent<PlayerNetwork>().player_ID;
+            nameTable[tID] = tP.GetComponent<PlayerNetwork>().playerName;
+            //Debug.Log("show name table: " + nameTable[tID]);
+        }
+        //Debug.Log("iteration done");
     }
 }
