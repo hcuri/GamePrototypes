@@ -205,13 +205,16 @@ public class PhotonNetworkManager : Photon.PunBehaviour
         {
             FillNameTable();
         }
-        Debug.Log("Killer is: " + killer + " Victim is: " + victim);
+        string killerS = (string)nameTable[killer];
+        string victimS = (string)nameTable[victim];
+
+        Debug.Log("Killer is: " + killerS + " Victim is: " + victimS);
         if (killer != -1)
-            killText.text = "Player" + killer + " has killed Player" + victim + "\n";
+            killText.text = killerS + " has killed " + victimS + "\n";
         else
         {
-            Debug.Log("Player " + victim + "has died in the shrinking zone");
-            killText.text = "Player" + victim + " has died in the shrinking zone\n";
+            Debug.Log("Player " + victimS + "has died in the shrinking zone");
+            killText.text = victimS + " has died in the shrinking zone\n";
         }
 
         GameObject myPlayer = PlayersInGame[killer - 1];
@@ -239,16 +242,12 @@ public class PhotonNetworkManager : Photon.PunBehaviour
 
     public void FillNameTable()
     {
-        //Debug.Log("Finding Player");
         nameTable = new Hashtable();
         GameObject[] AllPlayers = GameObject.FindGameObjectsWithTag("Player");
-        //Debug.Log("Searching name in " + AllPlayers.Length);
         foreach (GameObject tP in AllPlayers)
         {
             int tID = tP.GetComponent<PlayerNetwork>().player_ID;
             nameTable[tID] = tP.GetComponent<PlayerNetwork>().playerName;
-            //Debug.Log("show name table: " + nameTable[tID]);
         }
-        //Debug.Log("iteration done");
     }
 }
