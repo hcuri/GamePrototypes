@@ -18,6 +18,10 @@ public class PowerUpScript : Photon.MonoBehaviour {
     int randNum;
     private GameObject childObject;
 
+    public GameFlowManager m_GFM;
+    public float[] earlyPos;
+    public float[] latePos;
+
     void Start()
     {
         if (meshField == null)
@@ -33,6 +37,11 @@ public class PowerUpScript : Photon.MonoBehaviour {
 		colorField [2] = new Color (0/255f, 123/255f, 255/255f, 100/255f);
         colorField[4] = new Color(75 / 255f, 75 / 255f, 75 / 255f, 100 / 255f);
 		colorField [3] = new Color (100/255f, 1000/255f, 100/255f, 100/255f);
+
+        m_GFM = GameObject.Find("GameFlowManager").GetComponent<GameFlowManager>();
+
+        earlyPos = new float[] { 5, 35, 35, 10, 5 ,5};
+        latePos = new float[] { 20, 10, 10, 20, 20, 20 };
     }
 
     [PunRPC]
