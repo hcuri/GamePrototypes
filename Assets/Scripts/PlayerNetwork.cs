@@ -413,7 +413,7 @@ public class PlayerNetwork : Photon.MonoBehaviour {
         
 		m_health -= damage;
         if (m_health > m_maxHP) m_health = m_maxHP;
-        SetColor();
+        if(!invul) SetColor();
 
         if (m_pv.isMine && damage > 0f) {
 			damageImage.color = damageColor;

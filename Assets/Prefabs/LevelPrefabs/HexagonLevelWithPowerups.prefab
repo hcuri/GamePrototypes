@@ -103953,8 +103953,8 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 114017749690906710}
   ObservedComponentsFoldoutOpen: 1
-  viewIdField: 60
-  instantiationId: 60
+  viewIdField: 0
+  instantiationId: -1
   currentMasterID: -1
   isRuntimeInstantiated: 0
 --- !u!114 &114017749690906710
@@ -103968,7 +103968,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddfa85297ccf9d44b91a670524a92c88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToRespawn: 120
+  timeToRespawn: 25
   isRespawnable: 1
   isRandomizable: 1
   m_type: 0
@@ -103978,10 +103978,13 @@ MonoBehaviour:
   - {fileID: 4300000, guid: 486351f15650ce5408452352641fc317, type: 3}
   - {fileID: 4300000, guid: 911b2aca4190de843ba6fc029bf3734d, type: 3}
   - {fileID: 4300000, guid: a59faa6df8bd9cd4c8779604face71a1, type: 3}
+  - {fileID: 4300000, guid: d5201c54bfe2c0242acafec0421e0d8e, type: 3}
   colorField:
   - {r: 1, g: 0, b: 0.64137936, a: 0.39215687}
   - {r: 1, g: 0.88965523, b: 0, a: 0.39215687}
   - {r: 0.9034481, g: 0, b: 1, a: 0.39215687}
+  - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
+  - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
   - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
 --- !u!114 &114018804217556478
 MonoBehaviour:
@@ -104040,7 +104043,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddfa85297ccf9d44b91a670524a92c88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToRespawn: 120
+  timeToRespawn: 25
   isRespawnable: 1
   isRandomizable: 1
   m_type: 0
@@ -104050,10 +104053,13 @@ MonoBehaviour:
   - {fileID: 4300000, guid: 486351f15650ce5408452352641fc317, type: 3}
   - {fileID: 4300000, guid: 911b2aca4190de843ba6fc029bf3734d, type: 3}
   - {fileID: 4300000, guid: a59faa6df8bd9cd4c8779604face71a1, type: 3}
+  - {fileID: 4300000, guid: d5201c54bfe2c0242acafec0421e0d8e, type: 3}
   colorField:
   - {r: 1, g: 0, b: 0.64137936, a: 0.39215687}
   - {r: 1, g: 0.88965523, b: 0, a: 0.39215687}
   - {r: 0.9034481, g: 0, b: 1, a: 0.39215687}
+  - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
+  - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
   - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
 --- !u!114 &114028399838042634
 MonoBehaviour:
@@ -104077,8 +104083,8 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 114650333746725694}
   ObservedComponentsFoldoutOpen: 1
-  viewIdField: 6
-  instantiationId: 6
+  viewIdField: 0
+  instantiationId: -1
   currentMasterID: -1
   isRuntimeInstantiated: 0
 --- !u!114 &114040077072118738
@@ -104103,8 +104109,8 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 114208319676233954}
   ObservedComponentsFoldoutOpen: 1
-  viewIdField: 1
-  instantiationId: 1
+  viewIdField: 0
+  instantiationId: -1
   currentMasterID: -1
   isRuntimeInstantiated: 0
 --- !u!114 &114050383144165796
@@ -104157,7 +104163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddfa85297ccf9d44b91a670524a92c88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToRespawn: 120
+  timeToRespawn: 25
   isRespawnable: 1
   isRandomizable: 1
   m_type: 0
@@ -104167,10 +104173,13 @@ MonoBehaviour:
   - {fileID: 4300000, guid: 486351f15650ce5408452352641fc317, type: 3}
   - {fileID: 4300000, guid: 911b2aca4190de843ba6fc029bf3734d, type: 3}
   - {fileID: 4300000, guid: a59faa6df8bd9cd4c8779604face71a1, type: 3}
+  - {fileID: 4300000, guid: d5201c54bfe2c0242acafec0421e0d8e, type: 3}
   colorField:
   - {r: 1, g: 0, b: 0.64137936, a: 0.39215687}
   - {r: 1, g: 0.88965523, b: 0, a: 0.39215687}
   - {r: 0.9034481, g: 0, b: 1, a: 0.39215687}
+  - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
+  - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
   - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
 --- !u!114 &114058809796306558
 MonoBehaviour:
@@ -104183,7 +104192,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddfa85297ccf9d44b91a670524a92c88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToRespawn: 120
+  timeToRespawn: 25
   isRespawnable: 1
   isRandomizable: 1
   m_type: 0
@@ -104193,10 +104202,13 @@ MonoBehaviour:
   - {fileID: 4300000, guid: 486351f15650ce5408452352641fc317, type: 3}
   - {fileID: 4300000, guid: 911b2aca4190de843ba6fc029bf3734d, type: 3}
   - {fileID: 4300000, guid: a59faa6df8bd9cd4c8779604face71a1, type: 3}
+  - {fileID: 4300000, guid: d5201c54bfe2c0242acafec0421e0d8e, type: 3}
   colorField:
   - {r: 1, g: 0, b: 0.64137936, a: 0.39215687}
   - {r: 1, g: 0.88965523, b: 0, a: 0.39215687}
   - {r: 0.9034481, g: 0, b: 1, a: 0.39215687}
+  - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
+  - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
   - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
 --- !u!114 &114072794879737444
 MonoBehaviour:
@@ -104269,8 +104281,8 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 114693797085352842}
   ObservedComponentsFoldoutOpen: 1
-  viewIdField: 28
-  instantiationId: 28
+  viewIdField: 0
+  instantiationId: -1
   currentMasterID: -1
   isRuntimeInstantiated: 0
 --- !u!114 &114082072982581088
@@ -104295,8 +104307,8 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 114466223329843504}
   ObservedComponentsFoldoutOpen: 1
-  viewIdField: 59
-  instantiationId: 59
+  viewIdField: 0
+  instantiationId: -1
   currentMasterID: -1
   isRuntimeInstantiated: 0
 --- !u!114 &114095846363696392
@@ -104310,7 +104322,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddfa85297ccf9d44b91a670524a92c88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToRespawn: 120
+  timeToRespawn: 25
   isRespawnable: 1
   isRandomizable: 1
   m_type: 0
@@ -104320,10 +104332,13 @@ MonoBehaviour:
   - {fileID: 4300000, guid: 486351f15650ce5408452352641fc317, type: 3}
   - {fileID: 4300000, guid: 911b2aca4190de843ba6fc029bf3734d, type: 3}
   - {fileID: 4300000, guid: a59faa6df8bd9cd4c8779604face71a1, type: 3}
+  - {fileID: 4300000, guid: d5201c54bfe2c0242acafec0421e0d8e, type: 3}
   colorField:
   - {r: 1, g: 0, b: 0.64137936, a: 0.39215687}
   - {r: 1, g: 0.88965523, b: 0, a: 0.39215687}
   - {r: 0.9034481, g: 0, b: 1, a: 0.39215687}
+  - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
+  - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
   - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
 --- !u!114 &114110728701054394
 MonoBehaviour:
@@ -104370,8 +104385,8 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 114144401554060758}
   ObservedComponentsFoldoutOpen: 1
-  viewIdField: 3
-  instantiationId: 3
+  viewIdField: 0
+  instantiationId: -1
   currentMasterID: -1
   isRuntimeInstantiated: 0
 --- !u!114 &114112375005704812
@@ -104385,7 +104400,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddfa85297ccf9d44b91a670524a92c88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToRespawn: 120
+  timeToRespawn: 25
   isRespawnable: 1
   isRandomizable: 1
   m_type: 0
@@ -104395,10 +104410,13 @@ MonoBehaviour:
   - {fileID: 4300000, guid: 486351f15650ce5408452352641fc317, type: 3}
   - {fileID: 4300000, guid: 911b2aca4190de843ba6fc029bf3734d, type: 3}
   - {fileID: 4300000, guid: a59faa6df8bd9cd4c8779604face71a1, type: 3}
+  - {fileID: 4300000, guid: d5201c54bfe2c0242acafec0421e0d8e, type: 3}
   colorField:
   - {r: 1, g: 0, b: 0.64137936, a: 0.39215687}
   - {r: 1, g: 0.88965523, b: 0, a: 0.39215687}
   - {r: 0.9034481, g: 0, b: 1, a: 0.39215687}
+  - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
+  - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
   - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
 --- !u!114 &114127247394273722
 MonoBehaviour:
@@ -104434,7 +104452,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddfa85297ccf9d44b91a670524a92c88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToRespawn: 120
+  timeToRespawn: 25
   isRespawnable: 1
   isRandomizable: 1
   m_type: 0
@@ -104444,10 +104462,13 @@ MonoBehaviour:
   - {fileID: 4300000, guid: 486351f15650ce5408452352641fc317, type: 3}
   - {fileID: 4300000, guid: 911b2aca4190de843ba6fc029bf3734d, type: 3}
   - {fileID: 4300000, guid: a59faa6df8bd9cd4c8779604face71a1, type: 3}
+  - {fileID: 4300000, guid: d5201c54bfe2c0242acafec0421e0d8e, type: 3}
   colorField:
   - {r: 1, g: 0, b: 0.64137936, a: 0.39215687}
   - {r: 1, g: 0.88965523, b: 0, a: 0.39215687}
   - {r: 0.9034481, g: 0, b: 1, a: 0.39215687}
+  - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
+  - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
   - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
 --- !u!114 &114140570045126420
 MonoBehaviour:
@@ -104506,7 +104527,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddfa85297ccf9d44b91a670524a92c88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToRespawn: 120
+  timeToRespawn: 25
   isRespawnable: 1
   isRandomizable: 1
   m_type: 0
@@ -104516,10 +104537,13 @@ MonoBehaviour:
   - {fileID: 4300000, guid: 486351f15650ce5408452352641fc317, type: 3}
   - {fileID: 4300000, guid: 911b2aca4190de843ba6fc029bf3734d, type: 3}
   - {fileID: 4300000, guid: a59faa6df8bd9cd4c8779604face71a1, type: 3}
+  - {fileID: 4300000, guid: d5201c54bfe2c0242acafec0421e0d8e, type: 3}
   colorField:
   - {r: 1, g: 0, b: 0.64137936, a: 0.39215687}
   - {r: 1, g: 0.88965523, b: 0, a: 0.39215687}
   - {r: 0.9034481, g: 0, b: 1, a: 0.39215687}
+  - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
+  - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
   - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
 --- !u!114 &114171554017942848
 MonoBehaviour:
@@ -104532,7 +104556,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddfa85297ccf9d44b91a670524a92c88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToRespawn: 120
+  timeToRespawn: 25
   isRespawnable: 1
   isRandomizable: 1
   m_type: 0
@@ -104542,10 +104566,13 @@ MonoBehaviour:
   - {fileID: 4300000, guid: 486351f15650ce5408452352641fc317, type: 3}
   - {fileID: 4300000, guid: 911b2aca4190de843ba6fc029bf3734d, type: 3}
   - {fileID: 4300000, guid: a59faa6df8bd9cd4c8779604face71a1, type: 3}
+  - {fileID: 4300000, guid: d5201c54bfe2c0242acafec0421e0d8e, type: 3}
   colorField:
   - {r: 1, g: 0, b: 0.64137936, a: 0.39215687}
   - {r: 1, g: 0.88965523, b: 0, a: 0.39215687}
   - {r: 0.9034481, g: 0, b: 1, a: 0.39215687}
+  - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
+  - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
   - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
 --- !u!114 &114173848086369154
 MonoBehaviour:
@@ -104569,8 +104596,8 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 114281656994164518}
   ObservedComponentsFoldoutOpen: 1
-  viewIdField: 14
-  instantiationId: 14
+  viewIdField: 0
+  instantiationId: -1
   currentMasterID: -1
   isRuntimeInstantiated: 0
 --- !u!114 &114188018728597908
@@ -104584,7 +104611,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddfa85297ccf9d44b91a670524a92c88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToRespawn: 120
+  timeToRespawn: 25
   isRespawnable: 1
   isRandomizable: 1
   m_type: 0
@@ -104594,10 +104621,13 @@ MonoBehaviour:
   - {fileID: 4300000, guid: 486351f15650ce5408452352641fc317, type: 3}
   - {fileID: 4300000, guid: 911b2aca4190de843ba6fc029bf3734d, type: 3}
   - {fileID: 4300000, guid: a59faa6df8bd9cd4c8779604face71a1, type: 3}
+  - {fileID: 4300000, guid: d5201c54bfe2c0242acafec0421e0d8e, type: 3}
   colorField:
   - {r: 1, g: 0, b: 0.64137936, a: 0.39215687}
   - {r: 1, g: 0.88965523, b: 0, a: 0.39215687}
   - {r: 0.9034481, g: 0, b: 1, a: 0.39215687}
+  - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
+  - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
   - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
 --- !u!114 &114204723208599616
 MonoBehaviour:
@@ -104649,7 +104679,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddfa85297ccf9d44b91a670524a92c88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToRespawn: 120
+  timeToRespawn: 25
   isRespawnable: 1
   isRandomizable: 1
   m_type: 0
@@ -104659,10 +104689,13 @@ MonoBehaviour:
   - {fileID: 4300000, guid: 486351f15650ce5408452352641fc317, type: 3}
   - {fileID: 4300000, guid: 911b2aca4190de843ba6fc029bf3734d, type: 3}
   - {fileID: 4300000, guid: a59faa6df8bd9cd4c8779604face71a1, type: 3}
+  - {fileID: 4300000, guid: d5201c54bfe2c0242acafec0421e0d8e, type: 3}
   colorField:
   - {r: 1, g: 0, b: 0.64137936, a: 0.39215687}
   - {r: 1, g: 0.88965523, b: 0, a: 0.39215687}
   - {r: 0.9034481, g: 0, b: 1, a: 0.39215687}
+  - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
+  - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
   - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
 --- !u!114 &114210454236692434
 MonoBehaviour:
@@ -104709,8 +104742,8 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 114380141974758330}
   ObservedComponentsFoldoutOpen: 1
-  viewIdField: 33
-  instantiationId: 33
+  viewIdField: 0
+  instantiationId: -1
   currentMasterID: -1
   isRuntimeInstantiated: 0
 --- !u!114 &114217932863580600
@@ -104768,8 +104801,8 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 114884848353428382}
   ObservedComponentsFoldoutOpen: 1
-  viewIdField: 61
-  instantiationId: 61
+  viewIdField: 0
+  instantiationId: -1
   currentMasterID: -1
   isRuntimeInstantiated: 0
 --- !u!114 &114243919687547338
@@ -104810,8 +104843,8 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 114112375005704812}
   ObservedComponentsFoldoutOpen: 1
-  viewIdField: 84
-  instantiationId: 84
+  viewIdField: 0
+  instantiationId: -1
   currentMasterID: -1
   isRuntimeInstantiated: 0
 --- !u!114 &114257360339291964
@@ -104825,7 +104858,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddfa85297ccf9d44b91a670524a92c88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToRespawn: 120
+  timeToRespawn: 25
   isRespawnable: 1
   isRandomizable: 1
   m_type: 0
@@ -104835,10 +104868,13 @@ MonoBehaviour:
   - {fileID: 4300000, guid: 486351f15650ce5408452352641fc317, type: 3}
   - {fileID: 4300000, guid: 911b2aca4190de843ba6fc029bf3734d, type: 3}
   - {fileID: 4300000, guid: a59faa6df8bd9cd4c8779604face71a1, type: 3}
+  - {fileID: 4300000, guid: d5201c54bfe2c0242acafec0421e0d8e, type: 3}
   colorField:
   - {r: 1, g: 0, b: 0.64137936, a: 0.39215687}
   - {r: 1, g: 0.88965523, b: 0, a: 0.39215687}
   - {r: 0.9034481, g: 0, b: 1, a: 0.39215687}
+  - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
+  - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
   - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
 --- !u!114 &114259233039808522
 MonoBehaviour:
@@ -104885,8 +104921,8 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 114973296941988222}
   ObservedComponentsFoldoutOpen: 1
-  viewIdField: 80
-  instantiationId: 80
+  viewIdField: 0
+  instantiationId: -1
   currentMasterID: -1
   isRuntimeInstantiated: 0
 --- !u!114 &114268089370659526
@@ -105040,7 +105076,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddfa85297ccf9d44b91a670524a92c88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToRespawn: 120
+  timeToRespawn: 25
   isRespawnable: 1
   isRandomizable: 1
   m_type: 0
@@ -105050,10 +105086,13 @@ MonoBehaviour:
   - {fileID: 4300000, guid: 486351f15650ce5408452352641fc317, type: 3}
   - {fileID: 4300000, guid: 911b2aca4190de843ba6fc029bf3734d, type: 3}
   - {fileID: 4300000, guid: a59faa6df8bd9cd4c8779604face71a1, type: 3}
+  - {fileID: 4300000, guid: d5201c54bfe2c0242acafec0421e0d8e, type: 3}
   colorField:
   - {r: 1, g: 0, b: 0.64137936, a: 0.39215687}
   - {r: 1, g: 0.88965523, b: 0, a: 0.39215687}
   - {r: 0.9034481, g: 0, b: 1, a: 0.39215687}
+  - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
+  - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
   - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
 --- !u!114 &114282198766557398
 MonoBehaviour:
@@ -105100,8 +105139,8 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 114329407184111156}
   ObservedComponentsFoldoutOpen: 1
-  viewIdField: 10
-  instantiationId: 10
+  viewIdField: 0
+  instantiationId: -1
   currentMasterID: -1
   isRuntimeInstantiated: 0
 --- !u!114 &114304408600023780
@@ -105115,7 +105154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddfa85297ccf9d44b91a670524a92c88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToRespawn: 120
+  timeToRespawn: 25
   isRespawnable: 1
   isRandomizable: 1
   m_type: 0
@@ -105125,10 +105164,13 @@ MonoBehaviour:
   - {fileID: 4300000, guid: 486351f15650ce5408452352641fc317, type: 3}
   - {fileID: 4300000, guid: 911b2aca4190de843ba6fc029bf3734d, type: 3}
   - {fileID: 4300000, guid: a59faa6df8bd9cd4c8779604face71a1, type: 3}
+  - {fileID: 4300000, guid: d5201c54bfe2c0242acafec0421e0d8e, type: 3}
   colorField:
   - {r: 1, g: 0, b: 0.64137936, a: 0.39215687}
   - {r: 1, g: 0.88965523, b: 0, a: 0.39215687}
   - {r: 0.9034481, g: 0, b: 1, a: 0.39215687}
+  - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
+  - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
   - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
 --- !u!114 &114308048610869654
 MonoBehaviour:
@@ -105141,7 +105183,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddfa85297ccf9d44b91a670524a92c88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToRespawn: 120
+  timeToRespawn: 25
   isRespawnable: 1
   isRandomizable: 1
   m_type: 0
@@ -105151,10 +105193,13 @@ MonoBehaviour:
   - {fileID: 4300000, guid: 486351f15650ce5408452352641fc317, type: 3}
   - {fileID: 4300000, guid: 911b2aca4190de843ba6fc029bf3734d, type: 3}
   - {fileID: 4300000, guid: a59faa6df8bd9cd4c8779604face71a1, type: 3}
+  - {fileID: 4300000, guid: d5201c54bfe2c0242acafec0421e0d8e, type: 3}
   colorField:
   - {r: 1, g: 0, b: 0.64137936, a: 0.39215687}
   - {r: 1, g: 0.88965523, b: 0, a: 0.39215687}
   - {r: 0.9034481, g: 0, b: 1, a: 0.39215687}
+  - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
+  - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
   - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
 --- !u!114 &114315240928495908
 MonoBehaviour:
@@ -105217,8 +105262,8 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 114884923860342004}
   ObservedComponentsFoldoutOpen: 1
-  viewIdField: 85
-  instantiationId: 85
+  viewIdField: 0
+  instantiationId: -1
   currentMasterID: -1
   isRuntimeInstantiated: 0
 --- !u!114 &114322470670774842
@@ -105232,7 +105277,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddfa85297ccf9d44b91a670524a92c88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToRespawn: 120
+  timeToRespawn: 25
   isRespawnable: 1
   isRandomizable: 1
   m_type: 0
@@ -105242,10 +105287,13 @@ MonoBehaviour:
   - {fileID: 4300000, guid: 486351f15650ce5408452352641fc317, type: 3}
   - {fileID: 4300000, guid: 911b2aca4190de843ba6fc029bf3734d, type: 3}
   - {fileID: 4300000, guid: a59faa6df8bd9cd4c8779604face71a1, type: 3}
+  - {fileID: 4300000, guid: d5201c54bfe2c0242acafec0421e0d8e, type: 3}
   colorField:
   - {r: 1, g: 0, b: 0.64137936, a: 0.39215687}
   - {r: 1, g: 0.88965523, b: 0, a: 0.39215687}
   - {r: 0.9034481, g: 0, b: 1, a: 0.39215687}
+  - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
+  - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
   - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
 --- !u!114 &114324574909075142
 MonoBehaviour:
@@ -105274,7 +105322,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddfa85297ccf9d44b91a670524a92c88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToRespawn: 120
+  timeToRespawn: 25
   isRespawnable: 1
   isRandomizable: 1
   m_type: 0
@@ -105284,10 +105332,13 @@ MonoBehaviour:
   - {fileID: 4300000, guid: 486351f15650ce5408452352641fc317, type: 3}
   - {fileID: 4300000, guid: 911b2aca4190de843ba6fc029bf3734d, type: 3}
   - {fileID: 4300000, guid: a59faa6df8bd9cd4c8779604face71a1, type: 3}
+  - {fileID: 4300000, guid: d5201c54bfe2c0242acafec0421e0d8e, type: 3}
   colorField:
   - {r: 1, g: 0, b: 0.64137936, a: 0.39215687}
   - {r: 1, g: 0.88965523, b: 0, a: 0.39215687}
   - {r: 0.9034481, g: 0, b: 1, a: 0.39215687}
+  - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
+  - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
   - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
 --- !u!114 &114332307248852962
 MonoBehaviour:
@@ -105311,8 +105362,8 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 114304408600023780}
   ObservedComponentsFoldoutOpen: 1
-  viewIdField: 49
-  instantiationId: 49
+  viewIdField: 0
+  instantiationId: -1
   currentMasterID: -1
   isRuntimeInstantiated: 0
 --- !u!114 &114343612881062932
@@ -105416,8 +105467,8 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 114596570774243000}
   ObservedComponentsFoldoutOpen: 1
-  viewIdField: 58
-  instantiationId: 58
+  viewIdField: 0
+  instantiationId: -1
   currentMasterID: -1
   isRuntimeInstantiated: 0
 --- !u!114 &114365871011159588
@@ -105498,7 +105549,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddfa85297ccf9d44b91a670524a92c88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToRespawn: 120
+  timeToRespawn: 25
   isRespawnable: 1
   isRandomizable: 1
   m_type: 0
@@ -105508,10 +105559,13 @@ MonoBehaviour:
   - {fileID: 4300000, guid: 486351f15650ce5408452352641fc317, type: 3}
   - {fileID: 4300000, guid: 911b2aca4190de843ba6fc029bf3734d, type: 3}
   - {fileID: 4300000, guid: a59faa6df8bd9cd4c8779604face71a1, type: 3}
+  - {fileID: 4300000, guid: d5201c54bfe2c0242acafec0421e0d8e, type: 3}
   colorField:
   - {r: 1, g: 0, b: 0.64137936, a: 0.39215687}
   - {r: 1, g: 0.88965523, b: 0, a: 0.39215687}
   - {r: 0.9034481, g: 0, b: 1, a: 0.39215687}
+  - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
+  - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
   - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
 --- !u!114 &114386590602007672
 MonoBehaviour:
@@ -105535,8 +105589,8 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 114835864475378024}
   ObservedComponentsFoldoutOpen: 1
-  viewIdField: 79
-  instantiationId: 79
+  viewIdField: 0
+  instantiationId: -1
   currentMasterID: -1
   isRuntimeInstantiated: 0
 --- !u!114 &114390379131497182
@@ -105561,8 +105615,8 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 114860949081331358}
   ObservedComponentsFoldoutOpen: 1
-  viewIdField: 12
-  instantiationId: 12
+  viewIdField: 0
+  instantiationId: -1
   currentMasterID: -1
   isRuntimeInstantiated: 0
 --- !u!114 &114403214620337248
@@ -105592,7 +105646,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddfa85297ccf9d44b91a670524a92c88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToRespawn: 120
+  timeToRespawn: 25
   isRespawnable: 1
   isRandomizable: 1
   m_type: 0
@@ -105602,10 +105656,13 @@ MonoBehaviour:
   - {fileID: 4300000, guid: 486351f15650ce5408452352641fc317, type: 3}
   - {fileID: 4300000, guid: 911b2aca4190de843ba6fc029bf3734d, type: 3}
   - {fileID: 4300000, guid: a59faa6df8bd9cd4c8779604face71a1, type: 3}
+  - {fileID: 4300000, guid: d5201c54bfe2c0242acafec0421e0d8e, type: 3}
   colorField:
   - {r: 1, g: 0, b: 0.64137936, a: 0.39215687}
   - {r: 1, g: 0.88965523, b: 0, a: 0.39215687}
   - {r: 0.9034481, g: 0, b: 1, a: 0.39215687}
+  - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
+  - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
   - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
 --- !u!114 &114406907173705540
 MonoBehaviour:
@@ -105823,7 +105880,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddfa85297ccf9d44b91a670524a92c88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToRespawn: 120
+  timeToRespawn: 25
   isRespawnable: 1
   isRandomizable: 1
   m_type: 0
@@ -105833,10 +105890,13 @@ MonoBehaviour:
   - {fileID: 4300000, guid: 486351f15650ce5408452352641fc317, type: 3}
   - {fileID: 4300000, guid: 911b2aca4190de843ba6fc029bf3734d, type: 3}
   - {fileID: 4300000, guid: a59faa6df8bd9cd4c8779604face71a1, type: 3}
+  - {fileID: 4300000, guid: d5201c54bfe2c0242acafec0421e0d8e, type: 3}
   colorField:
   - {r: 1, g: 0, b: 0.64137936, a: 0.39215687}
   - {r: 1, g: 0.88965523, b: 0, a: 0.39215687}
   - {r: 0.9034481, g: 0, b: 1, a: 0.39215687}
+  - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
+  - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
   - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
 --- !u!114 &114466310138621704
 MonoBehaviour:
@@ -105876,8 +105936,8 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 114308048610869654}
   ObservedComponentsFoldoutOpen: 1
-  viewIdField: 81
-  instantiationId: 81
+  viewIdField: 0
+  instantiationId: -1
   currentMasterID: -1
   isRuntimeInstantiated: 0
 --- !u!114 &114484077983504986
@@ -105902,8 +105962,8 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 114865583033530734}
   ObservedComponentsFoldoutOpen: 1
-  viewIdField: 88
-  instantiationId: 88
+  viewIdField: 0
+  instantiationId: -1
   currentMasterID: -1
   isRuntimeInstantiated: 0
 --- !u!114 &114485342318250510
@@ -106073,8 +106133,8 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 114028053792667962}
   ObservedComponentsFoldoutOpen: 1
-  viewIdField: 57
-  instantiationId: 57
+  viewIdField: 0
+  instantiationId: -1
   currentMasterID: -1
   isRuntimeInstantiated: 0
 --- !u!114 &114533908621158414
@@ -106220,7 +106280,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddfa85297ccf9d44b91a670524a92c88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToRespawn: 120
+  timeToRespawn: 25
   isRespawnable: 1
   isRandomizable: 1
   m_type: 0
@@ -106230,10 +106290,13 @@ MonoBehaviour:
   - {fileID: 4300000, guid: 486351f15650ce5408452352641fc317, type: 3}
   - {fileID: 4300000, guid: 911b2aca4190de843ba6fc029bf3734d, type: 3}
   - {fileID: 4300000, guid: a59faa6df8bd9cd4c8779604face71a1, type: 3}
+  - {fileID: 4300000, guid: d5201c54bfe2c0242acafec0421e0d8e, type: 3}
   colorField:
   - {r: 1, g: 0, b: 0.64137936, a: 0.39215687}
   - {r: 1, g: 0.88965523, b: 0, a: 0.39215687}
   - {r: 0.9034481, g: 0, b: 1, a: 0.39215687}
+  - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
+  - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
   - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
 --- !u!114 &114556582946595092
 MonoBehaviour:
@@ -106246,7 +106309,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddfa85297ccf9d44b91a670524a92c88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToRespawn: 120
+  timeToRespawn: 25
   isRespawnable: 1
   isRandomizable: 1
   m_type: 0
@@ -106256,10 +106319,13 @@ MonoBehaviour:
   - {fileID: 4300000, guid: 486351f15650ce5408452352641fc317, type: 3}
   - {fileID: 4300000, guid: 911b2aca4190de843ba6fc029bf3734d, type: 3}
   - {fileID: 4300000, guid: a59faa6df8bd9cd4c8779604face71a1, type: 3}
+  - {fileID: 4300000, guid: d5201c54bfe2c0242acafec0421e0d8e, type: 3}
   colorField:
   - {r: 1, g: 0, b: 0.64137936, a: 0.39215687}
   - {r: 1, g: 0.88965523, b: 0, a: 0.39215687}
   - {r: 0.9034481, g: 0, b: 1, a: 0.39215687}
+  - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
+  - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
   - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
 --- !u!114 &114564879875477758
 MonoBehaviour:
@@ -106361,8 +106427,8 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 114058809796306558}
   ObservedComponentsFoldoutOpen: 1
-  viewIdField: 5
-  instantiationId: 5
+  viewIdField: 0
+  instantiationId: -1
   currentMasterID: -1
   isRuntimeInstantiated: 0
 --- !u!114 &114596570774243000
@@ -106376,7 +106442,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddfa85297ccf9d44b91a670524a92c88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToRespawn: 120
+  timeToRespawn: 25
   isRespawnable: 1
   isRandomizable: 1
   m_type: 0
@@ -106386,10 +106452,13 @@ MonoBehaviour:
   - {fileID: 4300000, guid: 486351f15650ce5408452352641fc317, type: 3}
   - {fileID: 4300000, guid: 911b2aca4190de843ba6fc029bf3734d, type: 3}
   - {fileID: 4300000, guid: a59faa6df8bd9cd4c8779604face71a1, type: 3}
+  - {fileID: 4300000, guid: d5201c54bfe2c0242acafec0421e0d8e, type: 3}
   colorField:
   - {r: 1, g: 0, b: 0.64137936, a: 0.39215687}
   - {r: 1, g: 0.88965523, b: 0, a: 0.39215687}
   - {r: 0.9034481, g: 0, b: 1, a: 0.39215687}
+  - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
+  - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
   - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
 --- !u!114 &114600077828578076
 MonoBehaviour:
@@ -106413,8 +106482,8 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 114171554017942848}
   ObservedComponentsFoldoutOpen: 1
-  viewIdField: 9
-  instantiationId: 9
+  viewIdField: 0
+  instantiationId: -1
   currentMasterID: -1
   isRuntimeInstantiated: 0
 --- !u!114 &114611678191067260
@@ -106545,8 +106614,8 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 114831022193300402}
   ObservedComponentsFoldoutOpen: 1
-  viewIdField: 2
-  instantiationId: 2
+  viewIdField: 0
+  instantiationId: -1
   currentMasterID: -1
   isRuntimeInstantiated: 0
 --- !u!114 &114650333746725694
@@ -106560,7 +106629,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddfa85297ccf9d44b91a670524a92c88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToRespawn: 120
+  timeToRespawn: 25
   isRespawnable: 1
   isRandomizable: 1
   m_type: 0
@@ -106570,10 +106639,13 @@ MonoBehaviour:
   - {fileID: 4300000, guid: 486351f15650ce5408452352641fc317, type: 3}
   - {fileID: 4300000, guid: 911b2aca4190de843ba6fc029bf3734d, type: 3}
   - {fileID: 4300000, guid: a59faa6df8bd9cd4c8779604face71a1, type: 3}
+  - {fileID: 4300000, guid: d5201c54bfe2c0242acafec0421e0d8e, type: 3}
   colorField:
   - {r: 1, g: 0, b: 0.64137936, a: 0.39215687}
   - {r: 1, g: 0.88965523, b: 0, a: 0.39215687}
   - {r: 0.9034481, g: 0, b: 1, a: 0.39215687}
+  - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
+  - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
   - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
 --- !u!114 &114653745503222300
 MonoBehaviour:
@@ -106586,7 +106658,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddfa85297ccf9d44b91a670524a92c88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToRespawn: 30
+  timeToRespawn: 25
   isRespawnable: 1
   isRandomizable: 1
   m_type: 0
@@ -106596,10 +106668,13 @@ MonoBehaviour:
   - {fileID: 4300000, guid: 486351f15650ce5408452352641fc317, type: 3}
   - {fileID: 4300000, guid: 911b2aca4190de843ba6fc029bf3734d, type: 3}
   - {fileID: 4300000, guid: a59faa6df8bd9cd4c8779604face71a1, type: 3}
+  - {fileID: 4300000, guid: d5201c54bfe2c0242acafec0421e0d8e, type: 3}
   colorField:
   - {r: 1, g: 0, b: 0.64137936, a: 0.39215687}
   - {r: 1, g: 0.88965523, b: 0, a: 0.39215687}
   - {r: 0.9034481, g: 0, b: 1, a: 0.39215687}
+  - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
+  - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
   - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
 --- !u!114 &114662848397483336
 MonoBehaviour:
@@ -106623,8 +106698,8 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 114653745503222300}
   ObservedComponentsFoldoutOpen: 1
-  viewIdField: 29
-  instantiationId: 29
+  viewIdField: 0
+  instantiationId: -1
   currentMasterID: -1
   isRuntimeInstantiated: 0
 --- !u!114 &114664072719376688
@@ -106726,8 +106801,8 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 114133356101246920}
   ObservedComponentsFoldoutOpen: 1
-  viewIdField: 87
-  instantiationId: 87
+  viewIdField: 0
+  instantiationId: -1
   currentMasterID: -1
   isRuntimeInstantiated: 0
 --- !u!114 &114673371586580868
@@ -106752,8 +106827,8 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 114886539044849000}
   ObservedComponentsFoldoutOpen: 1
-  viewIdField: 48
-  instantiationId: 48
+  viewIdField: 0
+  instantiationId: -1
   currentMasterID: -1
   isRuntimeInstantiated: 0
 --- !u!114 &114675317203247720
@@ -106799,8 +106874,8 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 114556582946595092}
   ObservedComponentsFoldoutOpen: 1
-  viewIdField: 32
-  instantiationId: 32
+  viewIdField: 0
+  instantiationId: -1
   currentMasterID: -1
   isRuntimeInstantiated: 0
 --- !u!114 &114679942694224778
@@ -106846,8 +106921,8 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 114095846363696392}
   ObservedComponentsFoldoutOpen: 1
-  viewIdField: 4
-  instantiationId: 4
+  viewIdField: 0
+  instantiationId: -1
   currentMasterID: -1
   isRuntimeInstantiated: 0
 --- !u!114 &114693797085352842
@@ -106861,7 +106936,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddfa85297ccf9d44b91a670524a92c88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToRespawn: 120
+  timeToRespawn: 25
   isRespawnable: 1
   isRandomizable: 1
   m_type: 0
@@ -106871,10 +106946,13 @@ MonoBehaviour:
   - {fileID: 4300000, guid: 486351f15650ce5408452352641fc317, type: 3}
   - {fileID: 4300000, guid: 911b2aca4190de843ba6fc029bf3734d, type: 3}
   - {fileID: 4300000, guid: a59faa6df8bd9cd4c8779604face71a1, type: 3}
+  - {fileID: 4300000, guid: d5201c54bfe2c0242acafec0421e0d8e, type: 3}
   colorField:
   - {r: 1, g: 0, b: 0.64137936, a: 0.39215687}
   - {r: 1, g: 0.88965523, b: 0, a: 0.39215687}
   - {r: 0.9034481, g: 0, b: 1, a: 0.39215687}
+  - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
+  - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
   - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
 --- !u!114 &114695357635555322
 MonoBehaviour:
@@ -106898,8 +106976,8 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 114257360339291964}
   ObservedComponentsFoldoutOpen: 1
-  viewIdField: 31
-  instantiationId: 31
+  viewIdField: 0
+  instantiationId: -1
   currentMasterID: -1
   isRuntimeInstantiated: 0
 --- !u!114 &114698477058928822
@@ -106936,7 +107014,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddfa85297ccf9d44b91a670524a92c88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToRespawn: 120
+  timeToRespawn: 25
   isRespawnable: 1
   isRandomizable: 1
   m_type: 0
@@ -106946,10 +107024,13 @@ MonoBehaviour:
   - {fileID: 4300000, guid: 486351f15650ce5408452352641fc317, type: 3}
   - {fileID: 4300000, guid: 911b2aca4190de843ba6fc029bf3734d, type: 3}
   - {fileID: 4300000, guid: a59faa6df8bd9cd4c8779604face71a1, type: 3}
+  - {fileID: 4300000, guid: d5201c54bfe2c0242acafec0421e0d8e, type: 3}
   colorField:
   - {r: 1, g: 0, b: 0.64137936, a: 0.39215687}
   - {r: 1, g: 0.88965523, b: 0, a: 0.39215687}
   - {r: 0.9034481, g: 0, b: 1, a: 0.39215687}
+  - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
+  - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
   - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
 --- !u!114 &114716943361100486
 MonoBehaviour:
@@ -106973,8 +107054,8 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 114971321712570736}
   ObservedComponentsFoldoutOpen: 1
-  viewIdField: 47
-  instantiationId: 47
+  viewIdField: 0
+  instantiationId: -1
   currentMasterID: -1
   isRuntimeInstantiated: 0
 --- !u!114 &114722423984793312
@@ -107066,8 +107147,8 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 114866046781355136}
   ObservedComponentsFoldoutOpen: 1
-  viewIdField: 78
-  instantiationId: 78
+  viewIdField: 0
+  instantiationId: -1
   currentMasterID: -1
   isRuntimeInstantiated: 0
 --- !u!114 &114733640171498894
@@ -107092,8 +107173,8 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 114322470670774842}
   ObservedComponentsFoldoutOpen: 1
-  viewIdField: 82
-  instantiationId: 82
+  viewIdField: 0
+  instantiationId: -1
   currentMasterID: -1
   isRuntimeInstantiated: 0
 --- !u!114 &114737939863139300
@@ -107118,8 +107199,8 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 114708270350498372}
   ObservedComponentsFoldoutOpen: 1
-  viewIdField: 46
-  instantiationId: 46
+  viewIdField: 0
+  instantiationId: -1
   currentMasterID: -1
   isRuntimeInstantiated: 0
 --- !u!114 &114738390509276616
@@ -107200,8 +107281,8 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 114188018728597908}
   ObservedComponentsFoldoutOpen: 1
-  viewIdField: 11
-  instantiationId: 11
+  viewIdField: 0
+  instantiationId: -1
   currentMasterID: -1
   isRuntimeInstantiated: 0
 --- !u!114 &114741479820359720
@@ -107226,8 +107307,8 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 114556447176114320}
   ObservedComponentsFoldoutOpen: 1
-  viewIdField: 86
-  instantiationId: 86
+  viewIdField: 0
+  instantiationId: -1
   currentMasterID: -1
   isRuntimeInstantiated: 0
 --- !u!114 &114761202365543414
@@ -107336,7 +107417,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddfa85297ccf9d44b91a670524a92c88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToRespawn: 120
+  timeToRespawn: 25
   isRespawnable: 1
   isRandomizable: 1
   m_type: 0
@@ -107346,10 +107427,13 @@ MonoBehaviour:
   - {fileID: 4300000, guid: 486351f15650ce5408452352641fc317, type: 3}
   - {fileID: 4300000, guid: 911b2aca4190de843ba6fc029bf3734d, type: 3}
   - {fileID: 4300000, guid: a59faa6df8bd9cd4c8779604face71a1, type: 3}
+  - {fileID: 4300000, guid: d5201c54bfe2c0242acafec0421e0d8e, type: 3}
   colorField:
   - {r: 1, g: 0, b: 0.64137936, a: 0.39215687}
   - {r: 1, g: 0.88965523, b: 0, a: 0.39215687}
   - {r: 0.9034481, g: 0, b: 1, a: 0.39215687}
+  - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
+  - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
   - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
 --- !u!114 &114806883106886968
 MonoBehaviour:
@@ -107362,7 +107446,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddfa85297ccf9d44b91a670524a92c88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToRespawn: 120
+  timeToRespawn: 25
   isRespawnable: 1
   isRandomizable: 1
   m_type: 0
@@ -107372,10 +107456,13 @@ MonoBehaviour:
   - {fileID: 4300000, guid: 486351f15650ce5408452352641fc317, type: 3}
   - {fileID: 4300000, guid: 911b2aca4190de843ba6fc029bf3734d, type: 3}
   - {fileID: 4300000, guid: a59faa6df8bd9cd4c8779604face71a1, type: 3}
+  - {fileID: 4300000, guid: d5201c54bfe2c0242acafec0421e0d8e, type: 3}
   colorField:
   - {r: 1, g: 0, b: 0.64137936, a: 0.39215687}
   - {r: 1, g: 0.88965523, b: 0, a: 0.39215687}
   - {r: 0.9034481, g: 0, b: 1, a: 0.39215687}
+  - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
+  - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
   - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
 --- !u!114 &114810445844075666
 MonoBehaviour:
@@ -107507,8 +107594,8 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 114054795760196946}
   ObservedComponentsFoldoutOpen: 1
-  viewIdField: 83
-  instantiationId: 83
+  viewIdField: 0
+  instantiationId: -1
   currentMasterID: -1
   isRuntimeInstantiated: 0
 --- !u!114 &114831022193300402
@@ -107522,7 +107609,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddfa85297ccf9d44b91a670524a92c88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToRespawn: 120
+  timeToRespawn: 25
   isRespawnable: 1
   isRandomizable: 1
   m_type: 0
@@ -107532,10 +107619,13 @@ MonoBehaviour:
   - {fileID: 4300000, guid: 486351f15650ce5408452352641fc317, type: 3}
   - {fileID: 4300000, guid: 911b2aca4190de843ba6fc029bf3734d, type: 3}
   - {fileID: 4300000, guid: a59faa6df8bd9cd4c8779604face71a1, type: 3}
+  - {fileID: 4300000, guid: d5201c54bfe2c0242acafec0421e0d8e, type: 3}
   colorField:
   - {r: 1, g: 0, b: 0.64137936, a: 0.39215687}
   - {r: 1, g: 0.88965523, b: 0, a: 0.39215687}
   - {r: 0.9034481, g: 0, b: 1, a: 0.39215687}
+  - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
+  - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
   - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
 --- !u!114 &114835864475378024
 MonoBehaviour:
@@ -107548,7 +107638,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddfa85297ccf9d44b91a670524a92c88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToRespawn: 120
+  timeToRespawn: 25
   isRespawnable: 1
   isRandomizable: 1
   m_type: 0
@@ -107558,10 +107648,13 @@ MonoBehaviour:
   - {fileID: 4300000, guid: 486351f15650ce5408452352641fc317, type: 3}
   - {fileID: 4300000, guid: 911b2aca4190de843ba6fc029bf3734d, type: 3}
   - {fileID: 4300000, guid: a59faa6df8bd9cd4c8779604face71a1, type: 3}
+  - {fileID: 4300000, guid: d5201c54bfe2c0242acafec0421e0d8e, type: 3}
   colorField:
   - {r: 1, g: 0, b: 0.64137936, a: 0.39215687}
   - {r: 1, g: 0.88965523, b: 0, a: 0.39215687}
   - {r: 0.9034481, g: 0, b: 1, a: 0.39215687}
+  - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
+  - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
   - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
 --- !u!114 &114841470710792594
 MonoBehaviour:
@@ -107585,8 +107678,8 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 114806883106886968}
   ObservedComponentsFoldoutOpen: 1
-  viewIdField: 7
-  instantiationId: 7
+  viewIdField: 0
+  instantiationId: -1
   currentMasterID: -1
   isRuntimeInstantiated: 0
 --- !u!114 &114851240697697160
@@ -107671,8 +107764,8 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 114404538427782088}
   ObservedComponentsFoldoutOpen: 1
-  viewIdField: 77
-  instantiationId: 77
+  viewIdField: 0
+  instantiationId: -1
   currentMasterID: -1
   isRuntimeInstantiated: 0
 --- !u!114 &114860949081331358
@@ -107686,7 +107779,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddfa85297ccf9d44b91a670524a92c88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToRespawn: 120
+  timeToRespawn: 25
   isRespawnable: 1
   isRandomizable: 1
   m_type: 0
@@ -107696,10 +107789,13 @@ MonoBehaviour:
   - {fileID: 4300000, guid: 486351f15650ce5408452352641fc317, type: 3}
   - {fileID: 4300000, guid: 911b2aca4190de843ba6fc029bf3734d, type: 3}
   - {fileID: 4300000, guid: a59faa6df8bd9cd4c8779604face71a1, type: 3}
+  - {fileID: 4300000, guid: d5201c54bfe2c0242acafec0421e0d8e, type: 3}
   colorField:
   - {r: 1, g: 0, b: 0.64137936, a: 0.39215687}
   - {r: 1, g: 0.88965523, b: 0, a: 0.39215687}
   - {r: 0.9034481, g: 0, b: 1, a: 0.39215687}
+  - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
+  - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
   - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
 --- !u!114 &114865583033530734
 MonoBehaviour:
@@ -107712,7 +107808,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddfa85297ccf9d44b91a670524a92c88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToRespawn: 120
+  timeToRespawn: 25
   isRespawnable: 1
   isRandomizable: 1
   m_type: 0
@@ -107722,10 +107818,13 @@ MonoBehaviour:
   - {fileID: 4300000, guid: 486351f15650ce5408452352641fc317, type: 3}
   - {fileID: 4300000, guid: 911b2aca4190de843ba6fc029bf3734d, type: 3}
   - {fileID: 4300000, guid: a59faa6df8bd9cd4c8779604face71a1, type: 3}
+  - {fileID: 4300000, guid: d5201c54bfe2c0242acafec0421e0d8e, type: 3}
   colorField:
   - {r: 1, g: 0, b: 0.64137936, a: 0.39215687}
   - {r: 1, g: 0.88965523, b: 0, a: 0.39215687}
   - {r: 0.9034481, g: 0, b: 1, a: 0.39215687}
+  - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
+  - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
   - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
 --- !u!114 &114866046781355136
 MonoBehaviour:
@@ -107738,7 +107837,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddfa85297ccf9d44b91a670524a92c88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToRespawn: 120
+  timeToRespawn: 25
   isRespawnable: 1
   isRandomizable: 1
   m_type: 0
@@ -107748,10 +107847,13 @@ MonoBehaviour:
   - {fileID: 4300000, guid: 486351f15650ce5408452352641fc317, type: 3}
   - {fileID: 4300000, guid: 911b2aca4190de843ba6fc029bf3734d, type: 3}
   - {fileID: 4300000, guid: a59faa6df8bd9cd4c8779604face71a1, type: 3}
+  - {fileID: 4300000, guid: d5201c54bfe2c0242acafec0421e0d8e, type: 3}
   colorField:
   - {r: 1, g: 0, b: 0.64137936, a: 0.39215687}
   - {r: 1, g: 0.88965523, b: 0, a: 0.39215687}
   - {r: 0.9034481, g: 0, b: 1, a: 0.39215687}
+  - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
+  - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
   - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
 --- !u!114 &114878525517379644
 MonoBehaviour:
@@ -107775,8 +107877,8 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 114912334527281990}
   ObservedComponentsFoldoutOpen: 1
-  viewIdField: 8
-  instantiationId: 8
+  viewIdField: 0
+  instantiationId: -1
   currentMasterID: -1
   isRuntimeInstantiated: 0
 --- !u!114 &114884848353428382
@@ -107790,7 +107892,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddfa85297ccf9d44b91a670524a92c88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToRespawn: 120
+  timeToRespawn: 25
   isRespawnable: 1
   isRandomizable: 1
   m_type: 0
@@ -107800,10 +107902,13 @@ MonoBehaviour:
   - {fileID: 4300000, guid: 486351f15650ce5408452352641fc317, type: 3}
   - {fileID: 4300000, guid: 911b2aca4190de843ba6fc029bf3734d, type: 3}
   - {fileID: 4300000, guid: a59faa6df8bd9cd4c8779604face71a1, type: 3}
+  - {fileID: 4300000, guid: d5201c54bfe2c0242acafec0421e0d8e, type: 3}
   colorField:
   - {r: 1, g: 0, b: 0.64137936, a: 0.39215687}
   - {r: 1, g: 0.88965523, b: 0, a: 0.39215687}
   - {r: 0.9034481, g: 0, b: 1, a: 0.39215687}
+  - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
+  - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
   - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
 --- !u!114 &114884923860342004
 MonoBehaviour:
@@ -107816,7 +107921,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddfa85297ccf9d44b91a670524a92c88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToRespawn: 120
+  timeToRespawn: 25
   isRespawnable: 1
   isRandomizable: 1
   m_type: 0
@@ -107826,10 +107931,13 @@ MonoBehaviour:
   - {fileID: 4300000, guid: 486351f15650ce5408452352641fc317, type: 3}
   - {fileID: 4300000, guid: 911b2aca4190de843ba6fc029bf3734d, type: 3}
   - {fileID: 4300000, guid: a59faa6df8bd9cd4c8779604face71a1, type: 3}
+  - {fileID: 4300000, guid: d5201c54bfe2c0242acafec0421e0d8e, type: 3}
   colorField:
   - {r: 1, g: 0, b: 0.64137936, a: 0.39215687}
   - {r: 1, g: 0.88965523, b: 0, a: 0.39215687}
   - {r: 0.9034481, g: 0, b: 1, a: 0.39215687}
+  - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
+  - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
   - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
 --- !u!114 &114885861220862466
 MonoBehaviour:
@@ -107875,7 +107983,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddfa85297ccf9d44b91a670524a92c88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToRespawn: 120
+  timeToRespawn: 25
   isRespawnable: 1
   isRandomizable: 1
   m_type: 0
@@ -107885,10 +107993,13 @@ MonoBehaviour:
   - {fileID: 4300000, guid: 486351f15650ce5408452352641fc317, type: 3}
   - {fileID: 4300000, guid: 911b2aca4190de843ba6fc029bf3734d, type: 3}
   - {fileID: 4300000, guid: a59faa6df8bd9cd4c8779604face71a1, type: 3}
+  - {fileID: 4300000, guid: d5201c54bfe2c0242acafec0421e0d8e, type: 3}
   colorField:
   - {r: 1, g: 0, b: 0.64137936, a: 0.39215687}
   - {r: 1, g: 0.88965523, b: 0, a: 0.39215687}
   - {r: 0.9034481, g: 0, b: 1, a: 0.39215687}
+  - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
+  - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
   - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
 --- !u!114 &114890305758162524
 MonoBehaviour:
@@ -107968,7 +108079,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddfa85297ccf9d44b91a670524a92c88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToRespawn: 120
+  timeToRespawn: 25
   isRespawnable: 1
   isRandomizable: 1
   m_type: 0
@@ -107978,10 +108089,13 @@ MonoBehaviour:
   - {fileID: 4300000, guid: 486351f15650ce5408452352641fc317, type: 3}
   - {fileID: 4300000, guid: 911b2aca4190de843ba6fc029bf3734d, type: 3}
   - {fileID: 4300000, guid: a59faa6df8bd9cd4c8779604face71a1, type: 3}
+  - {fileID: 4300000, guid: d5201c54bfe2c0242acafec0421e0d8e, type: 3}
   colorField:
   - {r: 1, g: 0, b: 0.64137936, a: 0.39215687}
   - {r: 1, g: 0.88965523, b: 0, a: 0.39215687}
   - {r: 0.9034481, g: 0, b: 1, a: 0.39215687}
+  - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
+  - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
   - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
 --- !u!114 &114895927042873238
 MonoBehaviour:
@@ -108028,8 +108142,8 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 114980460023574210}
   ObservedComponentsFoldoutOpen: 1
-  viewIdField: 67
-  instantiationId: 67
+  viewIdField: 0
+  instantiationId: -1
   currentMasterID: -1
   isRuntimeInstantiated: 0
 --- !u!114 &114901893555613010
@@ -108054,8 +108168,8 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 114993715232061798}
   ObservedComponentsFoldoutOpen: 1
-  viewIdField: 45
-  instantiationId: 45
+  viewIdField: 0
+  instantiationId: -1
   currentMasterID: -1
   isRuntimeInstantiated: 0
 --- !u!114 &114905332048203002
@@ -108124,7 +108238,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddfa85297ccf9d44b91a670524a92c88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToRespawn: 120
+  timeToRespawn: 25
   isRespawnable: 1
   isRandomizable: 1
   m_type: 0
@@ -108134,10 +108248,13 @@ MonoBehaviour:
   - {fileID: 4300000, guid: 486351f15650ce5408452352641fc317, type: 3}
   - {fileID: 4300000, guid: 911b2aca4190de843ba6fc029bf3734d, type: 3}
   - {fileID: 4300000, guid: a59faa6df8bd9cd4c8779604face71a1, type: 3}
+  - {fileID: 4300000, guid: d5201c54bfe2c0242acafec0421e0d8e, type: 3}
   colorField:
   - {r: 1, g: 0, b: 0.64137936, a: 0.39215687}
   - {r: 1, g: 0.88965523, b: 0, a: 0.39215687}
   - {r: 0.9034481, g: 0, b: 1, a: 0.39215687}
+  - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
+  - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
   - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
 --- !u!114 &114924362063269668
 MonoBehaviour:
@@ -108161,8 +108278,8 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 114894547101542724}
   ObservedComponentsFoldoutOpen: 1
-  viewIdField: 13
-  instantiationId: 13
+  viewIdField: 0
+  instantiationId: -1
   currentMasterID: -1
   isRuntimeInstantiated: 0
 --- !u!114 &114936200971328712
@@ -108243,8 +108360,8 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 114785165123186840}
   ObservedComponentsFoldoutOpen: 1
-  viewIdField: 30
-  instantiationId: 30
+  viewIdField: 0
+  instantiationId: -1
   currentMasterID: -1
   isRuntimeInstantiated: 0
 --- !u!114 &114971321712570736
@@ -108258,7 +108375,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddfa85297ccf9d44b91a670524a92c88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToRespawn: 30
+  timeToRespawn: 25
   isRespawnable: 1
   isRandomizable: 1
   m_type: 0
@@ -108268,10 +108385,13 @@ MonoBehaviour:
   - {fileID: 4300000, guid: 486351f15650ce5408452352641fc317, type: 3}
   - {fileID: 4300000, guid: 911b2aca4190de843ba6fc029bf3734d, type: 3}
   - {fileID: 4300000, guid: a59faa6df8bd9cd4c8779604face71a1, type: 3}
+  - {fileID: 4300000, guid: d5201c54bfe2c0242acafec0421e0d8e, type: 3}
   colorField:
   - {r: 1, g: 0, b: 0.64137936, a: 0.39215687}
   - {r: 1, g: 0.88965523, b: 0, a: 0.39215687}
   - {r: 0.9034481, g: 0, b: 1, a: 0.39215687}
+  - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
+  - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
   - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
 --- !u!114 &114973296941988222
 MonoBehaviour:
@@ -108284,7 +108404,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddfa85297ccf9d44b91a670524a92c88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToRespawn: 120
+  timeToRespawn: 25
   isRespawnable: 1
   isRandomizable: 1
   m_type: 0
@@ -108294,10 +108414,13 @@ MonoBehaviour:
   - {fileID: 4300000, guid: 486351f15650ce5408452352641fc317, type: 3}
   - {fileID: 4300000, guid: 911b2aca4190de843ba6fc029bf3734d, type: 3}
   - {fileID: 4300000, guid: a59faa6df8bd9cd4c8779604face71a1, type: 3}
+  - {fileID: 4300000, guid: d5201c54bfe2c0242acafec0421e0d8e, type: 3}
   colorField:
   - {r: 1, g: 0, b: 0.64137936, a: 0.39215687}
   - {r: 1, g: 0.88965523, b: 0, a: 0.39215687}
   - {r: 0.9034481, g: 0, b: 1, a: 0.39215687}
+  - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
+  - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
   - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
 --- !u!114 &114980460023574210
 MonoBehaviour:
@@ -108310,7 +108433,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddfa85297ccf9d44b91a670524a92c88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToRespawn: 120
+  timeToRespawn: 25
   isRespawnable: 1
   isRandomizable: 1
   m_type: 0
@@ -108320,10 +108443,13 @@ MonoBehaviour:
   - {fileID: 4300000, guid: 486351f15650ce5408452352641fc317, type: 3}
   - {fileID: 4300000, guid: 911b2aca4190de843ba6fc029bf3734d, type: 3}
   - {fileID: 4300000, guid: a59faa6df8bd9cd4c8779604face71a1, type: 3}
+  - {fileID: 4300000, guid: d5201c54bfe2c0242acafec0421e0d8e, type: 3}
   colorField:
   - {r: 1, g: 0, b: 0.64137936, a: 0.39215687}
   - {r: 1, g: 0.88965523, b: 0, a: 0.39215687}
   - {r: 0.9034481, g: 0, b: 1, a: 0.39215687}
+  - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
+  - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
   - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
 --- !u!114 &114984872022665502
 MonoBehaviour:
@@ -108382,7 +108508,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddfa85297ccf9d44b91a670524a92c88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToRespawn: 30
+  timeToRespawn: 25
   isRespawnable: 1
   isRandomizable: 1
   m_type: 0
@@ -108392,10 +108518,13 @@ MonoBehaviour:
   - {fileID: 4300000, guid: 486351f15650ce5408452352641fc317, type: 3}
   - {fileID: 4300000, guid: 911b2aca4190de843ba6fc029bf3734d, type: 3}
   - {fileID: 4300000, guid: a59faa6df8bd9cd4c8779604face71a1, type: 3}
+  - {fileID: 4300000, guid: d5201c54bfe2c0242acafec0421e0d8e, type: 3}
   colorField:
   - {r: 1, g: 0, b: 0.64137936, a: 0.39215687}
   - {r: 1, g: 0.88965523, b: 0, a: 0.39215687}
   - {r: 0.9034481, g: 0, b: 1, a: 0.39215687}
+  - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
+  - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
   - {r: 0, g: 0.48275852, b: 1, a: 0.39215687}
 --- !u!114 &114993980940934604
 MonoBehaviour:
