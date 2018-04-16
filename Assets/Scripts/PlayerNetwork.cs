@@ -66,6 +66,7 @@ public class PlayerNetwork : Photon.MonoBehaviour {
     public float m_HPReducedPerSecond = 15.0f;
     private float m_maxHP = 100f;
     private bool largeBalls = false;
+    private bool invul = false;
 
     //added by Po
     [SerializeField] GameObject[] m_weapons;
@@ -394,6 +395,8 @@ public class PlayerNetwork : Photon.MonoBehaviour {
     [PunRPC]
     public void TakeDamage(float damage, int shooterID)
     {
+        if (invul && damage > 0f) return;
+
         if (insideZone && damage > 0) {
             foreach (GameObject go in m_bloodCube)
             {
@@ -407,7 +410,7 @@ public class PlayerNetwork : Photon.MonoBehaviour {
 
 
         Debug.Log("I was shot by player" + shooterID);
-
+        
 		m_health -= damage;
         if (m_health > m_maxHP) m_health = m_maxHP;
         SetColor();
@@ -552,6 +555,10 @@ public class PlayerNetwork : Photon.MonoBehaviour {
         else if (powerType == 3)
         {
             StartCoroutine(bigBallsPowerup(5.0f));
+        }
+        else if (powerType == 5)
+        {
+            StartCoroutine(invulPowerup(5.0f));
         }
         //Some one need to handle the number of the power type to add attribue accordingly
     }
@@ -700,6 +707,18 @@ public class PlayerNetwork : Photon.MonoBehaviour {
         Debug.Log("Big ball powerup ending");
     }
 
+    IEnumerator invulPowerup(float time)
+    {
+        Debug.Log("invulnerable powerup starting");
+        invul = true;
+        GetComponentInChildren<Renderer>().material.color = Color.white;
+
+        yield return new WaitForSeconds(time);
+        invul = false;
+        SetColor();
+        Debug.Log("invulnerable powerup ending");
+    }
+
     [PunRPC]
     public void setMyName(string m_name)
     {
@@ -725,5 +744,10 @@ public class PlayerNetwork : Photon.MonoBehaviour {
         Vector2 facing = new Vector2(playerCamera.transform.forward.x, playerCamera.transform.forward.z);
         
         return Vector2.SignedAngle(facing, tosz);
+    }
+
+    public bool isInvulnerable()
+    {
+        return invul;
     }
 }
