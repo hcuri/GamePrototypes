@@ -25,7 +25,7 @@ public class PowerUpScript : Photon.MonoBehaviour {
         timer = timeToRespawn;
         this.tag = "PowerUp";
         randNum = (int)Random.Range(0, 5);
-        Debug.Log("random is :" + randNum);
+        //Debug.Log("random is :" + randNum);
         childObject = transform.GetChild(0).gameObject;
 		colorField = new Color[5];
 		colorField [0] = new Color (255/255f,0/255f,164/255f,100/255f);
