@@ -130,11 +130,12 @@ public class PowerUpScript : Photon.MonoBehaviour {
     {
         pv = other.gameObject.GetComponent<PhotonView>();
         if (other.CompareTag("Player") && isAvailable)
-        {
+        {            
             if (pv.isMine)
-            {
+            {              
                 //it will send the type number to player, and player should handle it.
                 other.GetComponent<PhotonView>().RPC("GetPowerUp", PhotonTargets.AllBuffered, m_type);
+                FloatingTextController.CreateFixedFloatingText(m_type);
             }
 
             if(!isRespawnable)

@@ -149,7 +149,9 @@ public class PlayerNetwork : Photon.MonoBehaviour {
         gameFlowManager = GameObject.Find("GameFlowManager");
 
         this.GetComponent<PhotonView>().RPC("setMyTag", PhotonTargets.AllBuffered);
-	}
+
+        FloatingTextController.Initialize();
+    }
 
     private void Update()
 	{

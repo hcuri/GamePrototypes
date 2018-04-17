@@ -23,7 +23,7 @@ public class Weapon : MonoBehaviour {
 
 	void Start () {
         m_pv = GetComponent<PhotonView>();
-        FloatingTextController.Initialize();
+        
         /*if (m_type == -1)
             Debug.Log(this.name + " was set to the wrong weapon type");*/
     }
@@ -68,15 +68,9 @@ public class Weapon : MonoBehaviour {
 
     private void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.tag == "Player")
-        {
-            //if(other.transform.position)
-            FloatingTextController.CreateFloatingText(m_damage.ToString(), transform);
-        }
-
         if (other.gameObject.tag == "Player" && m_pv.isMine)
         {
-            //FloatingTextController.CreateFloatingText(m_damage.ToString(), transform);
+            FloatingTextController.CreateFloatingText(m_damage.ToString(), transform);
             other.gameObject.GetComponent<PhotonView>().RPC("TakeDamage", PhotonTargets.AllBuffered, m_damage, m_id);
             m_damage = 0;
         }    
