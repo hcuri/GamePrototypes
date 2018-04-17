@@ -20,6 +20,7 @@ public class PhotonNetworkManager : Photon.PunBehaviour
     public float countDownToStart = 5.0f;
     private bool countingDown = false;
     public int m_ID = -1;
+    public Hashtable nameTable;
 
     [SerializeField] private Text killText;
     [SerializeField] private Text killCountText;
@@ -47,6 +48,8 @@ public class PhotonNetworkManager : Photon.PunBehaviour
         //Initial the array which to keep track of players
         PlayersInGame = new GameObject[numPeopleToStart];
         nameCarrier = GameObject.Find("NameCarrier");
+        //nameTable = new Hashtable();
+        nameTable = null;
     }
 
     public override void OnJoinedLobby()
@@ -98,8 +101,16 @@ public class PhotonNetworkManager : Photon.PunBehaviour
             {
                 if(pv.ownerId == otherPlayer.ID && pv.gameObject.CompareTag("Player"))
                 {
-                    FindObjectOfType<GameFlowManager>().playerDisconnected();
-                    killText.text = "Player" + pv.ownerId + " has disconnected";
+                    if (pv.gameObject.GetComponent<PlayerNetwork>().returnHealth() > 0)
+                    {
+                        if (nameTable == null)
+                        {
+                            FillNameTable();
+                        }
+
+                        FindObjectOfType<GameFlowManager>().playerDisconnected();
+                        killText.text = nameTable[pv.ownerId] + " has disconnected";
+                    }
                 }
             }
 
@@ -195,13 +206,20 @@ public class PhotonNetworkManager : Photon.PunBehaviour
 
     public void killWarn(int killer, int victim)
     {
-        Debug.Log("Killer is: " + killer + " Victim is: " + victim);
+        if(nameTable == null)
+        {
+            FillNameTable();
+        }
+        string killerS = (string)nameTable[killer];
+        string victimS = (string)nameTable[victim];
+
+        Debug.Log("Killer is: " + killerS + " Victim is: " + victimS);
         if (killer != -1)
-            killText.text = "Player" + killer + " has killed Player" + victim + "\n";
+            killText.text = killerS + " has killed " + victimS + "\n";
         else
         {
-            Debug.Log("Player " + victim + "has died in the shrinking zone");
-            killText.text = "Player" + victim + " has died in the shrinking zone\n";
+            Debug.Log("Player " + victimS + "has died in the shrinking zone");
+            killText.text = victimS + " has died in the shrinking zone\n";
         }
 
         GameObject myPlayer = PlayersInGame[killer - 1];
@@ -225,5 +243,16 @@ public class PhotonNetworkManager : Photon.PunBehaviour
         PhotonNetwork.Disconnect();
         //Scene m_Scene = SceneManager.GetActiveScene();
         SceneManager.LoadScene("Scene0");
+    }
+
+    public void FillNameTable()
+    {
+        nameTable = new Hashtable();
+        GameObject[] AllPlayers = GameObject.FindGameObjectsWithTag("Player");
+        foreach (GameObject tP in AllPlayers)
+        {
+            int tID = tP.GetComponent<PlayerNetwork>().player_ID;
+            nameTable[tID] = tP.GetComponent<PlayerNetwork>().playerName;
+        }
     }
 }
