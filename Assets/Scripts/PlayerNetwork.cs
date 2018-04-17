@@ -142,6 +142,9 @@ public class PlayerNetwork : Photon.MonoBehaviour {
         //start looking green
         SetColor();
 
+        //don't show your name above your own head
+        if (m_pv.isMine) nameOnHead.enabled = false;
+
         showCursor = false;
         shootEnable = true;
         isDead = false;
@@ -229,6 +232,10 @@ public class PlayerNetwork : Photon.MonoBehaviour {
 			damageImage.color = Color.Lerp (damageImage.color, Color.clear, 0.5f*Time.deltaTime);
             if(weaponPointer != -1)
                 weaponUpdatePosition();
+
+            // rotate the names towards you
+            foreach (PlayerNetwork pn in FindObjectsOfType<PlayerNetwork>())
+                pn.transform.Find("PlayerName").transform.forward = playerCamera.transform.forward;
 
             return;
         }
