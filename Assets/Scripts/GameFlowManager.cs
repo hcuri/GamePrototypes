@@ -15,6 +15,16 @@ public class GameFlowManager : MonoBehaviour {
     public GameObject winPanel;
     public bool isDebugging;
     public Text playersRemain;
+    //public ShrinkingZoneScript m_shrinking;
+
+    public enum StageType
+    {
+        InitialStage,
+        FinalStage
+    }
+
+    public StageType m_Stage;
+
     // Use this for initialization
     void Start () {
         playerInGameIsFilled = false;
@@ -30,6 +40,7 @@ public class GameFlowManager : MonoBehaviour {
         total_Player = playerCount;
         playersRemain = GameObject.Find("PlayersRemain").GetComponent<Text>();
         playersRemain.text = "";
+        m_Stage = StageType.InitialStage;
         updatePlayerRemain();
     }
 	
@@ -104,5 +115,10 @@ public class GameFlowManager : MonoBehaviour {
     {
         if (!endPanel.activeSelf && !winPanel.activeSelf)
             winPanel.SetActive(true);
+    }
+
+    public void processToNextStage()
+    {
+        m_Stage = StageType.FinalStage;
     }
 }

@@ -18,14 +18,23 @@ public class PowerUpScript : Photon.MonoBehaviour {
     int randNum;
     private GameObject childObject;
 
+    public GameFlowManager m_GFM;
+    public float[] earlyPos;
+    public float[] earlyPre;
+    public float[] latePos;
+    public float[] latePre;
+    public int temp;
+
     void Start()
     {
         if (meshField == null)
             Debug.Log("You need to assign differet meshes to the power up so that it can change");
         timer = timeToRespawn;
         this.tag = "PowerUp";
-        randNum = (int)Random.Range(0, 5);
-        //Debug.Log("random is :" + randNum);
+
+        /*randNum = (int)Random.Range(0, 5);
+        Debug.Log("random is :" + randNum);*/
+
         childObject = transform.GetChild(0).gameObject;
 		colorField = new Color[5];
 		colorField [0] = new Color (255/255f,0/255f,164/255f,100/255f);
@@ -33,12 +42,34 @@ public class PowerUpScript : Photon.MonoBehaviour {
 		colorField [2] = new Color (0/255f, 123/255f, 255/255f, 100/255f);
         colorField[4] = new Color(75 / 255f, 75 / 255f, 75 / 255f, 100 / 255f);
 		colorField [3] = new Color (100/255f, 1000/255f, 100/255f, 100/255f);
+
+        m_GFM = GameObject.Find("GameFlowManager").GetComponent<GameFlowManager>();
+
+        earlyPos = new float[] { 5, 35, 35, 10, 10 ,5};
+        earlyPre = new float[earlyPos.Length];
+        earlyPre[0] = earlyPos[0];
+        for(int i = 1; i < earlyPre.Length; i++)
+        {
+            earlyPre[i] = earlyPre[i - 1] + earlyPos[i];
+        }
+        latePos = new float[] { 20, 10, 10, 20, 20, 20 };
+        latePre = new float[latePos.Length];
+        latePre[0] = latePos[0];
+        for (int i = 1; i < latePre.Length; i++)
+        {
+            latePre[i] = latePre[i - 1] + latePos[i];
+        }
+
+        randNum = GetMyPosRand();
     }
 
     [PunRPC]
     public void SetType(int t_type)
     {
         //Debug.Log("t_type: " +  t_type);
+
+        t_type = t_type >= 5 ? 0 : t_type;
+
         m_type = t_type;
         childObject.GetComponent<MeshFilter>().sharedMesh = meshField[m_type];
         //childObject.GetComponent<MeshRenderer>().material = materialField[m_type];
@@ -63,6 +94,14 @@ public class PowerUpScript : Photon.MonoBehaviour {
                 GetComponent<MeshRenderer>().enabled = true;
                 childObject.GetComponent<MeshRenderer>().enabled = true;
                 GetComponent<Collider>().enabled = true;
+                if (m_GFM.m_Stage == GameFlowManager.StageType.InitialStage)
+                    randNum = GetMyPosRand();
+                else
+                    randNum = GetMyLateRand();
+                if (PhotonNetwork.isMasterClient)
+                {
+                    this.gameObject.GetComponent<PhotonView>().RPC("SetType", PhotonTargets.AllBuffered, isRandomizable ? randNum : m_type);
+                }
             }
         }
     }
@@ -107,17 +146,39 @@ public class PowerUpScript : Photon.MonoBehaviour {
         }
     }
 
-    private void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    public int GetMyPosRand()
     {
-        //if (stream.isWriting)
-        //{
-        //    stream.SendNext(timer);
-        //    stream.SendNext(isAvailable);
-        //}
-        //else if (stream.isReading)
-        //{
-        //    timer = (float)stream.ReceiveNext();
-        //    isAvailable = (bool)stream.ReceiveNext();
-        //}
+        Debug.Log("EarlyRand");
+        int randNum = Random.Range(0, 100);
+        int rightS = earlyPre.Length;
+        int leftS = 0;
+        int mid;
+        while(leftS < rightS)
+        {
+            mid = (rightS + leftS) / 2;
+            if (randNum > earlyPre[mid])
+                leftS = mid + 1;
+            else
+                rightS = mid;
+        }
+        return leftS;
+    }
+
+    public int GetMyLateRand()
+    {
+        Debug.Log("LateRand");
+        int randNum = Random.Range(0, 100);
+        int rightS = latePre.Length;
+        int leftS = 0;
+        int mid;
+        while (leftS < rightS)
+        {
+            mid = (rightS + leftS) / 2;
+            if (randNum > latePre[mid])
+                leftS = mid + 1;
+            else
+                rightS = mid;
+        }
+        return leftS;
     }
 }
