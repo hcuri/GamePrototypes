@@ -71,7 +71,10 @@ public class Weapon : MonoBehaviour {
         if (other.gameObject.tag == "Player")
         {
             //if(other.transform.position)
-            FloatingTextController.CreateFloatingText(m_damage.ToString(), transform);
+            if(other.gameObject.GetComponent<PlayerNetwork>().isInvulnerable())
+                FloatingTextController.CreateFloatingText("nope", transform);
+            else
+                FloatingTextController.CreateFloatingText(m_damage.ToString(), transform);
         }
 
         if (other.gameObject.tag == "Player" && m_pv.isMine)
