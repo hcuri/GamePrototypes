@@ -65,9 +65,6 @@ public class PowerUpScript : Photon.MonoBehaviour {
     public void SetType(int t_type)
     {
         //Debug.Log("t_type: " +  t_type);
-
-        t_type = t_type >= 5 ? 0 : t_type;
-
         m_type = t_type;
         childObject.GetComponent<MeshFilter>().sharedMesh = meshField[m_type];
         //childObject.GetComponent<MeshRenderer>().material = materialField[m_type];
