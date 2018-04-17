@@ -32,16 +32,14 @@ public class PowerUpScript : Photon.MonoBehaviour {
         timer = timeToRespawn;
         this.tag = "PowerUp";
 
-        /*randNum = (int)Random.Range(0, 5);
-        Debug.Log("random is :" + randNum);*/
-
         childObject = transform.GetChild(0).gameObject;
-		colorField = new Color[5];
+		colorField = new Color[6];
 		colorField [0] = new Color (255/255f,0/255f,164/255f,100/255f);
 		colorField [1] = new Color (255/255f, 227/255f, 0/255f, 100/255f);
 		colorField [2] = new Color (0/255f, 123/255f, 255/255f, 100/255f);
-        colorField[4] = new Color(75 / 255f, 75 / 255f, 75 / 255f, 100 / 255f);
-		colorField [3] = new Color (100/255f, 1000/255f, 100/255f, 100/255f);
+        colorField [3] = new Color (100/255f, 100/255f, 100/255f, 100/255f);
+        colorField [4] = new Color (75/255f, 75/255f, 75/255f, 100/255f);
+        colorField [5] = new Color (0/255f, 255/255f, 255/255f, 100/255f);
 
         m_GFM = GameObject.Find("GameFlowManager").GetComponent<GameFlowManager>();
 
@@ -67,9 +65,6 @@ public class PowerUpScript : Photon.MonoBehaviour {
     public void SetType(int t_type)
     {
         //Debug.Log("t_type: " +  t_type);
-
-        t_type = t_type >= 5 ? 0 : t_type;
-
         m_type = t_type;
         childObject.GetComponent<MeshFilter>().sharedMesh = meshField[m_type];
         //childObject.GetComponent<MeshRenderer>().material = materialField[m_type];
