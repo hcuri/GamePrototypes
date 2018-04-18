@@ -35,6 +35,7 @@ public class FloatingTextController : MonoBehaviour {
             case 2: text = "Weapon Speed ++"; break;
             case 3: text = "Maximum Power Mode, ON!"; break;
             case 4: text = "Invisible Mode, ON!"; break;
+            case 5: text = "Invulnerable Mode ON!"; break;
         }
 
         FloatingText instance = Instantiate(popuptext2);
