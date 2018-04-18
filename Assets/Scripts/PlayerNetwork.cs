@@ -79,7 +79,9 @@ public class PlayerNetwork : Photon.MonoBehaviour {
     public int killCount;
     private MeshRenderer m_MR;
     private MeshRenderer[] child_MR;
-    public float disappearTimer = 8.0f;
+    public float disappearTimer = 10.0f;
+	public float bigBallsTimer = 10.0f;
+	public float invulTimer = 10.0f;
 
     public bool showCursor;
     public bool shootEnable;
@@ -563,11 +565,11 @@ public class PlayerNetwork : Photon.MonoBehaviour {
         }
         else if (powerType == 3)
         {
-            StartCoroutine(bigBallsPowerup(5.0f));
+            StartCoroutine(bigBallsPowerup(bigBallsTimer));
         }
         else if (powerType == 5)
         {
-            StartCoroutine(invulPowerup(5.0f));
+            StartCoroutine(invulPowerup(invulTimer));
         }
         //Some one need to handle the number of the power type to add attribue accordingly
     }
