@@ -229,12 +229,14 @@ public class PlayerNetwork : Photon.MonoBehaviour {
             if (overHeated)
             {
                 this.GetComponent<PhotonView>().RPC("showOverHeated", PhotonTargets.AllBuffered);
-            } else
+            }
+            else
             {
                 this.GetComponent<PhotonView>().RPC("hideOverHeated", PhotonTargets.AllBuffered);
             }
+            //this.GetComponent<PhotonView>().RPC("displayOverHeated", PhotonTargets.AllBuffered);
 
-			if (!insideZone) {
+            if (!insideZone) {
                 //TakeDamage (Time.deltaTime * m_HPReducedPerSecond, -1);
                 this.GetComponent<PhotonView>().RPC("TakeDamage", PhotonTargets.AllBuffered, Time.deltaTime * m_HPReducedPerSecond, -1);
 				zoneText.text = "You're taking damage inside the zone!";
@@ -257,8 +259,10 @@ public class PlayerNetwork : Photon.MonoBehaviour {
 
             // rotate the names towards you
             foreach (PlayerNetwork pn in FindObjectsOfType<PlayerNetwork>())
+            {
                 pn.transform.Find("PlayerName").transform.forward = playerCamera.transform.forward;
-
+                pn.transform.Find("overheatImage").transform.forward = playerCamera.transform.forward;
+            }
             return;
         }
     }
@@ -499,6 +503,23 @@ public class PlayerNetwork : Photon.MonoBehaviour {
     {
         overheatedSign.enabled = false;
     }
+
+    //sign only viewable by overheater
+    /*
+    [PunRPC]
+    public void displayOverHeated()
+    {
+        if (overHeated)
+        {
+            overheatedSign.enabled = true;
+        }
+        else
+        {
+            overheatedSign.enabled = false;
+        }
+    }
+    */
+
 
     public void SetColor(){
 		if (m_health <= 0) {
