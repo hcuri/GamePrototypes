@@ -89,6 +89,9 @@ public class PlayerNetwork : Photon.MonoBehaviour {
     [SerializeField] GameObject[] m_bloodCube;
     [SerializeField] GameObject gameFlowManager;
 
+    //4/18/2018
+    public Text overheatedSign;
+    //4/18/2018
     public Text nameOnHead;
     public string playerName;
     public Image arrowImage;
@@ -113,8 +116,13 @@ public class PlayerNetwork : Photon.MonoBehaviour {
         m_MR = this.GetComponent<MeshRenderer>();
         child_MR = transform.GetComponentsInChildren<MeshRenderer>();
         nameOnHead = transform.Find("PlayerName").GetComponentInChildren<Text>();
+
+        overheatedSign = transform.Find("overheatImage").GetComponentInChildren<Text>();
+
         arrowImage = transform.Find("Arrow").GetComponentInChildren<Image>();
         arrowImage.enabled = false;
+        overheatedSign.enabled = false;
+
         Initialize();
 
         //added by Po
@@ -163,15 +171,18 @@ public class PlayerNetwork : Photon.MonoBehaviour {
         {
             //called a RPC to set my ID on every client
         }*/
-
+        
         if (m_pv.isMine)
         {
+            //this.GetComponent<PhotonView>().RPC("setMyTag", PhotonTargets.AllBuffered);
             Weapon_Cool_Heat();
-
+            
             if(overHeated)
             {
+                
                 if (requirePenalty)
                 {
+                    
                     PenaltyHeatingWeapon();
                 }
 
@@ -205,7 +216,7 @@ public class PlayerNetwork : Photon.MonoBehaviour {
 			}
 			m_atkSlider.value = WeaponDamageEmpoweredCounter;
 			m_spdSlider.value = WeaponSpeedEmpoweredCounter;
-			/*if (WeaponDamageEmpoweredCounter == 5) {
+            /*if (WeaponDamageEmpoweredCounter == 5) {
 				m_atkText.text = "MAXIMUM POWER!!!";
 			} else {
 				m_atkText.text = "Attack Damage: " + WeaponDamageEmpoweredCounter + "/5";
@@ -215,6 +226,14 @@ public class PlayerNetwork : Photon.MonoBehaviour {
 			} else {
 				m_spdText.text = "Projectile Speed: " + WeaponSpeedEmpoweredCounter + "/5";
 			}*/
+            if (overHeated)
+            {
+                this.GetComponent<PhotonView>().RPC("showOverHeated", PhotonTargets.AllBuffered);
+            } else
+            {
+                this.GetComponent<PhotonView>().RPC("hideOverHeated", PhotonTargets.AllBuffered);
+            }
+
 			if (!insideZone) {
                 //TakeDamage (Time.deltaTime * m_HPReducedPerSecond, -1);
                 this.GetComponent<PhotonView>().RPC("TakeDamage", PhotonTargets.AllBuffered, Time.deltaTime * m_HPReducedPerSecond, -1);
@@ -469,7 +488,19 @@ public class PlayerNetwork : Photon.MonoBehaviour {
         TakeDamage((float)damage, shooterID);
     }
 
-	public void SetColor(){
+    [PunRPC]
+    public void showOverHeated()
+    {
+        overheatedSign.enabled = true;
+    }
+
+    [PunRPC]
+    public void hideOverHeated()
+    {
+        overheatedSign.enabled = false;
+    }
+
+    public void SetColor(){
 		if (m_health <= 0) {
 			m_color.r = 0;
 			m_color.g = 0;
@@ -477,7 +508,8 @@ public class PlayerNetwork : Photon.MonoBehaviour {
 		else if (m_health > 50) {
 			m_color.r = ((100 - m_health) / 50f);
 			m_color.g = 1f;
-		} else {
+		}
+        else {
 			m_color.r = 1f;
 			m_color.g = (m_health/50f) ;
 		}
@@ -740,9 +772,14 @@ public class PlayerNetwork : Photon.MonoBehaviour {
     public void setMyTag()
     {
         if (playerName == "")
+        {
             nameOnHead.text = "empty";
+        }
         else
+        {
             nameOnHead.text = playerName;
+
+        }
     }
 
     private float AngleToShrinkingZone()

@@ -66,4 +66,7 @@ MonoBehaviour:
   - setMyTag
   - increseWeaponSize
   - setSize
+  - SetNameColor
+  - showOverHeated
+  - hideOverHeated
   DisableAutoOpenWizard: 1
