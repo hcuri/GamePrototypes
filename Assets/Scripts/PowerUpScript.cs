@@ -38,7 +38,7 @@ public class PowerUpScript : Photon.MonoBehaviour {
 		colorField [1] = new Color (255/255f, 227/255f, 0/255f, 100/255f);
 		colorField [2] = new Color (0/255f, 123/255f, 255/255f, 100/255f);
         colorField [3] = new Color (100/255f, 100/255f, 100/255f, 100/255f);
-        colorField [4] = new Color (75/255f, 75/255f, 75/255f, 100/255f);
+        colorField [4] = new Color (125/255f, 0/255f, 125/255f, 100/255f);
         colorField [5] = new Color (0/255f, 255/255f, 255/255f, 100/255f);
 
         m_GFM = GameObject.Find("GameFlowManager").GetComponent<GameFlowManager>();
@@ -125,11 +125,12 @@ public class PowerUpScript : Photon.MonoBehaviour {
     {
         pv = other.gameObject.GetComponent<PhotonView>();
         if (other.CompareTag("Player") && isAvailable)
-        {
+        {            
             if (pv.isMine)
-            {
+            {              
                 //it will send the type number to player, and player should handle it.
                 other.GetComponent<PhotonView>().RPC("GetPowerUp", PhotonTargets.AllBuffered, m_type);
+                FloatingTextController.CreateFixedFloatingText(m_type);
             }
 
             if(!isRespawnable)
