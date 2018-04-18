@@ -68,6 +68,10 @@ public class PlayerNetwork : Photon.MonoBehaviour {
     private bool largeBalls = false;
     private bool invul = false;
 
+	private Image max_power_bar;
+	private Image invuln_bar;
+	private Image invis_bar;
+
     //added by Po
     [SerializeField] GameObject[] m_weapons;
     [SerializeField] bool[] weaponOn;
@@ -110,6 +114,11 @@ public class PlayerNetwork : Photon.MonoBehaviour {
 		m_spdSlider = GameObject.Find ("SPDSlider").GetComponent<Slider> ();
 		//m_atkText = GameObject.Find ("ATK").GetComponent<Text> ();
 		//m_spdText = GameObject.Find ("SPD").GetComponent<Text> ();
+
+		max_power_bar = GameObject.Find ("Big Balls Bar").GetComponent<Image> ();
+		invuln_bar = GameObject.Find ("Invulnerable Bar").GetComponent<Image> ();
+		invis_bar = GameObject.Find ("Invisible Bar").GetComponent<Image> ();
+
         m_debugMode = GameObject.Find("NetworkManager").GetComponent<PhotonNetworkManager>().returnDebugMode();
         NetworkManager = GameObject.Find("NetworkManager");
         m_MR = this.GetComponent<MeshRenderer>();
@@ -217,6 +226,9 @@ public class PlayerNetwork : Photon.MonoBehaviour {
 			} else {
 				m_spdText.text = "Projectile Speed: " + WeaponSpeedEmpoweredCounter + "/5";
 			}*/
+			max_power_bar.fillAmount -= (1.0f/bigBallsTimer) *Time.deltaTime;
+			invuln_bar.fillAmount -= (1.0f/invulTimer) *Time.deltaTime;
+			invis_bar.fillAmount -= (1.0f/disappearTimer) *Time.deltaTime;
 			if (!insideZone) {
                 //TakeDamage (Time.deltaTime * m_HPReducedPerSecond, -1);
                 this.GetComponent<PhotonView>().RPC("TakeDamage", PhotonTargets.AllBuffered, Time.deltaTime * m_HPReducedPerSecond, -1);
@@ -583,6 +595,8 @@ public class PlayerNetwork : Photon.MonoBehaviour {
             mr.enabled = false;
         }
         nameOnHead.enabled = false;
+		if (m_pv.isMine)
+			invis_bar.fillAmount = 1.0f;
         StartCoroutine(ComeBack());
 
     }
@@ -709,6 +723,8 @@ public class PlayerNetwork : Photon.MonoBehaviour {
     {
         Debug.Log("big ball powerup starting");
         largeBalls = true;
+		if (m_pv.isMine)
+			max_power_bar.fillAmount = 1f;
         int temp = WeaponDamageEmpoweredCounter;
         WeaponDamageEmpoweredCounter = 5;
 
@@ -722,6 +738,8 @@ public class PlayerNetwork : Photon.MonoBehaviour {
     {
         Debug.Log("invulnerable powerup starting");
         invul = true;
+		if (m_pv.isMine)
+			invuln_bar.fillAmount = 1f;
         GetComponentInChildren<Renderer>().material.color = Color.white;
 
         yield return new WaitForSeconds(time);
