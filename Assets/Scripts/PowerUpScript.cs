@@ -34,12 +34,12 @@ public class PowerUpScript : Photon.MonoBehaviour {
 
         childObject = transform.GetChild(0).gameObject;
 		colorField = new Color[6];
-		colorField [0] = new Color (255/255f,0/255f,164/255f,100/255f);
-		colorField [1] = new Color (255/255f, 227/255f, 0/255f, 100/255f);
-		colorField [2] = new Color (0/255f, 123/255f, 255/255f, 100/255f);
-        colorField [3] = new Color (100/255f, 100/255f, 100/255f, 100/255f);
-        colorField [4] = new Color (125/255f, 0/255f, 125/255f, 100/255f);
-        colorField [5] = new Color (0/255f, 255/255f, 255/255f, 100/255f);
+		colorField [0] = new Color (255/255f,0/255f,164/255f,150/255f);
+		colorField [1] = new Color (255/255f, 255/255f, 0/255f, 150/255f);
+		colorField [2] = new Color (0/255f, 123/255f, 255/255f, 150/255f);
+        colorField [3] = new Color (9/255f, 255/255f, 0/255f, 50/255f);
+        colorField [4] = new Color (125/255f, 125/255f, 125/255f, 50/255f);
+        colorField [5] = new Color (0/255f, 255/255f, 255/255f, 50/255f);
 
         m_GFM = GameObject.Find("GameFlowManager").GetComponent<GameFlowManager>();
 
