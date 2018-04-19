@@ -3201,7 +3201,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3787383bebdca1740ac5005b39f93e50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numPeopleToStart: 6
+  numPeopleToStart: 2
   netInfo: {fileID: 891378066}
   spawnPoint:
   - {fileID: 808624998}
@@ -3210,7 +3210,7 @@ MonoBehaviour:
   - {fileID: 573343205}
   - {fileID: 2091592810}
   - {fileID: 1159606096}
-  player: {fileID: 1817380021515512, guid: 61bb8c213dbfe174d95dfbc6188258c0, type: 2}
+  player: {fileID: 1424334230714234, guid: a751e95034fcae54cbdab6194ba12faa, type: 2}
   shrinkingZone: {fileID: 1718153061817834, guid: 13369119b8aa1a24a8e9146cb83403ac,
     type: 2}
   lobbyCamera: {fileID: 2001878483}
