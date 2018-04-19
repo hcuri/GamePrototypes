@@ -1689,6 +1689,8 @@ MonoBehaviour:
   NetworkManager: {fileID: 0}
   killCount: 0
   disappearTimer: 8
+  bigBallsTimer: 10
+  invulTimer: 10
   showCursor: 0
   shootEnable: 0
   isDead: 0
@@ -1760,7 +1762,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_IsWalking: 0
-  m_WalkSpeed: 15
+  m_WalkSpeed: 7.5
   m_RunSpeed: 15
   m_RunstepLenghten: 0.7
   m_JumpSpeed: 30
