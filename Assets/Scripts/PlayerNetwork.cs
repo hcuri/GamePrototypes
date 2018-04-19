@@ -68,6 +68,10 @@ public class PlayerNetwork : Photon.MonoBehaviour {
     private bool largeBalls = false;
     private bool invul = false;
 
+	private Image max_power_bar;
+	private Image invuln_bar;
+	private Image invis_bar;
+
     //added by Po
     [SerializeField] GameObject[] m_weapons;
     [SerializeField] bool[] weaponOn;
@@ -79,7 +83,9 @@ public class PlayerNetwork : Photon.MonoBehaviour {
     public int killCount;
     private MeshRenderer m_MR;
     private MeshRenderer[] child_MR;
-    public float disappearTimer = 8.0f;
+    public float disappearTimer = 10.0f;
+	public float bigBallsTimer = 10.0f;
+	public float invulTimer = 10.0f;
 
     public bool showCursor;
     public bool shootEnable;
@@ -111,6 +117,11 @@ public class PlayerNetwork : Photon.MonoBehaviour {
 		m_spdSlider = GameObject.Find ("SPDSlider").GetComponent<Slider> ();
 		//m_atkText = GameObject.Find ("ATK").GetComponent<Text> ();
 		//m_spdText = GameObject.Find ("SPD").GetComponent<Text> ();
+
+		max_power_bar = GameObject.Find ("Big Balls Bar").GetComponent<Image> ();
+		invuln_bar = GameObject.Find ("Invulnerable Bar").GetComponent<Image> ();
+		invis_bar = GameObject.Find ("Invisible Bar").GetComponent<Image> ();
+
         m_debugMode = GameObject.Find("NetworkManager").GetComponent<PhotonNetworkManager>().returnDebugMode();
         NetworkManager = GameObject.Find("NetworkManager");
         m_MR = this.GetComponent<MeshRenderer>();
@@ -235,8 +246,10 @@ public class PlayerNetwork : Photon.MonoBehaviour {
                 this.GetComponent<PhotonView>().RPC("hideOverHeated", PhotonTargets.AllBuffered);
             }
             //this.GetComponent<PhotonView>().RPC("displayOverHeated", PhotonTargets.AllBuffered);
-
-            if (!insideZone) {
+            max_power_bar.fillAmount -= (1.0f/bigBallsTimer) *Time.deltaTime;
+            invuln_bar.fillAmount -= (1.0f/invulTimer) *Time.deltaTime;
+            invis_bar.fillAmount -= (1.0f/disappearTimer) *Time.deltaTime;
+			if (!insideZone) {
                 //TakeDamage (Time.deltaTime * m_HPReducedPerSecond, -1);
                 this.GetComponent<PhotonView>().RPC("TakeDamage", PhotonTargets.AllBuffered, Time.deltaTime * m_HPReducedPerSecond, -1);
 				zoneText.text = "You're taking damage inside the zone!";
@@ -616,11 +629,11 @@ public class PlayerNetwork : Photon.MonoBehaviour {
         }
         else if (powerType == 3)
         {
-            StartCoroutine(bigBallsPowerup(5.0f));
+            StartCoroutine(bigBallsPowerup(bigBallsTimer));
         }
         else if (powerType == 5)
         {
-            StartCoroutine(invulPowerup(5.0f));
+            StartCoroutine(invulPowerup(invulTimer));
         }
         //Some one need to handle the number of the power type to add attribue accordingly
     }
@@ -634,6 +647,8 @@ public class PlayerNetwork : Photon.MonoBehaviour {
             mr.enabled = false;
         }
         nameOnHead.enabled = false;
+		if (m_pv.isMine)
+			invis_bar.fillAmount = 1.0f;
         StartCoroutine(ComeBack());
 
     }
@@ -760,6 +775,8 @@ public class PlayerNetwork : Photon.MonoBehaviour {
     {
         Debug.Log("big ball powerup starting");
         largeBalls = true;
+		if (m_pv.isMine)
+			max_power_bar.fillAmount = 1f;
         int temp = WeaponDamageEmpoweredCounter;
         WeaponDamageEmpoweredCounter = 5;
 
@@ -773,6 +790,8 @@ public class PlayerNetwork : Photon.MonoBehaviour {
     {
         Debug.Log("invulnerable powerup starting");
         invul = true;
+		if (m_pv.isMine)
+			invuln_bar.fillAmount = 1f;
         GetComponentInChildren<Renderer>().material.color = Color.white;
 
         yield return new WaitForSeconds(time);
