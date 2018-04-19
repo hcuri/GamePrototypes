@@ -445,7 +445,7 @@ public class PlayerNetwork : Photon.MonoBehaviour {
         if (insideZone && damage > 0) {
             foreach (GameObject go in m_bloodCube)
             {
-                for (int i = 0; i < 10; i++)
+                for (int i = 0; i < 6; i++)
                 {
                     GameObject g = Instantiate(go, gameObject.transform.position + new Vector3(UnityEngine.Random.Range(-0.5f, 0.5f), 2.2f, UnityEngine.Random.Range(-0.5f, 0.5f)), Quaternion.identity);
                     g.GetComponent<Rigidbody>().AddForce(new Vector3(UnityEngine.Random.Range(-5f, 5f), UnityEngine.Random.Range(0, 5f), UnityEngine.Random.Range(-5f, 5f)));
