@@ -72,6 +72,10 @@ public class PlayerNetwork : Photon.MonoBehaviour {
 	private Image invuln_bar;
 	private Image invis_bar;
 
+    private IEnumerator invulCoroutine;
+    private IEnumerator bigBallsCoroutine;
+    private IEnumerator inviCoroutine;
+
     //added by Po
     [SerializeField] GameObject[] m_weapons;
     [SerializeField] bool[] weaponOn;
@@ -164,6 +168,11 @@ public class PlayerNetwork : Photon.MonoBehaviour {
 
         //don't show your name above your own head
         if (m_pv.isMine) nameOnHead.enabled = false;
+
+        //give coroutine references
+        bigBallsCoroutine = bigBallsPowerup();
+        invulCoroutine = invulPowerup();
+        inviCoroutine = ComeBack();
 
         showCursor = false;
         shootEnable = true;
@@ -629,11 +638,15 @@ public class PlayerNetwork : Photon.MonoBehaviour {
         }
         else if (powerType == 3)
         {
-            StartCoroutine(bigBallsPowerup(bigBallsTimer));
+            StopCoroutine(bigBallsCoroutine);
+            bigBallsCoroutine = bigBallsPowerup();
+            StartCoroutine(bigBallsCoroutine);
         }
         else if (powerType == 5)
         {
-            StartCoroutine(invulPowerup(invulTimer));
+            StopCoroutine(invulCoroutine);
+            invulCoroutine = invulPowerup();
+            StartCoroutine(invulCoroutine);
         }
         //Some one need to handle the number of the power type to add attribue accordingly
     }
@@ -649,7 +662,10 @@ public class PlayerNetwork : Photon.MonoBehaviour {
         nameOnHead.enabled = false;
 		if (m_pv.isMine)
 			invis_bar.fillAmount = 1.0f;
-        StartCoroutine(ComeBack());
+
+        StopCoroutine(inviCoroutine);
+        inviCoroutine = ComeBack();
+        StartCoroutine(inviCoroutine);
 
     }
 
@@ -726,7 +742,7 @@ public class PlayerNetwork : Photon.MonoBehaviour {
 
         //if (m_power == 2)//weapon damage
         //{
-            for (int i = 0; i < WeaponDamageEmpoweredCounter; i++)
+            for (int i = 0; i < (largeBalls? 5 : WeaponDamageEmpoweredCounter); i++)
             {
                 weapon.GetComponent<Weapon>().SetDamage();
                 //weapon.GetComponent<Weapon>().SetSize();
@@ -771,22 +787,19 @@ public class PlayerNetwork : Photon.MonoBehaviour {
         return m_health;
     }
     
-    IEnumerator bigBallsPowerup(float time)
+    IEnumerator bigBallsPowerup()
     {
         Debug.Log("big ball powerup starting");
         largeBalls = true;
 		if (m_pv.isMine)
 			max_power_bar.fillAmount = 1f;
-        int temp = WeaponDamageEmpoweredCounter;
-        WeaponDamageEmpoweredCounter = 5;
 
-        yield return new WaitForSeconds(time);
+        yield return new WaitForSeconds(bigBallsTimer);
         largeBalls = false;
-        WeaponDamageEmpoweredCounter = temp;
         Debug.Log("Big ball powerup ending");
     }
 
-    IEnumerator invulPowerup(float time)
+    IEnumerator invulPowerup()
     {
         Debug.Log("invulnerable powerup starting");
         invul = true;
@@ -794,7 +807,7 @@ public class PlayerNetwork : Photon.MonoBehaviour {
 			invuln_bar.fillAmount = 1f;
         GetComponentInChildren<Renderer>().material.color = Color.white;
 
-        yield return new WaitForSeconds(time);
+        yield return new WaitForSeconds(invulTimer);
         invul = false;
         SetColor();
         Debug.Log("invulnerable powerup ending");
