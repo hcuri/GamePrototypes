@@ -3201,7 +3201,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3787383bebdca1740ac5005b39f93e50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numPeopleToStart: 5
+  numPeopleToStart: 6
   netInfo: {fileID: 891378066}
   spawnPoint:
   - {fileID: 808624998}
